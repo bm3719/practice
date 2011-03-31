@@ -1,0 +1,418 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amssymb}  % Required for number sets.
+\usepackage{fullpage} % 1" margins instead of the standard huge ones.
+\usepackage{url}      % Required for /url{}.
+
+% Custom sequences.
+\newcommand{\inftyint}{\int_{-\infty}^{+\infty}}
+\newcommand{\intwrtx}[1]{\int_{-\infty}^{+\infty} #1 \,dx}
+
+% Theorem environment declarations.
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+  \ifdim\lastskip<1.5em \hskip-\lastskip
+  \hskip1.5em plus0em minus0.5em \fi \nobreak
+  \vrule height0.75em width0.5em depth0.25em\fi}
+
+\begin{document}
+\title{Some \LaTeX{} Notes}
+\author{Bruce C. Miller \\
+{\tt bm3719@gmail.com}}
+\date{August 11, 2009}
+\maketitle
+
+\begin{abstract}
+  This document is a first attempt at learning \LaTeX{} and a collection of
+  notes to myself I've made while doing so.  Only the basics are covered here
+  and it's probably useless without the document source.
+\end{abstract}
+
+\tableofcontents 
+% This value determines the subsection depth for the ToC.
+\setcounter{tocdepth}{2}
+
+\section{Getting Started}
+
+Note that the default paragraph behavior is to indent the first line of a
+paragraph, but this does not occur for the first line of the first paragraph in
+a section.  Carriage returns will not translate into the final document.  A
+single carriage return requires two in the \LaTeX{} file.
+
+Note that math expressions require dollar signs wrapped around them when they
+are embedded in paragraphs of normal text.  
+
+Here's some example control sequences:
+
+\vspace{20pt}
+Delta: $\delta$, $\Delta$
+
+Right arrow: $\to$, $\rightarrow$
+
+Emphasized text: \emph{Emphasized text}
+
+Single character sequences: \{ \" \$ \% \& \_ \#
+
+Super/subscripts: 23$^3$, 23$_a$, x$^{2y}$
+\vspace{20pt}
+
+% This is a comment line.  All comment lines must be preceded by the percent
+% sign.
+
+The tt command can be used for monospaced text like code.  This also works
+inline in paragraphs of normal text like: {\tt printf("sup");}. Note that in
+this example it is not necessary to escape the quotation marks.
+
+An easier way to produce single and double quotes is like: `hello' and
+``hello''.  Use hyphens for hyphenated words like: neck-cancer, en-dashes
+when specifying a range of numbers like: pages 155--219, and em-dashes for
+interjections like: ``Very much so---would you like to see mine?''
+
+For nested quotations, sometimes it is necessary to use a control sequence,
+e.g. ``I regard computer typesetting as being reasonably `straightforward'\,''
+he said.
+
+\subsection{Subsections}
+
+Here's a subsection to the first section.
+
+\subsection*{Unnumbered subsection}
+
+It's possible to suppress section/subsection numbering with an asterisk.
+
+Unnumbered sections aren't included in the numbering should normal
+subsectioning continue afterwards, nor do they appear in the ToC by default..
+Note that there are also other styles used for different document classes, like
+books use chapter instead of section.
+
+\subsection{Fonts}
+
+Basic font changes include \emph{emphasis}, \textbf{bold}, \texttt{typewriter},
+\textsf{sans serif}, \textrm{roman}, \textsl{slanted}, \textsc{small caps}.
+It's possible to combine these along with various textsizes like \large
+\textbf{\textsl{large boldface slanted text}}.  \normalsize Ungrouped font
+commands (those without braces) need to be explicitly returned to normal.
+
+\subsection{Special Characters}
+
+Accents can be added to chars with simple control sequences like: Se\'{a}n
+\'{O} Cinn\'{e}ide.  Here's some more examples: \`{e}, \"{o}, \c{C}, \t{oo},
+\~{n}, \^{e}.  There are different accent sequences for within math formulas.
+The control sequences \i \,and \j \,produce dotless i and j. These are required
+when placing an accent on the letter. Thus accented `i' is produced by \'{\i}.
+
+Special chars requiring char codes: \texttt{\char92}, \char94, \char126.  The
+backslash is especially inconvenient, since it requires texttt mode.
+But, it can also be constructed with textbackslash: \textbackslash 
+
+Additional chars: \oe, \ae, \aa, \o, \ss, <, >, \dag, \ddag, \S, \copyright,
+\pounds.  Some of these have capital variants too.  Note that $>$ and $<$
+require math mode.
+
+\section{Math Mode}
+
+Example: Let $f$ be the function defined by $f(x) = 3x + 7$, and let $a$ be a
+positive real number.
+
+Here's the same thing with inline-paren syntax: Let \( f \) be the function
+defined by \( f(x) = 3x + 7 \).
+
+Bracket notation is used when a formula should appear on its own line, like so: 
+\[ n! = n(n - 1)! \]
+\[ \Gamma(n + 1) = n\Gamma(n) \]
+This auto-centers the math text as well.
+
+The same thing can be done with equation blocks, but these grant auto-numbering
+of them.  
+\begin{equation}n! = \prod_{k = 1}^nk, \quad \forall n \in
+    \mathbb{N} \end {equation}
+% Using nested arrays allows the centering of what to the user appears to be
+% the third row.
+\begin{equation} 
+n! = \left\{
+  \begin{array}{l c}
+    \begin{array}{l l}
+      1 & \mbox{ if } n = 0 \\
+      n(n - 1)! & \mbox{ if } n > 0 \\
+    \end{array} & \forall n \in \mathbb{N} \\
+  \end{array}
+\right.\label{eqn:EqSec}
+\end{equation}
+
+By labelling numbered equations, you can then include references to them later
+on like: Here we apply the Fibonacci equation given in (\ref{eqn:EqSec}) and
+find that...
+
+The single quote character has special meaning in math mode (prime) like: $u' +
+v''$
+
+\subsection{Math Fonts}
+
+In math mode, font face defaults to the math italic font.  Font changes work
+similar to in normal mode except that font sequences only apply to single
+characters or enclosed blocks instead of propagating.  It's also necessary to
+use sequence names like mathbf instead of textbf.  A calligraphic font is also
+available (but only for capital letters).  For example:
+\[ \mathcal{V} = (u \times x) \cdot \mathbf{v} \]
+
+Embedded normal text should be inserted using mbox.  This prevents it from
+being treated as a sequence of variables.  Since whitespace between variables
+is truncated automatically, be sure to wrap any necessary spaces in the mbox as
+well.
+\[ M^\bot = \{ f \in V' : f(m) = 0 \mbox{ for all } m \in M \}.\]
+
+\subsection{Fractions and Roots}
+
+Complexity can be built upon the frac sequence like so:
+\[ f(x) = 2x + \frac{x - 7}{x^2 + 4} \]
+
+Square and n-th roots are equally simple.  The only strange thing is that n-th
+roots use the same \texttt{\textbackslash sqrt} sequence, but with an added
+numeric parameter:
+\[ \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
+\[ \sqrt[3]{q^2 - p^3} \]
+
+\subsection{Special Characters}
+
+There are two different kinds of ellipsis, one aligned to the baseline and the
+other centered:
+\[ f(x_1, x_2,\ldots, x_n) = x_1^2 + x_2^2 + \cdots + x_n^2 \]
+
+Accents use a different syntax in math mode for some reason.  Here's a few
+examples: 
+\[ \underline{a} \overline{a} \hat{a} \check{a} \tilde{a} \acute{a}
+\grave{a} \dot{a} \ddot{a} \breve{a} \bar{a} \vec{a} \]
+
+Regarding delimiters, ( [ $|$ ] ) are typed normally, but braces and double pipes
+require escape sequences, For example: 
+
+\[ \|f\| = \inf \{ K \in [0,+\infty) : |f(x)| \leq K \|x\| \mbox{ for all } x
+\in X \}.\]
+
+\subsection{More Complex Formulae}
+Large delimiters require \texttt{\textbackslash left}, followed by the
+delimiter character.  These need to be closed with a \texttt{\textbackslash
+  right}.  If the closing delimiter shouldn't show (the null delimiter), follow
+it with a period instead of the character again.
+\[ F(n) = \left\lfloor \frac{\varphi^n}{\sqrt{5}} + \frac{1}{2} \right\rfloor \]
+\[ \left. \frac{du}{dx} \right|_{x=0}.\] 
+
+Using an eqnarray* environment, multiline formulae can be constructed.  The
+equation needs some anchoring character, typically some equality or comparison
+operator.
+\begin{eqnarray*}
+  \cos 2\theta & = & \cos^2 \theta - \sin^2 \theta \\
+  & = & 2 \cos^2 \theta - 1.
+\end{eqnarray*}
+
+For a numbered version of the same, drop the asterisk.
+
+Matrices and multiline definitions both use arrays.  Here's a matrix: 
+\[ \chi(\lambda) = \left| \begin{array}{ccc}
+\lambda - a & -b & -c \\
+-d & \lambda - e & -f \\
+-g & -h & \lambda - i \end{array} \right|.\] 
+
+Arrays can also be used to just format tables of data.  They can also be nested
+for various alignment needs. 
+
+\subsection{Derivatives, Limits, Sums, Integrals}
+
+The Heat Equation, using \texttt{\textbackslash partial} for $\partial$:
+\[ \frac{\partial u}{\partial t}
+   = h^2 \left( \frac{\partial^2 u}{\partial x^2}
+      + \frac{\partial^2 u}{\partial y^2}
+      + \frac{\partial^2 u}{\partial z^2} \right) \]
+
+Limits use the \texttt{\textbackslash lim}, which can be paired with an
+underscore as in this example:
+\[ \lim_{x \to +\infty}, \inf_{x > s} \mbox{ and } \sup_{K} \]
+
+Sums and integrals follow a similar paradigm:
+\[ \sum_{k = 1}^{n} k^2 = \frac{1}{2} n (n + 1). \]
+\[ \int_{0}^{+\infty} x^n e^{-x} dx = n!. \]
+
+The only caveat to integrals is with equations that include multiple integrals,
+where its necessary to use \texttt{\textbackslash !} commands to properly space
+these (so they appear in a typographic ligature manner), such as:
+\[ \int \!\!\! \int_D f(x,y)\,dx\,dy.\]
+
+\section{General Notes}
+
+Though it seems weird to not indent the first paragraph of a section, this is
+actually the standard for professional publications, so don't do it.
+
+\subsection{Stops}
+
+\LaTeX{} will assume a lowercase letter followed by a period is a
+sentence stop, and insert the appropriate spacing as a result.  Sometimes this
+is incorrect, like if a Mr.\ appears in a sentence or a sentence ends with a
+word in all CAPS\@.  Use of appropriate control sequences are necessary here.
+
+\subsection{Lists}
+
+There are 3 list types: \texttt{enumerate} for numbered lists, \texttt{itemize}
+for un-numbered lists, and \texttt{description} for description lists.  Here's
+an description list, which requires a label parameter to \texttt{\textbackslash
+  item}:
+\begin{description}
+\item[Item 1] This is the first item.
+\item[Item 2] This is the second item.  Its content spans more than one line.  Look at
+  it go.  Yep, it sure is long.
+\end{description}
+
+\subsection{Quotations}
+
+The quote environment is handy for quoting a small block of text. As some guy
+once said,
+\begin{quote}
+  Pure mathematics is on the whole distinctly more useful than applied For what
+  is useful above all is technique, and mathematical technique is taught mainly
+  through pure mathematics.  
+
+  In great mathematics there is a very high degree of unexpectedness, combined
+  with inevitability and economy.
+\end{quote}
+
+The verbatim environment is useful for pasting in chunks of code in typewriter
+font, as in this example:
+\begin{verbatim}
+int main() {
+        printf("\a");
+        return 0;
+}
+\end{verbatim}
+
+\subsection{Tables}
+
+Tables are similar in structure to HTML tables, except with column definition
+defined first along with the possibility for double lined separators.  Here's a
+example that demonstrates most of the features:
+
+\vspace{10pt}
+\begin{tabular}{|l||l|l||l|l|}
+\hline
+ &\multicolumn{2}{l|}{Singular}&\multicolumn{2}{l|}{Plural}\\
+\cline{2-5}
+ &English&\textbf{Gaeilge}&English&\textbf{Gaeilge}\\
+\hline\hline
+1st Person&at me&\textbf{agam}&at us&\textbf{againn}\\
+2nd Person&at you&\textbf{agat}&at you&\textbf{agaibh}\\
+3rd Person&at him&\textbf{aige}&at them&\textbf{acu}\\
+ &at her&\textbf{aici}& & \\
+\hline
+\end{tabular}
+
+\subsection{Custom Sequences and Macros}
+
+If we've already defined a custom sequence for an integral over $\pm \infty$,
+we call it at any time to save a lot of typing.
+\[ \inftyint f(x)\,dx. \]
+\[ \inftyint g(x)\,dx. \]
+
+But, if we were just always going to use it in this form, we could save even
+more typing by making a custom sequence that accepted a parameter for the part
+we wanted to vary between occurrences.
+\[ \intwrtx{g(x)}. \]
+\[ \intwrtx{h(x)}. \]
+
+Additional parameters and nesting of these can be used to any level of
+complexity.
+
+\subsection{Theorems, Lemmas, Proofs}
+
+Theorem environments can be created for statements of theorems, lemmas,
+propositions, corollaries, proofs, definitions, examples, remarks, QED symbols,
+etc.  Here's an example using some definitions added to the document preamble.
+
+\begin{definition}
+  Let $H$ be a subgroup of a group~$G$.  A \emph{left coset} of $H$ in $G$ is a
+  subset of $G$ that is of the form $xH$, where $x \in G$ and $xH = \{ xh : h
+  \in H \}$.  Similarly a \emph{right coset} of $H$ in $G$ is a subset of $G$
+  that is of the form $Hx$, where $Hx = \{ hx : h \in H \}$
+\end{definition}
+
+Note that a subgroup~$H$ of a group $G$ is itself a left coset of $H$ in $G$.
+
+\begin{lemma}
+  \label{LeftCosetsDisjoint}
+  Let $H$ be a subgroup of a group $G$, and let $x$ and $y$ be elements of $G$.
+  Suppose that $xH \cap yH$ is non-empty.  Then $xH = yH$.
+\end{lemma}
+    
+\begin{proof}
+  Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$,
+  and $z = yb$ for some $b \in H$.  If $h$ is any element of $H$ then $ah \in
+  H$ and $a^{-1}h \in H$, since $H$ is a subgroup of $G$.  But $zh = x(ah)$ and
+  $xh = z(a^{-1}h)$ for all $h \in H$.  Therefore $zH \subset xH$ and $xH
+  \subset zH$, and thus $xH = zH$.  Similarly $yH = zH$, and thus $xH = yH$, as
+  required.\qed
+\end{proof}
+
+\subsection{Bibliography and Citations}
+
+Various types of citation styles are supported.  I've appended a bibliography
+section to the end of this document.  Here's a simple \texttt{\textbackslash
+  cite} making use of it \cite{Erdos01} which will reference the linked
+bib-entry.  Here's one \cite[p. 215]{ConcreteMath} with page number details.
+Multiple citations are often necessary at once as well \cite{ConcreteMath,
+  Knuth92}.
+
+Much more complicated references and styles are possible using BibTeX instead.
+These examples just use the built-in \LaTeX{} citation support.  BibTeX is far
+superior in all respects, in particular since it negates the need to format
+references by hand and allows citation styles to be switched almost
+effortlessly.
+
+\section{AUCTeX Notes}
+
+Some AUCTeX Tips:
+
+\begin{enumerate}
+\item Compile with \texttt{C-c C-c}.  If there are errors, use \texttt{C-c `}
+  to view.  Keep using \texttt{C-c `} to go to subsequent errors.
+\item To convert \LaTeX{} to PDF, just run `latex file.tex' from CLI, or change
+  output with pdflatex by toggling between DVI and PDF with \texttt{C-c C-t
+    C-p}.
+\item AUCTeX has a massive number of keybindings.  Some of these, like
+  \texttt{C-c C-f}, group a category of TeX tags.  Mashing a random key after
+  the group prefix will show a list of completions.
+\item After compiling, look at the log to see if there were any style warnings,
+  or use \texttt{C-c C-w} to toggle warnings on.
+\item To preview within Emacs, use a preview command like preview-buffer ({\tt
+    C-c C-p C-b}).  When done looking at it, clear the preview with
+  preview-clearout-buffer ({\tt C-c C-p C-c C-b}).
+\end{enumerate}
+
+% This adds the bibliography to the ToC.
+\addcontentsline{toc}{section}{References}
+\begin{thebibliography}{9}
+
+\bibitem{Erdos01} P. Erd\H os, \emph{A selection of problems and results in
+    combinatorics}, Recent trends in combinatorics (Matrahaza, 1995), Cambridge
+  Univ. Press, Cambridge, 2001, pp. 1--6.
+
+\bibitem{ConcreteMath} R.L. Graham, D.E. Knuth, and O. Patashnik,
+  \emph{Concrete mathematics}, Addison-Wesley, Reading, MA, 1989.
+
+\bibitem{Knuth92} D.E. Knuth, \emph{Two notes on notation}, Amer.
+  Math. Monthly \textbf{99} (1992), 403--422.
+
+\bibitem{Simpson} H. Simpson, \emph{Proof of the Riemann Hypothesis}, preprint
+  (2003), available at \url{http://www.math.drofnats.edu/riemann.ps}.
+
+\end{thebibliography}
+
+\end{document}

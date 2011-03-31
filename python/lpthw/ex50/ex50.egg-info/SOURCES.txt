@@ -1,0 +1,11 @@
+setup.py
+ex50/__init__.py
+ex50/game.py
+ex50/lexicon.py
+ex50/parser.py
+ex50/room.py
+ex50.egg-info/PKG-INFO
+ex50.egg-info/SOURCES.txt
+ex50.egg-info/dependency_links.txt
+ex50.egg-info/requires.txt
+ex50.egg-info/top_level.txt

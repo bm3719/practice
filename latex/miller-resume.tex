@@ -1,0 +1,207 @@
+\documentclass{article}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\textheight=10in
+\pagestyle{empty}
+%\raggedbottom
+\raggedright
+
+\def\bull{\vrule height 0.8ex width .7ex depth -.1ex }
+% DEFINITIONS FOR RESUME
+\newcommand{\area}[2]{\vspace*{-9pt} \begin{verse}\textbf{#1}   #2 \end{verse}  }
+\newcommand{\lineunder}{\vspace*{-8pt} \\ \hspace*{-18pt} \hrulefill \\}
+\newcommand{\header}[1]{{\hspace*{-15pt}\vspace*{7pt} \textsc{#1}} \vspace*{-7pt} \lineunder}
+\newcommand{\employer}[3]{{ \textbf{#1} (#2)\\ \underline{\textbf{\emph{#3}}}\\  }}
+\newcommand{\contact}[3]{
+\vspace*{-8pt}
+\begin{center}
+{\LARGE \scshape {#1}}\\
+#2 \lineunder
+#3
+\end{center}
+\vspace*{-8pt}
+}
+\newenvironment{achievements}{\begin{list}{$\bullet$}{\topsep 0pt \itemsep
+      -2pt}}{\vspace*{4pt}\end{list}}
+
+\newcommand{\schoolwithcourses}[4]{
+\textbf{#1} #2 $\bullet$ #3\\ 
+#4 $\bullet$ Selected Coursework:\\
+\vspace*{5pt}
+}
+% END RESUME DEFINITIONS
+
+\begin{document}
+
+\small
+\smallskip
+\vspace*{-44pt}
+
+\contact{\textbf{Bruce C. Miller}}
+{xxxxx Waterside View Dr., Apt xx $\bullet$ Reston, VA 20194}
+{(703) xxx-xxxx $\bullet$ bm3719@gmail.com}
+
+\header{Professional Objective} To continue working in the capacity of a
+senior-level software engineer within an environment where my skills can
+contribute significantly and be continuously challenged, specifically in an
+environment either employing functional programming languages or where computer
+science otherwise has a considerable influence.
+\vspace{7pt}
+
+\header{Skills}
+\begin{achievements}
+\item Proficiency in software development in C\#, SQL, T-SQL, Common Lisp,
+  Haskell, Java, JavaScript, Python, C, C++, PL-SQL, Delphi, Scheme.
+\item Familiarity with database design, design patterns, \LaTeX, regular
+  expressions, Unix-variants, GNU Emacs, GUI design (WinForms, WPF, MFC,
+  Swing), web development, and many Java and .Net frameworks.
+\end{achievements}
+
+\header{Work History}
+
+\employer{xxxxxx xxxxxx Inc.}{2010-present}{Senior Software Engineer} Part of
+an ``Advanced Analytics'' group, delivering data visualization and analysis
+tools to the NSA and other DoD agencies.
+\begin{achievements}
+\item Holding a principle engineer role on a small team and considerably
+  influenced its consistent meeting of deadlines under an Agile methodology.
+\item Software development within the Java ecology, including the use of
+  frameworks like Hibernate, Spring, JMS, and Jackson.
+\item Limited front end development in JavaScript, jQuery, Ext JS, and JSP.
+\item Build management with Maven and Nexus.
+\item Interviewed candidates for senior to junior level development positions.
+\end{achievements}
+
+\employer{iSYS, LLC}{2007-2010}{Senior Software Engineer} Part of a team
+responsible for the ``Next Generation'' CODIS (Combined DNA Index System), a
+DNA Forensics database and search engine funded by the FBI and used in all
+forensic DNA work within the US and 22 foreign countries.
+\begin{achievements}
+\item Full participation in the software development life cycle for a large
+  (over 1 million SLOC), enterprise-grade, distributed application.
+\item C\# development, employing the use of design patterns, WCF, LINQ, and
+  Parallel Extensions.
+\item Database design and development in SQL Server, with stored procedures in
+  T-SQL.
+\item Personally responsible for several critical features within CODIS, such
+  as Pr\"um Treaty support (used by EU nations) and tuning algorithms to meet
+  performance goals.
+\item Interviewed candidates for senior to junior level development positions.
+\end{achievements}
+
+\employer{e-LYNXX Corporation}{2004-2007}{Software Engineer} Responsibilities
+included designing and developing components within a large-scale n-tier
+application, managing a high volume of government and private sector financial
+transactions.
+\begin{achievements}
+\item Full SDLC participation, including requirements analysis, design,
+  development/implementation, debugging, and maintenance.
+\item C\# development in Visual Studio 2003/2005, Delphi development in Borland
+  Developer Studio 2006, and PL/SQL development in PL/SQL Developer.
+\item Database integration with Oracle 8i, 9i, and 10g, writing stored
+  procedures, data modeling/remodeling, and using DALs such as Direct Oracle
+  Access and ODP.Net.
+\item Research and implementation of architecture improvements using various
+  design patterns, features of the .Net Framework, and concepts from the
+  academic community.
+\item Migration and redesign of legacy codebases from Delphi 5 to Delphi 2006
+  and C\#.
+\item Revision control and change tracking in Borland StarTeam.
+\item B2B integration using WebServices, EDI (Electronic Data Interchange), and
+  cXML.
+\item Design/development of ancillary and supporting Windows services in C\# and
+  Delphi 2006.
+\item DDL/DML scripts in SQL.
+\item Build script management and build deployment.
+\end{achievements}
+
+\employer{Inclusive Technology Solutions Inc.}{2005-2007}{Senior Software
+  Engineer (part-time)} Acted as a senior member of an IT consulting firm,
+where initial responsibilities included the full development process, later
+migrating to a project lead role on all n-tier web application/e-commerce
+projects with team sizes up to 4.
+\begin{achievements}
+\item Projects managed and/or implemented involved languages such as C\#,
+  ASP.Net, and PHP; scripting in JavaScript; markup in XHTML and HTML; and
+  platforms such as Solaris, Linux, and Windows Server.
+\item Requirements and design analysis; selecting best platforms, technologies,
+  architectures, and structural paradigms.
+\item Code review for best practices, W3C standards compliance, and
+  cross-browser compatibility.
+\item Database design with MySQL.
+\item Coordination between internal client contacts, junior developers, graphic
+  designers, and external contractors.
+\item Performing technical interviews for all development and graphic design
+  applicants.
+\end{achievements}
+
+\employer{C\&L Instruments}{2001-2002}{Software Engineer} Completed development
+of a fluorescence imaging data acquisition and analysis application in Visual
+C++ 6.0 for use in studying ratio imaging and ion concentration in cellular
+biology experiments.
+\begin{achievements}
+\item Full participation in the software development life cycle, including
+  requirements analysis, design, development/implementation, debugging, and
+  maintenance.
+\item GUI programming in MFC and GDI, including image display, image
+  manipulation, and graphical data analysis.
+\item Wrote wrappers for numerous proprietary imaging APIs to support various
+  manufacturers' digital microscope cameras via a unified user interface.
+\item Co-developed device drivers in C++ for in-house expansion cards
+  controlling fluorescent microscopes, illuminators, and filter controllers.
+\item Assimilated a large amount of domain-specific knowledge regarding
+  fluorescent microscopy and biotech research in general.
+\end{achievements}
+
+\employer{Mantra Communications}{May 2000 - August 2000}{Software Engineer
+  (intern)} Developed an administrative front end in Java 1.1 for a bandwidth
+modification suite, ported various Java and C packages to/from HP-UX and
+Solaris, and designed numerous ancillary and internal applications.
+\begin{achievements}
+\item SDLC participation in detailed design, implementation, debugging, and
+  maintenance.
+\item Server-side web application programming using JSP, Java Servlets, and
+  JavaBeans.
+\item Java development in Borland JBuilder.
+\item Revision control with CVS.
+\item Database integration with JDBC.
+\end{achievements}
+
+\employer{Citibank}{May 1999 - December 1999}{Data Processing Analyst}
+\begin{achievements}
+\item Handled corporate and private financial data.
+\item User-level experience with IBM AIX.
+\end{achievements}
+
+\header{Education}
+
+\schoolwithcourses{Shippensburg University}{Shippensburg, PA}{Bachelor of
+  Science in Computer Sci., 1997-2001}
+
+\area{Computer Science}{ Unix Programming $\cdot$ Data Structures $\cdot$
+  Automata \& Computation $\cdot$ Network Programming $\cdot$ RDBMS Theory
+  $\cdot$ Operating Systems $\cdot$ Programming Language Theory $\cdot$
+  Algorithms $\cdot$ Object Oriented Systems $\cdot$ Declarative Methods }
+\area{Mathematics}{Multivariable Calculus $\cdot$ Linear Algebra $\cdot$
+  Discrete Math $\cdot$ Formal Logic }
+
+\schoolwithcourses{Shippensburg University}{Shippensburg, PA}{Masters of
+  Science in Computer Science, 2002-2004}{27/30 credits attained (3.66 GPA)}
+
+\area{Computer Science}{ Artificial Intelligence $\cdot$ Advanced Network
+  Programming $\cdot$ Web Development $\cdot$ Parallel Programming $\cdot$ Formal
+  Languages \& Automata $\cdot$ Algorithms $\cdot$ Robotics $\cdot$ OpenGL
+  Programming }
+
+\header{Other Activities}
+\begin{achievements}
+\item Yearly continuing education with development-related classes and
+  workshops, and attendance to developer conferences.
+\item Active Top Secret SSBI clearance.
+\item Contribution to various open-source projects, most recently starting a
+  game server emulator project in Java and MySQL
+  (http://code.google.com/p/l1j-en/).
+\end{achievements}
+
+\end{document}

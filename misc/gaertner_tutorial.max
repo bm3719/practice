@@ -1,0 +1,116 @@
+/* Following along with the `Gaertner revision' of the Maxima tutorial on */
+/* the Maxima home page. */
+
+/* Solutions of Univariate Polynomials */
+
+poly: x^2 - x - 12;
+solutions: solve(poly=0, x);
+map( lambda( [eq], lhs(eq) - rhs(eq)), solutions);
+apply("*", %);
+expand(%);
+
+/* Trigonometric Transformations */
+
+trigreduce(sin(x)^3 * cos(x));
+trigexpand(%);
+trigsimp(%);
+result:integrate(9/cos(7*x)^2, x);
+/* Skipping some, since it appears current Maxima doesn't do this. */
+
+/* Computation of a Partial Fraction Decomposition */
+
+partfrac(1/(x^2*(x^2 + 1)), x);
+/* Gives the correct answer, but we might want the step-by-step. */
+p1: a/x;
+p2: b/x^2;
+p3: (c*x + d)/(x^2 + 1);
+p1 + p2 + p3;
+ratsimp(%);
+n: num(%);
+solve ([coeff (n, x, 3) = 0,
+        coeff (n, x, 2) = 0,
+        coeff (n, x, 1) = 0,
+        coeff (n, x, 0) = 1],
+       [a, b, c, d]);
+at(p1 + p2 + p3, first(%));
+
+/* Planar Curves */
+
+alpha(t) := [sin(t), cos(t)];
+diff(alpha(z), z);
+J(a) := [-a[2], a[1]];
+J(alpha(y));
+alpha(z) . J(alpha(z));
+kappa(fn, t) := diff(fn(t), t, 2) . J(diff(fn(t), t))/((diff(fn(t),
+  t).diff(fn(t), t))^(3/2));
+kappa(alpha, t);
+trigsimp(%);
+eight(t) := [sin(t), sin(t)*cos(t)];
+/* plot2d(append('[parametric], eight (z), [[z, -%pi, %pi]], [[nticks, 360]])); */
+kappa(eight, z);
+/* plot2d(kappa(eight, z), [z, -%pi, %pi]); */
+
+/* Line Integrals */
+
+integrand: x^2*y*diff(x) + y*z*diff(y) + z*x*diff(z);
+path: [x = cos(t), y = sin(t), z = sin(t)];
+sublis(%, integrand);
+ev(%, diff);
+%, del(t) = 1;
+integrate(%, t, 0, 2*%pi);
+
+/* Computation of the Reciprocal of an Irrational Number */
+
+1/(2^(1/2) + 3^(1/2));
+ev (ratdisrep(rat(%)), algebraic);
+ir2: 2^(1/2) + 3^(1/3);
+1/ir2;
+ev (ratdisrep(rat(%)), algebraic);
+%*ir2;
+expand(%);
+
+/* Polynomial Arithmetic with Rests */
+
+poly: x^6 + 19 * x^5 + x^4 - 14 + x^3 - x^2 - 3*x + 1;
+mod(poly, 11);
+factor(poly), modulus:11;
+expand(%);
+mod(%, 11);
+
+/* Differential Equations of the First Order */
+
+eq: 'diff(y,x) = -y;
+ode2(eq, y, x);
+sol: ic1(%, x = 1, y = 8);
+
+/* Differential Equations of the Second Order */
+
+eq: 'diff(y, x, 2) + y = 0;
+sol2: ode2(eq, y, x);
+ps: ic2(sol2, x=0, y=2, 'diff(y, x)=1);
+ev (rhs(ps) , x= 0);
+diff(rhs(ps), x);
+ev(%, x = 0);
+bc2(sol2, x=0, y=2, x=2, y=-1);
+
+/* Computation of Limits */
+
+limit((x^2 - 1)/(x^2 + 1), x, inf);
+limit((x^2 + x - 6)/(x^4 + x^3 - 19 * x^2 + 11 * x + 30), x, 2);
+limit(tan(x), x, %pi/2, plus);
+limit(tax(x), x, %pi/2, minus);
+limit(tax(x), x, %pi/2);
+limit(tan(3 * x)/tan(x), x, %pi/2);
+
+/* Computation of Finite and Infinite Sums */
+
+sum(i, i, 1, 100);
+sum(1/x^2, x, 1, inf);
+sum(1/x^2, x, 1, inf), simpsum=true;  /* Only works for non-divergent sums. */
+sum1: sum(1/x^2, x, 1, inf);
+sum2: sum(1/x^3, x, 1, inf);
+sum1 + sum2;
+sumcontract(%);
+ev (%, simpsum=true);
+
+

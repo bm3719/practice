@@ -1,0 +1,191 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amssymb}  % Required for number sets.
+\usepackage{fullpage} % 1" margins instead of the standard huge ones.
+\usepackage{url}      % Required for /url{}.
+
+% Custom sequences.
+\newcommand{\inftyint}{\int_{-\infty}^{+\infty}}
+\newcommand{\intwrtx}[1]{\int_{-\infty}^{+\infty} #1 \,dx}
+
+% Theorem environment declarations.
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+  \ifdim\lastskip<1.5em \hskip-\lastskip
+  \hskip1.5em plus0em minus0.5em \fi \nobreak
+  \vrule height0.75em width0.5em depth0.25em\fi}
+
+\begin{document}
+\title{Maxima Notes}
+\author{Bruce C. Miller \\
+{\tt bm3719@gmail.com}}
+\date{December 12, 2009}
+\maketitle
+
+\begin{abstract}
+  Here's some notes created while learning Maxima.  This is an attempt to
+  create a workflow for producing \LaTeX{} documents while using Maxima as a
+  computer algebra system and rendering all math output in printable form,
+  including graphs.  I'm using \emph{The Computer Algebra Program Maxima - a
+    Tutorial} located at
+  \url{http://maxima.sourceforge.net/docs/tutorial/en/gaertner-tutorial-revision/Contents.htm}
+  for this document.
+\end{abstract}
+
+\tableofcontents 
+% This value determines the subsection depth for the ToC.
+\setcounter{tocdepth}{2}
+
+\section{A First Look}
+
+\subsection{Polynomials}
+Some polynomial variables.
+
+\begin{equation}
+\left(2\,y+x\right)^4
+\label{ex1:eq1}
+\end{equation}
+
+Expansion of (\ref{ex1:eq1}) results in (by calling the expand() function):
+
+\begin{equation}
+16\,y^4+32\,x\,y^3+24\,x^2\,y^2+8\,x^3\,y+x^4
+\end{equation}
+
+We can then return to the original by calling factor().
+
+Tip: Use equation blocks for all \LaTeX{} formatted equations, converting the
+double-dollar signs into equation tags.  This way I can reference these later
+as needed by labelling them.
+
+\subsection{Derivatives}
+A simple derivative: \texttt{diff(sin(x)*cos(x), x);}
+
+\begin{equation}
+\cos ^2x-\sin ^2x
+\end{equation}
+
+
+\texttt{trigsimp(\%);}
+
+\begin{equation}
+2\,\cos ^2x-1
+\end{equation}
+
+\subsection{Trigonometric expressions}
+Maxima rewriting trigonometric expressions in canonical form, namely as finite
+Fourier sums:
+
+\texttt{trigreduce (sin(x)\^{}5);}
+
+\begin{equation}
+  {{\sin \left(5\,x\right)-5\,\sin \left(3\,x\right)+10\,\sin x
+  }\over{16}}
+\end{equation}
+
+Tip: Escape caret and percent signs in \LaTeX{}.
+
+\subsection{Indefinite integrals}
+
+\texttt{integrate((x + 1)/(x\^{}3 - 8), x);}
+
+\begin{equation}
+-{{\log \left(x^2+2\,x+4\right)}\over{8}}+{{\arctan \left({{2\,x+2
+ }\over{2\,\sqrt{3}}}\right)}\over{4\,\sqrt{3}}}+{{\log \left(x-2
+ \right)}\over{4}}
+\end{equation}
+
+Here's a more complicated integral:
+
+This adds a predicate to the current context. A consistency check occurs to
+validate it within the context of other existing predicates.
+
+\texttt{assume(m>4);}
+
+\texttt{integrate(x\^{}m*(a + b*x)\^{}3, x);}
+
+\begin{equation}
+{{b^3\,x^{m+4}}\over{m+4}}+{{3\,a\,b^2\,x^{m+3}}\over{m+3}}+{{3\,a^
+ 2\,b\,x^{m+2}}\over{m+2}}+{{a^3\,x^{m+1}}\over{m+1}}
+\end{equation}
+
+\texttt{diff(\%, x);}
+
+\begin{equation}
+b^3\,x^{m+3}+3\,a\,b^2\,x^{m+2}+3\,a^2\,b\,x^{m+1}+a^3\,x^{m}
+\end{equation}
+
+\texttt{factor(\%);}
+
+\begin{equation}
+x^{m}\,\left(b\,x+a\right)^3
+\end{equation}
+
+Tip: It's far faster to use the keyboard only when jumping back and forth
+between Maxima and a \LaTeX{} document.
+
+\section{Symbolic Integration}
+
+\subsection{Indefinite integrals}
+
+Here, Maxima computes an indefinite integral. \texttt{integrate(x/(x\^{}3 + 1),
+  x);}
+
+\begin{equation}
+{{\log \left(x^2-x+1\right)}\over{6}}+{{\arctan \left({{2\,x-1
+ }\over{\sqrt{3}}}\right)}\over{\sqrt{3}}}-{{\log \left(x+1\right)
+ }\over{3}}
+\end{equation}
+
+Verifying this result by computing its derivative: \texttt{diff(\%, x);}
+
+\begin{equation}
+{{2}\over{3\,\left({{\left(2\,x-1\right)^2}\over{3}}+1\right)}}+{{2
+ \,x-1}\over{6\,\left(x^2-x+1\right)}}-{{1}\over{3\,\left(x+1\right)
+ }}
+\end{equation}
+
+This is a sum of three rational expressions.  Obviously, every term of the
+integral contributes one rational expression.  We use ratsimp to bring all
+three expressions on a common denominator: \texttt{ratsimp(\%);}
+
+\begin{equation}
+{{x}\over{x^3+1}}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

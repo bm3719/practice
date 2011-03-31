@@ -1,0 +1,425 @@
+These questions are the non-duplicates copied from:
+http://www.w140.com/kurt/unixtests/
+
+- What does it mean for a file to be "setuid?"
+
+Binary files can have a "setuid" bit toggled that indicates whether the binary
+is to be executed under the credentials of the file owner (commonly root).
+
+- Completely explain the nine permissions bits on files.
+
+Read, write, and execute permissions for (file's owning) user, (file's owning)
+group, and other users.
+
+- What happens when a new account is created?
+
+A /home/user directory is created, an entry is added into /etc/passwd, the
+encrypted password is added to /etc/shadow, and /etc/skel is copied to
+/home/user.
+
+- Is cron good for running a program once at some time in the future?  Why?
+
+The at command is suited for singular execution in the future.  The cron
+command is intended for automating tasks that need to be executed repeatedly.
+
+- What information is contained on each non-comment line of the crontab file?
+
+A collection of date/time flags (min, hour, day, month, week) and the command
+to be executed.
+
+- What must be done before files can be stored on a brand new hard disk?
+
+Formatting, creation of partitions, and mounting.
+
+- What is fsck?  When would you use it?  Why?
+
+Filesystem check.  If a server is shut off while running, executing fsck will
+check the partition entries in /etc/fstab for consistency.
+
+- Explain the elevator algorithm and how it is used in UNIX.
+
+This is a disk scheduling algorithm.  Unknown to me how it differs in Unix.
+
+- What is virtual memory?
+
+Virtual memory is a scheme for providing programs with an address space that,
+to the program, appears as if it is the only program running on the machine.
+The virtual memory can be mapped anywhere in physical memory, including paged
+out to the disk.
+
+- What is the benefit of having multiple swap disks?
+
+Reduced access time when a lot of swap-heavy operations are being performed.
+
+- What is an incremental backup?
+
+A backup scheme where only changed files, blocks, or file fragments are copied.
+
+- What does the UCB "dump" program do?
+
+A backup utility on most Unix systems.  It is a block-level copy of specified
+filesystems.
+
+- Can "restore" bring back an individual file?
+
+Yes.
+
+- Many SAs keep their backup tapes on a shelf in the server room.  Is this
+  smart?
+
+No.  Storing backups in a different physical location, when possible, reduces
+single points of failure.  Furthermore, tapes should be kept in a magnetically
+shielded tape safe.
+
+- What does it mean to "rotate" log files?
+
+Log files are archived by date and a certain number of them are always kept.
+Once this number is exceeded, the oldest archives are deleted.
+
+- What does syslogd do?
+
+Logs system messages.
+
+- Describe applications of two separate syslog actions.
+
+Outputting to the console; outputting to a file.
+
+- What is the job of the kernel?
+
+The kernel is the central component of operating systems.  Generally, it ties
+together the software on the system with hardware devices.  In a monolithic
+kernel architecture, it handles much more, like filesystems, memory management,
+etc.
+
+- What is the benefit of a modular kernel?
+
+The ability to dynamically load kernel modules at runtime on an as-needed basis
+and the ability to exclude modules not needed from occupying system memory.
+
+- What is encapsulation?
+
+Separating interface from implementation.
+
+- What is the relationship between ethernet and IP?
+
+Ethernet is a link-level protocol specific to a particular type of physical
+network.  IP is a stateless network-level protocol, independent of how the
+network is constructed.
+
+- What is a port?  Does IP have ports?
+
+Ports are a mapping between protocols and virtual data connections.  IP itself
+does not provide ports, but transport-level protocols on top of IP (like UDP)
+can have them.
+
+- What is a netmask?
+
+A bitmask that specifies the range upon which a subnet has valid IP addresses.
+
+- What is NAT?
+
+Network address translation.  A process for modifying packet headers to map
+between different address spaces.
+
+- What is the purpose of ARP?
+
+Address resolution display.  Maps between IP addresses and ethernet addresses.
+
+- What is the role of DHCP in PPP?
+
+Assigns PPP clients network credentials.
+
+- What information is contained in each non-comment line of the /etc/hosts
+  file?
+
+IP address, hostname, and alias.
+
+- Describe the use of the "route" command and give an example.
+
+Modifies the system routing tables.
+
+route add 192.168.100.101 mask 255.255.255.0 192.168.1.1
+
+- Why does /etc/resolv.conf specify nameservers by IP address instead of by
+  name?
+
+Because without a nameserver already specified, it may not be possible to
+resolve the name of one.
+
+- Does every TCP/IP-connected computer have a routing table or just routers?
+  Why?
+
+All do, since the TCP/IP stack requires default routes and a loopback
+interface.
+
+- To use a local IP router/gateway, do you need the router's IP#?  Explain.
+
+Not if provided by DHCP, but otherwise yes.
+
+- What is a routing protocol and what is its purpose?
+
+A routing protocol controls the way routers communicate with each other.
+
+- What is the principle behind distance-vector protocols?
+
+Routers maintain a collection of known nodes and costs associated with them as
+vectors.
+
+- Routes often have "costs" associated with them.  What is meant by this?
+
+The latency between routers.
+
+- What is a link-state protocol and what is its advantage.
+
+Each node maintains a map of the existing network from it's perspective and
+determines where to route packets based on this.  This spreads out the shortest
+path determination to each node in the path.
+
+- How is multiple access controlled on Ethernet?
+
+Channel sharing is controlled by carrier sense multiple access with collision
+detection (CSMA/CD).
+
+- What are two different kinds of media used for Ethernet?
+
+Fibre and coax.
+
+- What type of media does DSL use?
+
+The telephone network.
+
+- How does FDDI provide greater reliability than Ethernet?
+
+FDDI contains a backup ring for redundancy.
+
+- What is an Ethernet switch and how does it differ from a hub?
+
+A hub connects a single network together, whereas a switch can do the same, but
+is aware of ports, manages the MAC addresses of connected hosts, and can not
+broadcast data to non-destination hosts.
+
+- How is an Ethernet switch different from a router?
+
+A switch can connect a single network or bridge two networks, whereas a router
+connects two or more networks and typically provides the ability to determine
+where to send a packet to reach its destination optimally.
+
+- What is the benefit of using DNS instead of a /etc/hosts file?
+
+The hosts file is static and on a per-machine basis, whereas DNS entries are
+valid for any machine using that DNS server.
+
+- What is a top-level domain?
+
+The highest hierarchy in the domain name system.  It takes the form of the
+suffix on the domain name, like .com, .org, etc.
+
+- What is BIND?
+
+A DNS server.
+
+- What is a recursive nameserver and how does it answer a DNS query?
+
+Recursive nameservers are a way for non-root nameservers to cache DNS
+resolutions so that hostname lookups can be more efficient at the cost of
+caching these redundantly.
+
+- Illustrate the functions of the /etc/resolv.conf, /etc/nsswitch.conf, and
+  /etc/hosts files by explaining what happens during a hostname lookup.
+
+The hosts file is checked to see if there's a static definition of the hostname
+for this server.  If not, the nameserver in resolv.conf is used to acquire its
+IP address.  The various settings in nsswitch.conf are used to determine how
+the nsdispatch routines are used.
+  
+- Compare FTP and NFS.  How are they similar?  How are they different?
+
+Both are UDP protocols and stateless.  NFS integrates with the filesystem and
+NFS paths can be mounted.
+
+- Does root (UID=0) access files across NFS in the same way as other users?
+
+Unknown to me, but I suspect not.
+
+- What is meant by the statement that NFS is a "stateless" protocol?
+
+The protocol operates over UDP.  No session information is maintained between
+transactions.
+
+- Give an example of a mount command for mounting a remote NFS directory.
+
+mount remotebox:/usr/stuff /mnt/nfs
+
+- What information in contained on each non-comment line of /etc/exports?
+
+Local path, remote host allowed access, permission flags, and an option for not
+allowing root to have write access.
+
+- What is the difference between a hard mount and a soft mount in NFS?
+
+Programs access resources on a soft mount will receive internal I/O errors when
+they become unavailable.  With hard mounts, a console message occurs during
+timeouts and infinite retries follow.
+
+- What is a computer?
+
+An object that executes algorithms
+
+- What is hardware?
+
+Physical components of a computer.
+
+- What is software?
+
+Instructions executable by a computer.
+
+- What is an operating system?
+
+A collection of software that manages the hardware resources of a computer.
+
+- What is an interface?
+
+A standard provided by software or hardware that can be interacted with,
+typically providing some access to the resources controlled therein.
+
+- How is a hacked computer different from one that hasn't been hacked?
+
+Unintended or unauthorized access has occurred.
+
+- What is a name?
+
+A label representing an object or group of objects.
+
+- Jane has UID 143.  John has UID 257.  Jane owns the file "janes_prog" and she
+  makes it setuid.  John executes janes_prog.  What is the UID of the resulting
+  process?  What is the UID of the parent of the resulting process?
+
+143.  257.
+
+- How would you set it up so that incoming mail for a particular user gets sent
+  to some remote e-mail address?
+
+Create a .forward file.
+
+- Describe specifically two problems with the mbox mail storage scheme.
+
+The mbox format stores all messages in ASCII, requiring attachments to be
+encoded and de-encoded.  All messages are concatenated together, meaning
+performance suffers linearly as the amount of messages increase.
+
+- Explain how you can determine the route that an e-mail message took.
+
+View the full email header and checked the Received field contents.
+
+- Explain the role of IMAP.
+
+IMAP is a protocol for email clients to access remote mail servers.
+
+- When you send e-mail to jn@hlw.com, how does your system find the server's
+  IP?
+
+By hostname lookup.
+
+- What is sendmail and what is it for?
+
+sendmail is a mail transfer agent.  It receives and sends email messages.
+
+- How can you determine detect whether packets are getting dropped by a router?
+
+Using the ping utility.
+
+- What does traceroute do and how does it work?
+
+Outputs the route taken to a destination.  It uses the ICMP TIME_EXCEEDED
+response to get info on intermediary hosts.
+
+- What program can be used to list open TCP connections on a host?
+
+netstat.
+
+- What is tcpdump?  What does it do?  Give an example of when it would be
+  useful.
+
+tcpdump prints out contents of network packets that match the specified flags.
+An example of its use would be to log data transmitted through a particular
+port.
+  
+- Can netstat be used to examine the routing table?
+
+Yes.
+
+- What is the purpose of the /etc/shadow file and what problem does it solve?
+
+It contains the encrypted password of users in /etc/passwd.  It prevents having
+these in a world-readable file, which is vulnerable to dictionary attacks.
+
+- How would you remotely detect what network services a machine provides?
+
+Port scan.
+
+- How would you remotely find out what operating system a machine is running?
+
+nmap.
+
+- Exactly how does the "crack" program work?
+
+It's a dictionary attack on a collection of encrypted passwords.
+
+- What does the TCP wrappers package do and how does it increase security?
+
+Allows access control based on network credentials.
+
+- How could you know whether your machine has been hacked?
+
+Monitor network traffic, log exploit attempts, run OS-specific security scans,
+and verify checksums of system utilities.
+
+- What is the security risk posed by setuid programs?
+
+setuid root programs could be vulnerable to buffer overflow attacks that could
+execute arbitrary code under root credentials.  This is also true for programs
+setuid as normal users.
+
+- What aspects of standard UNIX file permissions cannot be represented using
+  the access control matrix (ACL) concept?
+
+Execute permissions and setuid.
+
+- Does SSH rely on the remote client's IP address for authentication?
+
+It can.
+
+- How does a proxy firewall increase the security of the protected network?
+
+By blocking all unneeded ports, thereby closing many attack vectors.
+
+- Rick knows that Jane never lies.
+  Jane knows that Mike never lies.
+  Mike knows that Sara never lies.
+  Jane tells Rick that Mike told her that Sara told him that her dog died.
+  Should Rick believe the news?
+
+Yes.
+
+- How would you determine whether a server needs a faster CPU or more memory?
+
+A utility like top displays the system load and the memory usage.  If the
+system load is consistently high, CPU is a bottleneck.  If processes are
+swapping constantly, memory is.
+
+- How would you determine whether a server needs more memory or faster disks?
+
+iostat can profile disk load.
+
+- What is the difference between ps and top?
+
+top is more of a system profiling utility that monitors overall performance in
+real time.  ps generates a snapshot of processes at a specific point in time.
+
+- What does iostat tell you?
+
+Kernel I/O statistics.
+
+- What does vmstat tell you?
+
+Kernel statistics on virtual memory, disks, and CPU activity.

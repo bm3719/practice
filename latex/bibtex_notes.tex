@@ -1,0 +1,134 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fullpage}
+\usepackage{url}
+
+\begin{document}
+\title{Example BibTeX File}
+\author{Bruce C. Miller \\
+{\tt bm3719@gmail.com}}
+\date{August 20, 2009}
+\maketitle
+
+\section{Introduction}
+BibTeX uses an external database of references.  Create one or more \emph{.bib}
+files and reference them with the \texttt{\textbackslash biblliography}
+command.  This document uses two external files, one with a couple normal
+references, and the third with a website reference.
+
+Here's the breakdown of the templates and required fields:
+
+\textbf{@article}
+An article from a magazine or a journal.
+\begin{itemize}
+\item Required fields: author, title, journal, year.
+\item Optional fields: volume, number, pages, month, note.
+\end{itemize}
+
+\textbf{@book}
+A published book
+\begin{itemize}
+\item Required fields: author/editor, title, publisher, year.
+\item Optional fields: volume/number, series, address, edition, month, note.
+\end{itemize}
+
+\textbf{@booklet}
+A bound work without a named publisher or sponsor.
+\begin{itemize}
+\item Required fields: title.
+\item Optional fields: author, howpublished, address, month, year, note.
+\end{itemize}
+
+\textbf{@conference}
+Equal to inproceedings
+\begin{itemize}
+\item Required fields: author, title, booktitle, year.
+\item Optional fields: editor, volume/number, series, pages, address, month,
+  organization, publisher, note.
+\end{itemize}
+
+\textbf{@inbook}
+A section of a book
+\begin{itemize}
+\item Required fields: author/editor, title, chapter and/or pages, publisher, year.
+\item Optional fields: volume/number, series, type, address, edition, month,
+  note.
+\end{itemize}
+
+\textbf{@incollection}
+A section of a book having its own title.
+\begin{itemize}
+\item Required fields: author, title, booktitle, publisher, year.
+\item Optional fields: editor, volume/number, series, type, chapter, pages,
+  address, edition, month, note.
+\end{itemize}
+
+\textbf{@inproceedings}
+An article in a conference proceedings.
+\begin{itemize}
+\item Required fields: author, title, booktitle, year.
+\item Optional fields: editor, volume/number, series, pages, address, month,
+  organization, publisher, note.
+\end{itemize}
+
+\textbf{@manual}
+Technical manual
+\begin{itemize}
+\item Required fields: title.
+\item Optional fields: author, organization, address, edition, month, year,
+  note.
+\end{itemize}
+
+\textbf{@mastersthesis}
+Master thesis
+\begin{itemize}
+\item Required fields: author, title, school, year.
+\item Optional fields: type, address, month, note.
+\end{itemize}
+
+\textbf{@misc}
+Template useful for other kinds of publication
+\begin{itemize}
+\item Required fields: none
+\item Optional fields: author, title, howpublished, month, year, note.
+\end{itemize}
+
+\textbf{@phdthesis}
+Ph.D. thesis
+\begin{itemize}
+\item Required fields: author, title, year, school.
+\item Optional fields: address, month, keywords, note.
+\end{itemize}
+
+\textbf{@proceedings}
+The proceedings of a conference.
+\begin{itemize}
+\item Required fields: title, year.
+\item Optional fields: editor, volume/number, series, address, month,
+        organization, publisher, note.
+\end{itemize}
+
+\textbf{@techreport} 
+Technical report from educational, commercial or standardization institution.
+\begin{itemize}
+\item Required fields: author, title, institution, year.
+\item Optional fields: type, number, address, month, note.
+\end{itemize}
+
+\textbf{@unpublished}
+An unpublished article, book, thesis, etc.
+\begin{itemize}
+\item Required fields: author, title, note.
+\item Optional fields: month, year.
+\end{itemize}
+
+\section{Citing Text}
+Here's some text that makes use of the various bibliography entries in the
+external files \cite{Abedon1994}.  Here's another one
+\cite{website:fermentas-lambda}.  Note that the second reference uses a url
+which requires an external package.
+
+\bibliographystyle{plain}
+\bibliography{bibtex_notes,more_bibtex}
+
+
+\end{document}

@@ -1,0 +1,191 @@
+These questions are the non-duplicates copied from:
+http://www.w140.com/kurt/unixtests/
+
+- What does it mean for a file to be "setuid?"
+
+- Completely explain the nine permissions bits on files.
+
+- What happens when a new account is created?
+
+- Is cron good for running a program once at some time in the future?  Why?
+
+- What information is contained on each non-comment line of the crontab file?
+
+- What must be done before files can be stored on a brand new hard disk?
+
+- What is fsck?  When would you use it?  Why?
+
+- Explain the elevator algorithm and how it is used in UNIX.
+
+- What is virtual memory?
+
+- What is the benefit of having multiple swap disks?
+
+- What is an incremental backup?
+
+- What does the UCB "dump" program do?
+
+- Can "restore" bring back an individual file?
+
+- Many SAs keep their backup tapes on a shelf in the server room.  Is this
+  smart?
+
+- What does it mean to "rotate" log files?
+
+- What does syslogd do?
+
+- Describe applications of two separate syslog actions.
+
+- What is the job of the kernel?
+
+- What is the benefit of a modular kernel?
+
+- What is encapsulation?
+
+- What is the relationship between ethernet and IP?
+
+- What is a port?  Does IP have ports?
+
+- What is a netmask?
+
+- What is NAT?
+
+- What is the purpose of ARP?
+
+- What is the role of DHCP in PPP?
+
+- What information is contained in each non-comment line of the /etc/hosts
+  file?
+
+- Describe the use of the "route" command and give an example.
+
+- Why does /etc/resolv.conf specify nameservers by IP address instead of by
+  name?
+
+- Does every TCP/IP-connected computer have a routing table or just routers?
+  Why?
+
+- To use a local IP router/gateway, do you need the router's IP#?  Explain.
+
+- What is a routing protocol and what is its purpose?
+
+- What is the principle behind distance-vector protocols?
+
+- Routes often have "costs" associated with them.  What is meant by this?
+
+- What is a link-state protocol and what is its advantage.
+
+- How is multiple access controlled on Ethernet?
+
+- What are two different kinds of media used for Ethernet?
+
+- What type of media does DSL use?
+
+- How does FDDI provide greater reliability than Ethernet?
+
+- What is an Ethernet switch and how does it differ from a hub?
+
+- How is an Ethernet switch different from a router?
+
+- What is the benefit of using DNS instead of a /etc/hosts file?
+
+- What is a top-level domain?
+
+- What is BIND?
+
+- What is a recursive nameserver and how does it answer a DNS query?
+
+- Illustrate the functions of the /etc/resolv.conf, /etc/nsswitch.conf, and
+  /etc/hosts files by explaining what happens during a hostname lookup.
+
+- Compare FTP and NFS.  How are they similar?  How are they different?
+
+- Does root (UID=0) access files across NFS in the same way as other users?
+
+- What is meant by the statement that NFS is a "stateless" protocol?
+
+- Give an example of a mount command for mounting a remote NFS directory.
+
+- What information in contained on each non-comment line of /etc/exports?
+
+- What is the difference between a hard mount and a soft mount in NFS?
+
+- What is a computer?
+
+- What is hardware?
+
+- What is software?
+
+- What is an operating system?
+
+- What is an interface?
+
+- How is a hacked computer different from one that hasn't been hacked?
+
+- What is a name?
+
+- Jane has UID 143.  John has UID 257.  Jane owns the file "janes_prog" and she
+  makes it setuid.  John executes janes_prog.  What is the UID of the resulting
+  process?  What is the UID of the parent of the resulting process?
+
+- How would you set it up so that incoming mail for a particular user gets sent
+  to some remote e-mail address?
+
+- Describe specifically two problems with the mbox mail storage scheme.
+
+- Explain how you can determine the route that an e-mail message took.
+
+- Explain the role of IMAP.
+
+- When you send e-mail to jn@hlw.com, how does your system find the server's
+  IP?
+
+- What is sendmail and what is it for?
+
+- How can you determine detect whether packets are getting dropped by a router?
+
+- What does traceroute do and how does it work?
+
+- What program can be used to list open TCP connections on a host?
+
+- What is tcpdump?  What does it do?  Give an example of when it would be
+  useful.
+
+- Can netstat be used to examine the routing table?
+
+- What is the purpose of the /etc/shadow file and what problem does it solve?
+
+- How would you remotely detect what network services a machine provides?
+
+- How would you remotely find out what operating system a machine is running?
+
+- Exactly how does the "crack" program work?
+
+- What does the TCP wrappers package do and how does it increase security?
+
+- How could you know whether your machine has been hacked?
+
+- What is the security risk posed by setuid programs?
+
+- What aspects of standard UNIX file permissions cannot be represented using
+  the access control matrix (ACL) concept?
+
+- Does SSH rely on the remote client's IP address for authentication?
+
+- How does a proxy firewall increase the security of the protected network?
+
+- Rick knows that Jane never lies.
+  Jane knows that Mike never lies.
+  Mike knows that Sara never lies.
+  Jane tells Rick that Mike told her that Sara told him that her dog died.
+  Should Rick believe the news?
+
+- How would you determine whether a server needs a faster CPU or more memory?
+
+- How would you determine whether a server needs more memory or faster disks?
+
+- What is the difference between ps and top?
+
+- What does iostat tell you?
+
+- What does vmstat tell you?
