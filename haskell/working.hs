@@ -14,13 +14,13 @@ test2 n = n * 3
 
 -- ttest :: Integer -> Float
 -- ttest n = (n `mod` 2) / 2
- 
+
 tup = ((1, 'a'), "foo")
 
 -- pattern matching version of fibonacci
 fib :: Integer -> Integer
 fib n | n < 2     = n
-      | otherwise = fib(n - 1) + fib(n - 2) 
+      | otherwise = fib(n - 1) + fib(n - 2)
 
 -- create a list of n fibonacci numbers
 fibList :: Integer -> [Integer]
@@ -31,14 +31,14 @@ fibList n | n < 1 = []
 fibList2 :: Integer -> [Integer]
 fibList2 n = map fib [0..(n - 1)]
 
--- add commas to the ends of all but the last elem in a 
+-- add commas to the ends of all but the last elem in a
 -- list of strings
 commaDelim :: [String] -> [String]
 commaDelim []       = []
 commaDelim (s : []) = [s]
-commaDelim (s : a)  = (s ++ ",") : commaDelim a 
+commaDelim (s : a)  = (s ++ ",") : commaDelim a
 
--- tie it all together 
+-- tie it all together
 makeList :: Integer -> String
 makeList n = (concat . commaDelim . (map show) . fibList2) n
 
@@ -56,15 +56,15 @@ countLowerChars s = length (filter isLower s)
 -- 3.5
 listMax :: [Integer] -> Integer
 listMax []        = 0
-listMax (m1 : ms) = max m1 (listMax ms) 
+listMax (m1 : ms) = max m1 (listMax ms)
 
 -- 3.6
 listPairsCheck :: [(a1, b1)] -> a1
 listPairsCheck a = fst (head (tail a))
 
 -- layout test
-layout1 x = 
-  case x of 
+layout1 x =
+  case x of
     0 -> 1
     1 -> 5
     _ -> -1
@@ -77,12 +77,12 @@ layout2 x = case x of { 0 -> 1 ; 1 -> 5; _ -> -1 }
 --             | a + mult (a, b - 1)  otherwise
 mult :: Integer -> Integer -> Integer
 mult n 0  = 0
-mult n m  = n + mult n (m - 1) 
+mult n m  = n + mult n (m - 1)
 
 -- 3.9
 my_map :: (a -> b) -> [a] -> [b]
 my_map _ []        = []
-my_map f (w : ws)  = f w : my_map f ws 
+my_map f (w : ws)  = f w : my_map f ws
 
 -- lambda expression with foldl
 --foldl (\ x -> (+) x) 0 [1, 3, 4]
@@ -90,7 +90,7 @@ my_map f (w : ws)  = f w : my_map f ws
 -- generate random single digit number
 genRandDigit :: IO Int
 genRandDigit = getStdRandom (randomR (0, 9))
---genRandDigit = RandomRIO (0::Int, 10) 
+--genRandDigit = RandomRIO (0::Int, 10)
 
 -- 4.1
 -- 1. [Char]
@@ -111,13 +111,13 @@ genRandDigit = getStdRandom (randomR (0, 9))
 -- 2. a -> b -> b -> (a, [b])
 -- 3. Num a => a -> a
 -- 4. a -> [Char]
--- 5. (Char a) -> a 
+-- 5. (Char a) -> a
 -- 6. Err
 -- 7. Num a => a -> a
 
 -- 4.4
 data Triple a b c = Triple a b c
-tripleFst (Triple a b c) = a 
+tripleFst (Triple a b c) = a
 tripleSnd (Triple a b c) = b
 tripleThr (Triple a b c) = c
 
@@ -168,7 +168,7 @@ tuple4 (Four  a b c d) = Just d
 -- 4.7
 fromTuple :: Tuple a b c d -> Either (Either a (a, b)) (Either (a, b, c) (a, b, c, d))
 fromTuple (One   a      ) = Left  (Left  a        )
-fromTuple (Two   a b    ) = Left  (Right (a,b)    ) 
+fromTuple (Two   a b    ) = Left  (Right (a,b)    )
 fromTuple (Three a b c  ) = Right (Left  (a,b,c)  )
 fromTuple (Four  a b c d) = Right (Right (a,b,c,d))
 
@@ -195,7 +195,7 @@ listTail (Cons x xs) = xs
 
 listFoldl :: (a -> b -> a) -> a -> List b -> a
 listFoldl p k Nil         = k
-listFoldl p k (Cons x xs) = listFoldl p (p k x) xs 
+listFoldl p k (Cons x xs) = listFoldl p (p k x) xs
 
 listFoldr :: (a -> b -> b) -> b -> List a -> b
 listFoldr p k Nil         = k
@@ -218,7 +218,7 @@ elements (Branch left x right) = (elements left) ++ [x] ++ (elements right)
 -- 4.10
 foldTree :: (a -> b -> b) -> b -> BinaryTree a -> b
 foldTree f z (Leaf x)           = f x z
-foldTree f z (Branch lhs x rhs) = foldTree f (f x (foldTree f z rhs)) lhs 
+foldTree f z (Branch lhs x rhs) = foldTree f (f x (foldTree f z rhs)) lhs
 
 elements2 = foldTree (:) []
 
