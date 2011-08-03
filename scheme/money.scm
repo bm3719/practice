@@ -95,9 +95,19 @@
               (+ cash c)
               (roulette-gamble (+ cash c) (- spins 1)))))))
 
-;; Martingale version of the above.
-(define (routlette-gamble-mg cash spins)
-  )
+;; Martingale version (using 30, 60, 120, 240, 480) of the above.
+(define (roulette-gamble-mg cash spins)
+  (define (r-g-m cash bet spins)
+    (if (< cash bet)
+        cash
+        (let ([spin (roulette-spin)])
+          (let ([c (if (< spin 18) bet (- 0 bet))])
+            (if (< spins 2)
+                (+ cash c)
+                (if (< (* bet 2) 500)
+                    (r-g-m (+ cash c) (* bet 2) (- spins 1))
+                    (r-g-m (+ cash c) 30 (- spins 1))))))))
+  (r-g-m cash 30 spins))
 
 ;; Calculate the odds of getting out with a specific target amount playing
 ;; roulette.
