@@ -72,8 +72,34 @@
         (else (de-inflate (- years 1)
                           (- amt (* amt inflation-rate)) inflation-rate))))
 
-;; Model the spin of a roulette wheel (1 - 36, 37 = 00, 0 = 0)
-;; TODO: Finish this.
-;(define (roulette-spin)
-;  (require 'random)
-;  (random 38))
+;; Model the spin of a roulette wheel.  There's 38 end states, and these can be
+;; mapped to whichever numbers (e.g. 1 - 36, 37 = 00, 0 = 0).  Uses SLIB (on
+;; Gauche, this requires lang/slib-gauche).
+(define (roulette-spin)
+  (use slib)
+  (require 'random)
+  (random 38))
+
+;; Simulate gambling at a roulette table.  Presumes a 1:2 bet (single color or
+;; odd/even).  And each bet is a table maximum of $500 (typical for normal
+;; tables in Vegas).
+;; cash: starting money
+;; spins: max number of rounds
+(define (roulette-gamble cash spins)
+  (if (< cash 500)
+      cash
+      (let ([spin (roulette-spin)])
+        ;; 18 possible win states.  Using 0 - 17.
+        (let ([c (if (< spin 18) 500 -500)])
+          (if (< spins 2)
+              (+ cash c)
+              (roulette-gamble (+ cash c) (- spins 1)))))))
+
+;; Martingale version of the above.
+(define (routlette-gamble-mg cash spins)
+  )
+
+;; Calculate the odds of getting out with a specific target amount playing
+;; roulette.
+(define (roulette-odds cash target)
+  )
