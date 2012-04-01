@@ -84,7 +84,7 @@ instance Entity Paddle where
 -- unique ID, and there is at most one edge per vertex pair.
 data Graph v e = Graph [(Int,v)] [(Int,Int,e)]
 
--- Naï path finding between 2 vertices, if one exists.
+-- Naïve path finding between 2 vertices, if one exists.
 search :: Graph v e -> Int -> Int -> Maybe [Int]
 search g@(Graph vl el) src dst
     | src == dst = Just [src]
