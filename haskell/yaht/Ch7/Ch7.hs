@@ -297,7 +297,7 @@ assignID1 l = zip l [1..(length l)]
 assignID2 l = zip l [1..]
 
 -- map/filter syntactic sugar: In set notation, we would write something like
--- {f(x) | x . s . p(x)}.  This describes the set of all values of f applied to
+-- {f(x) | x ∈ s ∧ p(x)}.  This describes the set of all values of f applied to
 -- elements of s which satisfy predicate p.  This is equivalent to `map f
 -- (filter p s)'.  Instead of this, we can write the more math-like notation of
 -- `[f x | x <- s, p x]'.  These expressions are equivalent:
