@@ -1,5 +1,3 @@
-(ns upenn.core)
-
 ;;;; http://www.cis.upenn.edu/~matuszek/cis554-2011/Assignments/clojure-01-exercises.html
 ;;;; Skipping the unit testing.
 
