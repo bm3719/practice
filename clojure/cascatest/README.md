@@ -12,7 +12,7 @@ Put data in HDFS:
 
     hadoop fs -copyFromLocal ~/data/1987-truncated /
 
-Run with `lein run' or interact with functions via `lein repl'.
+Run with `lein run` or interact with functions via `lein repl`.
 
 ## Usage
 
