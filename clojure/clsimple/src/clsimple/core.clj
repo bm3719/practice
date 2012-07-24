@@ -1,8 +1,4 @@
-(ns clsimple.core  (:use cascalog.api
-        cascalog.vars
-        [cascalog.workflow :only (fields)])
-  (:import [cascading.scheme.hadoop TextDelimited]
-           [cascading.tuple Fields]))
+(ns clsimple.core  (:use cascalog.api))
 
 (def gen-tuples
   [(range 3)
