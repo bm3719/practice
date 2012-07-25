@@ -11,4 +11,5 @@
                  ]
 ;  :profiles {:dev {:dependencies [[org.apache.hadoop/hadoop-core "0.20.2-dev"]]}}
   :plugins [[lein-swank "1.4.4"]]
-  :main clsimple.core)
+;  :main clsimple.core
+  :namespaces [clsimple.core])
