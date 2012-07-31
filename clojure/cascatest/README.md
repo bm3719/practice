@@ -10,9 +10,10 @@ Make a subset of the data:
 
 Put data in HDFS:
 
-    hadoop fs -copyFromLocal ~/data/1987-truncated /
+    hadoop fs -copyFromLocal ~/data/1987-truncated.tsv /
 
-Run with `lein run` or interact with functions via `lein repl`.
+Execute `lein deps` to grab dependencies.  Then run with `lein run` or interact
+with functions via `lein repl`.
 
 ## Usage
 
