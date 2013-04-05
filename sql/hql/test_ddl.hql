@@ -1,6 +1,7 @@
 -- Clean up test tables.
 drop table person;
 drop table person_detailed;
+drop table test_table;
 
 -- Create a basic test table.
 create table test_table(
