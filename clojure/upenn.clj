@@ -114,7 +114,7 @@
   (defn abs [n]
     (if (< n 0) (- 0 n) n))
   (defn dif [n1 n2]
-    (if (< (abs (- n1 n2)) 0.00001) true false))
+    (< (abs (- n1 n2)) 0.00001))
   (defn newton [n r]
     (let [guess (/ (+ r (/ n r)) 2)]
       (if (dif r guess) guess
@@ -127,7 +127,7 @@
 ;; converge. If two values take equally long to converge, return either value.
 (defn longest-collatz [lo hi]
   (defn collatz-count [n c]
-    (cond (= n 1) c
+    (cond (<= n 1) c
           (even? n) (collatz-count (/ n 2) (+ c 1))
           :else (collatz-count (+ (* 3 n) 1) (+ c 1))))
   (let [index (atom 0)]
