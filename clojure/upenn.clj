@@ -72,7 +72,6 @@
         (cons (if (seq? (first l)) (eliminate n (first l))
                   (first l))
               (eliminate n (rest l))))))
-                
 
 ;;; Second group: These are all probably best done with higher-order functions,
 ;;; so please use them wherever they seem to work.
