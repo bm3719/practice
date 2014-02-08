@@ -5,7 +5,7 @@
                              [clojure.string :only [split]]))
 
 (defn file-word-count
-  "Count words in a file.  Splits on any any whitespace length."
+  "Count words in a file.  Splits on any whitespace length."
   [file]
   (defn hash-update
     "Increment a hash-map value in place, or initialize to 1."
