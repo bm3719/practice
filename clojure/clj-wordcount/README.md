@@ -9,7 +9,7 @@ The source is [here](https://github.com/bm3719/practice/blob/master/clojure/clj-
 
 Running this (by default, against the files in resources/) can be done with:
 
-   lein run
+    lein run
 
 The histogram is implemented in Gnuplot:
 
