@@ -2,9 +2,10 @@ SET hive.merge.mapfiles=false;
 
 -- Full script including DDL and DML.  This will aggregate some input data that
 -- includes the various net worth components.
+
 -- Create a table with delimiters defined.
 DROP TABLE net_worth_staging_1;
-CREATE TABLE net_worth_staging_1(
+CREATE TABLE net_worth_staging_1 (
        id             INT,
        name           STRING,
        job            STRING,
@@ -24,7 +25,7 @@ ADD FILE ./test_full.py;
 -- Create the table with all fields cleaned up and converted to useful
 -- aggregates.
 DROP TABLE net_worth_staging_2;
-CREATE TABLE net_worth_staging_2(
+CREATE TABLE net_worth_staging_2 (
        name           STRING,
        job            STRING,
        assets         DOUBLE,

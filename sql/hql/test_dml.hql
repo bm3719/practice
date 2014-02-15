@@ -1,6 +1,6 @@
 -- Load some data from a text file.  The default delimiter is ^A.  "overwrite"
 -- will replace all existing data in the table.  Behind the scenes, this
--- actually copies the file (either from the local FS or HDFS.  Make sure
+-- actually copies the file (either from the local FS or HDFS).  Make sure
 -- there's no blank lines in the input file.
 load data local inpath './test_input.txt' overwrite into table person;
 
