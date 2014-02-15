@@ -72,7 +72,6 @@
         (cons (if (seq? (first l)) (eliminate n (first l))
                   (first l))
               (eliminate n (rest l))))))
-                
 
 ;;; Second group: These are all probably best done with higher-order functions,
 ;;; so please use them wherever they seem to work.
@@ -114,7 +113,7 @@
   (defn abs [n]
     (if (< n 0) (- 0 n) n))
   (defn dif [n1 n2]
-    (if (< (abs (- n1 n2)) 0.00001) true false))
+    (< (abs (- n1 n2)) 0.00001))
   (defn newton [n r]
     (let [guess (/ (+ r (/ n r)) 2)]
       (if (dif r guess) guess
@@ -127,9 +126,15 @@
 ;; converge. If two values take equally long to converge, return either value.
 (defn longest-collatz [lo hi]
   (defn collatz-count [n c]
-    (cond (= n 1) c
+    (cond (<= n 1) c
           (even? n) (collatz-count (/ n 2) (+ c 1))
           :else (collatz-count (+ (* 3 n) 1) (+ c 1))))
-  (let [lo-count (collatz-count lo 0)
-        hi-count (collatz-count hi 0)]
-    (if (> lo-count hi-count) lo hi)))
+  (let [index (atom 0)]
+    (defn lst-index [lst n]
+      (if (= (first lst) n) @index
+          (do (swap! index inc)
+              (lst-index (rest lst) n)))))
+  (let [lst (range lo (inc hi))
+        col-lst (map (fn [x] (collatz-count x 0)) lst)
+        col-max (reduce max col-lst)]
+    (nth lst (lst-index col-lst col-max))))
