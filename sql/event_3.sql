@@ -999,11 +999,11 @@ insert into etcitem values(
  1 -- save_at_once
  );
 
--- public hair
+-- pubic hair
 insert into etcitem values(
  50003, -- item_id
- 'Public Hair', -- name
- 'Public Hair', -- name_id
+ 'Pubic Hair', -- name
+ 'Pubic Hair', -- name_id
  'food', -- item_type
  'normal', -- use_type
  'animalmatter', -- material
