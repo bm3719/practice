@@ -1,0 +1,96 @@
+;;;; Exercises from 4clojure.com.  Using difficultly ordering and skipping the
+;;;; first 17.  This is just for syntax refamiliarization practice, so I'll
+;;;; probably stop somewhere in the Medium range.
+
+;;; Elementary
+
+;; #35: Local Bindings
+(= 7 (let [x 5] (+ 2 x)))
+(= 7 (let [x 3, y 10] (- y x)))
+(= 7 (let [x 21] (let [y 3] (/ x y))))
+
+;; #36: Let it Be
+(= 10 (let [x 7, y 3, z 1] (+ x y)))
+(= 4 (let [x 7, y 3, z 1] (+ y z)))
+(= 1 (let [x 7, y 3, z 1] z))
+
+;; #37: Regular Expressions
+(= "ABC" (apply str (re-seq #"[A-Z]+" "bA1B3Ce ")))
+
+;; #64: Intro to Reduce
+(= 15 (reduce + [1 2 3 4 5]))
+(= 0 (reduce + []))
+(= 6 (reduce + 1 [2 3]))
+
+;; #57: Simple Recursion
+(= '(5 4 3 2 1) ((fn foo [x] (when (> x 0) (conj (foo (dec x)) x ))) 5))
+
+;; #71: Rearranging Code: ->
+;; The -> macro threads an expression x through a variable number of forms, in
+;; each threading, making it a list if it is not already one.
+(= (last (sort (rest (reverse [2 5 4 1 3 6]))))
+   (-> [2 5 4 1 3 6] (reverse) (rest) (sort) (last))
+   5)
+
+;; #68: Recurring Theme
+(= '(7 6 5 4 3)
+   (loop [x 5
+          result []]
+     (if (> x 0)
+       (recur (dec x) (conj result (+ 2 x)))
+       result)))
+
+;; #72: Rearranging Code: ->>
+;; ->> is the same as ->, except that it inserts x as the last item in the
+;; forms passed.
+(= (reduce + (map inc (take 3 (drop 2 [2 5 4 1 3 6]))))
+   (->> [2 5 4 1 3 6] (drop 2) (take 3) (map inc) (reduce +))
+   11)
+
+;; #134: A nil key
+(true? (#(and (= nil (%1 %2)) (contains? %2 %1)) :a {:a nil :b 2}))
+(false? (#(and (= nil (%1 %2)) (contains? %2 %1)) :b {:a nil :b 2}))
+(false? (#(and (= nil (%1 %2)) (contains? %2 %1)) :c {:a nil :b 2}))
+
+;; #145: For the win
+(= '(1 5 9 13 17 21 25 29 33 37) (for [x (range 40)
+            :when (= 1 (rem x 4))]
+        x))
+(= '(1 5 9 13 17 21 25 29 33 37) (for [x (iterate #(+ 4 %) 0)
+            :let [z (inc x)]
+            :while (< z 40)]
+        z))
+(= '(1 5 9 13 17 21 25 29 33 37) (for [[x y] (partition 2 (range 20))]
+        (+ x y)))
+
+;; #162: Logical falsity and truth
+(= 1 (if-not false 1 0))
+(= 1 (if-not nil 1 0))
+(= 1 (if true 1 0))
+(= 1 (if [] 1 0))
+(= 1 (if [0] 1 0))
+(= 1 (if 0 1 0))
+(= 1 (if 1 1 0))
+
+;; #156: Map Defaults
+(= ((fn f [x s] (reduce conj (map #(hash-map % x) s))) 0 [:a :b :c])
+   {:a 0 :b 0 :c 0})
+(= ((fn f [x s] (reduce conj (map #(hash-map % x) s))) "x" [1 2 3])
+   {1 "x" 2 "x" 3 "x"})
+(= ((fn f [x s] (reduce conj (map #(hash-map % x) s))) [:a :b] [:foo :bar])
+   {:foo [:a :b] :bar [:a :b]})
+
+;;; Easy
+
+;; #19: Last Element
+(= (#(first (reverse %)) [1 2 3 4 5]) 5)
+(= (#(first (reverse %)) '(5 4 3)) 3)
+(= (#(first (reverse %)) ["b" "c" "d"]) "d")
+
+;; #20: Penultimate Element
+(= (#(->> % (reverse) (take 2) (last)) (list 1 2 3 4 5)) 4)
+(= (#(->> % (reverse) (take 2) (last)) ["a" "b" "c"]) "b")
+(= (#(->> % (reverse) (take 2) (last)) [[1 2] [3 4]]) [1 2])
+
+;; #21: Nth Element
+(= (__ '(4 5 6 7) 2) 6)
