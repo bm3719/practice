@@ -93,4 +93,137 @@
 (= (#(->> % (reverse) (take 2) (last)) [[1 2] [3 4]]) [1 2])
 
 ;; #21: Nth Element
-(= (__ '(4 5 6 7) 2) 6)
+(= ((fn f [lst n] (if (= n 0) (first lst) (f (rest lst) (- n 1))))
+    '(4 5 6 7) 2) 6)
+(= ((fn f [lst n] (if (= n 0) (first lst) (f (rest lst) (- n 1))))
+    [:a :b :c] 0) a)
+(= ((fn f [lst n] (if (= n 0) (first lst) (f (rest lst) (- n 1))))
+    [1 2 3 4] 1) 2)
+(= ((fn f [lst n] (if (= n 0) (first lst) (f (rest lst) (- n 1))))
+    '([1 2] [3 4] [5 6]) 2) [5 6])
+
+;; #22: Count a Sequence
+(= ((fn f [lst] (if (= lst '()) 0 (+ 1 (f (rest lst))))) '(1 2 3 3 1)) 5)
+(= ((fn f [lst] (if (= lst '()) 0 (+ 1 (f (rest lst))))) "Hello World") 11)
+(= ((fn f [lst] (if (= lst '()) 0 (+ 1 (f (rest lst))))) [[1 2] [3 4] [5 6]]) 3)
+(= ((fn f [lst] (if (= lst '()) 0 (+ 1 (f (rest lst))))) '(13)) 1)
+(= ((fn f [lst] (if (= lst '()) 0 (+ 1 (f (rest lst))))) '(:a :b :c)) 3)
+
+;; #24: Sum It All Up
+(= (#(reduce + %) [1 2 3]) 6)
+(= (#(reduce + %) (list 0 -2 5 5)) 8)
+(= (#(reduce + %) #{4 2 1}) 7)
+(= (#(reduce + %) '(0 0 -1)) -1)
+(= (#(reduce + %) '(1 10 3)) 14)
+
+;; #25: Find the odd numbers
+(= (#(filter odd? %) #{1 2 3 4 5}) '(1 3 5))
+(= (#(filter odd? %) [4 2 1 6]) '(1))
+(= (#(filter odd? %) [2 2 4 6]) '())
+(= (#(filter odd? %) [1 1 1 3]) '(1 1 1 3))
+
+;; #23: Reverse a Sequence
+(= ((fn f [lst] (if (<= (count lst) 1) lst
+                    (cons (last lst) (f (butlast lst)))))
+    [1 2 3 4 5]) [5 4 3 2 1])
+(= ((fn f [lst] (if (<= (count lst) 1) lst
+                    (cons (last lst) (f (butlast lst)))))
+    (sorted-set 5 7 2 7)) '(7 5 2))
+(= ((fn f [lst] (if (<= (count lst) 1) lst
+                    (cons (last lst) (f (butlast lst)))))
+    [[1 2] [3 4] [5 6]]) [[5 6] [3 4] [1 2]])
+
+;; #27: Palindrome Detector
+;; There's probably a cleaner way to do this.
+(false? (#(if (= (type %) java.lang.String)
+            (= % (apply str (reverse %)))
+            (= % (reverse %)))
+         '(1 2 3 4 5)))
+(true? (#(if (= (type %) java.lang.String)
+            (= % (apply str (reverse %)))
+            (= % (reverse %)))
+        "racecar"))
+(true? (#(if (= (type %) java.lang.String)
+            (= % (apply str (reverse %)))
+            (= % (reverse %)))
+        [:foo :bar :foo]))
+(true? (#(if (= (type %) java.lang.String)
+            (= % (apply str (reverse %)))
+            (= % (reverse %)))
+        '(1 1 3 3 1 1)))
+(false? (#(if (= (type %) java.lang.String)
+            (= % (apply str (reverse %)))
+            (= % (reverse %)))
+         '(:a :b :c)))
+
+;; #26: Fibonacci Sequence
+(= (#(map (fn fib [x] (if (< x 3) 1 (+ (fib (- x 1)) (fib (- x 2)))))
+           (range 1 (+ % 1)))
+    3) '(1 1 2))
+(= (#(map (fn fib [x] (if (< x 3) 1 (+ (fib (- x 1)) (fib (- x 2)))))
+           (range 1 (+ % 1)))
+    6) '(1 1 2 3 5 8))
+(= (#(map (fn fib [x] (if (< x 3) 1 (+ (fib (- x 1)) (fib (- x 2)))))
+           (range 1 (+ % 1)))
+    8) '(1 1 2 3 5 8 13 21))
+
+;; #38: Maximum value
+(= ((fn mymax [x & xs] (if (= (count xs) 0) x
+      (let [ox (apply mymax xs)]
+        (if (> x ox) x ox))))
+    1 8 3 4) 8)
+(= ((fn mymax [x & xs] (if (= (count xs) 0) x
+      (let [ox (apply mymax xs)]
+        (if (> x ox) x ox))))
+    30 20) 30)
+(= ((fn mymax [x & xs] (if (= (count xs) 0) x
+      (let [ox (apply mymax xs)]
+        (if (> x ox) x ox))))
+    45 67 11) 67)
+
+;; #29: Get the Caps
+(= ((fn f [s] (apply str (filter #(Character/isUpperCase %) s)))
+     "HeLlO, WoRlD!") "HLOWRD")
+(empty? ((fn f [s] (apply str (filter #(Character/isUpperCase %) s)))
+         "nothing"))
+(= ((fn f [s] (apply str (filter #(Character/isUpperCase %) s)))
+    "$#A(*&987Zf") "AZ")
+
+;; #32: Duplicate a Sequence
+(= ((fn f [lst] (if (= (count lst) 0) lst
+                    (conj (conj (f (rest lst)) (first lst)) (first lst))))
+    [1 2 3]) '(1 1 2 2 3 3))
+(= ((fn f [lst] (if (= (count lst) 0) lst
+                    (conj (conj (f (rest lst)) (first lst)) (first lst))))
+    [:a :a :b :b]) '(:a :a :a :a :b :b :b :b))
+(= ((fn f [lst] (if (= (count lst) 0) lst
+                    (conj (conj (f (rest lst)) (first lst)) (first lst))))
+    [[1 2] [3 4]]) '([1 2] [1 2] [3 4] [3 4]))
+
+;; #48: Intro to some
+(= 6 (some #{2 7 6} [5 6 7 8]))
+(= 6 (some #(when (even? %) %) [5 6 7 8]))
+
+;; #34: Implement range
+(= ((fn myrange [s n] (if (= s n) '() (conj (myrange (+ s 1) n) s)))
+    1 4) '(1 2 3))
+(= ((fn myrange [s n] (if (= s n) '() (conj (myrange (+ s 1) n) s)))
+    -2 2) '(-2 -1 0 1))
+(= ((fn myrange [s n] (if (= s n) '() (conj (myrange (+ s 1) n) s)))
+    5 8) '(5 6 7))
+
+;; #28: Flatten a sequence
+(= ((fn f [lst] (cond (= nil (first lst)) lst
+                      (sequential? (first lst)) (concat (f (first lst)) (f (rest lst)))
+                      :else (conj (f (rest lst)) (first lst))))
+    '((1 2) 3 [4 [5 6]])) '(1 2 3 4 5 6))
+(= ((fn f [lst] (cond (= nil (first lst)) lst
+                      (sequential? (first lst)) (concat (f (first lst)) (f (rest lst)))
+                      :else (conj (f (rest lst)) (first lst))))
+    ["a" ["b"] "c"]) '("a" "b" "c"))
+(= ((fn f [lst] (cond (= nil (first lst)) lst
+                      (sequential? (first lst)) (concat (f (first lst)) (f (rest lst)))
+                      :else (conj (f (rest lst)) (first lst))))
+    '(((:a)))) '(:a))
+
+
