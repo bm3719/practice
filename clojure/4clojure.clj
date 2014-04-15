@@ -1,8 +1,72 @@
-;;;; Exercises from 4clojure.com.  Using difficultly ordering and skipping the
-;;;; first 17.  This is just for syntax refamiliarization practice, so I'll
-;;;; probably stop somewhere in the Medium range.
+;;;; Exercises from 4clojure.com.  Using difficulty ordering.  Will probably
+;;;; stop somewhere in the Medium range.
 
 ;;; Elementary
+
+;; #2: Simple Math
+(= (- 10 (* 2 3)) 4)
+
+;; #3: Intro to Strings
+(= "HELLO WORLD" (.toUpperCase "hello world"))
+
+;; #4: Intro to Lists
+(= (list :a :b :c) '(:a :b :c))
+
+;; #5: Lists: conj
+(= '(1 2 3 4) (conj ('2 3 4) 1))
+(= '(1 2 3 4) (conj '(3 4) 2 1))
+
+;; #6: Intro to Vectors
+(= [:a :b :c] (list :a :b :c) (vec '(:a :b :c)) (vector :a :b :c))
+
+;; #7: Vectors: conj
+(= '(1 2 3 4) (conj [1 2 3] 4))
+(= '(1 2 3 4) (conj [1 2] 3 4))
+
+;; #8: Intro to Sets
+(= #{:a :b :c :d} (set '(:a :a :b :c :c :c :c :d :d)))
+(= #{:a :b :c :d} (clojure.set/union #{:a :b :c} #{:b :c :d}))
+
+;; #9: Sets: conj
+(= #{1 2 3 4} (conj #{1 4 3} 2))
+
+;; #10: Intro to Maps
+(= 20 ((hash-map :a 10, :b 20, :c 30) :b))
+(= 20 (:b {:a 10, :b 20, :c 30}))
+
+;; #11: Maps: conj
+(= {:a 1, :b 2, :c 3} (conj {:a 1} {:b 2} [:c 3]))
+
+;; #12: Intro to Sequences
+(= 3 (first '(3 2 1)))
+(= 3 (second [2 3 4]))
+(= 3 (last (list 1 2 3)))
+
+;; #13 Sequences: rest
+(= '(20 30 40) (rest [10 20 30 40]))
+
+;; #14: Intro to Functions
+(= 8 ((fn add-five [x] (+ x 5)) 3))
+(= 8 ((fn [x] (+ x 5)) 3))
+(= 8 (#(+ % 5) 3))
+(= 8 ((partial + 5) 3))
+
+;; #15: Double Down
+(= (#(* % 2) 2) 4)
+(= (#(* % 2) 3) 6)
+(= (#(* % 2) 11) 22)
+(= (#(* % 2) 7) 14)
+
+;; #16: Hello World
+(= (#(str "Hello, " % "!") "Dave") "Hello, Dave!")
+(= (#(str "Hello, " % "!") "Jenn") "Hello, Jenn!")
+(= (#(str "Hello, " % "!") "Rhea") "Hello, Rhea!")
+
+;; #17: Sequences: map
+(= '(6 7 8) (map #(+ % 5) '(1 2 3)))
+
+;; #18: Sequences: filter
+(= '(6 7) (filter #(> % 5) '(3 4 5 6 7)))
 
 ;; #35: Local Bindings
 (= 7 (let [x 5] (+ 2 x)))
@@ -225,5 +289,39 @@
                       (sequential? (first lst)) (concat (f (first lst)) (f (rest lst)))
                       :else (conj (f (rest lst)) (first lst))))
     '(((:a)))) '(:a))
+
+;; #42: Factorial Fun
+(= ((fn fac [x] (if (< x 3) x (* x (fac (- x 1))))) 1) 1)
+(= ((fn fac [x] (if (< x 3) x (* x (fac (- x 1))))) 3) 6)
+(= ((fn fac [x] (if (< x 3) x (* x (fac (- x 1))))) 5) 120)
+(= ((fn fac [x] (if (< x 3) x (* x (fac (- x 1))))) 8) 40320)
+
+;; #39: Interleave Two Seqs
+(= ((fn foo [a b] (if (or (empty? a) (empty? b)) '()
+                      (conj (foo (rest a) (rest b)) (first b) (first a))))
+    [1 2 3] [:a :b :c]) '(1 :a 2 :b 3 :c))
+(= ((fn foo [a b] (if (or (empty? a) (empty? b)) '()
+                      (conj (foo (rest a) (rest b)) (first b) (first a))))
+    [1 2] [3 4 5 6]) '(1 3 2 4))
+(= ((fn foo [a b] (if (or (empty? a) (empty? b)) '()
+                      (conj (foo (rest a) (rest b)) (first b) (first a))))
+    [1 2 3 4] [5]) [1 5])
+(= ((fn foo [a b] (if (or (empty? a) (empty? b)) '()
+                      (conj (foo (rest a) (rest b)) (first b) (first a))))
+    [30 20] [25 15]) [30 25 20 15])
+
+;; #30: Compress a Sequence
+(= (apply str ((fn f [s] (cond (empty? s) '()
+                               (= (first s) (second s)) (f (rest s)) 
+                               :else (conj (f (rest s)) (first s))))
+           "Leeeeeerrroyyy")) "Leroy")
+(= ((fn f [s] (cond (empty? s) '()
+                (= (first s) (second s)) (f (rest s)) 
+                :else (conj (f (rest s)) (first s))))
+    [1 1 2 3 3 2 2 3]) '(1 2 3 2 3))
+(= ((fn f [s] (cond (empty? s) '()
+                (= (first s) (second s)) (f (rest s)) 
+                :else (conj (f (rest s)) (first s))))
+    [[1 2] [1 2] [3 4] [1 2]]) '([1 2] [3 4] [1 2]))
 
 
