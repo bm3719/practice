@@ -324,4 +324,38 @@
                 :else (conj (f (rest s)) (first s))))
     [[1 2] [1 2] [3 4] [1 2]]) '([1 2] [3 4] [1 2]))
 
+;; #47: Contain Yourself
+(contains? #{4 5 6} 4)
+(contains? [1 1 1 1 1] 4)
+(contains? {4 :a 2 :b} 4)
+(not (contains? '(1 2 4) 4))
+
+;; #45: Intro to Iterate
+(= '(1 4 7 10 13) (take 5 (iterate #(+ 3 %) 1)))
+
+;; #33: Replicate a Sequence
+(= ((fn f [s n] (reduce concat (map #(take n (iterate identity %)) s)))
+    [1 2 3] 2) '(1 1 2 2 3 3))
+(= ((fn f [s n] (reduce concat (map #(take n (iterate identity %)) s)))
+    [:a :b] 4) '(:a :a :a :a :b :b :b :b))
+(= ((fn f [s n] (reduce concat (map #(take n (iterate identity %)) s)))
+    [4 5 6] 1) '(4 5 6))
+(= ((fn f [s n] (reduce concat (map #(take n (iterate identity %)) s)))
+    [[1 2] [3 4]] 2) '([1 2] [1 2] [3 4] [3 4]))
+(= ((fn f [s n] (reduce concat (map #(take n (iterate identity %)) s)))
+    [44 33] 2) [44 44 33 33])
+
+;; #40: Interpose a Seq
+(= ((fn f [k s] (if (< (count s) 2) s (conj (f k (rest s)) k (first s))))
+    0 [1 2 3]) [1 0 2 0 3])
+(= (apply str ((fn f [k s] (if (< (count s) 2) s (conj (f k (rest s)) k (first s))))
+               ", " ["one" "two" "three"])) "one, two, three")
+(= ((fn f [k s] (if (< (count s) 2) s (conj (f k (rest s)) k (first s))))
+    :z [:a :b :c :d]) [:a :z :b :z :c :z :d])
+
+;; #31: Pack a Sequence
+;; (= (__ [1 1 2 1 1 1 3 3]) '((1 1) (2) (1 1 1) (3 3)))
+;; (= (__ [:a :a :b :b :c]) '((:a :a) (:b :b) (:c)))
+;; (= (__ [[1 2] [1 2] [3 4]]) '(([1 2] [1 2]) ([3 4])))
+
 
