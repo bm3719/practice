@@ -358,6 +358,23 @@
 (= (#(partition-by identity %) [:a :a :b :b :c]) '((:a :a) (:b :b) (:c)))
 (= (#(partition-by identity %) [[1 2] [1 2] [3 4]]) '(([1 2] [1 2]) ([3 4])))
 
+;; #41: Drop Every Nth Item
+(= ((fn f [lst n] (if (< (count lst) n) lst
+                      (concat (take (- n 1) lst) (f (drop n lst) n))))
+    [1 2 3 4 5 6 7 8] 3) [1 2 4 5 7 8])
+(= ((fn f [lst n] (if (< (count lst) n) lst
+                      (concat (take (- n 1) lst) (f (drop n lst) n))))
+    [:a :b :c :d :e :f] 2) [:a :c :e])
+(= ((fn f [lst n] (if (< (count lst) n) lst
+                      (concat (take (- n 1) lst) (f (drop n lst) n))))
+    [1 2 3 4 5 6] 4) [1 2 3 5 6])
 
+;; #52: Intro to Destructuring
+(= [2 4] (let [[a b c d e f g] (range)] [c e]))
 
+;; #49: Split a sequence
+;; (= (__ 3 [1 2 3 4 5 6]) [[1 2 3] [4 5 6]])
+;; (= (__ 1 [:a :b :c :d]) [[:a] [:b :c :d]])
+;; (= (__ 2 [[1 2] [3 4] [5 6]]) [[[1 2] [3 4]] [[5 6]]])
 
+  
