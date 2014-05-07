@@ -373,8 +373,36 @@
 (= [2 4] (let [[a b c d e f g] (range)] [c e]))
 
 ;; #49: Split a sequence
-;; (= (__ 3 [1 2 3 4 5 6]) [[1 2 3] [4 5 6]])
-;; (= (__ 1 [:a :b :c :d]) [[:a] [:b :c :d]])
-;; (= (__ 2 [[1 2] [3 4] [5 6]]) [[[1 2] [3 4]] [[5 6]]])
+(= ((fn f [n lst] (if (<= (count lst) n) (list lst)
+                      (conj (list (drop n lst)) (take n lst))))
+    3 [1 2 3 4 5 6]) [[1 2 3] [4 5 6]])
+(= ((fn f [n lst] (if (<= (count lst) n) (list lst)
+                      (conj (list (drop n lst)) (take n lst))))
+    1 [:a :b :c :d]) [[:a] [:b :c :d]])
+(= ((fn f [n lst] (if (<= (count lst) n) (list lst)
+                      (conj (list (drop n lst)) (take n lst))))
+    2 [[1 2] [3 4] [5 6]]) [[[1 2] [3 4]] [[5 6]]])
 
-  
+;; #51: Advanced Destructuring
+(= [1 2 [3 4 5] [1 2 3 4 5]] (let [[a b & c :as d] [1 2 3 4 5]] [a b c d]))
+
+;; #83: A Half-Truth
+(= false (#(true? (and (some identity %&) (not (every? identity %&)))) false false))
+(= true (#(true? (and (some identity %&) (not (every? identity %&)))) true false))
+(= false (#(true? (and (some identity %&) (not (every? identity %&)))) true))
+(= true (#(true? (and (some identity %&) (not (every? identity %&)))) false true false))
+(= false (#(true? (and (some identity %&) (not (every? identity %&)))) true true true))
+(= true (#(true? (and (some identity %&) (not (every? identity %&)))) true true true false))
+
+;; #61: Map Construction
+(= (#(into {} (map vector %1 %2)) [:a :b :c] [1 2 3]) {:a 1, :b 2, :c 3})
+(= (#(into {} (map vector %1 %2)) [1 2 3 4] ["one" "two" "three"]) {1 "one", 2 "two", 3 "three"})
+(= (#(into {} (map vector %1 %2)) [:foo :bar] ["foo" "bar" "baz"]) {:foo "foo" :bar "bar"})
+
+;; $166: Comparisons
+;; (= :gt (__ < 5 1))
+;; (= :eq (__ (fn [x y] (< (count x) (count y))) "pear" "plum"))
+;; (= :lt (__ (fn [x y] (< (mod x 5) (mod y 5))) 21 3))
+;; (= :gt (__ > 0 2))
+
+
