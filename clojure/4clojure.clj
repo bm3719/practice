@@ -436,6 +436,17 @@
 (= [1 2 4 8 16] (map #(((fn [x] (fn [y] (int (Math/pow y x)))) %) 2) [0 1 2 3 4]))
 
 ;; #99: Product Digits
-;; (= (__ 1 1) [1])
-;; (= (__ 99 9) [8 9 1])
-;; (= (__ 999 99) [9 8 9 0 1])
+(= (#(map read-string (map str (seq (str (* %1 %2))))) 1 1) [1])
+(= (#(map read-string (map str (seq (str (* %1 %2))))) 99 9) [8 9 1])
+(= (#(map read-string (map str (seq (str (* %1 %2))))) 999 99) [9 8 9 0 1])
+
+;; #90: Cartesian Product
+;; (= (__ #{"ace" "king" "queen"} #{"♠" "♥" "♦" "♣"})
+;;    #{["ace"   "♠"] ["ace"   "♥"] ["ace"   "♦"] ["ace"   "♣"]
+;;      ["king"  "♠"] ["king"  "♥"] ["king"  "♦"] ["king"  "♣"]
+;;      ["queen" "♠"] ["queen" "♥"] ["queen" "♦"] ["queen" "♣"]})
+;; (= (__ #{1 2 3} #{4 5})
+;;    #{[1 4] [2 4] [3 4] [1 5] [2 5] [3 5]})
+;; (= 300 (count (__ (into #{} (range 10))
+;;                   (into #{} (range 30)))))
+  
