@@ -399,10 +399,43 @@
 (= (#(into {} (map vector %1 %2)) [1 2 3 4] ["one" "two" "three"]) {1 "one", 2 "two", 3 "three"})
 (= (#(into {} (map vector %1 %2)) [:foo :bar] ["foo" "bar" "baz"]) {:foo "foo" :bar "bar"})
 
-;; $166: Comparisons
-;; (= :gt (__ < 5 1))
-;; (= :eq (__ (fn [x y] (< (count x) (count y))) "pear" "plum"))
-;; (= :lt (__ (fn [x y] (< (mod x 5) (mod y 5))) 21 3))
-;; (= :gt (__ > 0 2))
+;; #166: Comparisons
+(= :gt (#(cond (%1 %2 %3) :lt (%1 %3 %2) :gt :else :eq) < 5 1))
+(= :eq (#(cond (%1 %2 %3) :lt (%1 %3 %2) :gt :else :eq)
+        (fn [x y] (< (count x) (count y))) "pear" "plum"))
+(= :lt (#(cond (%1 %2 %3) :lt (%1 %3 %2) :gt :else :eq)
+        (fn [x y] (< (mod x 5) (mod y 5))) 21 3))
+(= :gt (#(cond (%1 %2 %3) :lt (%1 %3 %2) :gt :else :eq) > 0 2))
 
+;; #66: Greatest Common Divisor
+;; Using the Euclidean algorithm.
+(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 2 4) 2)
+(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 10 5) 5)
+(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 5 7) 1)
+(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 1023 858) 33)
 
+;; #81: Set Intersection
+(= (#(clojure.set/difference %1 (clojure.set/difference %1 %2))
+    #{0 1 2 3} #{2 3 4 5}) #{2 3})
+(= (#(clojure.set/difference %1 (clojure.set/difference %1 %2))
+    #{0 1 2} #{3 4 5}) #{})
+(= (#(clojure.set/difference %1 (clojure.set/difference %1 %2))
+    #{:a :b :c :d} #{:c :e :a :f :d}) #{:a :c :d})
+
+;; #62: Re-implement Iterate
+(= (take 5 ((fn iter [f x] (lazy-seq (cons x (iter f (f x)))))
+            #(* 2 %) 1)) [1 2 4 8 16])
+(= (take 100 ((fn iter [f x] (lazy-seq (cons x (iter f (f x)))))
+              inc 0)) (take 100 [range]))
+(= (take 9 ((fn iter [f x] (lazy-seq (cons x (iter f (f x)))))
+            #(inc (mod % 3)) 1)) (take 9 (cycle [1 2 3])))
+
+;; #107: Simple closures
+(= 256 (((fn [x] (fn [y] (int (Math/pow y x)))) 2) 16) (((fn [x] (fn [y] (int (Math/pow y x)))) 8) 2))
+(= [1 8 27 64] (map ((fn [x] (fn [y] (int (Math/pow y x)))) 3) [1 2 3 4]))
+(= [1 2 4 8 16] (map #(((fn [x] (fn [y] (int (Math/pow y x)))) %) 2) [0 1 2 3 4]))
+
+;; #99: Product Digits
+;; (= (__ 1 1) [1])
+;; (= (__ 99 9) [8 9 1])
+;; (= (__ 999 99) [9 8 9 0 1])
