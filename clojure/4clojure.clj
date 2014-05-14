@@ -297,17 +297,13 @@
 (= ((fn fac [x] (if (< x 3) x (* x (fac (- x 1))))) 8) 40320)
 
 ;; #39: Interleave Two Seqs
-(= ((fn foo [a b] (if (or (empty? a) (empty? b)) '()
-                      (conj (foo (rest a) (rest b)) (first b) (first a))))
+(= (#(flatten (map list %1 %2))
     [1 2 3] [:a :b :c]) '(1 :a 2 :b 3 :c))
-(= ((fn foo [a b] (if (or (empty? a) (empty? b)) '()
-                      (conj (foo (rest a) (rest b)) (first b) (first a))))
+(= (#(flatten (map list %1 %2))
     [1 2] [3 4 5 6]) '(1 3 2 4))
-(= ((fn foo [a b] (if (or (empty? a) (empty? b)) '()
-                      (conj (foo (rest a) (rest b)) (first b) (first a))))
+(= (#(flatten (map list %1 %2))
     [1 2 3 4] [5]) [1 5])
-(= ((fn foo [a b] (if (or (empty? a) (empty? b)) '()
-                      (conj (foo (rest a) (rest b)) (first b) (first a))))
+(= (#(flatten (map list %1 %2))
     [30 20] [25 15]) [30 25 20 15])
 
 ;; #30: Compress a Sequence
