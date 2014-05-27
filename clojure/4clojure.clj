@@ -451,7 +451,7 @@
 (= 300 (count ((fn f [l1 l2] (if (= (count l1) 1) (into #{} (map #(vector (first l1) %) l2))
                                  (into #{} (concat (f (rest l1) l2) (map #(vector (first l1) %) l2)))))
                (into #{} (range 10))
-                  (into #{} (range 30)))))
+               (into #{} (range 30)))))
 
 ;; #63: Group a Sequence
 (= ((fn [f v] (apply merge-with #(conj %1 (first %2)) (map #(hash-map (f %) (vector %)) v)))
