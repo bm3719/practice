@@ -463,14 +463,41 @@
     count [[1] [1 2] [3] [1 2 3] [2 3]])
    {1 [[1] [3]], 2 [[1 2] [2 3]], 3 [[1 2 3]]})
 
-;; #122: Read a binary number.
-;; (= 0 (__ "0"))
-;; (= 7 (__ "111"))
-;; (= 8 (__ "1000"))
-;; (= 9 (__ "1001"))
-;; (= 255 (__ "11111111"))
-;; (= 1365 (__ "10101010101"))
-;; (= 65535 (__ "1111111111111111"))
+;; #122: Read a binary number
+(= 0 ((fn [s] (let [x (reverse (take (count (map char s)) (iterate #(* 2 %) 1)))]
+                (reduce + (map #(if (= %1 \0) 0 %2) (map char s) x))))
+      "0"))
+(= 7 ((fn [s] (let [x (reverse (take (count (map char s)) (iterate #(* 2 %) 1)))] 
+                (reduce + (map #(if (= %1 \0) 0 %2) (map char s) x))))
+      "111"))
+(= 8 ((fn [s] (let [x (reverse (take (count (map char s)) (iterate #(* 2 %) 1)))]
+                (reduce + (map #(if (= %1 \0) 0 %2) (map char s) x))))
+      "1000"))
+(= 9 ((fn [s] (let [x (reverse (take (count (map char s)) (iterate #(* 2 %) 1)))]
+                (reduce + (map #(if (= %1 \0) 0 %2) (map char s) x))))
+      "1001"))
+(= 255 ((fn [s] (let [x (reverse (take (count (map char s)) (iterate #(* 2 %) 1)))]
+                  (reduce + (map #(if (= %1 \0) 0 %2) (map char s) x))))
+        "11111111"))
+(= 1365 ((fn [s] (let [x (reverse (take (count (map char s)) (iterate #(* 2 %) 1)))]
+                   (reduce + (map #(if (= %1 \0) 0 %2) (map char s) x))))
+         "10101010101"))
+(= 65535 ((fn [s] (let [x (reverse (take (count (map char s)) (iterate #(* 2 %) 1)))]
+                    (reduce + (map #(if (= %1 \0) 0 %2) (map char s) x))))
+          "1111111111111111"))
 
+;; #88: Symmetric Difference
+(= (#(clojure.set/union (clojure.set/difference %1 %2) (clojure.set/difference %2 %1))
+    #{1 2 3 4 5 6} #{1 3 5 7}) #{2 4 6 7})
+(= (#(clojure.set/union (clojure.set/difference %1 %2) (clojure.set/difference %2 %1))
+    #{:a :b :c} #{}) #{:a :b :c})
+(= (#(clojure.set/union (clojure.set/difference %1 %2) (clojure.set/difference %2 %1))
+    #{} #{4 5 6}) #{4 5 6})
+(= (#(clojure.set/union (clojure.set/difference %1 %2) (clojure.set/difference %2 %1))
+    #{[1 2] [2 3]} #{[2 3] [3 4]}) #{[1 2] [3 4]})
 
-  
+;; #143: dot product
+;; (= 0 (__ [0 1 0] [1 0 0]))
+;; (= 3 (__ [1 1 1] [1 1 1]))
+;; (= 32 (__ [1 2 3] [4 5 6]))
+;; (= 256 (__ [2 5 6] [100 10 1]))
