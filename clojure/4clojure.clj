@@ -507,7 +507,30 @@
   (and (= (class x) x) x))
 
 ;; #135: Infix Calculator
-;; (= 7 (__ 2 + 5))
-;; (= 42 (__ 38 + 48 - 2 / 2))
-;; (= 8 (__ 10 / 2 - 1 * 2))
-;; (= 72 (__ 20 / 2 + 2 + 4 + 8 - 6 - 10 * 9))
+(= 7 ((fn infix [& rest]
+  (if (< (count rest) 3) (first rest)
+      ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
+ 2 + 5))
+(= 42 ((fn infix [& rest]
+  (if (< (count rest) 3) (first rest)
+      ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
+ 38 + 48 - 2 / 2))
+(= 8 ((fn infix [& rest]
+  (if (< (count rest) 3) (first rest)
+      ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
+ 10 / 2 - 1 * 2))
+(= 72 ((fn infix [& rest]
+  (if (< (count rest) 3) (first rest)
+      ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
+ 20 / 2 + 2 + 4 + 8 - 6 - 10 * 9))
+
+;; #97: Pascal's Triangle
+;; (= (__ 1) 1)
+;; (= (map __ (range 1 6))
+;;    [     [1]
+;;         [1 1]
+;;        [1 2 1]
+;;       [1 3 3 1]
+;;      [1 4 6 4 1]])
+;; (= (__ 11)
+;;    [1 10 45 120 210 252 210 120 45 10 1])
