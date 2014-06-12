@@ -503,5 +503,11 @@
 (= 256 (#(reduce + (map * %1 %2)) [2 5 6] [100 10 1]))
 
 ;; #126: Through the Looking Glass
-;; (let [x __]
-;;   (and (= (class x) x) x))
+(let [x Class]
+  (and (= (class x) x) x))
+
+;; #135: Infix Calculator
+;; (= 7 (__ 2 + 5))
+;; (= 42 (__ 38 + 48 - 2 / 2))
+;; (= 8 (__ 10 / 2 - 1 * 2))
+;; (= 72 (__ 20 / 2 + 2 + 4 + 8 - 6 - 10 * 9))
