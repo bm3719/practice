@@ -525,12 +525,37 @@
  20 / 2 + 2 + 4 + 8 - 6 - 10 * 9))
 
 ;; #97: Pascal's Triangle
-;; (= (__ 1) [1])
-;; (= (map __ (range 1 6))
-;;    [     [1]
-;;         [1 1]
-;;        [1 2 1]
-;;       [1 3 3 1]
-;;      [1 4 6 4 1]])
-;; (= (__ 11)
-;;    [1 10 45 120 210 252 210 120 45 10 1])
+(= ((fn [n] (last (take n (iterate
+                       (fn [prev-row]
+                         (concat [(first prev-row)]
+                                 (map #(apply + %) (partition 2 1 prev-row))
+                                 [(last prev-row)]))
+                       [1]))))
+    1) [1])
+(= (map (fn [n] (last (take n (iterate
+                       (fn [prev-row]
+                         (concat [(first prev-row)]
+                                 (map #(apply + %) (partition 2 1 prev-row))
+                                 [(last prev-row)]))
+                       [1]))))
+        (range 1 6))
+   [     [1]
+        [1 1]
+       [1 2 1]
+      [1 3 3 1]
+     [1 4 6 4 1]])
+(= ((fn [n] (last (take n (iterate
+                       (fn [prev-row]
+                         (concat [(first prev-row)]
+                                 (map #(apply + %) (partition 2 1 prev-row))
+                                 [(last prev-row)]))
+                       [1]))))
+    11)
+   [1 10 45 120 210 252 210 120 45 10 1])
+
+;; #157: Indexing Sequences
+;; (= (__ [:a :b :c]) [[:a 0] [:b 1] [:c 2]])
+;; (= (__ [0 1 3]) '((0 0) (1 1) (3 2)))
+;; (= (__ [[:foo] {:bar :baz}]) [[[:foo] 0] [{:bar :baz} 1]])
+
+  
