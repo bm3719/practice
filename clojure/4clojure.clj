@@ -584,8 +584,32 @@
         (take 2)))
 
 ;; #120: Sum of square of digits
-;; (= 8 (__ (range 10)))
-;; (= 19 (__ (range 30)))
-;; (= 50 (__ (range 100)))
-;; (= 50 (__ (range 1000)))
+(= 8 ((fn [col] (let [f (fn [x] (reduce + (map (comp #(* % %) read-string str) (str x))))]
+                  (count (filter #(< % (f %)) col))))
+      (range 10)))
+(= 19 ((fn [col] (let [f (fn [x] (reduce + (map (comp #(* % %) read-string str) (str x))))]
+                   (count (filter #(< % (f %)) col))))
+       (range 30)))
+(= 50 ((fn [col] (let [f (fn [x] (reduce + (map (comp #(* % %) read-string str) (str x))))]
+                   (count (filter #(< % (f %)) col))))
+       (range 100)))
+(= 50 ((fn [col] (let [f (fn [x] (reduce + (map (comp #(* % %) read-string str) (str x))))]
+                   (count (filter #(< % (f %)) col))))
+       (range 1000)))
+
+;; #95: To Tree, or not to Tree
+;; (= (__ '(:a (:b nil nil) nil))
+;;    true)
+;; (= (__ '(:a (:b nil nil)))
+;;    false)
+;; (= (__ [1 nil [2 [3 nil nil] [4 nil nil]]])
+;;    true)
+;; (= (__ [1 [2 nil nil] [3 nil nil] [4 nil nil]])
+;;    false)
+;; (= (__ [1 [2 [3 [4 nil nil] nil] nil] nil])
+;;    true)
+;; (= (__ [1 [2 [3 [4 false nil] nil] nil] nil])
+;;    false)
+;; (= (__ '(:a nil ()))
+;;    false)
 
