@@ -526,18 +526,18 @@
 
 ;; #97: Pascal's Triangle
 (= ((fn [n] (last (take n (iterate
-                       (fn [prev-row]
-                         (concat [(first prev-row)]
-                                 (map #(apply + %) (partition 2 1 prev-row))
-                                 [(last prev-row)]))
-                       [1]))))
+                           (fn [prev-row]
+                             (concat [(first prev-row)]
+                                     (map #(apply + %) (partition 2 1 prev-row))
+                                     [(last prev-row)]))
+                           [1]))))
     1) [1])
 (= (map (fn [n] (last (take n (iterate
-                       (fn [prev-row]
-                         (concat [(first prev-row)]
-                                 (map #(apply + %) (partition 2 1 prev-row))
-                                 [(last prev-row)]))
-                       [1]))))
+                               (fn [prev-row]
+                                 (concat [(first prev-row)]
+                                         (map #(apply + %) (partition 2 1 prev-row))
+                                         [(last prev-row)]))
+                               [1]))))
         (range 1 6))
    [     [1]
         [1 1]
@@ -545,11 +545,11 @@
       [1 3 3 1]
      [1 4 6 4 1]])
 (= ((fn [n] (last (take n (iterate
-                       (fn [prev-row]
-                         (concat [(first prev-row)]
-                                 (map #(apply + %) (partition 2 1 prev-row))
-                                 [(last prev-row)]))
-                       [1]))))
+                           (fn [prev-row]
+                             (concat [(first prev-row)]
+                                     (map #(apply + %) (partition 2 1 prev-row))
+                                     [(last prev-row)]))
+                           [1]))))
     11)
    [1 10 45 120 210 252 210 120 45 10 1])
 
