@@ -554,8 +554,22 @@
    [1 10 45 120 210 252 210 120 45 10 1])
 
 ;; #157: Indexing Sequences
-;; (= (__ [:a :b :c]) [[:a 0] [:b 1] [:c 2]])
-;; (= (__ [0 1 3]) '((0 0) (1 1) (3 2)))
-;; (= (__ [[:foo] {:bar :baz}]) [[[:foo] 0] [{:bar :baz} 1]])
+(= (#(for [i (range (count %))] [(nth % i) i])
+    [:a :b :c]) [[:a 0] [:b 1] [:c 2]])
+(= (#(for [i (range (count %))] [(nth % i) i])
+    [0 1 3]) '((0 0) (1 1) (3 2)))
+(= (#(for [i (range (count %))] [(nth % i) i])
+    [[:foo] {:bar :baz}]) [[[:foo] 0] [{:bar :baz} 1]])
+
+;; #118: Re-implement Map
+;; (= [3 4 5 6 7]
+;;    (__ inc [2 3 4 5 6]))
+;; (= (repeat 10 nil)
+;;    (__ (fn [_] nil) (range 10)))
+;; (= [1000000 1000001]
+;;    (->> (__ inc (range))
+;;         (drop (dec 1000000))
+;;         (take 2)))
+
 
   
