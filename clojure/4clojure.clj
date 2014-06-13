@@ -562,14 +562,30 @@
     [[:foo] {:bar :baz}]) [[[:foo] 0] [{:bar :baz} 1]])
 
 ;; #118: Re-implement Map
-;; (= [3 4 5 6 7]
-;;    (__ inc [2 3 4 5 6]))
-;; (= (repeat 10 nil)
-;;    (__ (fn [_] nil) (range 10)))
-;; (= [1000000 1000001]
-;;    (->> (__ inc (range))
-;;         (drop (dec 1000000))
-;;         (take 2)))
+(= [3 4 5 6 7]
+   ((fn m [f col]
+      (lazy-seq
+       (if-not (seq col) '()
+               (cons (f (first col)) (m f (rest col))))))
+    inc [2 3 4 5 6]))
+(= (repeat 10 nil)
+   ((fn m [f col]
+      (lazy-seq
+       (if-not (seq col) '()
+               (cons (f (first col)) (m f (rest col))))))
+    (fn [_] nil) (range 10)))
+(= [1000000 1000001]
+   (->> ((fn m [f col]
+           (lazy-seq
+            (if-not (seq col) '()
+                    (cons (f (first col)) (m f (rest col))))))
+         inc (range))
+        (drop (dec 1000000))
+        (take 2)))
 
+;; #120: Sum of square of digits
+;; (= 8 (__ (range 10)))
+;; (= 19 (__ (range 30)))
+;; (= 50 (__ (range 100)))
+;; (= 50 (__ (range 1000)))
 
-  
