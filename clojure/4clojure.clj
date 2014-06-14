@@ -598,18 +598,48 @@
        (range 1000)))
 
 ;; #95: To Tree, or not to Tree
-;; (= (__ '(:a (:b nil nil) nil))
-;;    true)
-;; (= (__ '(:a (:b nil nil)))
-;;    false)
-;; (= (__ [1 nil [2 [3 nil nil] [4 nil nil]]])
-;;    true)
-;; (= (__ [1 [2 nil nil] [3 nil nil] [4 nil nil]])
-;;    false)
-;; (= (__ [1 [2 [3 [4 nil nil] nil] nil] nil])
-;;    true)
-;; (= (__ [1 [2 [3 [4 false nil] nil] nil] nil])
-;;    false)
-;; (= (__ '(:a nil ()))
-;;    false)
+(= ((fn tree? [col]
+      (if-not (and (= (count col) 3) (every? #(not= false %) col)) false
+              (every? true? (map #(if (sequential? %) (tree? %) true) col))))
+    '(:a (:b nil nil) nil))
+   true)
+(= ((fn tree? [col]
+      (if-not (and (= (count col) 3) (every? #(not= false %) col)) false
+              (every? true? (map #(if (sequential? %) (tree? %) true) col))))
+    '(:a (:b nil nil)))
+   false)
+(= ((fn tree? [col]
+      (if-not (and (= (count col) 3) (every? #(not= false %) col)) false
+              (every? true? (map #(if (sequential? %) (tree? %) true) col))))
+    [1 nil [2 [3 nil nil] [4 nil nil]]])
+   true)
+(= ((fn tree? [col]
+      (if-not (and (= (count col) 3) (every? #(not= false %) col)) false
+              (every? true? (map #(if (sequential? %) (tree? %) true) col))))
+    [1 [2 nil nil] [3 nil nil] [4 nil nil]])
+   false)
+(= ((fn tree? [col]
+      (if-not (and (= (count col) 3) (every? #(not= false %) col)) false
+              (every? true? (map #(if (sequential? %) (tree? %) true) col))))
+    [1 [2 [3 [4 nil nil] nil] nil] nil])
+   true)
+(= ((fn tree? [col]
+      (if-not (and (= (count col) 3) (every? #(not= false %) col)) false
+              (every? true? (map #(if (sequential? %) (tree? %) true) col))))
+    [1 [2 [3 [4 false nil] nil] nil] nil])
+   false)
+(= ((fn tree? [col]
+      (if-not (and (= (count col) 3) (every? #(not= false %) col)) false
+              (every? true? (map #(if (sequential? %) (tree? %) true) col))))
+    '(:a nil ()))
+   false)
+
+;; #128: Recognize Playing Cards
+;; (= {:suit :diamond :rank 10} (__ "DQ"))      
+;; (= {:suit :heart :rank 3} (__ "H5"))         
+;; (= {:suit :club :rank 12} (__ "CA"))         
+;; (= (range 13) (map (comp :rank __ str)       
+;;                    '[S2 S3 S4 S5 S6 S7       
+;;                      S8 S9 ST SJ SQ SK SA])) 
+
 
