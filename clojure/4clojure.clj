@@ -667,10 +667,39 @@
           S8 S9 ST SJ SQ SK SA])) 
 
 ;; #100: Least Common Multiple
-;; (== (__ 2 3) 6)
-;; (== (__ 5 3 7) 105)
-;; (== (__ 1/3 2/5) 2)
-;; (== (__ 3/4 1/6) 3/2)
-;; (== (__ 7 5/7 2 3/5) 210)
+(== ((fn [& rest]
+       (let [x          (apply min rest)
+             divisible? #(zero? (rem %1 %2))]
+         (first (take 1 (filter #(every? (fn [n] (divisible? % n)) rest)
+                                (iterate (partial + x) x))))))
+     2 3) 6)
+(== ((fn [& rest]
+       (let [x          (apply min rest)
+             divisible? #(zero? (rem %1 %2))]
+         (first (take 1 (filter #(every? (fn [n] (divisible? % n)) rest)
+                                (iterate (partial + x) x))))))
+     5 3 7) 105)
+(== ((fn [& rest]
+       (let [x          (apply min rest)
+             divisible? #(zero? (rem %1 %2))]
+         (first (take 1 (filter #(every? (fn [n] (divisible? % n)) rest)
+                                (iterate (partial + x) x))))))
+     1/3 2/5) 2)
+(== ((fn [& rest]
+       (let [x          (apply min rest)
+             divisible? #(zero? (rem %1 %2))]
+         (first (take 1 (filter #(every? (fn [n] (divisible? % n)) rest)
+                                (iterate (partial + x) x))))))
+     3/4 1/6) 3/2)
+(== ((fn [& rest]
+       (let [x          (apply min rest)
+             divisible? #(zero? (rem %1 %2))]
+         (first (take 1 (filter #(every? (fn [n] (divisible? % n)) rest)
+                                (iterate (partial + x) x))))))
+     7 5/7 2 3/5) 210)
 
-
+;; #147: Pascal's Trapezoid
+;; (= (second (__ [2 3 2])) [2 5 5 2])
+;; (= (take 5 (__ [1])) [[1] [1 1] [1 2 1] [1 3 3 1] [1 4 6 4 1]])
+;; (= (take 2 (__ [3 1 2])) [[3 1 2] [3 4 3 2]])
+;; (= (take 100 (__ [2 4 2])) (rest (take 101 (__ [2 2]))))
