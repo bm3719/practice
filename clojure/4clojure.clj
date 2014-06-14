@@ -736,7 +736,22 @@
                     [2 2]))))
 
 ;; #173: Intro to Destructuring 2
-;; (= 3
-;;    (let [[__] [+ (range 3)]] (apply __))
-;;    (let [[[__] b] [[+ 1] 2]] (__ b))
-;;    (let [[__] [inc 2]] (__)))
+(= 3
+   (let [[x y] [+ (range 3)]] (apply x y))
+   (let [[[x y] b] [[+ 1] 2]] (x y b))
+   (let [[x y] [inc 2]] (x y)))
+
+;; #96: Beauty is Symmetry
+;; (= (__ '(:a (:b nil nil) (:b nil nil))) true)
+;; (= (__ '(:a (:b nil nil) nil)) false)
+;; (= (__ '(:a (:b nil nil) (:c nil nil))) false)
+;; (= (__ [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
+;;         [2 [3 nil [4 [6 nil nil] [5 nil nil]]] nil]])
+;;    true)
+;; (= (__ [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
+;;         [2 [3 nil [4 [5 nil nil] [6 nil nil]]] nil]])
+;;    false)
+;; (= (__ [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
+;;         [2 [3 nil [4 [6 nil nil] nil]] nil]])
+;;    false)
+
