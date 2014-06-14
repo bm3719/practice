@@ -635,11 +635,42 @@
    false)
 
 ;; #128: Recognize Playing Cards
-;; (= {:suit :diamond :rank 10} (__ "DQ"))      
-;; (= {:suit :heart :rank 3} (__ "H5"))         
-;; (= {:suit :club :rank 12} (__ "CA"))         
-;; (= (range 13) (map (comp :rank __ str)       
-;;                    '[S2 S3 S4 S5 S6 S7       
-;;                      S8 S9 ST SJ SQ SK SA])) 
+(= {:suit :diamond :rank 10}
+   ((fn [s] (let [suit #({\D :diamond \H :heart \C :club \S :spade} %)
+                  rank #(if (re-find #"[A-Z]" (str %))
+                          ({\T 8 \J 9 \Q 10 \K 11 \A 12} %)
+                          (- (read-string (str %)) 2))]
+              {:suit (suit (first s)) :rank (rank (second s))}))
+    "DQ"))
+(= {:suit :heart :rank 3}
+   ((fn [s] (let [suit #({\D :diamond \H :heart \C :club \S :spade} %)
+                  rank #(if (re-find #"[A-Z]" (str %))
+                          ({\T 8 \J 9 \Q 10 \K 11 \A 12} %)
+                          (- (read-string (str %)) 2))]
+              {:suit (suit (first s)) :rank (rank (second s))}))
+    "H5"))
+(= {:suit :club :rank 12}
+   ((fn [s] (let [suit #({\D :diamond \H :heart \C :club \S :spade} %)
+                  rank #(if (re-find #"[A-Z]" (str %))
+                          ({\T 8 \J 9 \Q 10 \K 11 \A 12} %)
+                          (- (read-string (str %)) 2))]
+              {:suit (suit (first s)) :rank (rank (second s))}))
+    "CA"))
+(= (range 13)
+   (map (comp :rank (fn [s] (let [suit #({\D :diamond \H :heart \C :club \S :spade} %)
+                                  rank #(if (re-find #"[A-Z]" (str %))
+                                          ({\T 8 \J 9 \Q 10 \K 11 \A 12} %)
+                                          (- (read-string (str %)) 2))]
+                              {:suit (suit (first s)) :rank (rank (second s))}))
+              str)       
+        '[S2 S3 S4 S5 S6 S7       
+          S8 S9 ST SJ SQ SK SA])) 
+
+;; #100: Least Common Multiple
+;; (== (__ 2 3) 6)
+;; (== (__ 5 3 7) 105)
+;; (== (__ 1/3 2/5) 2)
+;; (== (__ 3/4 1/6) 3/2)
+;; (== (__ 7 5/7 2 3/5) 210)
 
 
