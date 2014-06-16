@@ -804,14 +804,104 @@
    false)
 
 ;; #146: Trees into table
-;; (= (__ '{a {p 1, q 2}
-;;          b {m 3, n 4}})
-;;    '{[a p] 1, [a q] 2
-;;      [b m] 3, [b n] 4})
-;; (= (__ '{[1] {a b c d}
-;;          [2] {q r s t u v w x}})
-;;    '{[[1] a] b, [[1] c] d,
-;;      [[2] q] r, [[2] s] t,
-;;      [[2] u] v, [[2] w] x})
-;; (= (__ '{m {1 [a b c] 3 nil}})
-;;    '{[m 1] [a b c], [m 3] nil})
+(= (#(into {} (for [[k1 v1] %
+                [k2 v2] v1]
+            [[k1 k2] v2]))
+    '{a {p 1, q 2}
+      b {m 3, n 4}})
+   '{[a p] 1, [a q] 2
+     [b m] 3, [b n] 4})
+(= (#(into {} (for [[k1 v1] %
+                [k2 v2] v1]
+            [[k1 k2] v2]))
+    '{[1] {a b c d}
+      [2] {q r s t u v w x}})
+   '{[[1] a] b, [[1] c] d,
+     [[2] q] r, [[2] s] t,
+     [[2] u] v, [[2] w] x})
+(= (#(into {} (for [[k1 v1] %
+                [k2 v2] v1]
+            [[k1 k2] v2]))
+    '{m {1 [a b c] 3 nil}})
+   '{[m 1] [a b c], [m 3] nil})
+
+;; #153: Pairwise Disjoint Sets
+(= (#(let [all-items  (for [s % e s] e)
+           dup-counts (for [[id freq] (frequencies all-items)
+                            :when (> freq 1)]
+                        id)]
+       (zero? (count dup-counts)))
+    #{#{\U} #{\s} #{\e \R \E} #{\P \L} #{\.}})
+   true)
+(= (#(let [all-items  (for [s % e s] e)
+           dup-counts (for [[id freq] (frequencies all-items)
+                            :when (> freq 1)]
+                        id)]
+       (zero? (count dup-counts)))
+    #{#{:a :b :c :d :e}
+      #{:a :b :c :d}
+      #{:a :b :c}
+      #{:a :b}
+      #{:a}})
+   false)
+(= (#(let [all-items  (for [s % e s] e)
+           dup-counts (for [[id freq] (frequencies all-items)
+                            :when (> freq 1)]
+                        id)]
+       (zero? (count dup-counts)))
+    #{#{[1 2 3] [4 5]}
+      #{[1 2] [3 4 5]}
+      #{[1] [2] 3 4 5}
+      #{1 2 [3 4] [5]}})
+   true)
+(= (#(let [all-items  (for [s % e s] e)
+           dup-counts (for [[id freq] (frequencies all-items)
+                            :when (> freq 1)]
+                        id)]
+       (zero? (count dup-counts)))
+    #{#{'a 'b}
+      #{'c 'd 'e}
+      #{'f 'g 'h 'i}
+      #{''a ''c ''f}})
+   true)
+(= (#(let [all-items  (for [s % e s] e)
+           dup-counts (for [[id freq] (frequencies all-items)
+                            :when (> freq 1)]
+                        id)]
+       (zero? (count dup-counts)))
+    #{#{'(:x :y :z) '(:x :y) '(:z) '()}
+      #{#{:x :y :z} #{:x :y} #{:z} #{}}
+      #{'[:x :y :z] [:x :y] [:z] [] {}}})
+   false)
+(= (#(let [all-items  (for [s % e s] e)
+           dup-counts (for [[id freq] (frequencies all-items)
+                            :when (> freq 1)]
+                        id)]
+       (zero? (count dup-counts)))
+    #{#{(= "true") false}
+      #{:yes :no}
+      #{(class 1) 0}
+      #{(symbol "true") 'false}
+      #{(keyword "yes") ::no}
+      #{(class '1) (int \0)}})
+   false)
+(= (#(let [all-items  (for [s % e s] e)
+           dup-counts (for [[id freq] (frequencies all-items)
+                            :when (> freq 1)]
+                        id)]
+       (zero? (count dup-counts)))
+    #{#{distinct?}
+      #{#(-> %) #(-> %)}
+      #{#(-> %) #(-> %) #(-> %)}
+      #{#(-> %) #(-> %) #(-> %)}})
+   true)
+(= (#(let [all-items  (for [s % e s] e)
+           dup-counts (for [[id freq] (frequencies all-items)
+                            :when (> freq 1)]
+                        id)]
+       (zero? (count dup-counts)))
+    #{#{(#(-> *)) + (quote mapcat) #_ nil}
+      #{'+ '* mapcat (comment mapcat)}
+      #{(do) set contains? nil?}
+      #{, , , #_, , empty?}})
+   false)
