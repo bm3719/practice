@@ -742,16 +742,76 @@
    (let [[x y] [inc 2]] (x y)))
 
 ;; #96: Beauty is Symmetry
-;; (= (__ '(:a (:b nil nil) (:b nil nil))) true)
-;; (= (__ '(:a (:b nil nil) nil)) false)
-;; (= (__ '(:a (:b nil nil) (:c nil nil))) false)
-;; (= (__ [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
-;;         [2 [3 nil [4 [6 nil nil] [5 nil nil]]] nil]])
-;;    true)
-;; (= (__ [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
-;;         [2 [3 nil [4 [5 nil nil] [6 nil nil]]] nil]])
-;;    false)
-;; (= (__ [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
-;;         [2 [3 nil [4 [6 nil nil] nil]] nil]])
-;;    false)
+(= ((fn symmetric? [tree]
+      (let [left (second tree)
+            right (last tree)]
+        (if (not= (first left) (first right)) false
+            (if (sequential? left)
+              (and (symmetric? (list nil (second left) (last right)))
+                   (symmetric? (list nil (last left) (second right))))
+              true))))
+    '(:a (:b nil nil) (:b nil nil))) true)
+(= ((fn symmetric? [tree]
+      (let [left (second tree)
+            right (last tree)]
+        (if (not= (first left) (first right)) false
+            (if (sequential? left)
+              (and (symmetric? (list nil (second left) (last right)))
+                   (symmetric? (list nil (last left) (second right))))
+              true))))
+    '(:a (:b nil nil) nil)) false)
+(= ((fn symmetric? [tree]
+      (let [left (second tree)
+            right (last tree)]
+        (if (not= (first left) (first right)) false
+            (if (sequential? left)
+              (and (symmetric? (list nil (second left) (last right)))
+                   (symmetric? (list nil (last left) (second right))))
+              true))))
+    '(:a (:b nil nil) (:c nil nil))) false)
+(= ((fn symmetric? [tree]
+      (let [left (second tree)
+            right (last tree)]
+        (if (not= (first left) (first right)) false
+            (if (sequential? left)
+              (and (symmetric? (list nil (second left) (last right)))
+                   (symmetric? (list nil (last left) (second right))))
+              true))))
+    [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
+     [2 [3 nil [4 [6 nil nil] [5 nil nil]]] nil]])
+   true)
+(= ((fn symmetric? [tree]
+      (let [left (second tree)
+            right (last tree)]
+        (if (not= (first left) (first right)) false
+            (if (sequential? left)
+              (and (symmetric? (list nil (second left) (last right)))
+                   (symmetric? (list nil (last left) (second right))))
+              true))))
+    [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
+     [2 [3 nil [4 [5 nil nil] [6 nil nil]]] nil]])
+   false)
+(= ((fn symmetric? [tree]
+      (let [left (second tree)
+            right (last tree)]
+        (if (not= (first left) (first right)) false
+            (if (sequential? left)
+              (and (symmetric? (list nil (second left) (last right)))
+                   (symmetric? (list nil (last left) (second right))))
+              true))))
+    [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
+     [2 [3 nil [4 [6 nil nil] nil]] nil]])
+   false)
 
+;; #146: Trees into table
+;; (= (__ '{a {p 1, q 2}
+;;          b {m 3, n 4}})
+;;    '{[a p] 1, [a q] 2
+;;      [b m] 3, [b n] 4})
+;; (= (__ '{[1] {a b c d}
+;;          [2] {q r s t u v w x}})
+;;    '{[[1] a] b, [[1] c] d,
+;;      [[2] q] r, [[2] s] t,
+;;      [[2] u] v, [[2] w] x})
+;; (= (__ '{m {1 [a b c] 3 nil}})
+;;    '{[m 1] [a b c], [m 3] nil})
