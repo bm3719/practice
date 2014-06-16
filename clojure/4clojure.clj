@@ -905,3 +905,13 @@
       #{(do) set contains? nil?}
       #{, , , #_, , empty?}})
    false)
+
+;;; Medium
+
+;; #46: Flipping out
+;; (= 3 ((_ nth) 2 [1 2 3 4 5]))
+;; (= true ((__ >) 7 8))
+;; (= 4 ((_ quot) 2 8))
+;; (= [1 2 3] ((_ take) [1 2 3 4 5] 3))
+
+
