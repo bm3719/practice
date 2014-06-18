@@ -942,7 +942,7 @@
 (= (set (#(partition-by (comp str type) (sort-by (comp str type) %))
          [[1 2] :a [3 4] 5 6 :b])) #{[[1 2] [3 4]] [:a :b] [5 6]})
 
-;; #55: Count Occurances
+;; #55: Count Occurrences
 ;; (= (__ [1 1 2 3 2 1 1]) {1 4, 2 2, 3 1})
 ;; (= (__ [:b :a :b :a :b]) {:a 2, :b 3})
 ;; (= (__ '([1 2] [1 3] [1 3])) {[1 2] 1, [1 3] 2})
