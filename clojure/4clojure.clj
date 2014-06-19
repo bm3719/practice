@@ -943,6 +943,48 @@
          [[1 2] :a [3 4] 5 6 :b])) #{[[1 2] [3 4]] [:a :b] [5 6]})
 
 ;; #55: Count Occurrences
-;; (= (__ [1 1 2 3 2 1 1]) {1 4, 2 2, 3 1})
-;; (= (__ [:b :a :b :a :b]) {:a 2, :b 3})
-;; (= (__ '([1 2] [1 3] [1 3])) {[1 2] 1, [1 3] 2})
+(= ((fn [col] (reduce #(update-in %1 [%2] inc)
+                      (reduce #(assoc %1 %2 0) {} (set col)) col))
+    [1 1 2 3 2 1 1]) {1 4, 2 2, 3 1})
+(= ((fn [col] (reduce #(update-in %1 [%2] inc)
+                      (reduce #(assoc %1 %2 0) {} (set col)) col))
+    [:b :a :b :a :b]) {:a 2, :b 3})
+(= ((fn [col] (reduce #(update-in %1 [%2] inc)
+                      (reduce #(assoc %1 %2 0) {} (set col)) col))
+    '([1 2] [1 3] [1 3])) {[1 2] 1, [1 3] 2})
+
+;; #56: Find Distinct Items
+(= ((fn f [col]
+  (if (empty? col) []
+      (let [es (f (butlast col))
+            e  (last col)]
+        (if (some #(= e %) es) es
+          (conj es e)))))
+    [1 2 1 3 1 2 4]) [1 2 3 4])
+(= ((fn f [col]
+  (if (empty? col) []
+      (let [es (f (butlast col))
+            e  (last col)]
+        (if (some #(= e %) es) es
+          (conj es e)))))
+    [:a :a :b :b :c :c]) [:a :b :c])
+(= ((fn f [col]
+  (if (empty? col) []
+      (let [es (f (butlast col))
+            e  (last col)]
+        (if (some #(= e %) es) es
+          (conj es e)))))
+    '([2 4] [1 2] [1 3] [1 3])) '([2 4] [1 2] [1 3]))
+(= ((fn f [col]
+  (if (empty? col) []
+      (let [es (f (butlast col))
+            e  (last col)]
+        (if (some #(= e %) es) es
+          (conj es e)))))
+    (range 50)) (range 50))
+
+;; #58: Function Composition
+;; (= [3 2 1] ((__ rest reverse) [1 2 3 4]))
+;; (= 5 ((__ (partial + 3) second) [1 2 3 4]))
+;; (= true ((__ zero? #(mod % 8) +) 3 5 7 9))
+;; (= "HELLO" ((__ #(.toUpperCase %) #(apply str %) take) 5 "hello world"))
