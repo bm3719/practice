@@ -449,19 +449,15 @@
 (= (#(map read-string (map str (seq (str (* %1 %2))))) 999 99) [9 8 9 0 1])
 
 ;; #90: Cartesian Product
-;; There's probably a cleaner way to do this.
-(= ((fn f [l1 l2] (if (= (count l1) 1) (into #{} (map #(vector (first l1) %) l2))
-                      (into #{} (concat (f (rest l1) l2) (map #(vector (first l1) %) l2)))))
+(= (#(into #{} (for [x %1 y %2] [x y]))
     #{"ace" "king" "queen"} #{"♠" "♥" "♦" "♣"})
    #{["ace"   "♠"] ["ace"   "♥"] ["ace"   "♦"] ["ace"   "♣"]
      ["king"  "♠"] ["king"  "♥"] ["king"  "♦"] ["king"  "♣"]
      ["queen" "♠"] ["queen" "♥"] ["queen" "♦"] ["queen" "♣"]})
-(= ((fn f [l1 l2] (if (= (count l1) 1) (into #{} (map #(vector (first l1) %) l2))
-                      (into #{} (concat (f (rest l1) l2) (map #(vector (first l1) %) l2)))))
+(= (#(into #{} (for [x %1 y %2] [x y]))
     #{1 2 3} #{4 5})
    #{[1 4] [2 4] [3 4] [1 5] [2 5] [3 5]})
-(= 300 (count ((fn f [l1 l2] (if (= (count l1) 1) (into #{} (map #(vector (first l1) %) l2))
-                                 (into #{} (concat (f (rest l1) l2) (map #(vector (first l1) %) l2)))))
+(= 300 (count (#(into #{} (for [x %1 y %2] [x y]))
                (into #{} (range 10))
                (into #{} (range 30)))))
 
@@ -537,31 +533,34 @@
        20 / 2 + 2 + 4 + 8 - 6 - 10 * 9))
 
 ;; #97: Pascal's Triangle
-(= ((fn [n] (last (take n (iterate
-                           (fn [prev-row]
-                             (concat [(first prev-row)]
-                                     (map #(apply + %) (partition 2 1 prev-row))
-                                     [(last prev-row)]))
-                           [1]))))
+(= ((fn [n]
+      (last (take n (iterate
+                     (fn [prev-row]
+                       (concat [(first prev-row)]
+                               (map #(apply + %) (partition 2 1 prev-row))
+                               [(last prev-row)]))
+                     [1]))))
     1) [1])
-(= (map (fn [n] (last (take n (iterate
-                               (fn [prev-row]
-                                 (concat [(first prev-row)]
-                                         (map #(apply + %) (partition 2 1 prev-row))
-                                         [(last prev-row)]))
-                               [1]))))
+(= (map (fn [n]
+          (last (take n (iterate
+                         (fn [prev-row]
+                           (concat [(first prev-row)]
+                                   (map #(apply + %) (partition 2 1 prev-row))
+                                   [(last prev-row)]))
+                         [1]))))
         (range 1 6))
    [     [1]
          [1 1]
          [1 2 1]
          [1 3 3 1]
          [1 4 6 4 1]])
-(= ((fn [n] (last (take n (iterate
-                           (fn [prev-row]
-                             (concat [(first prev-row)]
-                                     (map #(apply + %) (partition 2 1 prev-row))
-                                     [(last prev-row)]))
-                           [1]))))
+(= ((fn [n]
+      (last (take n (iterate
+                     (fn [prev-row]
+                       (concat [(first prev-row)]
+                               (map #(apply + %) (partition 2 1 prev-row))
+                               [(last prev-row)]))
+                     [1]))))
     11)
    [1 10 45 120 210 252 210 120 45 10 1])
 
@@ -1000,3 +999,5 @@
 ;; (= 5 ((__ (partial + 3) second) [1 2 3 4]))
 ;; (= true ((__ zero? #(mod % 8) +) 3 5 7 9))
 ;; (= "HELLO" ((__ #(.toUpperCase %) #(apply str %) take) 5 "hello world"))
+
+
