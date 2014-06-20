@@ -118,14 +118,14 @@
 
 ;; #145: For the win
 (= '(1 5 9 13 17 21 25 29 33 37) (for [x (range 40)
-            :when (= 1 (rem x 4))]
-        x))
+                                       :when (= 1 (rem x 4))]
+                                   x))
 (= '(1 5 9 13 17 21 25 29 33 37) (for [x (iterate #(+ 4 %) 0)
-            :let [z (inc x)]
-            :while (< z 40)]
-        z))
+                                       :let [z (inc x)]
+                                       :while (< z 40)]
+                                   z))
 (= '(1 5 9 13 17 21 25 29 33 37) (for [[x y] (partition 2 (range 20))]
-        (+ x y)))
+                                   (+ x y)))
 
 ;; #162: Logical falsity and truth
 (= 1 (if-not false 1 0))
@@ -204,16 +204,16 @@
             (= % (reverse %)))
          '(1 2 3 4 5)))
 (true? (#(if (= (type %) java.lang.String)
-            (= % (apply str (reverse %)))
-            (= % (reverse %)))
+           (= % (apply str (reverse %)))
+           (= % (reverse %)))
         "racecar"))
 (true? (#(if (= (type %) java.lang.String)
-            (= % (apply str (reverse %)))
-            (= % (reverse %)))
+           (= % (apply str (reverse %)))
+           (= % (reverse %)))
         [:foo :bar :foo]))
 (true? (#(if (= (type %) java.lang.String)
-            (= % (apply str (reverse %)))
-            (= % (reverse %)))
+           (= % (apply str (reverse %)))
+           (= % (reverse %)))
         '(1 1 3 3 1 1)))
 (false? (#(if (= (type %) java.lang.String)
             (= % (apply str (reverse %)))
@@ -222,32 +222,32 @@
 
 ;; #26: Fibonacci Sequence
 (= (#(map (fn fib [x] (if (< x 3) 1 (+ (fib (- x 1)) (fib (- x 2)))))
-           (range 1 (+ % 1)))
+          (range 1 (+ % 1)))
     3) '(1 1 2))
 (= (#(map (fn fib [x] (if (< x 3) 1 (+ (fib (- x 1)) (fib (- x 2)))))
-           (range 1 (+ % 1)))
+          (range 1 (+ % 1)))
     6) '(1 1 2 3 5 8))
 (= (#(map (fn fib [x] (if (< x 3) 1 (+ (fib (- x 1)) (fib (- x 2)))))
-           (range 1 (+ % 1)))
+          (range 1 (+ % 1)))
     8) '(1 1 2 3 5 8 13 21))
 
 ;; #38: Maximum value
 (= ((fn mymax [x & xs] (if (= (count xs) 0) x
-      (let [ox (apply mymax xs)]
-        (if (> x ox) x ox))))
+                           (let [ox (apply mymax xs)]
+                             (if (> x ox) x ox))))
     1 8 3 4) 8)
 (= ((fn mymax [x & xs] (if (= (count xs) 0) x
-      (let [ox (apply mymax xs)]
-        (if (> x ox) x ox))))
+                           (let [ox (apply mymax xs)]
+                             (if (> x ox) x ox))))
     30 20) 30)
 (= ((fn mymax [x & xs] (if (= (count xs) 0) x
-      (let [ox (apply mymax xs)]
-        (if (> x ox) x ox))))
+                           (let [ox (apply mymax xs)]
+                             (if (> x ox) x ox))))
     45 67 11) 67)
 
 ;; #29: Get the Caps
 (= ((fn f [s] (apply str (filter #(Character/isUpperCase %) s)))
-     "HeLlO, WoRlD!") "HLOWRD")
+    "HeLlO, WoRlD!") "HLOWRD")
 (empty? ((fn f [s] (apply str (filter #(Character/isUpperCase %) s)))
          "nothing"))
 (= ((fn f [s] (apply str (filter #(Character/isUpperCase %) s)))
@@ -310,14 +310,14 @@
 (= (apply str ((fn f [s] (cond (empty? s) '()
                                (= (first s) (second s)) (f (rest s)) 
                                :else (conj (f (rest s)) (first s))))
-           "Leeeeeerrroyyy")) "Leroy")
+               "Leeeeeerrroyyy")) "Leroy")
 (= ((fn f [s] (cond (empty? s) '()
-                (= (first s) (second s)) (f (rest s)) 
-                :else (conj (f (rest s)) (first s))))
+                    (= (first s) (second s)) (f (rest s)) 
+                    :else (conj (f (rest s)) (first s))))
     [1 1 2 3 3 2 2 3]) '(1 2 3 2 3))
 (= ((fn f [s] (cond (empty? s) '()
-                (= (first s) (second s)) (f (rest s)) 
-                :else (conj (f (rest s)) (first s))))
+                    (= (first s) (second s)) (f (rest s)) 
+                    :else (conj (f (rest s)) (first s))))
     [[1 2] [1 2] [3 4] [1 2]]) '([1 2] [3 4] [1 2]))
 
 ;; #47: Contain Yourself
@@ -383,17 +383,26 @@
 (= [1 2 [3 4 5] [1 2 3 4 5]] (let [[a b & c :as d] [1 2 3 4 5]] [a b c d]))
 
 ;; #83: A Half-Truth
-(= false (#(true? (and (some identity %&) (not (every? identity %&)))) false false))
-(= true (#(true? (and (some identity %&) (not (every? identity %&)))) true false))
-(= false (#(true? (and (some identity %&) (not (every? identity %&)))) true))
-(= true (#(true? (and (some identity %&) (not (every? identity %&)))) false true false))
-(= false (#(true? (and (some identity %&) (not (every? identity %&)))) true true true))
-(= true (#(true? (and (some identity %&) (not (every? identity %&)))) true true true false))
+(= false (#(true? (and (some identity %&) (not (every? identity %&))))
+          false false))
+(= true (#(true? (and (some identity %&) (not (every? identity %&))))
+         true false))
+(= false (#(true? (and (some identity %&) (not (every? identity %&))))
+          true))
+(= true (#(true? (and (some identity %&) (not (every? identity %&))))
+         false true false))
+(= false (#(true? (and (some identity %&) (not (every? identity %&))))
+          true true true))
+(= true (#(true? (and (some identity %&) (not (every? identity %&))))
+         true true true false))
 
 ;; #61: Map Construction
-(= (#(into {} (map vector %1 %2)) [:a :b :c] [1 2 3]) {:a 1, :b 2, :c 3})
-(= (#(into {} (map vector %1 %2)) [1 2 3 4] ["one" "two" "three"]) {1 "one", 2 "two", 3 "three"})
-(= (#(into {} (map vector %1 %2)) [:foo :bar] ["foo" "bar" "baz"]) {:foo "foo" :bar "bar"})
+(= (#(into {} (map vector %1 %2))
+    [:a :b :c] [1 2 3]) {:a 1, :b 2, :c 3})
+(= (#(into {} (map vector %1 %2))
+    [1 2 3 4] ["one" "two" "three"]) {1 "one", 2 "two", 3 "three"})
+(= (#(into {} (map vector %1 %2))
+    [:foo :bar] ["foo" "bar" "baz"]) {:foo "foo" :bar "bar"})
 
 ;; #166: Comparisons
 (= :gt (#(cond (%1 %2 %3) :lt (%1 %3 %2) :gt :else :eq) < 5 1))
@@ -427,9 +436,12 @@
             #(inc (mod % 3)) 1)) (take 9 (cycle [1 2 3])))
 
 ;; #107: Simple closures
-(= 256 (((fn [x] (fn [y] (int (Math/pow y x)))) 2) 16) (((fn [x] (fn [y] (int (Math/pow y x)))) 8) 2))
-(= [1 8 27 64] (map ((fn [x] (fn [y] (int (Math/pow y x)))) 3) [1 2 3 4]))
-(= [1 2 4 8 16] (map #(((fn [x] (fn [y] (int (Math/pow y x)))) %) 2) [0 1 2 3 4]))
+(= 256 (((fn [x] (fn [y] (int (Math/pow y x)))) 2) 16)
+   (((fn [x] (fn [y] (int (Math/pow y x)))) 8) 2))
+(= [1 8 27 64] (map ((fn [x] (fn [y] (int (Math/pow y x)))) 3)
+                    [1 2 3 4]))
+(= [1 2 4 8 16] (map #(((fn [x] (fn [y] (int (Math/pow y x)))) %) 2)
+                     [0 1 2 3 4]))
 
 ;; #99: Product Digits
 (= (#(map read-string (map str (seq (str (* %1 %2))))) 1 1) [1])
@@ -508,21 +520,21 @@
 
 ;; #135: Infix Calculator
 (= 7 ((fn infix [& rest]
-  (if (< (count rest) 3) (first rest)
-      ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
- 2 + 5))
+        (if (< (count rest) 3) (first rest)
+            ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
+      2 + 5))
 (= 42 ((fn infix [& rest]
-  (if (< (count rest) 3) (first rest)
-      ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
- 38 + 48 - 2 / 2))
+         (if (< (count rest) 3) (first rest)
+             ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
+       38 + 48 - 2 / 2))
 (= 8 ((fn infix [& rest]
-  (if (< (count rest) 3) (first rest)
-      ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
- 10 / 2 - 1 * 2))
+        (if (< (count rest) 3) (first rest)
+            ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
+      10 / 2 - 1 * 2))
 (= 72 ((fn infix [& rest]
-  (if (< (count rest) 3) (first rest)
-      ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
- 20 / 2 + 2 + 4 + 8 - 6 - 10 * 9))
+         (if (< (count rest) 3) (first rest)
+             ((nth rest (- (count rest) 2)) (apply infix (drop-last 2 rest)) (last rest))))
+       20 / 2 + 2 + 4 + 8 - 6 - 10 * 9))
 
 ;; #97: Pascal's Triangle
 (= ((fn [n] (last (take n (iterate
@@ -540,10 +552,10 @@
                                [1]))))
         (range 1 6))
    [     [1]
-        [1 1]
-       [1 2 1]
-      [1 3 3 1]
-     [1 4 6 4 1]])
+         [1 1]
+         [1 2 1]
+         [1 3 3 1]
+         [1 4 6 4 1]])
 (= ((fn [n] (last (take n (iterate
                            (fn [prev-row]
                              (concat [(first prev-row)]
@@ -805,23 +817,23 @@
 
 ;; #146: Trees into table
 (= (#(into {} (for [[k1 v1] %
-                [k2 v2] v1]
-            [[k1 k2] v2]))
+                    [k2 v2] v1]
+                [[k1 k2] v2]))
     '{a {p 1, q 2}
       b {m 3, n 4}})
    '{[a p] 1, [a q] 2
      [b m] 3, [b n] 4})
 (= (#(into {} (for [[k1 v1] %
-                [k2 v2] v1]
-            [[k1 k2] v2]))
+                    [k2 v2] v1]
+                [[k1 k2] v2]))
     '{[1] {a b c d}
       [2] {q r s t u v w x}})
    '{[[1] a] b, [[1] c] d,
      [[2] q] r, [[2] s] t,
      [[2] u] v, [[2] w] x})
 (= (#(into {} (for [[k1 v1] %
-                [k2 v2] v1]
-            [[k1 k2] v2]))
+                    [k2 v2] v1]
+                [[k1 k2] v2]))
     '{m {1 [a b c] 3 nil}})
    '{[m 1] [a b c], [m 3] nil})
 
@@ -955,32 +967,32 @@
 
 ;; #56: Find Distinct Items
 (= ((fn f [col]
-  (if (empty? col) []
-      (let [es (f (butlast col))
-            e  (last col)]
-        (if (some #(= e %) es) es
-          (conj es e)))))
+      (if (empty? col) []
+          (let [es (f (butlast col))
+                e  (last col)]
+            (if (some #(= e %) es) es
+                (conj es e)))))
     [1 2 1 3 1 2 4]) [1 2 3 4])
 (= ((fn f [col]
-  (if (empty? col) []
-      (let [es (f (butlast col))
-            e  (last col)]
-        (if (some #(= e %) es) es
-          (conj es e)))))
+      (if (empty? col) []
+          (let [es (f (butlast col))
+                e  (last col)]
+            (if (some #(= e %) es) es
+                (conj es e)))))
     [:a :a :b :b :c :c]) [:a :b :c])
 (= ((fn f [col]
-  (if (empty? col) []
-      (let [es (f (butlast col))
-            e  (last col)]
-        (if (some #(= e %) es) es
-          (conj es e)))))
+      (if (empty? col) []
+          (let [es (f (butlast col))
+                e  (last col)]
+            (if (some #(= e %) es) es
+                (conj es e)))))
     '([2 4] [1 2] [1 3] [1 3])) '([2 4] [1 2] [1 3]))
 (= ((fn f [col]
-  (if (empty? col) []
-      (let [es (f (butlast col))
-            e  (last col)]
-        (if (some #(= e %) es) es
-          (conj es e)))))
+      (if (empty? col) []
+          (let [es (f (butlast col))
+                e  (last col)]
+            (if (some #(= e %) es) es
+                (conj es e)))))
     (range 50)) (range 50))
 
 ;; #58: Function Composition
