@@ -997,43 +997,57 @@
 ;; #58: Function Composition
 (= [3 2 1] (((fn [& fs]
                (let [fs (reverse fs)]
-                 (fn [& args]
-                   (loop [inner (apply (first fs) args)
-                          fs    (next fs)]
-                     (if fs
-                       (recur ((first fs) inner) (next fs))
-                       inner)))))
+                 #(loop [inner (apply (first fs) %&)
+                         fs    (next fs)]
+                    (if fs
+                      (recur ((first fs) inner) (next fs))
+                      inner))))
              rest reverse) [1 2 3 4]))
 (= 5 (((fn [& fs]
          (let [fs (reverse fs)]
-           (fn [& args]
-             (loop [inner (apply (first fs) args)
-                    fs    (next fs)]
-               (if fs
-                 (recur ((first fs) inner) (next fs))
-                 inner)))))
+           (loop [inner (apply (first fs) %&)
+                  fs    (next fs)]
+             (if fs
+               (recur ((first fs) inner) (next fs))
+               inner))))
        (partial + 3) second) [1 2 3 4]))
 (= true (((fn [& fs]
             (let [fs (reverse fs)]
-              (fn [& args]
-                (loop [inner (apply (first fs) args)
-                       fs    (next fs)]
-                  (if fs
-                    (recur ((first fs) inner) (next fs))
-                    inner)))))
+              #(loop [inner (apply (first fs) %&)
+                      fs    (next fs)]
+                 (if fs
+                   (recur ((first fs) inner) (next fs))
+                   inner))))
           zero? #(mod % 8) +) 3 5 7 9))
 (= "HELLO" (((fn [& fs]
                (let [fs (reverse fs)]
-                 (fn [& args]
-                   (loop [inner (apply (first fs) args)
-                          fs    (next fs)]
-                     (if fs
-                       (recur ((first fs) inner) (next fs))
-                       inner)))))
+                 #(loop [inner (apply (first fs) %&)
+                         fs    (next fs)]
+                    (if fs
+                      (recur ((first fs) inner) (next fs))
+                      inner))))
              #(.toUpperCase %) #(apply str %) take) 5 "hello world"))
 
-;; #59: Juxtaposition
-;; (= [21 6 1] ((__ + max min) 2 3 5 1 6 4))
-;; (= ["HELLO" 5] ((__ #(.toUpperCase %) count) "hello"))
-;; (= [2 6 4] ((__ :a :c :b) {:a 2, :b 4, :c 6, :d 8, :e 10}))
+(fn [& fs]
+  (let [fs (reverse fs)]
+    #(loop [inner (apply (first fs) %&)
+            fs    (next fs)]
+       (if fs
+         (recur ((first fs) inner) (next fs))
+         inner))))
 
+;; #59: Juxtaposition
+(= [21 6 1] (((fn [& fs]
+                #(for [f fs] (apply f %&)))
+              + max min) 2 3 5 1 6 4))
+(= ["HELLO" 5] (((fn [& fs]
+                   #(for [f fs] (apply f %&)))
+                 #(.toUpperCase %) count) "hello"))
+(= [2 6 4] (((fn [& fs]
+               #(for [f fs] (apply f %&)))
+             :a :c :b) {:a 2, :b 4, :c 6, :d 8, :e 10}))
+
+;; #54: Partition a Sequence
+;; (= (__ 3 (range 9)) '((0 1 2) (3 4 5) (6 7 8)))
+;; (= (__ 2 (range 8)) '((0 1) (2 3) (4 5) (6 7)))
+;; (= (__ 3 (range 8)) '((0 1 2) (3 4 5)))
