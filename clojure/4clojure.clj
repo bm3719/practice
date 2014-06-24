@@ -1028,14 +1028,6 @@
                       inner))))
              #(.toUpperCase %) #(apply str %) take) 5 "hello world"))
 
-(fn [& fs]
-  (let [fs (reverse fs)]
-    #(loop [inner (apply (first fs) %&)
-            fs    (next fs)]
-       (if fs
-         (recur ((first fs) inner) (next fs))
-         inner))))
-
 ;; #59: Juxtaposition
 (= [21 6 1] (((fn [& fs]
                 #(for [f fs] (apply f %&)))
