@@ -308,15 +308,15 @@
 
 ;; #30: Compress a Sequence
 (= (apply str ((fn f [s] (cond (empty? s) '()
-                               (= (first s) (second s)) (f (rest s)) 
+                               (= (first s) (second s)) (f (rest s))
                                :else (conj (f (rest s)) (first s))))
                "Leeeeeerrroyyy")) "Leroy")
 (= ((fn f [s] (cond (empty? s) '()
-                    (= (first s) (second s)) (f (rest s)) 
+                    (= (first s) (second s)) (f (rest s))
                     :else (conj (f (rest s)) (first s))))
     [1 1 2 3 3 2 2 3]) '(1 2 3 2 3))
 (= ((fn f [s] (cond (empty? s) '()
-                    (= (first s) (second s)) (f (rest s)) 
+                    (= (first s) (second s)) (f (rest s))
                     :else (conj (f (rest s)) (first s))))
     [[1 2] [1 2] [3 4] [1 2]]) '([1 2] [3 4] [1 2]))
 
@@ -475,7 +475,7 @@
 (= 0 ((fn [s] (let [x (reverse (take (count (map char s)) (iterate #(* 2 %) 1)))]
                 (reduce + (map #(if (= %1 \0) 0 %2) (map char s) x))))
       "0"))
-(= 7 ((fn [s] (let [x (reverse (take (count (map char s)) (iterate #(* 2 %) 1)))] 
+(= 7 ((fn [s] (let [x (reverse (take (count (map char s)) (iterate #(* 2 %) 1)))]
                 (reduce + (map #(if (= %1 \0) 0 %2) (map char s) x))))
       "111"))
 (= 8 ((fn [s] (let [x (reverse (take (count (map char s)) (iterate #(* 2 %) 1)))]
@@ -673,9 +673,9 @@
                                           ({\T 8 \J 9 \Q 10 \K 11 \A 12} %)
                                           (- (read-string (str %)) 2))]
                               {:suit (suit (first s)) :rank (rank (second s))}))
-              str)       
-        '[S2 S3 S4 S5 S6 S7       
-          S8 S9 ST SJ SQ SK SA])) 
+              str)
+        '[S2 S3 S4 S5 S6 S7
+          S8 S9 ST SJ SQ SK SA]))
 
 ;; #100: Least Common Multiple
 (== ((fn [& rest]
@@ -995,9 +995,45 @@
     (range 50)) (range 50))
 
 ;; #58: Function Composition
-;; (= [3 2 1] ((__ rest reverse) [1 2 3 4]))
-;; (= 5 ((__ (partial + 3) second) [1 2 3 4]))
-;; (= true ((__ zero? #(mod % 8) +) 3 5 7 9))
-;; (= "HELLO" ((__ #(.toUpperCase %) #(apply str %) take) 5 "hello world"))
+(= [3 2 1] (((fn [& fs]
+               (let [fs (reverse fs)]
+                 (fn [& args]
+                   (loop [inner (apply (first fs) args)
+                          fs    (next fs)]
+                     (if fs
+                       (recur ((first fs) inner) (next fs))
+                       inner)))))
+             rest reverse) [1 2 3 4]))
+(= 5 (((fn [& fs]
+         (let [fs (reverse fs)]
+           (fn [& args]
+             (loop [inner (apply (first fs) args)
+                    fs    (next fs)]
+               (if fs
+                 (recur ((first fs) inner) (next fs))
+                 inner)))))
+       (partial + 3) second) [1 2 3 4]))
+(= true (((fn [& fs]
+            (let [fs (reverse fs)]
+              (fn [& args]
+                (loop [inner (apply (first fs) args)
+                       fs    (next fs)]
+                  (if fs
+                    (recur ((first fs) inner) (next fs))
+                    inner)))))
+          zero? #(mod % 8) +) 3 5 7 9))
+(= "HELLO" (((fn [& fs]
+               (let [fs (reverse fs)]
+                 (fn [& args]
+                   (loop [inner (apply (first fs) args)
+                          fs    (next fs)]
+                     (if fs
+                       (recur ((first fs) inner) (next fs))
+                       inner)))))
+             #(.toUpperCase %) #(apply str %) take) 5 "hello world"))
 
+;; #59: Juxtaposition
+;; (= [21 6 1] ((__ + max min) 2 3 5 1 6 4))
+;; (= ["HELLO" 5] ((__ #(.toUpperCase %) count) "hello"))
+;; (= [2 6 4] ((__ :a :c :b) {:a 2, :b 4, :c 6, :d 8, :e 10}))
 
