@@ -1103,6 +1103,30 @@
           100)) 541)
 
 ;; #74: Filter Perfect Squares
-;; (= (__ "4,5,6,7,8,9") "4,9")
-;; (= (__ "15,16,25,36,37") "16,25,36")
+(= ((fn [s]
+      (->> s
+           (partition-by #(= \, %))
+           (filter #(not= \, (first %)))
+           (map (comp read-string #(apply str %)))
+           (filter #(zero? (mod % (Math/sqrt %))))
+           (map str)
+           (interpose ",")
+           (apply str)))
+    "4,5,6,7,8,9") "4,9")
+(= ((fn [s]
+      (->> s
+           (partition-by #(= \, %))
+           (filter #(not= \, (first %)))
+           (map (comp read-string #(apply str %)))
+           (filter #(zero? (mod % (Math/sqrt %))))
+           (map str)
+           (interpose ",")
+           (apply str)))
+    "15,16,25,36,37") "16,25,36")
 
+;; #65: Black Box Testing
+;; (= :map (__ {:a 1, :b 2}))
+;; (= :list (__ (range (rand-int 20))))
+;; (= :vector (__ [1 2 3 4 5 6]))
+;; (= :set (__ #{10 (rand-int 5)}))
+;; (= [:map :set :vector :list] (map __ [{} #{} [] ()]))
