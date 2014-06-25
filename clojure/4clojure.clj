@@ -1077,6 +1077,32 @@
    ["fall" "follies" "foolish" "Fools" "for"])
 
 ;; #67: Prime Numbers
-;; (= (__ 2) [2 3])
-;; (= (__ 5) [2 3 5 7 11])
-;; (= (last (__ 100)) 541)
+(= ((fn [n]
+      (let [prime? (fn [x]
+                     (or (< x 3)
+                         (not= 0 (reduce * (map #(mod x %)
+                                                (range 2 (+ 1 (Math/sqrt x))))))))]
+        (take n (for [x (iterate inc 2)
+                      :when (prime? x)] x))))
+    2) [2 3])
+(= ((fn [n]
+      (let [prime? (fn [x]
+                     (or (< x 3)
+                         (not= 0 (reduce * (map #(mod x %)
+                                                (range 2 (+ 1 (Math/sqrt x))))))))]
+        (take n (for [x (iterate inc 2)
+                      :when (prime? x)] x))))
+    5) [2 3 5 7 11])
+(= (last ((fn [n]
+            (let [prime? (fn [x]
+                           (or (< x 3)
+                               (not= 0 (reduce * (map #(mod x %)
+                                                      (range 2 (+ 1 (Math/sqrt x))))))))]
+              (take n (for [x (iterate inc 2)
+                            :when (prime? x)] x))))
+          100)) 541)
+
+;; #74: Filter Perfect Squares
+;; (= (__ "4,5,6,7,8,9") "4,9")
+;; (= (__ "15,16,25,36,37") "16,25,36")
+
