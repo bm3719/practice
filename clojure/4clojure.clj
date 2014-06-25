@@ -1053,10 +1053,30 @@
           (conj (my-part n (drop n col)) (take n col))))
     3 (range 8)) '((0 1 2) (3 4 5)))
 
-;; #70: Word Sortin
-;; (= (__  "Have a nice day.")
-;;    ["a" "day" "Have" "nice"])
-;; (= (__  "Clojure is a fun language!")
-;;    ["a" "Clojure" "fun" "is" "language"])
-;; (= (__  "Fools fall for foolish follies.")
-;;    ["fall" "follies" "foolish" "Fools" "for"])
+;; #70: Word Sorting
+(= ((fn [s]
+      (->> s (partition-by #(= \space %))
+           (filter #(not= \space (first %)))
+           (map (comp (partial re-find #"\w+") (partial apply str)))
+           (sort-by #(.toLowerCase %))))
+    "Have a nice day.")
+   ["a" "day" "Have" "nice"])
+(= ((fn [s]
+      (->> s (partition-by #(= \space %))
+           (filter #(not= \space (first %)))
+           (map (comp (partial re-find #"\w+") (partial apply str)))
+           (sort-by #(.toLowerCase %))))
+    "Clojure is a fun language!")
+   ["a" "Clojure" "fun" "is" "language"])
+(= ((fn [s]
+      (->> s (partition-by #(= \space %))
+           (filter #(not= \space (first %)))
+           (map (comp (partial re-find #"\w+") (partial apply str)))
+           (sort-by #(.toLowerCase %))))
+    "Fools fall for foolish follies.")
+   ["fall" "follies" "foolish" "Fools" "for"])
+
+;; #67: Prime Numbers
+;; (= (__ 2) [2 3])
+;; (= (__ 5) [2 3 5 7 11])
+;; (= (last (__ 100)) 541)
