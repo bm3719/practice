@@ -1040,6 +1040,23 @@
              :a :c :b) {:a 2, :b 4, :c 6, :d 8, :e 10}))
 
 ;; #54: Partition a Sequence
-;; (= (__ 3 (range 9)) '((0 1 2) (3 4 5) (6 7 8)))
-;; (= (__ 2 (range 8)) '((0 1) (2 3) (4 5) (6 7)))
-;; (= (__ 3 (range 8)) '((0 1 2) (3 4 5)))
+(= ((fn my-part [n col]
+      (if (< (count col) (* 2 n)) (list (take n col))
+          (conj (my-part n (drop n col)) (take n col))))
+    3 (range 9)) '((0 1 2) (3 4 5) (6 7 8)))
+(= ((fn my-part [n col]
+      (if (< (count col) (* 2 n)) (list (take n col))
+          (conj (my-part n (drop n col)) (take n col))))
+    2 (range 8)) '((0 1) (2 3) (4 5) (6 7)))
+(= ((fn my-part [n col]
+      (if (< (count col) (* 2 n)) (list (take n col))
+          (conj (my-part n (drop n col)) (take n col))))
+    3 (range 8)) '((0 1 2) (3 4 5)))
+
+;; #70: Word Sortin
+;; (= (__  "Have a nice day.")
+;;    ["a" "day" "Have" "nice"])
+;; (= (__  "Clojure is a fun language!")
+;;    ["a" "Clojure" "fun" "is" "language"])
+;; (= (__  "Fools fall for foolish follies.")
+;;    ["fall" "follies" "foolish" "Fools" "for"])
