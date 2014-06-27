@@ -1126,42 +1126,32 @@
 
 ;; #65: Black Box Testing
 (= :map ((fn [col]
-           (let [x (gensym)
-                 y (gensym)
-                 c (count col)]
+           (let [[x y c] [(gensym) (gensym) (count col)]]
              (if (= (+ c 2) (count (conj col [x x] [x x])))
                (if (= y (first (conj col x y))) :list :vector)
                (if (= (+ 1 c) (count (conj col [x 1] [x 2]))) :map :set))))
          {:a 1, :b 2}))
 (= :list ((fn [col]
-            (let [x (gensym)
-                  y (gensym)
-                  c (count col)]
+            (let [[x y c] [(gensym) (gensym) (count col)]]
               (if (= (+ c 2) (count (conj col [x x] [x x])))
                 (if (= y (first (conj col x y))) :list :vector)
                 (if (= (+ 1 c) (count (conj col [x 1] [x 2]))) :map :set))))
           (range (rand-int 20))))
 (= :vector ((fn [col]
-              (let [x (gensym)
-                    y (gensym)
-                    c (count col)]
+              (let [[x y c] [(gensym) (gensym) (count col)]]
                 (if (= (+ c 2) (count (conj col [x x] [x x])))
                   (if (= y (first (conj col x y))) :list :vector)
                   (if (= (+ 1 c) (count (conj col [x 1] [x 2]))) :map :set))))
             [1 2 3 4 5 6]))
 (= :set ((fn [col]
-           (let [x (gensym)
-                 y (gensym)
-                 c (count col)]
+           (let [[x y c] [(gensym) (gensym) (count col)]]
              (if (= (+ c 2) (count (conj col [x x] [x x])))
                (if (= y (first (conj col x y))) :list :vector)
                (if (= (+ 1 c) (count (conj col [x 1] [x 2]))) :map :set))))
          #{10 (rand-int 5)}))
 (= [:map :set :vector :list]
    (map (fn [col]
-          (let [x (gensym)
-                y (gensym)
-                c (count col)]
+          (let [[x y c] [(gensym) (gensym) (count col)]]
             (if (= (+ c 2) (count (conj col [x x] [x x])))
               (if (= y (first (conj col x y))) :list :vector)
               (if (= (+ 1 c) (count (conj col [x 1] [x 2]))) :map :set))))
