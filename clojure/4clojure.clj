@@ -1125,8 +1125,53 @@
     "15,16,25,36,37") "16,25,36")
 
 ;; #65: Black Box Testing
-;; (= :map (__ {:a 1, :b 2}))
-;; (= :list (__ (range (rand-int 20))))
-;; (= :vector (__ [1 2 3 4 5 6]))
-;; (= :set (__ #{10 (rand-int 5)}))
-;; (= [:map :set :vector :list] (map __ [{} #{} [] ()]))
+(= :map ((fn [col]
+           (let [x (gensym)
+                 y (gensym)
+                 c (count col)]
+             (if (= (+ c 2) (count (conj col [x x] [x x])))
+               (if (= y (first (conj col x y))) :list :vector)
+               (if (= (+ 1 c) (count (conj col [x 1] [x 2]))) :map :set))))
+         {:a 1, :b 2}))
+(= :list ((fn [col]
+            (let [x (gensym)
+                  y (gensym)
+                  c (count col)]
+              (if (= (+ c 2) (count (conj col [x x] [x x])))
+                (if (= y (first (conj col x y))) :list :vector)
+                (if (= (+ 1 c) (count (conj col [x 1] [x 2]))) :map :set))))
+          (range (rand-int 20))))
+(= :vector ((fn [col]
+              (let [x (gensym)
+                    y (gensym)
+                    c (count col)]
+                (if (= (+ c 2) (count (conj col [x x] [x x])))
+                  (if (= y (first (conj col x y))) :list :vector)
+                  (if (= (+ 1 c) (count (conj col [x 1] [x 2]))) :map :set))))
+            [1 2 3 4 5 6]))
+(= :set ((fn [col]
+           (let [x (gensym)
+                 y (gensym)
+                 c (count col)]
+             (if (= (+ c 2) (count (conj col [x x] [x x])))
+               (if (= y (first (conj col x y))) :list :vector)
+               (if (= (+ 1 c) (count (conj col [x 1] [x 2]))) :map :set))))
+         #{10 (rand-int 5)}))
+(= [:map :set :vector :list]
+   (map (fn [col]
+          (let [x (gensym)
+                y (gensym)
+                c (count col)]
+            (if (= (+ c 2) (count (conj col [x x] [x x])))
+              (if (= y (first (conj col x y))) :list :vector)
+              (if (= (+ 1 c) (count (conj col [x 1] [x 2]))) :map :set))))
+        [{} #{} [] ()]))
+
+;; #76: Intro to Trampoline
+;; (= __
+;;    (letfn
+;;        [(foo [x y] #(bar (conj x y) y))
+;;         (bar [x y] (if (> (last x) 10)
+;;                      x
+;;                      #(foo x (+ 2 y))))]
+;;      (trampoline foo [] 1)))
