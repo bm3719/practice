@@ -1,0 +1,29 @@
+Time-stamp: <2014-07-15 01:25:21 (bm3719)>
+#+STARTUP: content
+
+This is a test of GitHub's rendering of org-mode files.  Should the desired
+features be present, I may use them to replace Markdown files.
+
+Here's a code block.
+
+#+BEGIN_SRC clojure                                                                                     
+(apply + (filter even?
+                 ((fn [col]
+                    (if (> (last col) 4000000) col
+                        (recur (conj col (+ (last col) (last (butlast col)))))))
+                  [1 2])))
+#+END_SRC
+
+Identing in SRC blocks non-functional
+
+Here's an outline.
+
+* List
+** List item 1
+** TODO Here's a TODO item
+Some text under the item.
+** DONE Here's one with state updates
+   - State "DONE"       from "STARTED"    [2014-07-15 Tue 01:25]
+   - State "STARTED"    from "TODO"       [2014-07-15 Tue 01:25]
+Some text under the item.
+
