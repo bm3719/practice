@@ -1,3 +1,6 @@
+;;;; Project Euler problems, solved in Clojure.
+;;;; https://projecteuler.net/
+
 ;; #1: Multiples of 3 and 5
 ;; 
 ;; If we list all the natural numbers below 10 that are multiples of 3 or 5, we
@@ -27,3 +30,26 @@
 ;; The prime factors of 13195 are 5, 7, 13, 29.
 ;;
 ;; What is the largest prime factor of the number 600851475143?
+(defn primes "Sieve of Eratosthenes." [n]
+  (loop [p 2 seq (range 2 n)]
+    (if (> (* p p) n)
+      seq
+      (let [new-seq (filter #(or (= % p) (not= 0 (mod % p))) seq)
+        new-p (first (filter #(> % p) new-seq))]
+    (recur new-p new-seq)))))
+
+(defn l-factor [n]
+  (let [ps (primes (int (Math/sqrt n)))]
+    (apply max (for [x ps
+                     :when (zero? (rem n x))]
+                 x))))
+
+(l-factor 600851475143)
+
+;; #4: Largest palindrome product
+;;
+;; A palindromic number reads the same both ways. The largest palindrome made
+;; from the product of two 2-digit numbers is 9009 = 91 × 99.
+;;
+;; Find the largest palindrome made from the product of two 3-digit numbers.
+
