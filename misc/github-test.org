@@ -1,0 +1,42 @@
+Time-stamp: <2014-07-15 01:32:58 (bm3719)>
+#+STARTUP: content
+
+This is a test of GitHub's rendering of org-mode files.  Should the desired
+features be present, I may use them to replace Markdown files.
+
+Here's a code block.
+
+#+BEGIN_SRC clojure                                                                                     
+(apply + (filter even?
+                 ((fn [col]
+                    (if (> (last col) 4000000) col
+                        (recur (conj col (+ (last col) (last (butlast col)))))))
+                  [1 2])))
+#+END_SRC
+
+Here's a [[http://github.com/bm3719][link]].
+
+Here's an outline.
+
+* List
+** List item 1
+** TODO Here's a TODO item
+Some text under the item.
+** DONE Here's one with state updates
+   - State "DONE"       from "STARTED"    [2014-07-15 Tue 01:25]
+   - State "STARTED"    from "TODO"       [2014-07-15 Tue 01:25]
+Some text under the item.
+
+
+* Observations
+Some observations made while creating this file.  There are probably more
+issues yet to be encountered.
+- This works okay, but my standard org-mode document structure produces ugly
+  renderings.
+- Identing in SRC blocks is non-functional.  This effectively negates my main
+  intention of using org-babel-execute functionality to do literate programming
+  within these files.  Code will have to be written in proper source files and
+  pasted in.  Thus, it's only useful for documentation and presentation.
+- Don't use time stamps.
+- Don't use item scheduling.
+

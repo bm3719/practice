@@ -23,7 +23,8 @@
 (apply + (filter even?
                  ((fn [col]
                     (if (> (last col) 4000000) col
-                        (recur (conj col (+ (last col) (last (butlast col))))))) [1 2])))
+                        (recur (conj col (+ (last col) (last (butlast col)))))))
+                  [1 2])))
 
 ;; #3: Largest prime factor
 ;;
