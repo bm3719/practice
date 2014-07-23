@@ -60,14 +60,14 @@
   (if (<= (count s) 1) true
       (and (= (first s) (last s)) (palindrome? (rest (butlast s))))))
 
-(defn l-palindrome-product []
+(defn l-palindrome-product [l h]
   (apply max
-         (for [x (range 100 1000)
-               y (range 100 1000)
+         (for [x (range l h)
+               y (range l h)
                :when (palindrome? (str (* x y)))]
            (* x y))))
 
-(l-palindrome-product)
+(l-palindrome-product 100 1000)
 
 ;; #5: Smallest multiple
 ;;
@@ -77,6 +77,26 @@
 ;; What is the smallest positive number that is evenly divisible by all of the
 ;; numbers from 1 to 20?
 
+(defn smallest-multiple
+  "Find the smallest number that can be divided by each of the numbers from 1
+  to n." [n]
+  (let [ns (range 1 (inc n))
+        is-div? (fn [x] (every? identity (map #(zero? (rem x %)) ns)))]
+    (first (filter is-div? (map inc (range))))))
 
+(defn smallest-multiple 20)
 
+;; #6: Sum square difference
+;;
+;; The sum of the squares of the first ten natural numbers is,
+;; 1^2 + 2^2 + ... + 10^2 = 385
+;;
+;; The square of the sum of the first ten natural numbers is,
+;; (1 + 2 + ... + 10)^2 = 55^2 = 3025
+;;
+;; Hence the difference between the sum of the squares of the first ten natural
+;; numbers and the square of the sum is 3025 − 385 = 2640.
+;;
+;; Find the difference between the sum of the squares of the first one hundred
+;; natural numbers and the square of the sum.
 
