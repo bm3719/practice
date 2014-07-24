@@ -200,3 +200,19 @@
 ;;
 ;; There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 ;; Find the product abc.
+
+(first (for [c (reverse (range 998))
+             b (reverse (range 998))
+             a (reverse (range 998))
+             :when (and (> c b a)
+                        (= 1000 (+ c b a))
+                        (= (+ (* a a) (* b b)) (* c c)))]
+         (* a b c)))
+
+;; #10: Summation of primes
+;;
+;; The sum of primes below 10 is 2 + 3 + 5 + 7 = 17.
+;;
+;; Find the sum of all the primes below two million.
+
+
