@@ -566,7 +566,6 @@
     (if (even? n) (/ n 2) (+ (* 3 n) 1)))
   (count (take-while (partial < 1) (iterate step n))))
 
-;; A bit inefficient, but works.
 (defn max-collatz [n]
   (loop [n n
          c n
