@@ -560,3 +560,28 @@
 ;; Which starting number, under one million, produces the longest chain?
 ;;
 ;; NOTE: Once the chain starts the terms are allowed to go above one million.
+
+
+(defn collatz [n]
+  (cond (= n 1) '(1)
+        (even? n) (conj (collatz (/ n 2)) n)
+        :else (conj (collatz (+ (* 3 n) 1)) n)))
+
+(defn collatz-count2
+  ([n] (if (= n 1) 1
+           (let [n (if (even? n) (/ n 2) (+ (* 3 n) 1))]
+             (collatz-count n 1))))
+  ([n c] (if (= n 1) (inc c)
+             (let [n (if (even? n) (/ n 2) (+ (* 3 n) 1))]
+               (recur n (inc c))))))
+
+(defn max-collatz [n]
+  (defn max-collatz-acc [v max]
+    (if (empty? v) (first max)
+        (let [cur [(first v) (collatz-count (first v))]]
+          (if (> (second cur) (second max))
+            (max-collatz-acc (rest v) cur)
+            (max-collatz-acc (rest v) max)))))
+  (max-collatz-acc (range 1 (inc n)) [0 0]))
+
+(max-collatz 1000000)
