@@ -569,9 +569,11 @@
 ;; A bit inefficient, but works.
 (defn max-collatz [n]
   (loop [n n
-         c 0]
+         c n
+         count 0]
     (if (= n 1) c
-        (recur (- n 1) (if (> (collatz-count c) (collatz-count n)) c n)))))
+        (let [n-count (collatz-count n)]
+          (recur (- n 1) (if (> count n-count) c n) n-count)))))
     
 (max-collatz 1000000)
 
