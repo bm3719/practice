@@ -561,27 +561,23 @@
 ;;
 ;; NOTE: Once the chain starts the terms are allowed to go above one million.
 
+(defn collatz-count [n]
+  (defn step [n]
+    (if (even? n) (/ n 2) (+ (* 3 n) 1)))
+  (count (take-while (partial < 1) (iterate step n))))
 
-(defn collatz [n]
-  (cond (= n 1) '(1)
-        (even? n) (conj (collatz (/ n 2)) n)
-        :else (conj (collatz (+ (* 3 n) 1)) n)))
-
-(defn collatz-count2
-  ([n] (if (= n 1) 1
-           (let [n (if (even? n) (/ n 2) (+ (* 3 n) 1))]
-             (collatz-count n 1))))
-  ([n c] (if (= n 1) (inc c)
-             (let [n (if (even? n) (/ n 2) (+ (* 3 n) 1))]
-               (recur n (inc c))))))
-
+;; A bit inefficient, but works.
 (defn max-collatz [n]
-  (defn max-collatz-acc [v max]
-    (if (empty? v) (first max)
-        (let [cur [(first v) (collatz-count (first v))]]
-          (if (> (second cur) (second max))
-            (max-collatz-acc (rest v) cur)
-            (max-collatz-acc (rest v) max)))))
-  (max-collatz-acc (range 1 (inc n)) [0 0]))
-
+  (loop [n n
+         c 0]
+    (if (= n 1) c
+        (recur (- n 1) (if (> (collatz-count c) (collatz-count n)) c n)))))
+    
 (max-collatz 1000000)
+
+;; #15: Lattice paths
+;;
+;; Starting the top left corner of a 2x2 grid, and only being able to move to
+;; the right and down, there are exactly 6 routes to the bottom right corner.
+;;
+;; How many such routes are there through a 20x20 grid?
