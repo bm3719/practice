@@ -616,3 +616,57 @@
 ;; forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20
 ;; letters. The use of "and" when writing out numbers is in compliance with
 ;; British usage.
+
+(def one-nineteen [3 3 5 4 4 3 5 5 4 3 6 6 8 8 7 7 9 8 8])
+(def tens [6 6 5 5 5 7 6 6])
+
+(defn letters-count [n]
+  (defn get-tens [n]
+    (get tens (- (int (/ (mod n 100) 10)) 2)))
+  (+ (if (= n 1000) 11 0)
+     (if (< 99 n 1000) (+ (get one-nineteen (dec (int (/ n 100)))) 7
+                           (if (< 0 (mod n 100)) 3 0)) 0)
+     (if (< 19 (mod n 100) 100)
+       (get-tens n) 0)
+     (if (< 19 (mod n 100) 100)
+         (if (< 0 (mod n 10) 10) (get one-nineteen (dec (mod n 10))) 0) 0)
+     (if (< 0 (mod n 100) 20) (get one-nineteen (dec (mod n 100))) 0)))
+
+(apply + (map letters-count (range 1 1001)))
+
+;; #18: Maximum path sum I
+;;
+;; By starting at the top of the triangle below and moving to adjacent numbers
+;; on the row below, the maximum total from top to bottom is 23.
+;;
+;; 
+;;    3
+;;   7 4
+;;  2 4 6
+;; 8 5 9 3
+;;
+;; That is, 3 + 7 + 4 + 9 = 23.
+;;
+;; Find the maximum total from top to bottom of the triangle below:
+;;
+;;                      75
+;;                    95 64
+;;                   17 47 82
+;;                 18 35 87 10
+;;                20 04 82 47 65
+;;              19 01 23 75 03 34
+;;             88 02 77 73 07 63 67
+;;           99 65 04 28 06 16 70 92
+;;          41 41 26 56 83 40 80 70 33
+;;        41 48 72 33 47 32 37 16 94 29
+;;       53 71 44 65 25 43 91 52 97 51 14
+;;     70 11 33 28 77 73 17 78 39 68 17 57
+;;    91 71 52 38 17 14 91 43 58 50 27 29 48
+;;  63 66 04 68 89 53 67 30 73 16 69 87 40 31
+;; 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
+;;
+;; NOTE: As there are only 16384 routes, it is possible to solve this problem
+;; by trying every route. However, Problem 67, is the same challenge with a
+;; triangle containing one-hundred rows; it cannot be solved by brute force,
+;; and requires a clever method! ;o)
+
