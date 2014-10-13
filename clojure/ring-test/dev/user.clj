@@ -17,5 +17,5 @@
   "Run this to start the server from the REPL."
   ([join?]
      (defonce server
-       (jetty/run-jetty core/app {:join join? :port 3000})))
+       (jetty/run-jetty core/app {:join? join? :port 3000})))
   ([] (boot false)))
