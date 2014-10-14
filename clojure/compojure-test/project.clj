@@ -8,7 +8,7 @@
   :plugins [[lein-ring "0.8.12"]]
   :ring {:handler compojure-test.handler/app}
   :jvm-opts ["-Xmx3g"]
-  :main ring-test.core
+  :main compojure-test.handler
   :repl-options {:init-ns user}
   :profiles {:dev {:resource-paths ["dev"]
                    :dependencies [[javax.servlet/servlet-api "2.5"]

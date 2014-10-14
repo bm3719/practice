@@ -27,6 +27,7 @@
    (GET "/posts" [] (str "hi " user-id))))
 
 (defroutes app-routes
+  ;; A basic route: (verb route parameters handler)
   (GET "/" [] "Hello World")
   ;; Example route with path and vector of parameters.
   (GET "/user/:id" [id] (str "<h1>Hello " id "</h1>"))
