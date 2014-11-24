@@ -1,0 +1,27 @@
+Time-stamp: <2014-11-24 10:04:35 (bmiller)>
+#+STARTUP: content
+
+* Security+ SY0-401
+** Measuring and weighing risk
+** Monitoring and diagnosing networks
+** Understanding devices and infrastructure
+*** ports
+- 21 FTP
+- 22 SSH
+- 25 SMTP
+- 53 DNS
+- 80 HTTP
+- 110 POP3
+- 139 NetBIOS session
+- 143 IMAP
+- 443 HTTPS
+- 3389 RDP
+** Access control, authentication, and authorization
+** Protecting wireless networks
+** Securing the cloud
+** Host, data, and application security
+** Cryptography
+** Malware, vulnerabilities, and threats
+** Social engineering and other foes
+** Security administration
+** Disaster recovery and incident response
