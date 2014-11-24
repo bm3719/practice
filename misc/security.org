@@ -1,8 +1,77 @@
-Time-stamp: <2014-11-24 10:04:35 (bmiller)>
+Time-stamp: <2014-11-24 17:09:20 (bmiller)>
 #+STARTUP: content
 
 * Security+ SY0-401
 ** Measuring and weighing risk
+*** risk assessment
+A process conducted in which threats, vulnerabilities, and impacts of a loss
+are assessed.  Determines which risks are real/likely.  Coordination with the
+Business Impact Analysis (BIA) determines course of action.
+*** computing risk assessment
+Prioritize and determine which risks are acceptable.  NIST provides a guide
+for conducting assessments.
+*** risk calculations
+Risk impact terms:
+- ALE: Annual Loss Expectancy.  A monetary measure of loss, every year.
+- SLE: Single Loss Expectancy.  A monetary measure of loss for one event.  This
+  is divided into AV (asset value) and EF (exposure factor).  SLE = AV * EF.
+- ARO: Annualized Rate of Occurance.  Chance of an event occurring within a
+  year, based on historical data.
+
+Formula: SLE * ARO = ALE
+*** quantitative vs. qualitative risk assessment
+Risk assessments are either qualitative (opinion-based and subjective) or
+qualitative (cost-based and objective).  If a dollar cost can be assigned,
+it's quantitative.
+*** additional risk terminology
+- Likelihood: A score representing the possibility of threat initiation.  Goes
+  from 10-0, with 10 being a certainty that the adversary will initiate a
+  threat event.
+- Threat vector: The way in which an attacker poses a threat.
+- Mean Time Between Failures (MTBF): The measure of the anticipated incidence
+  of failure for a system or component.  E.g., if a system's MTBF is 1 year,
+  expect to replace it once a year.
+- Mean Time to Failure (MTTF): The average time to failure for a
+  non-repairable system.  Same as MTBF, but for non-repairable systems.
+- Mean Time to Restore (MTTR): How long it takes to repair a system once a
+  failure occurs.
+- Recovery Time Objective (RTO): The maximum amount of downtime considered
+  acceptable.  Agreed upon during BIA creation.
+- Recovery Point Objective (RPO): The point in time from which the system needs
+  to be restored.  The shorter the RPO time, the more expensive.
+- Service Level Agreement (SLA)
+*** acting on your risk assessment
+- Risk Avoidance: Identifying a risk and deciding not to engage in actions
+  associated with it.
+- Risk Transference: Sharing some of the burden of the risk with another
+  entity (e.g. using insurance).
+- Risk Mitigation: Taking steps to reduce a risk.  E.g., Data Loss Prevention
+  (DLP) systems monitor the content of systems ensure key content is not
+  deleted/removed.
+- Risk Deterrence: Warning the adversary about consequences, like posting
+  prosecution policies or warning of intrusion detection.
+- Risk Acceptance: The choice to make when the cost of implementing the other
+  choices outweighs the harm of an identified risk.
+*** risks associated with cloud computing
+Cloud computing implementations:
+- PaaS: Vendors allow apps to be created an run on their infrastructure.
+  E.g., AWS and Google Code.
+- SaaS: Applications are remotely run over the Web.
+- IaaS: Virtualized resources, billed by resource usage.
+
+Risk-related issues:
+- Regulatory compliance
+- User privileges: Enforcing least privileges, reduced control.
+- Data integration/segregation: Shared resources up data
+  encryption/segregation requirements.
+*** risks associated with virtualization
+- Breaking out of the VM: Data access issues.
+- Network and security controls can intermingle: Granularity differences
+  between network and VM admin tools.
+- Most attacks occur through the hypervisor, giving attackers root-level
+  access to all VMs.
+*** developing policies, standards, and guidelines
+- 
 ** Monitoring and diagnosing networks
 ** Understanding devices and infrastructure
 *** ports
@@ -25,3 +94,38 @@ Time-stamp: <2014-11-24 10:04:35 (bmiller)>
 ** Social engineering and other foes
 ** Security administration
 ** Disaster recovery and incident response
+
+* Assessment test (first try)
+1 A
+2 D
+3 
+4 A x
+5 
+6 B?
+7 D x
+8 B? x
+9 A x
+10 B?
+11 A 
+12 A?
+13 
+14 D x
+15 A
+16 
+17 C? x
+18 D
+19 A
+20 
+21 A
+22 B
+23 A
+24 C
+25 
+26 
+27 C x
+28 C
+29 
+30 A
+Score: 50%
+
+* Assessment test (second try)
