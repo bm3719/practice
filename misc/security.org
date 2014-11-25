@@ -1,16 +1,16 @@
-Time-stamp: <2014-11-24 17:09:20 (bmiller)>
+Time-stamp: <2014-11-25 16:46:57 (bmiller)>
 #+STARTUP: content
 
 * Security+ SY0-401
-** Measuring and weighing risk
+** Chapter 1: Measuring and weighing risk
 *** risk assessment
 A process conducted in which threats, vulnerabilities, and impacts of a loss
 are assessed.  Determines which risks are real/likely.  Coordination with the
 Business Impact Analysis (BIA) determines course of action.
-*** computing risk assessment
+**** computing risk assessment
 Prioritize and determine which risks are acceptable.  NIST provides a guide
 for conducting assessments.
-*** risk calculations
+**** risk calculations
 Risk impact terms:
 - ALE: Annual Loss Expectancy.  A monetary measure of loss, every year.
 - SLE: Single Loss Expectancy.  A monetary measure of loss for one event.  This
@@ -19,11 +19,11 @@ Risk impact terms:
   year, based on historical data.
 
 Formula: SLE * ARO = ALE
-*** quantitative vs. qualitative risk assessment
+**** quantitative vs. qualitative risk assessment
 Risk assessments are either qualitative (opinion-based and subjective) or
 qualitative (cost-based and objective).  If a dollar cost can be assigned,
 it's quantitative.
-*** additional risk terminology
+**** additional risk terminology
 - Likelihood: A score representing the possibility of threat initiation.  Goes
   from 10-0, with 10 being a certainty that the adversary will initiate a
   threat event.
@@ -40,7 +40,7 @@ it's quantitative.
 - Recovery Point Objective (RPO): The point in time from which the system needs
   to be restored.  The shorter the RPO time, the more expensive.
 - Service Level Agreement (SLA)
-*** acting on your risk assessment
+**** acting on your risk assessment
 - Risk Avoidance: Identifying a risk and deciding not to engage in actions
   associated with it.
 - Risk Transference: Sharing some of the burden of the risk with another
@@ -52,7 +52,7 @@ it's quantitative.
   prosecution policies or warning of intrusion detection.
 - Risk Acceptance: The choice to make when the cost of implementing the other
   choices outweighs the harm of an identified risk.
-*** risks associated with cloud computing
+**** risks associated with cloud computing
 Cloud computing implementations:
 - PaaS: Vendors allow apps to be created an run on their infrastructure.
   E.g., AWS and Google Code.
@@ -64,16 +64,139 @@ Risk-related issues:
 - User privileges: Enforcing least privileges, reduced control.
 - Data integration/segregation: Shared resources up data
   encryption/segregation requirements.
-*** risks associated with virtualization
+**** risks associated with virtualization
 - Breaking out of the VM: Data access issues.
 - Network and security controls can intermingle: Granularity differences
   between network and VM admin tools.
 - Most attacks occur through the hypervisor, giving attackers root-level
   access to all VMs.
 *** developing policies, standards, and guidelines
-- 
-** Monitoring and diagnosing networks
-** Understanding devices and infrastructure
+Policies provide high-level guidance, standards provide expectations, and
+guidelines provide specific advice.
+**** implementing policies
+- Scope Statement: Outlines what the policy intends to accomplish and which
+  documents, laws, and practices it addresses.  Usually a single sentence.
+- Policy Overview Statement: Provides the goal of the policy, its importance,
+  and how to comply.  Usually a single paragraph.
+- Policy Statement: The substance of the policy.  E.g., how to lock up the
+  building at night.
+- Accountability Statement: Who is responsible for ensuring the policy is
+  enforced.
+- Exception Statement: Guidance on how to deviate from the policy.
+**** incorporating standards
+Standards are derived from policies.  Provides enough detail that an audit can
+be performed.
+
+Key aspects of standards documents:
+- Scope and Purpose: Explains/describes the intention.
+- Roles and Responsibilities: Who is responsible for implementing, monitoring,
+  and maintaining the standard.
+- Reference Documents: Explains how the standard relates to the organization's
+  policies, thereby connecting them.
+- Performance Criteria: Outlines how to accomplish the task, including a
+  relevant baseline and tech standards.
+- Maintenance and Administrative Requirements: E.g., frequency of lock
+  combination changes.
+**** following guidelines
+Helps users comply with standards, often step-by-step processes to accomplish
+tasks.
+
+Contents of guidelines documents:
+- Scope and Purpose: Overview of the guideline's intent.
+- Roles and Responsibilities: Who is responsible for accomplishing tasks.
+- Guideline Statements: Step-by-step instructions.
+- Operational Considerations: Specify what duties are required and at what
+  intervals.
+**** Business policies to implement
+Primary areas of concern:
+- Separation of Duties Policies: Designed to reduce risk of fraud and prevent
+  other losses.  May require more than one person to accomplish key
+  processes.
+- Privacy Policies: Define what controls are required to maintain data
+  privacy.  A legal document informed by laws.
+- Acceptable Use Policies (AUPs): Describe how employees can use company
+  systems and resources, including consequences for misuse.  Also known as a
+  Use Policy.
+- Security Policies: Define what controls are required for security.
+- Mandatory Vacations: Addresses dependence upon single persons and an
+  opportunity to discover fraud.
+- Job Rotation: Same motivation as mandatory vacations, with an emphasis on
+  redundancy in skills.
+- Least Privilege: Users are given only the permissions needed to perform work.
+- Succession Planning: Outlines internal persons that have the ability to step
+  into positions when they open up.  Identifies key roles.
+**** understanding control types and false positives/negatives
+Once risks are identified, controls are put in place to address them.
+Controls fall into three groups:
+- Management: Risk assessment; planning; system and services acquisition;
+  certification, accreditation, and security assessment.
+- Operational: Personnel security, physical and environmental protection,
+  contingency planning, configuration management, maintenance, system and
+  information integrity, media protection, incident response, awareness and
+  training.
+- Technical: Identification and authentication, access control, audit and
+  accountability, system and communication protection.
+
+Once controls are implemented, audits should be performed.  While doing so,
+pay attention to:
+- False positives: Events flagged as anomalies that aren't really incidents.
+- False negatives: Lack of alert on an real event.
+**** risk management best practices
+Implemented with a BIA.  What is shown in industry to produce superior results
+regarding business continuity.
+**** undertaking business impact analysis (BIA)
+BIA is the process of evaluating critical systems to define impact and
+recovery plans.  Focuses on impact a loss would have.
+
+Key components:
+- Identifying Critical Functions: Defines essential functions until restoration
+  of full service.  Ensures Business Continuity Planning (BCP).
+- Prioritizing Critical Business Functions: Categorizes essential/non-essential
+  functions.  Useful allocating resources during recovery.
+- Calculating a Timeframe for Critical Systems Loss: Evaluates maximum time a
+  particular function can be unavailable.  Dictates contingencies to minimize
+  loss when time is exceeded.
+- Estimating the Tangible and Intangible Impact on the Organization: Details
+  tangible (loss production/sales) and intangible (loss customer confidence)
+  impact.
+**** identifying critical systems and components
+Build systems that don't have a Single Point of Failure (SPOF) by adding
+redundancy.  Factor weather, natural disaster, and utilities into contingency
+plans.
+**** high availability (HA)
+Measures used to keep services operational during an outage.  The goal is to
+have 99.999% availability (five nines).
+**** redundancy
+Systems either duplicated of fail over to other systems.  Failover is the
+process reconstructing a system or switching to another when failure is
+detected.  In networks, this involves failover network paths.  Includes
+clustering (load balancing).
+**** fault tolerance
+The ability of a system to sustain operation in event of component failure.
+Stock spare parts and ensure power.  For parts, having N+1 is a common
+strategy, where N is the number of parts in use.  For power, use UPSes with
+surge protection or a backup generator.
+**** RAID
+- RAID 0: Disk striping.
+- RAID 1: Disk mirroring.  Can alternatively be disk duplexing, which uses one
+  more controller card (writing to both disks simultaneously).
+- RAID 3: Disk striping with a parity disk.  Uses RAID 0 striping, but adds
+  another disk for parity info.  Common in older systems.
+- RAID 5: Disk striping with parity, spread across multiple disks.  Supports
+  3-32 disks.  Can survive failure of only one drive.
+**** disaster recovery
+Recovering system operations after a disaster.  Planning includes designing a
+comprehensive backup plan of backup storage, procedures, and maintenance.
+Prioritize critical systems.
+**** types of backups
+Include both paper and computer records.
+**** disaster recovery planning
+Keep backups of key data, databases, applications, and paper records.
+**** tabletop exercise
+A method of accessing risk where a facilitator and participants discuss
+possible situations and how to respond.
+** Chapter 2: Monitoring and diagnosing networks
+** Chapter 3: Understanding devices and infrastructure
 *** ports
 - 21 FTP
 - 22 SSH
@@ -85,15 +208,16 @@ Risk-related issues:
 - 143 IMAP
 - 443 HTTPS
 - 3389 RDP
-** Access control, authentication, and authorization
-** Protecting wireless networks
-** Securing the cloud
-** Host, data, and application security
-** Cryptography
-** Malware, vulnerabilities, and threats
-** Social engineering and other foes
-** Security administration
-** Disaster recovery and incident response
+** Chapter 4: Access control, authentication, and authorization
+** Chapter 5: Protecting wireless networks
+** Chapter 6: Securing the cloud
+** Chapter 7: Host, data, and application security
+** Chapter 8: Cryptography
+** Chapter 9: Malware, vulnerabilities, and threats
+** Chapter 10: Social engineering and other foes
+** Chapter 11: Security administration
+** Chapter 12: Disaster recovery and incident response
+
 
 * Assessment test (first try)
 1 A
