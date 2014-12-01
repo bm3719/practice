@@ -1,4 +1,4 @@
-Time-stamp: <2014-11-25 16:46:57 (bmiller)>
+Time-stamp: <2014-12-01 16:57:41 (bmiller)>
 #+STARTUP: content
 
 * Security+ SY0-401
@@ -39,7 +39,7 @@ it's quantitative.
   acceptable.  Agreed upon during BIA creation.
 - Recovery Point Objective (RPO): The point in time from which the system needs
   to be restored.  The shorter the RPO time, the more expensive.
-- Service Level Agreement (SLA)
+- Service Level Agreement (SLA): Formally defines service provided.
 **** acting on your risk assessment
 - Risk Avoidance: Identifying a risk and deciding not to engage in actions
   associated with it.
@@ -54,7 +54,7 @@ it's quantitative.
   choices outweighs the harm of an identified risk.
 **** risks associated with cloud computing
 Cloud computing implementations:
-- PaaS: Vendors allow apps to be created an run on their infrastructure.
+- PaaS: Vendors allow apps to be created and run on their infrastructure.
   E.g., AWS and Google Code.
 - SaaS: Applications are remotely run over the Web.
 - IaaS: Virtualized resources, billed by resource usage.
@@ -82,7 +82,8 @@ guidelines provide specific advice.
   building at night.
 - Accountability Statement: Who is responsible for ensuring the policy is
   enforced.
-- Exception Statement: Guidance on how to deviate from the policy.
+- Exception Statement: Guidance on how to deviate from the policy and an
+  escalation contact.
 **** incorporating standards
 Standards are derived from policies.  Provides enough detail that an audit can
 be performed.
@@ -167,7 +168,7 @@ plans.
 Measures used to keep services operational during an outage.  The goal is to
 have 99.999% availability (five nines).
 **** redundancy
-Systems either duplicated of fail over to other systems.  Failover is the
+Systems either duplicated or fail over to other systems.  Failover is the
 process reconstructing a system or switching to another when failure is
 detected.  In networks, this involves failover network paths.  Includes
 clustering (load balancing).
@@ -195,7 +196,89 @@ Keep backups of key data, databases, applications, and paper records.
 **** tabletop exercise
 A method of accessing risk where a facilitator and participants discuss
 possible situations and how to respond.
+*** review questions
+1 C
+2 A
+3 D
+4 A
+5 B
+6 D (B)
+7 A
+8 D
+9 B (C)
+10 E
+11 C
+12 D
+13 D
+14 C
+15 B
+16 C
+17 C
+18 A
+19 C
+20 A
+*** additional notes
+- Change management: A structured approach to securing a company's assets.
 ** Chapter 2: Monitoring and diagnosing networks
+*** monitoring networks
+**** network monitors
+- Sniffers: Another name for network monitors.  Enables examining the
+  signaling and traffic that occurs on a network.
+- Promiscuous mode: A NIC looking at any packet it sees on the network, even
+  if the packet is not addressed to that NIC.
+**** monitoring system logs
+Event logs: System logs that record various events that occur.  Includes many
+types of logs, but security and access logs are most pertinent here.
+
+For Windows, the two most important are:
+- Application Log: Contains events logged by programs, including errors.
+  E.g., SQL Server uses this and the log can show DB compromise attempts.
+- Security Log: Shows successful/unsuccessful login attempts and resource use
+  (e.g. creating, opening, deleting files and other objects).  Event types to
+  log can be specified.  Should always be changed to log both successful and
+  failed login attempts.
+
+In Linux, note:
+- /var/log/faillog: Logs failed user logins.
+- /var/log/apport.log: Logs application crashes.  Can sometimes reveal system
+  compromise attempts or the presence of virii/spyware.
+*** hardening
+Hardening means to lock down and secure an OS as much as practical.  Ensure
+unneeded services are turned off, unneeded software is uninstalled, patches are
+updated, user accounts are checked, etc.
+**** working with services
+Part of OS hardening involves disable unnecessary services.
+
+Tips:
+- File and Print Servers: Primarily vulnerable to DoS.  Ensure only needed
+  protocols are run.
+- Networks with PC-Based Systems: Disable NetBIOS on servers or provide an
+  effective firewall between them and the internet.  NetBIOS ports are 135,
+  137, 138, and 139.  On Unix systems, close port 111 (RPC).
+- Directory Sharing: Limit to what is essential for system functions.  Hide
+  root directories from browsing -- instead, designate subfolders.
+**** protecting management interfaces and applications
+Admin interfaces should be restricted to only those admins who need it.
+Protect server utilities and even workstation utilities like regedit.  Password
+protect management functionality and consoles.
+
+On Windows, use the Performance Monitor to look for possible illicit activity,
+as it can do things like show excessive processor usage.
+**** software
+Remove unneeded software.  On Windows, remove Windows components that commonly
+come preinstalled (via Programs and Features).
+**** patches
+A patch is an update to a system, adding new functionality or correcting bugs.
+In a network environment, patches should be applied to a single machine and
+tested first, as it's possible that patches could have problems.  In such
+cases, not applying it is an option until a fix can be found.
+
+Types of patches:
+- Service pack: A periodic update that corrects problems in one version of a
+  product.  Gets users to the current codebase for the product.
+- Updates: Code fixes provided to individual customers experiencing critical
+  problems that have no feasible workarounds.
+- Security updates: Address security vulnerabilities.
 ** Chapter 3: Understanding devices and infrastructure
 *** ports
 - 21 FTP
