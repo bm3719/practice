@@ -1,4 +1,4 @@
-Time-stamp: <2014-12-01 16:57:41 (bmiller)>
+Time-stamp: <2014-12-02 17:18:03 (bmiller)>
 #+STARTUP: content
 
 * Security+ SY0-401
@@ -230,7 +230,7 @@ possible situations and how to respond.
 Event logs: System logs that record various events that occur.  Includes many
 types of logs, but security and access logs are most pertinent here.
 
-For Windows, the two most important are:
+For Windows, the two most important event logs are:
 - Application Log: Contains events logged by programs, including errors.
   E.g., SQL Server uses this and the log can show DB compromise attempts.
 - Security Log: Shows successful/unsuccessful login attempts and resource use
@@ -278,28 +278,746 @@ Types of patches:
   product.  Gets users to the current codebase for the product.
 - Updates: Code fixes provided to individual customers experiencing critical
   problems that have no feasible workarounds.
-- Security updates: Address security vulnerabilities.
+- Security updates: Address security vulnerabilities.  Should be considered
+  mandatory.  Should be deployed within 30 days of release.
+**** user account control
+Only active accounts should be operational and properly managed.  Along with
+domain accounts, pay attention local accounts.  A common approach is to
+configure a single machine, image it, then copy to other workstations.  This
+can result in issues propagating throughout a network.
+
+Tips:
+- Disable unneeded accounts.  These can provide attack vectors.
+- Accounts must have passwords that meet standards.  These should apply to
+  domain and local accounts.
+- Apply least privileges.
+
+Disable these accounts:
+- Employees who have left the company: Should be disabled the minute an
+  employee is terminated, regardless of termination type.  Disable instead of
+  delete accounts.
+- Temporary employees: Also disable immediately.
+- Default guest accounts: Commonly known to exist.
+**** filesystems
+Windows:
+- MS FAT: Designed for small drives.  FAT-16 preceded FAT-32.  Only allows
+  share-level and user-level access privileges.  If a user has write or change
+  access to a directory, they have access to any file in the directory.
+  Highly insecure.
+- MS NTFS (New Technology FS): Introduced in Windows NT.  Addresses growing
+  disk sizes, security concerns, and file stability.  Unlike FAT, includes
+  transaction-tracking, which allows backing out any disk operation in
+  progress when the OS crashes or loses power.  Files, directories, and
+  volumes each have their own security.  Tracks security in ACLs.
+
+Windows systems have hidden admin shares with names ending in dollar signs
+(e.g., admin$) for remote administration.
+
+Not covered: ext3, ext4, XFS on Linux; HFS, HFS+ on OSX.
+*** securing the network
+- MAC limiting and filtering: Limit network access to known MAC addresses.
+  Most routers have this option.  Find MAC address using ipconfig /all or
+  ifconfig/ip command.  Not foolproof as MAC addresses can be changed.
+- 802.1X: Add port authentication to MAC filtering secures on a switch port
+  level, vastly increasing security.  802.1X defines port-based security for
+  wireless network access control.  802.1X offers authentication and defines
+  the Extensible Authentication Protocol (EAP) over IEEE 802.  This is EAP
+  over LAN (EAPOL).  Authentication relies on authentication servers instead
+  of access points and switches doing it themselves.
+- Disable unused ports: Disable the service and block the port with a firewall.
+- Rogue machine detection: Scan for these.
+*** security posture
+Document a baseline configuration, representing a known secure state.
+Reporting will be relative to this state.  The baseline also addresses specific
+compliance issues and regulatory standards.  Include network utilization stats,
+useful in identifying DoS attacks.
+**** continuous security monitoring
+Ongoing monitoring involving network traffic levels, routine evaluations for
+regulatory compliance, and checks of network security device configurations.
+**** security audits
+Scheduled, in-depth checks of security.  Includes:
+- Review of security logs.
+- Review of policies and compliance with policies.
+- A check of security device configuration.
+- Review of incident response reports.
+
+Scope and frequency are determined by the organization, subject to
+needs/budget.
+**** setting a remediation policy
+Monitoring may uncover gaps between the baseline and current network state.  A
+remediation plan must be implemented.  A possible classification of gaps:
+- Minor: Does not pose an immediate threat.
+- Serious: Could pose an  immediate threat, but one unlikely.
+- Critical: Poses an immediate threat that must be addressed.
+*** reporting security issues
+**** alarms
+Indications of an ongoing current problem requiring immediate response.  Alarm
+rates may indicate trends.  After solving the problem, look for indicators that
+the condition is not isolated.  A notification system should notify appropriate
+staff.  That staff needs a procedure to report incident specifics and how it
+was addressed.
+**** alerts
+Issues requiring attention but not likely to bring down the system.  Alerts
+can refer to Event Viewer events, or AV industry and OS alerts.
+**** trends
+Trends in threats, like if a type of attack is currently common.  Also can
+refer to organizational security profile trends.  E.g., audits finding
+increased policy compliance or increased violation of software installation
+policies.  Allow the taking of proactive security measures.
+*** differentiating between detection controls and prevention controls
+Some controls exist to detect potential threats, others to prevent/minimize
+them.  An intrusion detection system (IDS) detects, an intrusion prevention
+system (IPS) prevents.  H-IDS is host based, N-IDS is network based.
+
+Honeypot: A tool that is part detection and prevention.  Honeypots allow
+themselves to be attacked to gain information of methods used in the attack.
+Draws attackers away from high-value systems and provides attack strategy
+intelligence.  If not configured properly, can be used to launch further
+attacks.  Concepts to consider for honeypots/honeynets:
+- Enticement: Luring someone into a plan/trap via invitation.
+- Entrapment: Encouraging/inducing potential criminal activity when a desire
+  is expressed not to go ahead.  Not legally acceptable.
+
+Tar pit: Exists only to slow down attackers and does not collect data.
+*** review questions
+1 C
+2 B
+3 C
+4 A
+5 A
+6 A
+7 B
+8 B
+9 A
+10 B
+11 C
+12 D
+13 C
+14 A
+15 B
+16 D
+17 C
+18 A
+19 A
+20 B
+*** additional notes
+Administrator: IDS person responsible for setting security posture.
 ** Chapter 3: Understanding devices and infrastructure
-*** ports
-- 21 FTP
-- 22 SSH
-- 25 SMTP
-- 53 DNS
-- 80 HTTP
-- 110 POP3
-- 139 NetBIOS session
-- 143 IMAP
-- 443 HTTPS
-- 3389 RDP
+Intrastructure, network ports, and common protocols. A network is composed of
+media and devices.
+*** mastering TCP/IP
+Has numerous holes which are easy to plug once aware of their existence.
+**** OSI relevance
+OSI model is 7-layer.  TCP/IP precedes OSI and uses 4 layers and is used here.
+**** working with the TCP/IP suite
+Layers:
+- Application layer: E.g., HTTP, SMTP.
+- Host-to-Host, or Transport layer: TCP or UDP (user datagram protocol).
+- Internet layer: IP.
+- Network Access, Network Interface, or Link layer: Network topology
+  (essential for conveying information on a network).  Includes "media".
+
+TCP/IP uses existing physical connections between systems, ignoring network
+topology (which network controllers handle).
+
+Concepts:
+- Host: Any device connected to the network that runs the TCP/IP stack
+  (protocol suite).
+- Encapsulation: The process used to pass messages between layers.
+**** the application layer
+Highest layer.  Allows applications to access services or protocols to exchange
+data.  Common protocols:
+- HTTP
+- HTTP Secure (HTTPS): Combines HTTP with SSL/TLS to provide encrypted
+  communication.
+  - SSL: Establishes a secure connection between two TCP-based machines.  Uses
+    the handshake method of session establishment.  Maintains a session using
+    symmetric encryption.
+  - TLS: A security protocol that expands upon SSL.  May replace SSL and is
+    already referred to as SSL 3.1, though doesn't interoperate with SSL.
+- FTP: Allows connections to FTP servers for file uploads/downloadds.  Uses
+  ports 20 and 21.  Inherently insecure.  FTP over SSL (FTPS) adds support for
+  SSL cryptography.  There's also SSH FTP (SFTP), also known as Secure FTP.
+  An alternative to FTP is SCP, using port 22.  This combines the remote copy
+  program (RCP) with SSH.  Finally, there's Trivial FTP (TFTP), which allows
+  file transfer without any user interaction.  TFTP should be avoided anywhere
+  other options exist.
+- SMTP: Email delivery.  Port 25.
+- Telnet
+- DNS: Allows resolving of hostnames to IPs.  Port 53.
+- RDP: Allows Windows-based terminal servers.  Port 3389.
+- SNMP: Simple Network Management Protocol.  Allows communication between
+  network devices and a management console.  Used by routers, bridges, and
+  intelligent hubs.
+- POP3: Post Office Protocol, version 3.  Receiving email.  Port 110.  Often
+  now replaced by IMAP on port 143.  POP was created to move email to clients
+  and not keep it on the server, whereas IMAP stores email on the server for
+  access.  Now, POP can now be configured to store on the server and IMAP to
+  store only locally.
+**** the host-to-host or transport layer
+Session and datagram communications.
+- TCP: Provides reliable, one-to-one, connection-oriented sessions.
+  Establishes sessions and ensures packet reception.  Ensures packets are
+  decoded and sequenced properly.  The connection persists during the only
+  session.
+- UDP: Provides unreliable, connectionless communication between hosts.  Faster
+  than TCP.  No session synchronization.  Doesn't guarantee error-free
+  communication.  Mainly used to send small packets of info.  The application
+  is responsible for acknowledging correct reception of data.
+**** the internet layer
+Responsible for routing, IP addressing, and packaging.  Does most of the work
+in establishing info exchange between hosts.  Four standard layer protocols:
+- IP: Routable protocol responsible for IP addressing.  Fragments and
+  reassembles message packets.  Only routes information, doesn't verify for
+  accuracy (which is the domain of TCP).  Determines if a destination is known
+  and, if so, routes info to it.  If destination is unknown, IP sends the
+  packet to the router.
+- Address Resolution Protocol (ARP): Resolves IP addresses into Network
+  Interface layer addresses, including hardware addresses.  Resolves IPs to MAC
+  addresses.
+- Internet Control Message Protocol (ICMP): Provides maintenance and reporting
+  functions.  Used by ping.  ICMP responds to ping requests or locally reports
+  if the destination is unreachable.  Routers and other network devices use
+  ICMP to report path info.
+**** the network access layer
+Responsible for placing and removing packets on the physical network via
+communicating with the host's network adapters. When network topology or
+technology is changed, TCP/IP only needs to know how to communicate with the
+new network controller.  Can also communicate with multiple network topologies.
+**** IPv4 and IPv6
+IPv4: 32-bit addresses, IPv6: 128-bit addresses.  IPv6 includes mandatory
+IPSec security.  Most systems support both.
+**** understanding encapsulation
+Encapsulation allows a transport protocol to be sent across the network and
+used by the equivalent protocol/service at the destination.  Allows higher
+level protocols not to care what happens at lower levels.
+**** working with protocols and services
+Ports, handshakes, and application interfaces.
+
+Note: NetBIOS was originally an alternative to TCP/IP, but has since been
+adapted to run on top of it.  It's widely used for name resolution and
+registration in Windows-based environments.
+**** well-known ports
+Ports identify how a communication process occurs.  Ports are special addresses
+that allow communication between hosts.  The Internet Assigned Numbers
+Authority (IANA) defines a list of well-known ports.
+
+Port numbers are additional info added to TCP or UDP message headers.
+
+TCP ports:
+- 20 FTP (data channel)
+- 21* FTP (control channel)
+- 22* SSH and SCP
+- 23 Telnet
+- 25* SMTP
+- 49 TACACS authentication service
+- 80* HTTP
+- 110* POP3
+- 115 SFTP
+- 119 NNTP
+- 137 NetBIOS name service
+- 138 NetBIOS datagram service
+- 139* NetBIOS session
+- 143* IMAP
+- 389 LDAP
+- 443* HTTPS
+- 989 FTPS (data channel)
+- 990 FTPS (control channel)
+- 3389 MS WBT Server (RDP)
+
+UDP ports:
+- 22* SSH and SCP
+- 49 TACACS authentication service
+- 53* DNS
+- 69 TFTP
+- 80* HTTP
+- 137 NetBIOS name service
+- 138 NetBIOS datagram service
+- 139* NetBIOS session
+- 143* IMAP
+- 161 SNMP
+- 389 LDAP
+- 989 FTPS (data channel)
+- 990 FTPS (control channel)
+- 3389 MS WBT Server (RDP)
+**** viewing the active TCP and UDP ports
+- Windows: netstat lists local:port -> foreign address.  netstat -a provides
+  full listings.
+- services file: A reference for common services/ports.
+**** TCP three-way handshake
+TCP is a connection-oriented protocol which establishes a session using a
+three-way handshake:
+- SYN: The client originates the connection, sending a TCP segment/message to
+  the server.  This segment includes an initial sequence number (ISN) for the
+  connection and a window size.
+- SYN/ACK: The server responds with a TCP segment that contains its ISN and a
+  value for its buffer/window size.
+- ACK: The client sends back and acknowledgement of the server's sequence
+  number.
+
+A four-step process is used to close the connection.  The sequence numbers are
+used so the server can handle simultaneous requests on the same port.  All
+communication in a session uses the same sequence number.
+**** application programming interface
+Here refers to the APIs used by programmers to create interfaces to TCP/IP.
+
+MS uses the Windows Socket (Winsock) API to interface TCP/IP.
+**** other protocols to know
+- iSCSI (Internet Small Computer Systems Interface): Uses port 860 and 3260.
+  Allows data storage and transfers across the network.  Enables the creation
+  of storage area networks (SANs).
+- Fibre Channel: Same as iSCSI, but designed for only fibre-based networks.
+  Later changed to use SCSI to create SANs.  A common protocol used is FCoE
+  (Fibre Channel over Ethernet), which is not routable at the IP layer, and is
+  only useful in small networks.
+*** designing a secure network
+Consider these when designing the security topology of a network:
+- Demilitarized zones (DMZs).
+- Subnetting.
+- VLANs.
+- Remote access.
+- NAT.
+- Telephony.
+- NACs.
+**** demilitarized zones
+An area to place public servers accessible to people otherwise not trusted.
+Doesn't allow access to other parts of the network.  Can be built/demarcated
+using firewalls that can transmit in three directions:
+- To the internal network.
+- To the external internet.
+- To the public information (DMZ).
+
+If a web server was on a DMZ, the firewall would direct HTTP traffic there,
+whereas email would go to the internal network.
+
+Bastion hosts: Hosts, routers, and firewalls that exist outside the DMZ and
+open to the public.
+**** subnetting
+Subnetting: Using a subnet mask to divide a network into smaller components.
+These can be divided physically, logically, topologically, etc.
+
+Subnetting uses bits from the host address to create the additional networks.
+This can:
+- Use IP addresses more effectively.
+- Make the network more secure and manageable.
+
+Subnets increase security by confining traffic to the network it needs to be
+on, reducing network traffic and creating more broadcast domains (reducing
+network-wide broadcast traffic).
+**** virtual local area networks (VLANs)
+A VLAN allows creation of groups of users and systems, segmenting them on the
+network.  Allows hiding of other segments and controlling access.  VLANs can
+be set up to control the path data takes.  A good way to contain network
+traffic to a certain area.
+
+Can also be thought of as a network of hosts that act as if a physical wire
+connects them, even though it doesn't exist.
+
+VLANs reduce the number of broadcast domains by reducing their scope, improving
+performance and manageability, and decreasing dependence on topology.  Most
+importantly, it allows users with similar data sensitivity to be segmented
+together.
+
+Tunneling protocols: Adds the ability to create tunnels between networks that
+can be more secure, support additional protocols, and provide virtual paths.
+Can use encapsulation in other packets to be sent across a public network.
+
+Types of tunneling:
+- Point-to-Point Tunneling Protocol (PPTP): Supports encapsulation of PPP
+  (point-to-point protocol) packets in a single point-to-point environment.  A
+  low-end protocol.  Negotiation between hosts done is done in the clear, after
+  which the channel is encrypted.  This is its major weakness.  A
+  packet-capture device, like a sniffer, can capture the negotiation process
+  and determine connection type and how the tunnel works.  MS created and uses
+  PPTP.  Uses port 1723 on TCP.
+- Layer 2 Tunneling Protocol (L2TP): Combined MS (PPTP) and Cisco (L2F)
+  tunneling protocols.  Primarily point-to-point.  Supports multiple network
+  protocols and can be used outside of TCP/IP.  Works over IPX, SNA, and IP,
+  and can therefore act as a bridge between systems.  Its main problem is lack
+  of data encryption, but this can be provided by IPSec.  Uses port 1701 on
+  UDP.
+- Secure Shell (SSH): Uses encryption to establish a connection.  Alternative
+  to Telnet, FTP, and other clear-text programs.  Uses port 22 on TCP.
+- Internet Protocol Security (IPSec): Not a tunneling protocol, but used in
+  conjunction with them.  Mainly for LAN-to-LAN connections, but also used with
+  dial-up.  Provides secure authentication and encryption of data and headers,
+  making it highly secure.  Can work in:
+  - Tunneling mode: Data or payload and headers are encrypted.
+  - Transport mode: Only payload is encrypted.
+**** remote access
+Tunnels create virtual connections between two systems/networks.  Data is
+encapsulated in an mutually agreed protocol.  Data passed through tunnels
+appears on the other side as part of the network.
+
+Remote Access Servers (RAS): Any server service that offers the ability to
+connect remote systems.  On Windows this is Routing and Remote Access (RRAS).
+Connections are accomplished via dial-up/plain-old telephone services (POTS),
+VPNs, ISDN, DSL, and cable modems.  RAS connections can be secure or not.
+Virtual Network Computing (VNC) provides things like remote control of
+computers, but has leaves open a discoverable opening.  Should be configured as
+a "manual start" service.
+**** network address translation (NAT)
+NAT originally extended the number of usable IP addresses, but now allows
+organizations to present a single IP address to the Internet for all
+connections.  The NAT server provides IPs to the hosts in the network and
+tracks inbound/outbound traffic.
+
+NAT presents a limited number of connections to the network through a router
+or NAT server.  Intruders will only know a single address.  The rest of the
+network is hidden from the outside and acts as a firewall.  Most routers
+support NAT.
+
+Non-routable, private address ranges assigned by most NATs for internal use:
+- 10.0.0.0 - 10.255.255.255.
+- 172.16.0.0 - 172.31.255.255.
+- 192.168.0.0 - 192.168.255.255.
+
+Note: Port Address Translation (PAT) is also possible.  NAT can use multiple
+public IP addresses, whereas PAT can only use one.  PAT is usually only used on
+small, private networks.  MS's ICS is a PAT implementation.  Also, Destination
+NAT (DNAT) can be used to redirect traffic for a virtual host to a real one.
+**** telephony
+Telephony is the merger of IT and telephone systems.  Breaches here are just
+as serious as any other.
+
+Voice over IP (VoIP) can be sniffed and is susceptible to DoS attacks since it
+uses UDP.  If a data network goes down, telephony can be lost.
+**** network access control (NAC)
+Operational security includes NAC, authentication, and security topologies.
+
+NAC is a set of standards defined by the network for clients attempting access.
+NAC typically requires clients be virus-free and adhere to certain policies.
+*** understanding the various network infrastructure devices
+Components encountered in a network.
+
+Note: For network devices requiring default accounts to change settings, be
+sure to change passwords.
+**** firewalls
+Firewalls isolate one network from another.
+
+The first line of network defense.  Can be standalone systems/included in
+routers or servers or hardware-only/software-only.  Many firewalls are add-in
+software for servers/workstations.
+
+Appliances: Some firewalls are appliances.  Intended to be the primary device
+separating two networks.  These are freestanding, self-contained devices,
+requiring less maintenance.
+
+Firewall functions include one or more of:
+- Packet filter.
+- Proxy firewall.
+- Stateful packet inspection firewall.
+**** packet filter firewalls
+Passes or blocks traffic to specific addresses based on the type of
+application.  Doesn't analyze the data, only uses addressing info.  E.g., allow
+port 80, block port 23.  Included in most routers.  Some allow specifying which
+IPs can request which ports.
+**** proxy firewalls
+An intermediary between outside/inside the network.  Examines data and makes
+rule-based decisions about whether to forward/refuse requests.  Intercepts all
+packets and reprocesses them for internal use, including the hiding of IPs.
+
+Provides better security than packet filtering due to increased intelligence.
+All internal requests are routed through the proxy, isolating users from the
+external network.  Can also provide caching to increase efficiency.
+
+Proxy firewalls typically use two NICs, in which case it's called a dual-homed
+firewall.  One NIC is connected internally, the other externally.
+
+Note: IP forwarding bypasses firewalls and uses the firewall as a router.
+Probably don't want that on proxies.
+
+Proxies can function at either:
+- Application-level: Reads commands of protocols.  E.g., knowing about GET and
+  PUT requests and having rules in regards to them.  An application-level proxy
+  is needed for each protocol supported.  Many provide full auditing,
+  accounting, etc.
+- Circuit-level: Doesn't deal with the contents of packets processed.
+**** stateful packet inspection firewalls
+Stateless firewalls make decisions based on the data that comes in (the current
+packet), and not complex decisions.  Stateful packet inspection (SPI) filtering
+keeps records for every communication channel and what the next should be.
+
+Stateful inspection occurs at all levels of the network and provided added
+security, especially for UDP and ICMP.  DoS attacks can overload the state
+table and cause firewalls to shut down/reboot.
+**** routers
+Primary device for connectivity between two or more networks.  Provides a path
+between networks and joins networks.  Most routers can act as packet-filtering
+firewalls.
+
+Border routers: In conjunction with Channel Service Unit/Data Service Unit
+(CSU/DSU), routers can translate from LAN framing to WAN framing (e.g. a router
+connecting 100bT and T1 networks).  Needed due to LANs/WANs having different
+protocols.
+
+Zones: Router-divided subnetworks.
+
+Routers maintain tables of destinations and local connections.  Contains info
+about systems connected and where to forward requests for unknown destinations.
+These tables grow as connections are made.
+
+Protocols routers use for communication routing and other info:
+- Routing Information Protocol (RIP).
+- Border Gateway Protocol (BGP).
+- Open Shortest Path First (OSPF).
+
+Best practice is for a router to augment the defense of a firewall.
+
+Routers can be configured statically (manually) or dynamically (where they
+learn of other routers and use their info to build routing tables).
+**** switches
+Multiport devices that improve network efficiency.  Switches contain small
+amounts of info, usually only a table of MAC addresses.  Using virtual
+circuits, they improve network efficiency.  Virtual circuits are more difficult
+to examine with network monitors.  Combines some of the best features of
+routers and hubs.
+
+Only use switches internally because they only use MAC addresses and not IPs.
+Routing can only occurs on IPs.
+**** load balancers
+Load balancing is shifting a load between devices.  Can apply to servers, HDs,
+CPUs, etc.  This provides:
+- Reduced response time.
+- Maximizes throughput.
+- Allows better resource allocation.
+
+Can be software or hardware.
+**** proxies
+A device that acts on behalf of another.  All internal user interaction with
+the internet should be controlled through a proxy server.  Proxies should
+auto-block known bad sites.  Caching should be enabled.
+**** web security gateway
+A proxy server (proxies and caches) with web protection software built-in.
+Can include a virus scanner and traffic monitors.  Can detect/prohibit certain
+content, P2P connections, IM, tunneling, HTTP/HTML exploits, ActiveX, etc.
+**** VPNs and VPN concentrators
+VPN: A private network connection that occurs through a public network,
+providing security over insecure environments.  Can connect LANs across the
+internet.  Requires special hardware/software.  VPNs usually use L2TP, IPSec,
+PPTP.  Great for extra/intranets for remote offices.
+
+Main concern is encryption.  PPTP: weak encryption, IPSec 
+*** review questions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** additional notes
 ** Chapter 4: Access control, authentication, and authorization
+*** review questions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
 ** Chapter 5: Protecting wireless networks
+*** review questions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
 ** Chapter 6: Securing the cloud
+*** review questions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
 ** Chapter 7: Host, data, and application security
+*** review questions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
 ** Chapter 8: Cryptography
+*** review questions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
 ** Chapter 9: Malware, vulnerabilities, and threats
+*** review questions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
 ** Chapter 10: Social engineering and other foes
+*** review questions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
 ** Chapter 11: Security administration
+*** review questions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
 ** Chapter 12: Disaster recovery and incident response
+*** review questions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
 
 
 * Assessment test (first try)
