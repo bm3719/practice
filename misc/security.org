@@ -1,4 +1,4 @@
-Time-stamp: <2014-12-02 17:18:03 (bmiller)>
+Time-stamp: <2014-12-03 17:05:33 (bmiller)>
 #+STARTUP: content
 
 * Security+ SY0-401
@@ -10,7 +10,7 @@ Business Impact Analysis (BIA) determines course of action.
 **** computing risk assessment
 Prioritize and determine which risks are acceptable.  NIST provides a guide
 for conducting assessments.
-**** risk calculations
+***** risk calculations
 Risk impact terms:
 - ALE: Annual Loss Expectancy.  A monetary measure of loss, every year.
 - SLE: Single Loss Expectancy.  A monetary measure of loss for one event.  This
@@ -19,11 +19,11 @@ Risk impact terms:
   year, based on historical data.
 
 Formula: SLE * ARO = ALE
-**** quantitative vs. qualitative risk assessment
+***** quantitative vs. qualitative risk assessment
 Risk assessments are either qualitative (opinion-based and subjective) or
 qualitative (cost-based and objective).  If a dollar cost can be assigned,
 it's quantitative.
-**** additional risk terminology
+***** additional risk terminology
 - Likelihood: A score representing the possibility of threat initiation.  Goes
   from 10-0, with 10 being a certainty that the adversary will initiate a
   threat event.
@@ -108,7 +108,7 @@ Contents of guidelines documents:
 - Guideline Statements: Step-by-step instructions.
 - Operational Considerations: Specify what duties are required and at what
   intervals.
-**** Business policies to implement
+**** business policies to implement
 Primary areas of concern:
 - Separation of Duties Policies: Designed to reduce risk of fraud and prevent
   other losses.  May require more than one person to accomplish key
@@ -145,7 +145,7 @@ pay attention to:
 **** risk management best practices
 Implemented with a BIA.  What is shown in industry to produce superior results
 regarding business continuity.
-**** undertaking business impact analysis (BIA)
+***** undertaking business impact analysis (BIA)
 BIA is the process of evaluating critical systems to define impact and
 recovery plans.  Focuses on impact a loss would have.
 
@@ -160,24 +160,24 @@ Key components:
 - Estimating the Tangible and Intangible Impact on the Organization: Details
   tangible (loss production/sales) and intangible (loss customer confidence)
   impact.
-**** identifying critical systems and components
+***** identifying critical systems and components
 Build systems that don't have a Single Point of Failure (SPOF) by adding
 redundancy.  Factor weather, natural disaster, and utilities into contingency
 plans.
-**** high availability (HA)
+***** high availability (HA)
 Measures used to keep services operational during an outage.  The goal is to
 have 99.999% availability (five nines).
-**** redundancy
+***** redundancy
 Systems either duplicated or fail over to other systems.  Failover is the
 process reconstructing a system or switching to another when failure is
 detected.  In networks, this involves failover network paths.  Includes
 clustering (load balancing).
-**** fault tolerance
+***** fault tolerance
 The ability of a system to sustain operation in event of component failure.
 Stock spare parts and ensure power.  For parts, having N+1 is a common
 strategy, where N is the number of parts in use.  For power, use UPSes with
 surge protection or a backup generator.
-**** RAID
+***** RAID
 - RAID 0: Disk striping.
 - RAID 1: Disk mirroring.  Can alternatively be disk duplexing, which uses one
   more controller card (writing to both disks simultaneously).
@@ -189,9 +189,9 @@ surge protection or a backup generator.
 Recovering system operations after a disaster.  Planning includes designing a
 comprehensive backup plan of backup storage, procedures, and maintenance.
 Prioritize critical systems.
-**** types of backups
+***** types of backups
 Include both paper and computer records.
-**** disaster recovery planning
+***** disaster recovery planning
 Keep backups of key data, databases, applications, and paper records.
 **** tabletop exercise
 A method of accessing risk where a facilitator and participants discuss
@@ -226,7 +226,7 @@ possible situations and how to respond.
   signaling and traffic that occurs on a network.
 - Promiscuous mode: A NIC looking at any packet it sees on the network, even
   if the packet is not addressed to that NIC.
-**** monitoring system logs
+***** monitoring system logs
 Event logs: System logs that record various events that occur.  Includes many
 types of logs, but security and access logs are most pertinent here.
 
@@ -257,14 +257,14 @@ Tips:
   137, 138, and 139.  On Unix systems, close port 111 (RPC).
 - Directory Sharing: Limit to what is essential for system functions.  Hide
   root directories from browsing -- instead, designate subfolders.
-**** protecting management interfaces and applications
+***** protecting management interfaces and applications
 Admin interfaces should be restricted to only those admins who need it.
 Protect server utilities and even workstation utilities like regedit.  Password
 protect management functionality and consoles.
 
 On Windows, use the Performance Monitor to look for possible illicit activity,
 as it can do things like show excessive processor usage.
-**** software
+***** software
 Remove unneeded software.  On Windows, remove Windows components that commonly
 come preinstalled (via Programs and Features).
 **** patches
@@ -424,7 +424,7 @@ Concepts:
 - Host: Any device connected to the network that runs the TCP/IP stack
   (protocol suite).
 - Encapsulation: The process used to pass messages between layers.
-**** the application layer
+***** the application layer
 Highest layer.  Allows applications to access services or protocols to exchange
 data.  Common protocols:
 - HTTP
@@ -454,7 +454,7 @@ data.  Common protocols:
   and not keep it on the server, whereas IMAP stores email on the server for
   access.  Now, POP can now be configured to store on the server and IMAP to
   store only locally.
-**** the host-to-host or transport layer
+***** the host-to-host or transport layer
 Session and datagram communications.
 - TCP: Provides reliable, one-to-one, connection-oriented sessions.
   Establishes sessions and ensures packet reception.  Ensures packets are
@@ -464,7 +464,7 @@ Session and datagram communications.
   than TCP.  No session synchronization.  Doesn't guarantee error-free
   communication.  Mainly used to send small packets of info.  The application
   is responsible for acknowledging correct reception of data.
-**** the internet layer
+***** the internet layer
 Responsible for routing, IP addressing, and packaging.  Does most of the work
 in establishing info exchange between hosts.  Four standard layer protocols:
 - IP: Routable protocol responsible for IP addressing.  Fragments and
@@ -479,7 +479,7 @@ in establishing info exchange between hosts.  Four standard layer protocols:
   functions.  Used by ping.  ICMP responds to ping requests or locally reports
   if the destination is unreachable.  Routers and other network devices use
   ICMP to report path info.
-**** the network access layer
+***** the network access layer
 Responsible for placing and removing packets on the physical network via
 communicating with the host's network adapters. When network topology or
 technology is changed, TCP/IP only needs to know how to communicate with the
@@ -497,7 +497,7 @@ Ports, handshakes, and application interfaces.
 Note: NetBIOS was originally an alternative to TCP/IP, but has since been
 adapted to run on top of it.  It's widely used for name resolution and
 registration in Windows-based environments.
-**** well-known ports
+***** well-known ports
 Ports identify how a communication process occurs.  Ports are special addresses
 that allow communication between hosts.  The Internet Assigned Numbers
 Authority (IANA) defines a list of well-known ports.
@@ -540,11 +540,11 @@ UDP ports:
 - 989 FTPS (data channel)
 - 990 FTPS (control channel)
 - 3389 MS WBT Server (RDP)
-**** viewing the active TCP and UDP ports
-- Windows: netstat lists local:port -> foreign address.  netstat -a provides
+***** viewing the active TCP and UDP ports
+- Windows: netstat lists local port -> foreign address.  netstat -a provides
   full listings.
 - services file: A reference for common services/ports.
-**** TCP three-way handshake
+***** TCP three-way handshake
 TCP is a connection-oriented protocol which establishes a session using a
 three-way handshake:
 - SYN: The client originates the connection, sending a TCP segment/message to
@@ -558,11 +558,11 @@ three-way handshake:
 A four-step process is used to close the connection.  The sequence numbers are
 used so the server can handle simultaneous requests on the same port.  All
 communication in a session uses the same sequence number.
-**** application programming interface
+***** application programming interface
 Here refers to the APIs used by programmers to create interfaces to TCP/IP.
 
 MS uses the Windows Socket (Winsock) API to interface TCP/IP.
-**** other protocols to know
+***** other protocols to know
 - iSCSI (Internet Small Computer Systems Interface): Uses port 860 and 3260.
   Allows data storage and transfers across the network.  Enables the creation
   of storage area networks (SANs).
@@ -654,8 +654,8 @@ connect remote systems.  On Windows this is Routing and Remote Access (RRAS).
 Connections are accomplished via dial-up/plain-old telephone services (POTS),
 VPNs, ISDN, DSL, and cable modems.  RAS connections can be secure or not.
 Virtual Network Computing (VNC) provides things like remote control of
-computers, but has leaves open a discoverable opening.  Should be configured as
-a "manual start" service.
+computers, but has leaves a discoverable opening.  Should be configured as a
+"manual start" service.
 **** network address translation (NAT)
 NAT originally extended the number of usable IP addresses, but now allows
 organizations to present a single IP address to the Internet for all
@@ -707,12 +707,12 @@ Firewall functions include one or more of:
 - Packet filter.
 - Proxy firewall.
 - Stateful packet inspection firewall.
-**** packet filter firewalls
+***** packet filter firewalls
 Passes or blocks traffic to specific addresses based on the type of
 application.  Doesn't analyze the data, only uses addressing info.  E.g., allow
 port 80, block port 23.  Included in most routers.  Some allow specifying which
 IPs can request which ports.
-**** proxy firewalls
+***** proxy firewalls
 An intermediary between outside/inside the network.  Examines data and makes
 rule-based decisions about whether to forward/refuse requests.  Intercepts all
 packets and reprocesses them for internal use, including the hiding of IPs.
@@ -733,7 +733,7 @@ Proxies can function at either:
   is needed for each protocol supported.  Many provide full auditing,
   accounting, etc.
 - Circuit-level: Doesn't deal with the contents of packets processed.
-**** stateful packet inspection firewalls
+***** stateful packet inspection firewalls
 Stateless firewalls make decisions based on the data that comes in (the current
 packet), and not complex decisions.  Stateful packet inspection (SPI) filtering
 keeps records for every communication channel and what the next should be.
@@ -797,30 +797,312 @@ providing security over insecure environments.  Can connect LANs across the
 internet.  Requires special hardware/software.  VPNs usually use L2TP, IPSec,
 PPTP.  Great for extra/intranets for remote offices.
 
-Main concern is encryption.  PPTP: weak encryption, IPSec 
+Main concern is encryption.  PPTP: weak encryption, IPSec: higher security.
+
+VPN concentrator: A hardware device used to create remote access VPNs.  It
+creates encrypted tunnel sessions between hosts, most using two-factor
+authentication.  Cisco concentrators include Scalable Encryption Processing
+(SEP) for hardware encryption.
+**** intrusion detection systems (IDS)
+Software that runs either on workstations or network devices to track network
+activity.  Can evaluate system logs, monitor network activity, and disconnect
+sessions in violation of security.  Some IDSs come with firewalls.  Recommend
+combining with a firewall, as if firewall defenses are bypassed, the IDS
+introduces reactive countermeasures.
+**** understanding intrusion detection systems
+Intrusion detection (ID) is the process of monitoring events in a system or
+network to detect an occurring intrusion.  An intrusion is any activity that
+attempts to undermine or compromise the confidentiality, integrity, or
+availability of resources.
+
+Terms:
+- Activity: An element of a data source of interest to the operator.
+- Administrator: Person responsible for setting the security policy, deploys
+  and configures the IDS, determines appropriate responses to attacks, and
+  determines alarm levels, historical logging, and session-monitoring
+  capabilities.
+- Alert: A message from the analyzer indicating an event of interest, like
+  with exceeded traffic thresholds.
+- Analyzer: Component or process that analyzes data collected by the sensor.
+- Data source: Raw info that the IDS uses, like audit files, system logs,
+  network traffic, etc.
+- Event: An occurrence in a data source that indicates suspicious activity.
+  Events might trigger alerts.
+- Manager: Component or process that operator uses to manage the IDS, like an
+  IDS console.  Used for config changes.
+- Notification: Process or method by which the manager makes the operator
+  aware of the alert.
+- Operator: Person responsible for the IDS.
+- Sensor: IDS component that collects data from a data source and passes it to
+  the analyzer.
+
+IDSs use four main approaches:
+- Behavior-Based-Detection IDS: Looks for deviations in behavior such as
+  unusually-high traffic, policy violations, etc.
+- Signature-Based-Detection IDS: Also called a misuse-detection IDS (MD-IDS).
+  Primarily focused on detecting based on attack signatures (established
+  methods of attack) and audit trails.  Uses a database of misuse and attack
+  signatures.  E.g., if the MD-IDS knows what a TCP flood looks like, it can
+  respond or report appropriately.
+- Anomaly-Detection IDS (AD-IDS): Looks for anomalies, usually using a training
+  program to learn normal operation and then spot deviations from that, or by
+  being manually assigned baseline values.
+- Heuristic IDS: Uses algorithms to analyze network traffic.  Require more
+  fine tuning to prevent false positives.
+
+In order for reporting to be effective, a baseline of typical network traffic
+should be developed.
+
+AD-IDSs use AI and expert systems.
+
+IDSs detect and report unusual occurrences, but unlike firewalls, don't block.
+**** IDS vs. IPS
+An IPS is an IDS that reacts to detected intrusion, usually by blocking
+communication from an offending IP.  The main problem here is false positives.
+**** working with a Network-based IDS (NIDS)
+NIDS attaches to some point in a network, and reports on/monitors network
+traffic.  Can be in front or behind a firewall.  A dual-security approach is
+to place NIDSs in both locations.
+
+In front of a firewall, the NIDS can monitor traffic going to the network and
+give data on attacks the firewall is blocking.
+
+NIDS can attach to a switch, hub, or tap.  Some switches and hubs have
+monitoring ports which are effectively taps.  The advantage of a tap is the
+IDS is the only device using it.
+
+Port spanning/port mirroring: Copies all traffic from all ports to a single
+port and disallows bidirectional traffic on that port.
+
+Two types of responses: passive and active.
+***** implementing a passive response
+Cannot react to an incident.
+
+Passive strategies:
+- Logging: Recording events and their circumstances.  Info then used to devise
+  a counter to threats.
+- Notification: Notify event-related info the appropriate personnel.  For
+  manned IDSs, messages can appear on the manager's console.
+- Shunning: Ignoring an attack.  Useful for attacks that are inapplicable
+  (e.g. IIS attacks on Apache).
+***** implementing a active response
+Involve taking action based on an attack/threat.  The goal is taking the
+quickest possible reaction to reduce impact.  More costly than passive.
+
+Active reactions:
+- Terminating processes or sessions: E.g., in a TCP flood attack, the IDS can
+  cause TCP to force resets (RST) to all current sessions.
+- Network configuration changes: E.g., if an IP is an attack source, the IDS
+  can instruct the border router or firewall to reject traffic from it.  If a
+  socket or port is attacked, it can tell the firewall to block it for a
+  length of time.
+- Deception: Fools an attacker into thinking an attack is succeeding, while
+  monitoring and possibly redirecting to a honeypot.
+**** working with a Host-based IDS (HIDS)
+Software run on a host, usually a service or background process.  Examines
+logs, events, and applications, but usually skips network traffic.  Popular on
+servers already using encrypted channels.  Typically are passive.
+
+Problems:
+- If a system's compromised, logs are unreliable.
+- Must be deployed to each system, adding administrative load.
+
+Benefits:
+- Can keep checksums on files to detect alteration.
+- Can read memory.
+**** working with NIPSs
+Network intrustion prevention systems focus on prevention.  Also detects,
+therefor is a subset of NIDS.  Focuses on signature matches and takes action.
+
+Can also be called intrusion detection and prevention systems (IDPS).
+**** logs to check in Linux
+- /var/log/faillog: Failed authentication attempts.
+- /var/log/lastlog: List of uses and when they logged in.
+- /var/log/messages: Use grep to find login-related info.
+- /var/log/wtmp: Used by last command.
+**** protocol analyzers
+Protocol analyzers = packet sniffers.  Monitor data transmitted across a
+network.  Software called an analyzer or sniffer.  Snort is an example of an
+analyzer.
+**** spam filters
+Catches unwanted email and filters it before delivery.  Uses rules, such as
+sender IP lists, subject word scanning, etc.  Can also be used for outgoing
+mail to catch infected internal computers.
+**** UTM security appliances
+Unified Threat Management (UTM), or Next Generation Firewall (NGFW), is an
+all-in-one appliance.  Combines firewalls with things like intrusion
+prevention, antivirus, filtering, etc.
+
+Advantages include reduced learning curve, single vendor, and reduced
+complexity.  Disadvantages include single point of failure and single vendor
+dependence.
+***** URL filters
+Block websites based on URL.  IE8's SmartScreen Filter is a URL filter, which
+blocks phishing and malware sites.
+***** content inspection
+Looks at data coming in.  IE includes Content Advisor.
+***** malware inspection
+Malware detection is useful, but stop it prior to being on systems is better.
+***** web application firewall (WAF) vs. network firewall
+A WAF is a real-time appliance that applies a set of customizable rules to
+block traffic to and from webservers and to try to block attacks.  Protects
+against XSS, injection attacks, and forged HTTP requests.
+
+Reacts to both known and suspected problems, making them superior to IPSs.
+***** application-aware devices
+Has the ability to respond to traffic based on what's there.  These devices
+combine SNMP and QoS to prioritize traffic.  Can be added to firewalls, IPSs,
+IDSs, and proxies.
 *** review questions
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 C
+2 A
+3 D
+4 B
+5 B
+6 A
+7 A
+8 D
+9 C
+10 A
+11 B
+12 A
+13 D
+14 C
+15 A
+16 B,C
+17 C
+18 A
+19 D
+20 A
 *** additional notes
+Socket: A combination of an IP and port.
 ** Chapter 4: Access control, authentication, and authorization
+Controlling access to a system, what resources are accessible, and ensuring
+users are who they claim to be.
+*** understanding access control basics
+Access control: Allowing authorized users to the system and keeping others out.
+**** identification vs. authentication
+- Identification: Finding out who someone is.  Claiming an identity
+- Authentication: A mechanism for verifying that identification.  Proving the
+  identity.
+
+Authentication (single or multifactor) systems are based on one or more of:
+- Something you know: A password or PIN.
+- Something you have: A smart card, token, or ID device.
+- Something you are: Fingerprints or retinal scans (biometrics).
+- Something you do: An action taken to complete authentication.
+- Somewhere you are: Geolocation.  Often not used due to mobile computing.
+
+Systems use similar methods for authentication between each other.
+
+Out-of-band authentication: Getting public record info (such as credit
+reports) and querying about info within.
+**** authentication (single factor) and authorization
+Single-factor authentication (SFA): The most basic form.  Includes user/pass
+combination.
+
+Mutual authentication: When two or more parties authenticate each other.
+Servers and clients can use this to establish a secure connection and employ
+encryption.  Ensures the client isn't connecting to a rogue server.  Used when
+data is critical, like finance.
+**** multifactor authentication
+When two or more authentication methods are used, e.g. user/pass + smart card.
+The factors can not be from the same category.  Password+PIN is still SFA.
+**** layered security and defense in depth
+Synonymous terms, both meaning not relying on a single entity for protection.
+**** network access control
+Operational security is part of a triad also including physical and management
+security.  Operational security includes network access control (NAC),
+authentication, and security topologies -- everything not included in design
+or physical security.
+**** tokens
+Security tokens are pieces of data that contain the rights and access
+privileges of the token bearer as part of the token.  Similar to certs in that
+they are used to identify and authenticate a user.  Some OSes create temp
+tokens for every action or for user sessions.
+**** federations
+A federation is a collection of related (e.g., for an industry association)
+computer networks that agree on standards of operation, such as for security.
+An example is an IM federation of providers that agree on communication
+standards.
+
+Federated identity: Linking a user's identity with their privileges in a manner
+usable across business boundaries (e.g. MS Passport, Google Checkout).
+
+Single sign-on: Having one password for all resources on a network.
+**** potential authentication and access problems
+Transitive access and client-side attacks.
+***** transitive access
+Involves transition.  A trusts B, B trusts C, then A may trust C.  Problems
+here were solved with transitive trusts, which type relationships between
+domains.
+
+In AD, the default is two-way transitive trust.  Potentially troublesome due
+to someone acquiring undesired access by joining a domain.
+**** authentication issues to consider
+Consider tech-savviness of people affected by policies, though its better to
+educate users than lower security.
+
+Use identity proofing when issues arise between identification and
+authentication, e.g. asking for mother's maiden name in event of lost
+password.  The problem with these is that they are easily guessed/learned.
+Difficult questions or biometrics are better.  Proofing shouldn't grant
+immediate access, rather it should send access info to their email account.
+**** authentication protocols
+- PAP (Password Authentication Protocol): Older system, not used.  Sends
+  user/pass in plain text.
+- SPAP (Shiva Password Authentication Protocol): Replaced PAP.  Encrypts
+  user/pass.
+- CHAP (Challenge Handshake Authentication Protocol): Stops man-in-the-middle
+  attacks.  During initial auth, the client is asked to generate a random
+  number/hash and send it.  The client is then periodically challenged to
+  provide the number again.
+- TOTP (Time-Based One-Time Password): An algorithm using a time-based factor
+  to create unique passwords.
+- HOTP (HMAC-Based One-Time Password): An algorithm using a Hash Message
+  Authentication Code (HMAC) algorithm.
+**** account policy enforcement
+***** password length and complexity
+***** password expiration
+***** password recovery
+***** password disablement and lockout
+**** users with multiple accounts/roles
+**** generic account prohibition
+**** group-based and user-assigned privileges
+*** understanding remote access connectivity
+**** using the point-to-point protocol
+**** working with tunneling protocols
+**** working with RADIUS
+**** TACACS/TACACS+/XTACACS
+**** VLAN management
+**** SAML
+*** understanding authentication services
+**** LDAP
+**** Kerberos
+**** single sign-on initiatives
+*** understanding access control
+**** mandatory access control
+**** discretionary access control
+**** role-based access control
+**** rule-based access control
+*** implementing access controlling best practices
+**** least privilege
+**** separation of duties
+**** time of day restrictions
+**** user access review
+**** smart cards
+***** common access card
+***** personal identification verification card
+**** access control lists
+***** implicit deny
+***** firewall rules
+**** port security
+**** working with 802.1X
+**** flood guards and loop protection
+**** preventing network bridging
+**** log analylsis
+**** trusted OS
+**** secure router configuration
 *** review questions
 1
 2
@@ -843,6 +1125,25 @@ Main concern is encryption.  PPTP: weak encryption, IPSec
 19
 20
 ** Chapter 5: Protecting wireless networks
+*** working with wireless systems
+**** IEEE 802.11x wireless protocols
+**** WEP/WAP/WPA/WPA2
+***** wired equivalent privacy
+***** wireless application protocol
+***** wi-fi protected access and WPA2
+**** wireless transport layer security
+*** understanding wireless devices
+**** wireless access points
+**** antenna placement
+**** antenna types
+**** MAC filtering
+**** captive portals
+**** working with VPNs
+**** extensible authentication protocol
+**** lightweight extensible authentication protocol
+**** protected extensible authentication protocol
+*** wireless vulnerabilities to know
+**** wireless attack analogy
 *** review questions
 1
 2
@@ -865,6 +1166,22 @@ Main concern is encryption.  PPTP: weak encryption, IPSec
 19
 20
 ** Chapter 6: Securing the cloud
+*** working with cloud computing
+**** software as a service (SaaS)
+**** platform as a service (PaaS)
+**** infrastructure as a service (IaaS)
+**** private cloud
+**** public cloud
+**** community cloud
+**** hybrid cloud
+*** working with virtualization
+**** snapshots
+**** patch compatibility
+**** host availability/elasticity
+**** security control testing
+**** sandboxing
+*** security and the cloud
+**** cloud storage
 *** review questions
 1
 2
@@ -887,6 +1204,36 @@ Main concern is encryption.  PPTP: weak encryption, IPSec
 19
 20
 ** Chapter 7: Host, data, and application security
+*** application hardening
+**** database and technologies
+**** NoSQL
+**** big data
+**** SAN
+**** fuzzing
+**** secure cloud
+**** OWASP
+**** CERT secure coding standards
+**** application configuration baselining
+**** operating system patch management
+**** application patch management
+*** host security
+**** permissions
+**** access control lists
+**** antimalware
+**** host software baselining
+**** hardening web services
+**** hardening email servers
+**** hardening FTP servers
+**** hardening DNS servers
+**** hardening DHCP servers
+*** protecting data through fault tolerance
+**** backups
+**** RAID
+**** clustering and load balancing
+*** application security
+*** best practices for security
+**** data loss prevention
+**** hardware based encryption
 *** review questions
 1
 2
@@ -909,6 +1256,73 @@ Main concern is encryption.  PPTP: weak encryption, IPSec
 19
 20
 ** Chapter 8: Cryptography
+*** an overview of cryptography
+**** historical cryptography
+**** substitution ciphers
+**** multi-alphabet substitution
+**** transposition ciphers
+**** the Enigma Machine
+**** steganography
+**** transport encryption
+*** modern cryptography
+**** working with symmetric algorithms
+**** key exchange
+**** working with asymmetric algorithms
+**** what cryptography should you use?
+**** hashing algorithms
+**** rainbow tables and salt
+**** key stretching
+**** understanding quantum cryptography
+**** cryptanalysis methods
+**** wi-fi encryption
+*** using cryptographic services
+**** confidentiality and strength
+**** integrity
+**** digital signatures
+**** authentication
+**** nonrepudiation
+**** key features
+*** understanding cryptography standards and protocols
+**** the origins of encryption standards
+**** the role of government agencies
+- National Security Agency
+- National Security Agency/Central Security Service
+- National Institute of Standards and Technology
+**** industry associations and the development process
+- American Bankers Association
+- Internet Engineering Task Force
+- Internet Society
+- World Wide Web Consortium
+- International Telecommunications Union
+- Institute of Electrical and Electronics Engineers
+**** public-key infrastructure X.509/public-key cryptography standards
+**** X.509
+**** SSL and TLS
+**** certificate management protocols
+**** secure multipurpose internet mail extensions
+**** secure eletronic transaction
+**** Secure Shell
+**** Pretty Good Privacy
+**** HTTP Secure
+**** Secure HTTP
+**** IP Security
+**** tunneling protocols
+**** Federal Information Processing Standards (FIPS)
+*** using public-key infrastructure
+**** using a certificate authority
+**** working with registration authorities and local registration authorities
+***** implementing certificates
+***** X.509
+***** certificate policies
+***** certificate best practices
+**** understanding certificate revocation
+**** implementing trust models
+***** hierarchical trust models
+***** bridge trust models
+***** mesh trust models
+***** hybrid trust model
+**** hardware-based encryption devices
+**** data encryption
 *** review questions
 1
 2
@@ -931,6 +1345,58 @@ Main concern is encryption.  PPTP: weak encryption, IPSec
 19
 20
 ** Chapter 9: Malware, vulnerabilities, and threats
+*** understanding malware
+*** surviving viruses
+**** symptoms of a virus infection
+**** how viruses work
+**** types of viruses
+**** managing spam to avoid viruses
+**** antivirus software
+*** understanding various type of attacks
+**** identifying denial-of-service and distributed denial-of-servce attacks
+**** spoofing attacks
+**** pharming attacks
+**** phishing, spear-phishing, and vishing
+**** xmas attack
+**** man-in-the-middle attacks
+**** replay attacks
+**** smurf attacks
+**** password attacks
+**** privilege escalation
+**** malicious insider threats
+**** transitive access
+**** client-side attacks
+**** typo squatting and URL hijacking
+**** watering hole attack
+*** identifying types of application attacks
+**** cross-site scripting and forgery
+**** SQL injection
+**** LDAP injection
+**** XML injection
+**** directory traversal/command injection
+**** buffer overflow
+**** integer overflow
+**** zero-day exploits
+**** cookies and attachments
+**** locally shared objects and flash cookies
+**** malicious add-ons
+**** session hijacking
+**** header manipulation
+**** arbitrary code and remote code execution
+*** tools for finding threats
+**** interpreting assessment results
+**** tools to know
+**** understanding protocol analyzers
+**** working with vulnerability scanners
+**** honeypots and honeynets
+**** working with a port scanner
+**** banner grabbing
+**** risk calculations and assessment types
+**** baseline reporting
+**** code review
+**** determine attack surface
+**** architecture
+**** design review
 *** review questions
 1
 2
@@ -953,6 +1419,41 @@ Main concern is encryption.  PPTP: weak encryption, IPSec
 19
 20
 ** Chapter 10: Social engineering and other foes
+*** understanding social engineering
+**** types of social engineering attacks
+**** what motivates and attack?
+**** the principles behind social engineering
+**** social engineering attack examples
+*** understanding physical security
+**** hardware locks and security
+**** mantraps
+**** video surveillance
+**** camera vs. guard
+**** fencing
+**** access list
+**** proper lighting
+**** signs
+**** guards
+**** barricades
+**** biometrics
+**** protected distribution
+**** alarms
+**** motion detection
+*** environmental controls
+**** HVAC
+**** fire supression
+**** fire extinguishers
+**** fixed systems
+**** EMI shielding
+**** hot and cold aisles
+**** environmental monitoring
+**** temperature and humidity controls
+*** control types
+**** a control type analogy
+*** data policies
+**** destorying a flash drive
+**** some considerations
+**** optical discs
 *** review questions
 1
 2
@@ -975,6 +1476,36 @@ Main concern is encryption.  PPTP: weak encryption, IPSec
 19
 20
 ** Chapter 11: Security administration
+*** third-party integration
+**** transistioning
+**** ongoing operations
+*** understanding security awareness and training
+**** communicating with users to raise awareness
+**** providing education and training
+**** safety topics
+**** training topics
+*** classifying information
+**** public information
+***** limited distribution
+***** full distribution
+**** private information
+***** internal information
+***** restricted information
+*** information access controls
+**** security concepts
+*** complying with privacy and security regulations
+**** the Health Insurance Portability and Accountability Act
+**** the Gramm-Leach-Bliley Act
+**** the Computer Fraud and Abuse Act
+**** the Family Educational Rights and Privacy Act
+**** the Computer Security Act of 1987
+**** the Cyberspace Electronic Security Act
+**** the Cyber Security Enhancement Act
+**** the Patriot Act
+**** familiarizing yourself with international efforts
+*** mobile devices
+**** BOYD issues
+*** alternative methods to mitigate security risks
 *** review questions
 1
 2
@@ -997,6 +1528,32 @@ Main concern is encryption.  PPTP: weak encryption, IPSec
 19
 20
 ** Chapter 12: Disaster recovery and incident response
+*** issues associated with business continuity
+**** types of storage mechanisms
+**** crafting a disaster-recover plan
+***** understanding backup plan issues
+***** knowing the backup types
+***** developing a backup plan
+***** recovering a system
+***** backout vs. backup
+***** planning for alternate sites
+**** incident response policies
+**** understanding incident response
+***** step 1: identify the incident
+***** step 2: investigating the incident
+***** step 3: repair the damage
+***** step 4: documenting and reporting the response
+***** step 5: adjusting procedures
+***** forensics from the Security+ perspective
+**** succession planning
+**** tabletop exercise
+*** reinforcing vendor support
+**** service-level agreements
+**** code escrow agreements
+*** penetration testings
+**** what should you test?
+**** vulnerability scanning
+***** credentialed vs. noncredentialed
 *** review questions
 1
 2
@@ -1053,4 +1610,292 @@ Main concern is encryption.  PPTP: weak encryption, IPSec
 30 A
 Score: 50%
 
+
 * Assessment test (second try)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+Score:
+
+
+* All review questions (second try)
+*** chapter 1
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** chapter 2
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** chapter 3
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** chapter 4
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** chapter 5
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** chapter 6
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** chapter 7
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** chapter 8
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** chapter 9
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** chapter 10
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** chapter 11
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** chapter 12
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+*** score
