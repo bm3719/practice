@@ -1,4 +1,4 @@
-Time-stamp: <2014-12-03 17:05:33 (bmiller)>
+Time-stamp: <2014-12-04 17:07:01 (bmiller)>
 #+STARTUP: content
 
 * Security+ SY0-401
@@ -1062,120 +1062,522 @@ immediate access, rather it should send access info to their email account.
 - HOTP (HMAC-Based One-Time Password): An algorithm using a Hash Message
   Authentication Code (HMAC) algorithm.
 **** account policy enforcement
+Account Policy: Determines security parameters regarding who can/cannot access
+the system.
+
+The following subsections are account policy enforcement best practices.
 ***** password length and complexity
+Obtain balance between ease of remembering and cracking difficulty.  Minimums:
+8 chars considered length, 1 non-alpha char.
+
+Windows can be set to not require passwords by setting min length 0.  Win
+8/7/Vista's Local Security Policy sets password complexity.  Physical access
+to Windows machines can allow password retrieval.
 ***** password expiration
+The longer a password is used, the more likely it is to be broken.  90 days is
+the standard, MS recommends 42.
+
+Password history: Prevents users from using previous passwords, with
+configurable history lengths.  History of 24 passwords is recommended.
+
+Set minimum number of days that can exist between password changes to 2.
 ***** password recovery
+Only a hash is stored usually.  Admins should change it to something else then
+have users log in and change it.
 ***** password disablement and lockout
+Accounts should be disabled for employees on temporary leave and permanently
+for terminated employees.  For employees coming back as contractors, suspend
+accounts so the relative identifiers (RIDs) are reused.
+
+Locking an account usually occurs after repeated failed login attempts,
+preventing password guessing:
+- Account lockout duration: Accounts can become unlocked after a period of
+  time.  Setting to 0 requires an admin to unlock.
+- Account lockout threshold: Number of failed login attempts.
+- Reset account lockout counter after: Duration between failed login attempts
+  that count as a sequence of failures.
 **** users with multiple accounts/roles
+Educate users with elevated privilege accounts to only use them when
+necessary.  Establish policies to this effect.
 **** generic account prohibition
+A generic account is any account shared by multiple users, including guest
+accounts.  Problems include shared passwords and auditing issues.  These
+should not be used.
 **** group-based and user-assigned privileges
+Group privileges include groups and roles.
 *** understanding remote access connectivity
-**** using the point-to-point protocol
+Remote authentication is any auth done for a remote user.
+**** using the Point-to-Point Protocol
+PPP supports multiple protocols and works with POTS, ISDN, T1, etc.  Doesn't
+provide data security (no encryption), but does use CHAP auth.
+
+PPP encapsulates traffic in Network Control Protocol (NCP) and authenticates
+with Link Control Protocol (LCP).
+
+PPP's insecurity makes it unsuitable for WAN connections.  For direct
+connections, risk of phone line taps is small.  PPP connections through a
+network should use an encrypted tunnel system.
 **** working with tunneling protocols
+Tunneling protocols create tunnels between networks that can be more secure,
+support added protocols, and provide virtual paths.  Sensitive data is
+encapsulated in other packets and sent across a public network.
+- PPTP: Supports encapsulation in a point-to-point environment.  Encapsulates
+  and encrypts packets.  The channel is encrypted after negotiation occurs,
+  though a sniffer can still capture the negotiation process to determine
+  connection type and tunnel info.
+- Layer 2 Forwarding (L2F): A Cisco-created method of creating tunnels, mainly
+  for dial-up.  Similar to PPP and shouldn't be used on WANs.  Provides
+  authentication, but no encryption.
+- Layer 2 Tunneling Protocol (L2TP): A hybrid of L2F and PPTP.  Primarily a
+  point-to-point protocol.  Doesn't provide data security/encryption, but
+  IPSec can be used for this.
+- Secure Shell (SSH): Uses encryption to establish a secure connection between
+  two systems.
+- Internet Protocol Security (IPSec): Used in conjunction with tunneling
+  protocols.  Primarily for LAN-to-LAN connections, but also remote
+  connections.  Provides secure authentication and encryption of data and
+  headers.
 **** working with RADIUS
+Remote Authentication Dial-in User Service (RADIUS), an IETF standard protocol,
+allows authentication of remote and other network connections.  Implemented by
+most major OSes.  Can be managed centrally.  Servers that allow access to a
+network verify with a RADIUS server to perform authentication.
+
+Use RADIUS when you want a single service to authenticate remote users.
+Auditing and accounting can occur on the RADIUS server.
+
+The main downside to RADIUS is that remote connectivity can go down if the
+single servers malfunctions.  Some RADIUS systems allow multiple servers to
+counter this.
 **** TACACS/TACACS+/XTACACS
+Terminal Access Controller Access-Control System (TACACS) is a
+client/server-oriented protocol, similar to RADIUS.  Extended TACAS
+(XTACACS) added logging/auditing.  TACACS+ is the current version, and allows
+multiple credential methods, like Kerberos.
+
+Both TACACS and RADIUS are centralized remote authentication services.
 **** VLAN management
+VLANs allow groups of users/systems, segmented on a network.  Hides segments
+of networks, controls access, and controls data paths.
+
+For security, VLANs allow grouping of users with similar data sensitivity
+levels.
 **** SAML
+Security Assertion Markup Language (SAML) is an XML variant used for
+authentication and authorization data.  Service providers uses SAML to prove
+remote user identity.
 *** understanding authentication services
+Authentication services: The implementation of the authentication
+technology. Only need to know about LDAP, Kerberos, and SSO for exam.  LDAP
+and Kerberos are protocols, SSO is a property of access control.
 **** LDAP
+Lightweight Directory Access Protocol (LDAP): A standardized directory access
+protocol that allows queries to be made of directories (paired-down X.500-based
+directories).  LDAP is used by Active Directory.  Uses port 389.
+
+Secure LDAP (LDAPS): Encrypts all LDAP communication with SSL/TLS over
+port 636.
 **** Kerberos
+An authentication protocol/method, allowing SSO.  Kerberos authentication uses
+a key distribution center (KDC), which authenticates the principal (user,
+program, or system) and provides it a ticket.  The ticket can then be used to
+authenticate against other principals.  The only Kerberos weakness is the KDC
+is a single point of failure.
+
+Workflow:
+- User authenticates to KDC and is given a ticket granting ticket (TGT), which
+  lists privileges of the user.
+- User requests a resource on the network from the KDC, presenting the TGT.
+  The TGT sends the user a service ticket.
+- The user's computer sends the service ticket to the server with the service.
+  The server communicates with the TGT to validate the service ticket.
 **** single sign-on initiatives
+SSO gives users access to all needed applications/systems needed with one
+login.
+- Kerberos: A single token allows any Kerberos-enabled application to accept a
+  user as valid.  Requires each application to be able to do so.
+- AD: The AD server retains all access rights for network users/groups.  Upon
+  user login, AD issues a GUID to the user.  AD-supporting applications use
+  the GUID to provide access control.
+
+On decentralized networks, SSO passwords are stored on each server,
+representing a security risk.  Enforcing password changes helps some.
+
+SSO has some of its own security issues, but is the simplest way to deal with
+users with multiple roles/accounts.
 *** understanding access control
-**** mandatory access control
-**** discretionary access control
-**** role-based access control
-**** rule-based access control
+Four primary methods of access control:
+- Mandatory Access Control (MAC): All access predefined.
+- Discretionary Access Control (DAC): Incorporates some flexibility.
+- Role-Based Access Control (RBAC): Allows the user's role to dictate access
+  capabilities.
+- Rule-Based Access Control (RBAC): Limits the user to settings in
+  preconfigured policies.
+
+For high security, the standard is MAC or role-based.  For normal business and
+educational environments, DAC is standard.
+**** Mandatory Access Control (MAC)
+Relatively inflexible, but most secure.  Users can't share info unless rights
+to do so are established by administrators.  Requires much up-front thinking
+about relationships.  Makes security breaches easier to investigate and
+correct and information control easier.  Downside: Inflexible and requires
+change over time.  If confidentiality is paramount, use MAC.
+**** Discretionary Access Control (DAC)
+More flexible, allowing the share of information dynamically between users.
+Increases risk of unauthorized information disclosure and makes it harder to
+ensure only appropriate access is issued.  Unix file permissions are an
+example of DAC, with it's "other" group permissions.
+**** Role-Based Access Control (RBAC)
+Implement access by job function or responsibility.  Between the flexibility
+of DAC and MAC.  Windows uses this.
+**** Rule-Based Access Control (RBAC)
+Uses preconfigured security policies, like deny lists and allow lists.  Can be
+used in conjunction with role-based models to add flexibility.  Can implement
+this with ACLs.
 *** implementing access controlling best practices
 **** least privilege
+Users/systems are given the minimum privileges necessary to accomplish their
+job.  Reduces the risk of privilege escalation.
 **** separation of duties
+Differentiation between users and groups at varying levels, e.g., root/SA,
+administrative accounts, normal users, restricted accounts.
+
+Do the following at minimum:
+- Separate the SA from regular accounts and never log in as SA for routine
+  functions.
+- Limit SA account to minimum group.
+- Separate audit/logging from SA.
 **** time of day restrictions
+Configuring when an account can have access.  Prevents attacks during the
+majority of the time accounts aren't in use.
 **** user access review
+Access review is a process to determine whether a user's access level is still
+appropriate.  Accounts for change in roles over time.
+
+Continuous monitoring: Ongoing auditing of resources accessed by a user.
 **** smart cards
-***** common access card
-***** personal identification verification card
+Contain memory storing permissions and access information.  Difficult to
+counterfeit but easy to steal.  Passwords/PINs are required to activate most
+smart cards.
+***** Common Access Card (CAC)
+Used for accessing DoD computers, signing email, and implementing PKI.
+***** Personal Identification Verification (PIV) card
+The same as CAC, but for federal employees and contractors.
 **** access control lists
+Grants/denies devices access to network capabilities.
 ***** implicit deny
+If the proviso in question has not be explicitly granted, then access is
+denied.  Can be based upon IP, destination, packet type, etc.
 ***** firewall rules
+Dictates what traffic can pass between the firewall and internal network.
+Criteria:
+- Block the connection.
+- Allow the connection.
+- Allow the connection if it's secured.
+
+Can be applied inbound/outbound and to any network type, and should be audited
+regularly.
 **** port security
+Allows an administrator to configure switch ports so that only certain MAC
+addresses can use the port.  A feature of smart switches, which also include
+Dynamic ARP Inspection (DAI) to protect ports from ARP spoofing.
+
+Areas to be familiar with:
+- MAC limiting and filtering: Limit access to known MAC addresses.  Some
+  routers also have this feature.  Not foolproof.
+- 802.1X: Adding port authentication to MAC filtering increases security.
+- Unused ports: Disable these.
 **** working with 802.1X
+Defines port-based security for wireless network access control.  Adds
+authentication via Extensible Authentication Protocol (EAP) over IEEE 802,
+called EAP over LAN (EAPOL).  Allow APs and switches to not do authentication,
+but rely on an authentication server.
 **** flood guards and loop protection
+Flood guard: A protection feature built into some firewalls to vary the
+tolerance for unanswered login attacks.  Lessens the likelihood/success of DoS
+attacks.
+
+Loop protection: Prevents broadcast loops.  Can disable broadcast forwarding
+to protect against duplicate ARP requests (those having the same target
+protocol address).  The Spanning Tree Protocol (STP) ensures loop-free bridged
+ethernet LANs.  STP ensures only one active path exists between two stations.
 **** preventing network bridging
+Network bridging: When a devices has multiple NICs where a user on one network
+can jump to the other.  A problem with modern laptops with multiple adapters.
+Preventable by shutting off a jack when bridging is detected.  Create profiles
+where only one interface is allowed.  Disable unused connections and ICS.
 **** log analylsis
-**** trusted OS
+Collect and analyze logs.  Store them for future baseline comparisons.
+**** Trusted OS (TOS)
+Any OS meeting government requirements for security.  Common Criteria (CC) are
+the most common set of standards for security.  CC outlines Evaluation
+Assurance Levels (EALs):
+- EAL 1: Correct operation, but threats viewed as not serious.
+- EAL 2: 1 + requires product developers to use good design practices.
+- EAL 3: Moderate levels of security.
+- EAL 4: Positive security engineering.  The common benchmark for commercial
+  systems.
+- EAL 5: Security engineering implemented from an early design phase.
+- EAL 6: Specialized security engineering.  Secure from penetration attackers.
+- EAL 7: Extremely high levels of security.  Requires extensive independent
+  testing and measurement of every component.
 **** secure router configuration
+Musts:
+- Change the default password.
+- Walk through the advanced settings: Block ping requests, perform MAC
+  filtering, etc.
+- Keep the firmware upgraded: Router manufacturers issues patches for
+  discovered problems.
+
+Back up router configuration before changing anything.
 *** review questions
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 B
+2 B
+3 A
+4 A
+5 A
+6 A
+7 A
+8 C
+9 B
+10 A
+11 A
+12 A
+13 A
+14 C
+15 B
+16 D
+17 A
+18 B
+19 C
+20 D
+*** additional notes
+Tokens can be used to validate users per-session.
 ** Chapter 5: Protecting wireless networks
 *** working with wireless systems
+802.11 standards.
 **** IEEE 802.11x wireless protocols
+The 802.11x family of protocols provide wireless communication using radio
+frequency transmissions in the 2.4GHz and 5GHz spectrum.  Except for 802.11a,
+these are compatible with each other.
+- 802.11: 1 or 2Mbps, 2.4GHz.
+- 802.11a: Up to 54Mbps, 5GHz.
+- 802.11b: Up to 11Mbps (fallback to 5.5 and 1Mbps), 2.4 GHz.  Also called
+  Wi-Fi or 802.11 high rate.
+- 802.11g: Up to 54Mbps, 2.4 GHz.  Higher speeds but shares space other 2.4GHz
+  devices, as is the case with 802.11b.
+- 802.11i: Provides security enhancements with focus on authentication.  Often
+  referenced as WPA2.
+- 802.11n: Up to 600Mbps (though usually much slower).  Either 2.4GHz or
+  5GHz.  Most popular now due to high speeds and less interference.  Multiple
+  antennas can increase speed.
 **** WEP/WAP/WPA/WPA2
-***** wired equivalent privacy
-***** wireless application protocol
-***** wi-fi protected access and WPA2
-**** wireless transport layer security
+Wired Equivalent Privacy (WEP) was a basic wireless security with Wireless
+Application Protocol (WAP) providing network communications.  Has since been
+replaced with WPA/WPA2.
+***** Wired Equivalent Privacy (WEP)
+A wireless protocol designed to provide privacy equivalent to a wired network
+(though it doesn't, WPA2 does).  Vulnerable due to weakness in encryption
+algorithm used (RC4).
+
+IV attack: The initialization vector (IV) is 24-bit, meaning IVs are reused
+with the same key. Examining the repeated result allows cracking the WEP secret
+key.
+
+Temporal Key Integrity Protocol (TKIP): Strengthens WEP encryption.  Places a
+128-bit wrapper around the WEP encryption with a key based upon things like
+the destination MAC address and packet serial number.  However, even TKIP has
+been broken.
+***** Wireless Application Protocol (WAP)
+A data transmission standard widely adopted by manufacturers.  WAP functions
+are equivalent to TCP/IP functions as the intent is the same, but for wireless.
+WAP uses a subset of HTML called Wireless Markup Language (WML) for displays.
+Scripting capabilities are provided by WMLScript.  WML and WMLScript allow
+malicious code/viruses to be transmitted.
+
+WAP systems communicate via a WAP gateway.  The gateway interfaces between WAP
+and HTTP and TCP/IP.  If the WAP->internet communication isn't encrypted,
+packets can be sniffed.  The security concern converting between WAP and
+SSL/TLS, exposing plain text, is called "gap in the WAP".  Fixed in WAP 2.0.
+
+WAP can use WEP, WPA with TKIP, and WPA2.  WTLS is the security layer of WAP.
+***** Wi-Fi Protected Access (WPA) and WPA2
+Introduced in 802.11i, addressing security issues in WEP.  WPA implements some
+of 802.11i to communicate with older wireless devices.  WPA uses RC4+TKIP.
+WPA2 implements the full 802.11i and isn't compatible with older devices.
+
+CCMP: WPA2 requires Counter Mode with Cipher Block Chaining Message
+Authentication Code Protocol (CCMP).  CCMP users 128-bit AES encryption with a
+48-bit IV.  The larger IV makes cracking difficult and minimizes replay
+attacks.
+
+Replay attack: Capturing portions of a session to play back later to convince
+the host that it's still talking to the original connection.
+**** Wireless Transport Layer Security (WTLS)
+The security layer for WAP.  Provides authentication, encryption, and data
+integrity on wireless.  Uses lower bandwidth/processing than TLS.  Moderately
+secure.  WTLS is used to support devices that don't have much processing power.
 *** understanding wireless devices
+Use RF signalling or cellular.
+
+Levels of security existing in WAP:
+- Anonymous authentication: Allows anyone to connect to the wireless portal.
+- Server authentication: Requires authentication against the server.
+- Two-way (client and server) authentication: Requires both ends to
+  authenticate.
+
+Some wireless devices can use certificates to verify authentication.
+
+Technologies providing services between devices:
+- Wireless Session Protocol (WSP): Manages the session information and
+  connection between devices.
+- Wireless Transaction Protocol (WTP): Provides TCP/UDP analogs to WAP.
+- Wireless Transport Layer Security (WTLS): Security layer for WAP.
+- Wireless Datagram Protocol (WDP): Provides common interface between devices.
 **** wireless access points
-**** antenna placement
-**** antenna types
-**** MAC filtering
-**** captive portals
-**** working with VPNs
-**** extensible authentication protocol
-**** lightweight extensible authentication protocol
-**** protected extensible authentication protocol
+A low-power transmitter/receiver (transceiver), placed strategically for
+wireless access, using 802.11x protocols.  Uses a portion of the RF (radio
+frequency) spectrum called microwave.
+***** antenna placement
+Generally, the greater the distance, the more the signal will attenuate.
+Materials can reflect or absorb the signal.  Some include power level controls
+to reduce amount of output.  A site survey with a strength meter can be done
+while laying out a network.
+***** antenna types
+- Omnidirectional antenna: Provide 360° patterns evenly.
+- Directional antenna: Can cover a greater distance, but in a particular
+  direction.
+- Gain value: Rating metric for antenna.  Expressed in dBi.  Every 3 dB doubles
+  the power output.
+***** MAC filtering
+Most APs include MAC filtering, but default it to off.  Synonymous with
+"network lock".  Vulnerable to MAC spoofing.
+***** captive portals
+Common on public hotspots.  Requires users to agree to conditions before using
+the network/Internet.
+***** working with VPNs
+VPNs can enhance security over wireless.
+**** Extensible Authentication Protocol (EAP)
+Provides a framework for authentication often used in wireless networks.
+Among the types used with WPA/WPA2 are LEAP and PEAP.
+
+Wi-Fi Protected Setup (WPS): A series of EAP messages allowing new hosts to
+join the network and use WPA/WPA2.  Common in homes and small offices.
+Requires users to do something to complete the enrollment process, like enter a
+PIN, push a router button, or close distance for NFC.  WPS attacks are common
+though, e.g., using brute force PIN attacks.  Recommend disable WPS.
+
+Near-field communication (NFC): Requires the user to bring the client close to
+the AP for verification (through RFID or Wi-Fi), validating it is present.
+***** Lightweight Extensible Authentication Protocol (LEAP)
+An extension to EAP by Cisco, being phased out.  Lacks Windows support.
+Requires mutual authentication.  Susceptible to dictionary attacks.  Not
+recommended.
+***** Protected Extensible Authentication Protocol (PEAP)
+The current standard EAP.  Secure through establishing an encrypted channel
+between server/client.
 *** wireless vulnerabilities to know
-**** wireless attack analogy
+Vulnerable to all the wired attacks, plus additional wireless ones.  Easy to
+intercept.  Network names are regularly broadcast via SSID broadcast.
+
+Cloaking: SSID broadcasts can be disabled.  Requires prior knowledge of the
+APs existence.  A very weak form of security.
+
+Site surveys: While used for antenna placement, can also be done by attackers
+to find systems, protocols, etc.
+
+Jamming: Intentional interference of the signal.
+
+War driving: Driving around with a laptop looking for APs with a NIC set to
+promiscuous mode.
+
+War chalking: Once a network weakness is discovered, writing information about
+that in chalk outside the premises.
+
+Rogue access points: Any unauthorized AP added to the network.  May not
+implement proper security.
+
+Evil twin attack: A rogue wireless AP poses as a legitimate wireless service
+provider to intercept information users transmit.
+
+Never assume wireless communication is secure.  Always use data security.  Set
+APs to not broadcast. Use WPA2 and higher encryption levels.
+
+Bluetooth is often used to create personal area networks (PANs or WPANs).
+Change the default PIN on Bluetooth devices.  Set Bluetooth devices
+non-discoverable.  Vulnerablities:
+- Bluejacking: Sending unsolicited messages (like spam) over Bluetooth
+  connections.
+- Bluesnarfing: Gaining unauthorized access through a Bluetooth connection.
 *** review questions
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 C
+2 A
+3 C
+4 D
+5 B
+6 C
+7 A
+8 A
+9 C
+10 A
+11 B
+12 B
+13 C
+14 A
+15 A
+16 C
+17 D
+18 B
+19 A
+20 D
 ** Chapter 6: Securing the cloud
 *** working with cloud computing
-**** software as a service (SaaS)
-**** platform as a service (PaaS)
-**** infrastructure as a service (IaaS)
+Service models: SaaS, PaaS, IaaS.  Delivery models: private, public, community,
+hybrid.
+
+Cloud bursting: When your servers become too busy, you offload traffic to a
+cloud provider.  A form of load balancing/prioritizing, employing Quality of
+Service (QoS) protocols.
+**** Software as a Service (SaaS)
+Provides applications running on clouds.  Used via thin client interfaces, like
+the web or a program.  The consumer doesn't control the underlying
+infrastructure.
+
+Consumer: User.
+Provider: Application, middleware, OS, hardware, network, facility.
+**** Platform as a Service (PaaS)
+Consumer can deploy consumer-created/acquired applications on the cloud, using
+languages, libs, services, and tools provided by provider.
+
+Consumer: User, application.
+Provider: Middleware, OS, hardware, network, facility.
+**** Infrastructure as a Service (IaaS)
+Consumer able to deploy and run arbitrary software, OSes, and applications.
+
+Consumer: User, application, middleware, OS.
+Provider: Hardware, network, facility.
 **** private cloud
+Cloud is for exclusive use by an organization.  Organization acts as both
+provider and consumer.  Doesn't need to be online.
 **** public cloud
+Cloud open for use by general public.  Cloud providers own public clouds.
 **** community cloud
+Cloud for use by specific community or organizations with shared concerns.  May
+be owned/operated by some of the organizations or external.
 **** hybrid cloud
+Composition of two or more of public, private, community.
 *** working with virtualization
+Hypervisor: The software/hardware combination making virtualization possible.
+Two methods of implementation exist:
+- Type I hypervisor (bare metal): Independent of the OS and boots before the
+  OS.
+- Type II hypervisor (hosted): Dependent upon the OS and cannot boot until the
+  OS is running.
 **** snapshots
+Allow taking of an image of the system at a point in time.  The VM can then be
+reverted to a saved state.  Snapshots contain copies of the VM settings
+(hardware configuration), information on all virtual disks, and memory state of
+the VM.  Can be used for cloning.
 **** patch compatibility
 **** host availability/elasticity
 **** security control testing
