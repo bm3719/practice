@@ -1,16 +1,16 @@
-Time-stamp: <2014-12-04 17:07:01 (bmiller)>
+Time-stamp: <2014-12-05 16:54:50 (bmiller)>
 #+STARTUP: content
 
 * Security+ SY0-401
 ** Chapter 1: Measuring and weighing risk
-*** risk assessment
+*** Risk assessment
 A process conducted in which threats, vulnerabilities, and impacts of a loss
 are assessed.  Determines which risks are real/likely.  Coordination with the
 Business Impact Analysis (BIA) determines course of action.
-**** computing risk assessment
+**** Computing risk assessment
 Prioritize and determine which risks are acceptable.  NIST provides a guide
 for conducting assessments.
-***** risk calculations
+***** Risk calculations
 Risk impact terms:
 - ALE: Annual Loss Expectancy.  A monetary measure of loss, every year.
 - SLE: Single Loss Expectancy.  A monetary measure of loss for one event.  This
@@ -19,11 +19,11 @@ Risk impact terms:
   year, based on historical data.
 
 Formula: SLE * ARO = ALE
-***** quantitative vs. qualitative risk assessment
+***** Quantitative vs. qualitative risk assessment
 Risk assessments are either qualitative (opinion-based and subjective) or
 qualitative (cost-based and objective).  If a dollar cost can be assigned,
 it's quantitative.
-***** additional risk terminology
+***** Additional risk terminology
 - Likelihood: A score representing the possibility of threat initiation.  Goes
   from 10-0, with 10 being a certainty that the adversary will initiate a
   threat event.
@@ -40,7 +40,7 @@ it's quantitative.
 - Recovery Point Objective (RPO): The point in time from which the system needs
   to be restored.  The shorter the RPO time, the more expensive.
 - Service Level Agreement (SLA): Formally defines service provided.
-**** acting on your risk assessment
+**** Acting on your risk assessment
 - Risk Avoidance: Identifying a risk and deciding not to engage in actions
   associated with it.
 - Risk Transference: Sharing some of the burden of the risk with another
@@ -52,7 +52,7 @@ it's quantitative.
   prosecution policies or warning of intrusion detection.
 - Risk Acceptance: The choice to make when the cost of implementing the other
   choices outweighs the harm of an identified risk.
-**** risks associated with cloud computing
+**** Risks associated with cloud computing
 Cloud computing implementations:
 - PaaS: Vendors allow apps to be created and run on their infrastructure.
   E.g., AWS and Google Code.
@@ -64,16 +64,16 @@ Risk-related issues:
 - User privileges: Enforcing least privileges, reduced control.
 - Data integration/segregation: Shared resources up data
   encryption/segregation requirements.
-**** risks associated with virtualization
+**** Risks associated with virtualization
 - Breaking out of the VM: Data access issues.
 - Network and security controls can intermingle: Granularity differences
   between network and VM admin tools.
 - Most attacks occur through the hypervisor, giving attackers root-level
   access to all VMs.
-*** developing policies, standards, and guidelines
+*** Developing policies, standards, and guidelines
 Policies provide high-level guidance, standards provide expectations, and
 guidelines provide specific advice.
-**** implementing policies
+**** Implementing policies
 - Scope Statement: Outlines what the policy intends to accomplish and which
   documents, laws, and practices it addresses.  Usually a single sentence.
 - Policy Overview Statement: Provides the goal of the policy, its importance,
@@ -84,7 +84,7 @@ guidelines provide specific advice.
   enforced.
 - Exception Statement: Guidance on how to deviate from the policy and an
   escalation contact.
-**** incorporating standards
+**** Incorporating standards
 Standards are derived from policies.  Provides enough detail that an audit can
 be performed.
 
@@ -98,7 +98,7 @@ Key aspects of standards documents:
   relevant baseline and tech standards.
 - Maintenance and Administrative Requirements: E.g., frequency of lock
   combination changes.
-**** following guidelines
+**** Following guidelines
 Helps users comply with standards, often step-by-step processes to accomplish
 tasks.
 
@@ -108,7 +108,7 @@ Contents of guidelines documents:
 - Guideline Statements: Step-by-step instructions.
 - Operational Considerations: Specify what duties are required and at what
   intervals.
-**** business policies to implement
+**** Business policies to implement
 Primary areas of concern:
 - Separation of Duties Policies: Designed to reduce risk of fraud and prevent
   other losses.  May require more than one person to accomplish key
@@ -126,7 +126,7 @@ Primary areas of concern:
 - Least Privilege: Users are given only the permissions needed to perform work.
 - Succession Planning: Outlines internal persons that have the ability to step
   into positions when they open up.  Identifies key roles.
-**** understanding control types and false positives/negatives
+**** Understanding control types and false positives/negatives
 Once risks are identified, controls are put in place to address them.
 Controls fall into three groups:
 - Management: Risk assessment; planning; system and services acquisition;
@@ -142,10 +142,10 @@ Once controls are implemented, audits should be performed.  While doing so,
 pay attention to:
 - False positives: Events flagged as anomalies that aren't really incidents.
 - False negatives: Lack of alert on an real event.
-**** risk management best practices
+**** Risk management best practices
 Implemented with a BIA.  What is shown in industry to produce superior results
 regarding business continuity.
-***** undertaking business impact analysis (BIA)
+***** Undertaking business impact analysis (BIA)
 BIA is the process of evaluating critical systems to define impact and
 recovery plans.  Focuses on impact a loss would have.
 
@@ -160,19 +160,19 @@ Key components:
 - Estimating the Tangible and Intangible Impact on the Organization: Details
   tangible (loss production/sales) and intangible (loss customer confidence)
   impact.
-***** identifying critical systems and components
+***** Identifying critical systems and components
 Build systems that don't have a Single Point of Failure (SPOF) by adding
 redundancy.  Factor weather, natural disaster, and utilities into contingency
 plans.
-***** high availability (HA)
+***** High Availability (HA)
 Measures used to keep services operational during an outage.  The goal is to
 have 99.999% availability (five nines).
-***** redundancy
+***** Redundancy
 Systems either duplicated or fail over to other systems.  Failover is the
 process reconstructing a system or switching to another when failure is
 detected.  In networks, this involves failover network paths.  Includes
 clustering (load balancing).
-***** fault tolerance
+***** Fault tolerance
 The ability of a system to sustain operation in event of component failure.
 Stock spare parts and ensure power.  For parts, having N+1 is a common
 strategy, where N is the number of parts in use.  For power, use UPSes with
@@ -185,18 +185,18 @@ surge protection or a backup generator.
   another disk for parity info.  Common in older systems.
 - RAID 5: Disk striping with parity, spread across multiple disks.  Supports
   3-32 disks.  Can survive failure of only one drive.
-**** disaster recovery
+**** Disaster recovery
 Recovering system operations after a disaster.  Planning includes designing a
 comprehensive backup plan of backup storage, procedures, and maintenance.
 Prioritize critical systems.
-***** types of backups
+***** Types of backups
 Include both paper and computer records.
-***** disaster recovery planning
+***** Disaster recovery planning
 Keep backups of key data, databases, applications, and paper records.
-**** tabletop exercise
+**** Tabletop exercise
 A method of accessing risk where a facilitator and participants discuss
 possible situations and how to respond.
-*** review questions
+*** Review questions
 1 C
 2 A
 3 D
@@ -217,16 +217,16 @@ possible situations and how to respond.
 18 A
 19 C
 20 A
-*** additional notes
+*** Additional notes
 - Change management: A structured approach to securing a company's assets.
 ** Chapter 2: Monitoring and diagnosing networks
-*** monitoring networks
-**** network monitors
+*** Monitoring networks
+**** Network monitors
 - Sniffers: Another name for network monitors.  Enables examining the
   signaling and traffic that occurs on a network.
 - Promiscuous mode: A NIC looking at any packet it sees on the network, even
   if the packet is not addressed to that NIC.
-***** monitoring system logs
+***** Monitoring system logs
 Event logs: System logs that record various events that occur.  Includes many
 types of logs, but security and access logs are most pertinent here.
 
@@ -242,11 +242,11 @@ In Linux, note:
 - /var/log/faillog: Logs failed user logins.
 - /var/log/apport.log: Logs application crashes.  Can sometimes reveal system
   compromise attempts or the presence of virii/spyware.
-*** hardening
+*** Hardening
 Hardening means to lock down and secure an OS as much as practical.  Ensure
 unneeded services are turned off, unneeded software is uninstalled, patches are
 updated, user accounts are checked, etc.
-**** working with services
+**** Working with services
 Part of OS hardening involves disable unnecessary services.
 
 Tips:
@@ -257,17 +257,17 @@ Tips:
   137, 138, and 139.  On Unix systems, close port 111 (RPC).
 - Directory Sharing: Limit to what is essential for system functions.  Hide
   root directories from browsing -- instead, designate subfolders.
-***** protecting management interfaces and applications
+***** Protecting management interfaces and applications
 Admin interfaces should be restricted to only those admins who need it.
 Protect server utilities and even workstation utilities like regedit.  Password
 protect management functionality and consoles.
 
 On Windows, use the Performance Monitor to look for possible illicit activity,
 as it can do things like show excessive processor usage.
-***** software
+***** Software
 Remove unneeded software.  On Windows, remove Windows components that commonly
 come preinstalled (via Programs and Features).
-**** patches
+**** Patches
 A patch is an update to a system, adding new functionality or correcting bugs.
 In a network environment, patches should be applied to a single machine and
 tested first, as it's possible that patches could have problems.  In such
@@ -280,7 +280,7 @@ Types of patches:
   problems that have no feasible workarounds.
 - Security updates: Address security vulnerabilities.  Should be considered
   mandatory.  Should be deployed within 30 days of release.
-**** user account control
+**** User account control
 Only active accounts should be operational and properly managed.  Along with
 domain accounts, pay attention local accounts.  A common approach is to
 configure a single machine, image it, then copy to other workstations.  This
@@ -298,7 +298,7 @@ Disable these accounts:
   delete accounts.
 - Temporary employees: Also disable immediately.
 - Default guest accounts: Commonly known to exist.
-**** filesystems
+**** Filesystems
 Windows:
 - MS FAT: Designed for small drives.  FAT-16 preceded FAT-32.  Only allows
   share-level and user-level access privileges.  If a user has write or change
@@ -314,7 +314,7 @@ Windows systems have hidden admin shares with names ending in dollar signs
 (e.g., admin$) for remote administration.
 
 Not covered: ext3, ext4, XFS on Linux; HFS, HFS+ on OSX.
-*** securing the network
+*** Securing the network
 - MAC limiting and filtering: Limit network access to known MAC addresses.
   Most routers have this option.  Find MAC address using ipconfig /all or
   ifconfig/ip command.  Not foolproof as MAC addresses can be changed.
@@ -326,15 +326,15 @@ Not covered: ext3, ext4, XFS on Linux; HFS, HFS+ on OSX.
   of access points and switches doing it themselves.
 - Disable unused ports: Disable the service and block the port with a firewall.
 - Rogue machine detection: Scan for these.
-*** security posture
+*** Security posture
 Document a baseline configuration, representing a known secure state.
 Reporting will be relative to this state.  The baseline also addresses specific
 compliance issues and regulatory standards.  Include network utilization stats,
 useful in identifying DoS attacks.
-**** continuous security monitoring
+**** Continuous security monitoring
 Ongoing monitoring involving network traffic levels, routine evaluations for
 regulatory compliance, and checks of network security device configurations.
-**** security audits
+**** Security audits
 Scheduled, in-depth checks of security.  Includes:
 - Review of security logs.
 - Review of policies and compliance with policies.
@@ -343,28 +343,28 @@ Scheduled, in-depth checks of security.  Includes:
 
 Scope and frequency are determined by the organization, subject to
 needs/budget.
-**** setting a remediation policy
+**** Setting a remediation policy
 Monitoring may uncover gaps between the baseline and current network state.  A
 remediation plan must be implemented.  A possible classification of gaps:
 - Minor: Does not pose an immediate threat.
 - Serious: Could pose an  immediate threat, but one unlikely.
 - Critical: Poses an immediate threat that must be addressed.
-*** reporting security issues
-**** alarms
+*** Reporting security issues
+**** Alarms
 Indications of an ongoing current problem requiring immediate response.  Alarm
 rates may indicate trends.  After solving the problem, look for indicators that
 the condition is not isolated.  A notification system should notify appropriate
 staff.  That staff needs a procedure to report incident specifics and how it
 was addressed.
-**** alerts
+**** Alerts
 Issues requiring attention but not likely to bring down the system.  Alerts
 can refer to Event Viewer events, or AV industry and OS alerts.
-**** trends
+**** Trends
 Trends in threats, like if a type of attack is currently common.  Also can
 refer to organizational security profile trends.  E.g., audits finding
 increased policy compliance or increased violation of software installation
 policies.  Allow the taking of proactive security measures.
-*** differentiating between detection controls and prevention controls
+*** Differentiating between detection controls and prevention controls
 Some controls exist to detect potential threats, others to prevent/minimize
 them.  An intrusion detection system (IDS) detects, an intrusion prevention
 system (IPS) prevents.  H-IDS is host based, N-IDS is network based.
@@ -379,7 +379,7 @@ attacks.  Concepts to consider for honeypots/honeynets:
   is expressed not to go ahead.  Not legally acceptable.
 
 Tar pit: Exists only to slow down attackers and does not collect data.
-*** review questions
+*** Review questions
 1 C
 2 B
 3 C
@@ -400,16 +400,16 @@ Tar pit: Exists only to slow down attackers and does not collect data.
 18 A
 19 A
 20 B
-*** additional notes
+*** Additional notes
 Administrator: IDS person responsible for setting security posture.
 ** Chapter 3: Understanding devices and infrastructure
 Intrastructure, network ports, and common protocols. A network is composed of
 media and devices.
-*** mastering TCP/IP
+*** Mastering TCP/IP
 Has numerous holes which are easy to plug once aware of their existence.
 **** OSI relevance
 OSI model is 7-layer.  TCP/IP precedes OSI and uses 4 layers and is used here.
-**** working with the TCP/IP suite
+**** Working with the TCP/IP suite
 Layers:
 - Application layer: E.g., HTTP, SMTP.
 - Host-to-Host, or Transport layer: TCP or UDP (user datagram protocol).
@@ -424,7 +424,7 @@ Concepts:
 - Host: Any device connected to the network that runs the TCP/IP stack
   (protocol suite).
 - Encapsulation: The process used to pass messages between layers.
-***** the application layer
+***** The application layer
 Highest layer.  Allows applications to access services or protocols to exchange
 data.  Common protocols:
 - HTTP
@@ -454,7 +454,7 @@ data.  Common protocols:
   and not keep it on the server, whereas IMAP stores email on the server for
   access.  Now, POP can now be configured to store on the server and IMAP to
   store only locally.
-***** the host-to-host or transport layer
+***** The host-to-host or transport layer
 Session and datagram communications.
 - TCP: Provides reliable, one-to-one, connection-oriented sessions.
   Establishes sessions and ensures packet reception.  Ensures packets are
@@ -464,7 +464,7 @@ Session and datagram communications.
   than TCP.  No session synchronization.  Doesn't guarantee error-free
   communication.  Mainly used to send small packets of info.  The application
   is responsible for acknowledging correct reception of data.
-***** the internet layer
+***** The internet layer
 Responsible for routing, IP addressing, and packaging.  Does most of the work
 in establishing info exchange between hosts.  Four standard layer protocols:
 - IP: Routable protocol responsible for IP addressing.  Fragments and
@@ -479,7 +479,7 @@ in establishing info exchange between hosts.  Four standard layer protocols:
   functions.  Used by ping.  ICMP responds to ping requests or locally reports
   if the destination is unreachable.  Routers and other network devices use
   ICMP to report path info.
-***** the network access layer
+***** The network access layer
 Responsible for placing and removing packets on the physical network via
 communicating with the host's network adapters. When network topology or
 technology is changed, TCP/IP only needs to know how to communicate with the
@@ -487,17 +487,17 @@ new network controller.  Can also communicate with multiple network topologies.
 **** IPv4 and IPv6
 IPv4: 32-bit addresses, IPv6: 128-bit addresses.  IPv6 includes mandatory
 IPSec security.  Most systems support both.
-**** understanding encapsulation
+**** Understanding encapsulation
 Encapsulation allows a transport protocol to be sent across the network and
 used by the equivalent protocol/service at the destination.  Allows higher
 level protocols not to care what happens at lower levels.
-**** working with protocols and services
+**** Working with protocols and services
 Ports, handshakes, and application interfaces.
 
 Note: NetBIOS was originally an alternative to TCP/IP, but has since been
 adapted to run on top of it.  It's widely used for name resolution and
 registration in Windows-based environments.
-***** well-known ports
+***** Well-known ports
 Ports identify how a communication process occurs.  Ports are special addresses
 that allow communication between hosts.  The Internet Assigned Numbers
 Authority (IANA) defines a list of well-known ports.
@@ -540,7 +540,7 @@ UDP ports:
 - 989 FTPS (data channel)
 - 990 FTPS (control channel)
 - 3389 MS WBT Server (RDP)
-***** viewing the active TCP and UDP ports
+***** Viewing the active TCP and UDP ports
 - Windows: netstat lists local port -> foreign address.  netstat -a provides
   full listings.
 - services file: A reference for common services/ports.
@@ -558,11 +558,11 @@ three-way handshake:
 A four-step process is used to close the connection.  The sequence numbers are
 used so the server can handle simultaneous requests on the same port.  All
 communication in a session uses the same sequence number.
-***** application programming interface
+***** Application programming interface
 Here refers to the APIs used by programmers to create interfaces to TCP/IP.
 
 MS uses the Windows Socket (Winsock) API to interface TCP/IP.
-***** other protocols to know
+***** Other protocols to know
 - iSCSI (Internet Small Computer Systems Interface): Uses port 860 and 3260.
   Allows data storage and transfers across the network.  Enables the creation
   of storage area networks (SANs).
@@ -570,7 +570,7 @@ MS uses the Windows Socket (Winsock) API to interface TCP/IP.
   Later changed to use SCSI to create SANs.  A common protocol used is FCoE
   (Fibre Channel over Ethernet), which is not routable at the IP layer, and is
   only useful in small networks.
-*** designing a secure network
+*** Designing a secure network
 Consider these when designing the security topology of a network:
 - Demilitarized zones (DMZs).
 - Subnetting.
@@ -579,7 +579,7 @@ Consider these when designing the security topology of a network:
 - NAT.
 - Telephony.
 - NACs.
-**** demilitarized zones
+**** Demilitarized zones
 An area to place public servers accessible to people otherwise not trusted.
 Doesn't allow access to other parts of the network.  Can be built/demarcated
 using firewalls that can transmit in three directions:
@@ -592,7 +592,7 @@ whereas email would go to the internal network.
 
 Bastion hosts: Hosts, routers, and firewalls that exist outside the DMZ and
 open to the public.
-**** subnetting
+**** Subnetting
 Subnetting: Using a subnet mask to divide a network into smaller components.
 These can be divided physically, logically, topologically, etc.
 
@@ -604,7 +604,7 @@ This can:
 Subnets increase security by confining traffic to the network it needs to be
 on, reducing network traffic and creating more broadcast domains (reducing
 network-wide broadcast traffic).
-**** virtual local area networks (VLANs)
+**** Virtual local area networks (VLANs)
 A VLAN allows creation of groups of users and systems, segmenting them on the
 network.  Allows hiding of other segments and controlling access.  VLANs can
 be set up to control the path data takes.  A good way to contain network
@@ -644,7 +644,7 @@ Types of tunneling:
   making it highly secure.  Can work in:
   - Tunneling mode: Data or payload and headers are encrypted.
   - Transport mode: Only payload is encrypted.
-**** remote access
+**** Remote access
 Tunnels create virtual connections between two systems/networks.  Data is
 encapsulated in an mutually agreed protocol.  Data passed through tunnels
 appears on the other side as part of the network.
@@ -656,7 +656,7 @@ VPNs, ISDN, DSL, and cable modems.  RAS connections can be secure or not.
 Virtual Network Computing (VNC) provides things like remote control of
 computers, but has leaves a discoverable opening.  Should be configured as a
 "manual start" service.
-**** network address translation (NAT)
+**** Network address translation (NAT)
 NAT originally extended the number of usable IP addresses, but now allows
 organizations to present a single IP address to the Internet for all
 connections.  The NAT server provides IPs to the hosts in the network and
@@ -676,23 +676,23 @@ Note: Port Address Translation (PAT) is also possible.  NAT can use multiple
 public IP addresses, whereas PAT can only use one.  PAT is usually only used on
 small, private networks.  MS's ICS is a PAT implementation.  Also, Destination
 NAT (DNAT) can be used to redirect traffic for a virtual host to a real one.
-**** telephony
+**** Telephony
 Telephony is the merger of IT and telephone systems.  Breaches here are just
 as serious as any other.
 
 Voice over IP (VoIP) can be sniffed and is susceptible to DoS attacks since it
 uses UDP.  If a data network goes down, telephony can be lost.
-**** network access control (NAC)
+**** Network Access Control (NAC)
 Operational security includes NAC, authentication, and security topologies.
 
 NAC is a set of standards defined by the network for clients attempting access.
 NAC typically requires clients be virus-free and adhere to certain policies.
-*** understanding the various network infrastructure devices
+*** Understanding the various network infrastructure devices
 Components encountered in a network.
 
 Note: For network devices requiring default accounts to change settings, be
 sure to change passwords.
-**** firewalls
+**** Firewalls
 Firewalls isolate one network from another.
 
 The first line of network defense.  Can be standalone systems/included in
@@ -707,12 +707,12 @@ Firewall functions include one or more of:
 - Packet filter.
 - Proxy firewall.
 - Stateful packet inspection firewall.
-***** packet filter firewalls
+***** Packet filter firewalls
 Passes or blocks traffic to specific addresses based on the type of
 application.  Doesn't analyze the data, only uses addressing info.  E.g., allow
 port 80, block port 23.  Included in most routers.  Some allow specifying which
 IPs can request which ports.
-***** proxy firewalls
+***** Proxy firewalls
 An intermediary between outside/inside the network.  Examines data and makes
 rule-based decisions about whether to forward/refuse requests.  Intercepts all
 packets and reprocesses them for internal use, including the hiding of IPs.
@@ -733,7 +733,7 @@ Proxies can function at either:
   is needed for each protocol supported.  Many provide full auditing,
   accounting, etc.
 - Circuit-level: Doesn't deal with the contents of packets processed.
-***** stateful packet inspection firewalls
+***** Stateful packet inspection firewalls
 Stateless firewalls make decisions based on the data that comes in (the current
 packet), and not complex decisions.  Stateful packet inspection (SPI) filtering
 keeps records for every communication channel and what the next should be.
@@ -741,7 +741,7 @@ keeps records for every communication channel and what the next should be.
 Stateful inspection occurs at all levels of the network and provided added
 security, especially for UDP and ICMP.  DoS attacks can overload the state
 table and cause firewalls to shut down/reboot.
-**** routers
+**** Routers
 Primary device for connectivity between two or more networks.  Provides a path
 between networks and joins networks.  Most routers can act as packet-filtering
 firewalls.
@@ -766,7 +766,7 @@ Best practice is for a router to augment the defense of a firewall.
 
 Routers can be configured statically (manually) or dynamically (where they
 learn of other routers and use their info to build routing tables).
-**** switches
+**** Switches
 Multiport devices that improve network efficiency.  Switches contain small
 amounts of info, usually only a table of MAC addresses.  Using virtual
 circuits, they improve network efficiency.  Virtual circuits are more difficult
@@ -775,7 +775,7 @@ routers and hubs.
 
 Only use switches internally because they only use MAC addresses and not IPs.
 Routing can only occurs on IPs.
-**** load balancers
+**** Load balancers
 Load balancing is shifting a load between devices.  Can apply to servers, HDs,
 CPUs, etc.  This provides:
 - Reduced response time.
@@ -783,11 +783,11 @@ CPUs, etc.  This provides:
 - Allows better resource allocation.
 
 Can be software or hardware.
-**** proxies
+**** Proxies
 A device that acts on behalf of another.  All internal user interaction with
 the internet should be controlled through a proxy server.  Proxies should
 auto-block known bad sites.  Caching should be enabled.
-**** web security gateway
+**** Web security gateway
 A proxy server (proxies and caches) with web protection software built-in.
 Can include a virus scanner and traffic monitors.  Can detect/prohibit certain
 content, P2P connections, IM, tunneling, HTTP/HTML exploits, ActiveX, etc.
@@ -803,13 +803,13 @@ VPN concentrator: A hardware device used to create remote access VPNs.  It
 creates encrypted tunnel sessions between hosts, most using two-factor
 authentication.  Cisco concentrators include Scalable Encryption Processing
 (SEP) for hardware encryption.
-**** intrusion detection systems (IDS)
+**** Intrusion detection systems (IDS)
 Software that runs either on workstations or network devices to track network
 activity.  Can evaluate system logs, monitor network activity, and disconnect
 sessions in violation of security.  Some IDSs come with firewalls.  Recommend
 combining with a firewall, as if firewall defenses are bypassed, the IDS
 introduces reactive countermeasures.
-**** understanding intrusion detection systems
+**** Understanding intrusion detection systems
 Intrusion detection (ID) is the process of monitoring events in a system or
 network to detect an occurring intrusion.  An intrusion is any activity that
 attempts to undermine or compromise the confidentiality, integrity, or
@@ -859,7 +859,7 @@ IDSs detect and report unusual occurrences, but unlike firewalls, don't block.
 **** IDS vs. IPS
 An IPS is an IDS that reacts to detected intrusion, usually by blocking
 communication from an offending IP.  The main problem here is false positives.
-**** working with a Network-based IDS (NIDS)
+**** Working with a Network-based IDS (NIDS)
 NIDS attaches to some point in a network, and reports on/monitors network
 traffic.  Can be in front or behind a firewall.  A dual-security approach is
 to place NIDSs in both locations.
@@ -875,7 +875,7 @@ Port spanning/port mirroring: Copies all traffic from all ports to a single
 port and disallows bidirectional traffic on that port.
 
 Two types of responses: passive and active.
-***** implementing a passive response
+***** Implementing a passive response
 Cannot react to an incident.
 
 Passive strategies:
@@ -885,7 +885,7 @@ Passive strategies:
   manned IDSs, messages can appear on the manager's console.
 - Shunning: Ignoring an attack.  Useful for attacks that are inapplicable
   (e.g. IIS attacks on Apache).
-***** implementing a active response
+***** Implementing a active response
 Involve taking action based on an attack/threat.  The goal is taking the
 quickest possible reaction to reduce impact.  More costly than passive.
 
@@ -898,7 +898,7 @@ Active reactions:
   length of time.
 - Deception: Fools an attacker into thinking an attack is succeeding, while
   monitoring and possibly redirecting to a honeypot.
-**** working with a Host-based IDS (HIDS)
+**** Working with a Host-based IDS (HIDS)
 Software run on a host, usually a service or background process.  Examines
 logs, events, and applications, but usually skips network traffic.  Popular on
 servers already using encrypted channels.  Typically are passive.
@@ -910,21 +910,21 @@ Problems:
 Benefits:
 - Can keep checksums on files to detect alteration.
 - Can read memory.
-**** working with NIPSs
+**** Working with NIPSs
 Network intrustion prevention systems focus on prevention.  Also detects,
 therefor is a subset of NIDS.  Focuses on signature matches and takes action.
 
 Can also be called intrusion detection and prevention systems (IDPS).
-**** logs to check in Linux
+**** Logs to check in Linux
 - /var/log/faillog: Failed authentication attempts.
 - /var/log/lastlog: List of uses and when they logged in.
 - /var/log/messages: Use grep to find login-related info.
 - /var/log/wtmp: Used by last command.
-**** protocol analyzers
+**** Protocol analyzers
 Protocol analyzers = packet sniffers.  Monitor data transmitted across a
 network.  Software called an analyzer or sniffer.  Snort is an example of an
 analyzer.
-**** spam filters
+**** Spam filters
 Catches unwanted email and filters it before delivery.  Uses rules, such as
 sender IP lists, subject word scanning, etc.  Can also be used for outgoing
 mail to catch infected internal computers.
@@ -939,21 +939,21 @@ dependence.
 ***** URL filters
 Block websites based on URL.  IE8's SmartScreen Filter is a URL filter, which
 blocks phishing and malware sites.
-***** content inspection
+***** Content inspection
 Looks at data coming in.  IE includes Content Advisor.
-***** malware inspection
+***** Malware inspection
 Malware detection is useful, but stop it prior to being on systems is better.
-***** web application firewall (WAF) vs. network firewall
+***** Web application firewall (WAF) vs. network firewall
 A WAF is a real-time appliance that applies a set of customizable rules to
 block traffic to and from webservers and to try to block attacks.  Protects
 against XSS, injection attacks, and forged HTTP requests.
 
 Reacts to both known and suspected problems, making them superior to IPSs.
-***** application-aware devices
+***** Application-aware devices
 Has the ability to respond to traffic based on what's there.  These devices
 combine SNMP and QoS to prioritize traffic.  Can be added to firewalls, IPSs,
 IDSs, and proxies.
-*** review questions
+*** Review questions
 1 C
 2 A
 3 D
@@ -974,14 +974,14 @@ IDSs, and proxies.
 18 A
 19 D
 20 A
-*** additional notes
+*** Additional notes
 Socket: A combination of an IP and port.
 ** Chapter 4: Access control, authentication, and authorization
 Controlling access to a system, what resources are accessible, and ensuring
 users are who they claim to be.
-*** understanding access control basics
+*** Understanding access control basics
 Access control: Allowing authorized users to the system and keeping others out.
-**** identification vs. authentication
+**** Identification vs. authentication
 - Identification: Finding out who someone is.  Claiming an identity
 - Authentication: A mechanism for verifying that identification.  Proving the
   identity.
@@ -997,7 +997,7 @@ Systems use similar methods for authentication between each other.
 
 Out-of-band authentication: Getting public record info (such as credit
 reports) and querying about info within.
-**** authentication (single factor) and authorization
+**** Authentication (single factor) and authorization
 Single-factor authentication (SFA): The most basic form.  Includes user/pass
 combination.
 
@@ -1005,22 +1005,22 @@ Mutual authentication: When two or more parties authenticate each other.
 Servers and clients can use this to establish a secure connection and employ
 encryption.  Ensures the client isn't connecting to a rogue server.  Used when
 data is critical, like finance.
-**** multifactor authentication
+**** Multifactor authentication
 When two or more authentication methods are used, e.g. user/pass + smart card.
 The factors can not be from the same category.  Password+PIN is still SFA.
-**** layered security and defense in depth
+**** Layered security and defense in depth
 Synonymous terms, both meaning not relying on a single entity for protection.
-**** network access control
+**** Network access control
 Operational security is part of a triad also including physical and management
 security.  Operational security includes network access control (NAC),
 authentication, and security topologies -- everything not included in design
 or physical security.
-**** tokens
+**** Tokens
 Security tokens are pieces of data that contain the rights and access
 privileges of the token bearer as part of the token.  Similar to certs in that
 they are used to identify and authenticate a user.  Some OSes create temp
 tokens for every action or for user sessions.
-**** federations
+**** Federations
 A federation is a collection of related (e.g., for an industry association)
 computer networks that agree on standards of operation, such as for security.
 An example is an IM federation of providers that agree on communication
@@ -1030,16 +1030,16 @@ Federated identity: Linking a user's identity with their privileges in a manner
 usable across business boundaries (e.g. MS Passport, Google Checkout).
 
 Single sign-on: Having one password for all resources on a network.
-**** potential authentication and access problems
+**** Potential authentication and access problems
 Transitive access and client-side attacks.
-***** transitive access
+***** Transitive access
 Involves transition.  A trusts B, B trusts C, then A may trust C.  Problems
 here were solved with transitive trusts, which type relationships between
 domains.
 
 In AD, the default is two-way transitive trust.  Potentially troublesome due
 to someone acquiring undesired access by joining a domain.
-**** authentication issues to consider
+**** Authentication issues to consider
 Consider tech-savviness of people affected by policies, though its better to
 educate users than lower security.
 
@@ -1048,7 +1048,7 @@ authentication, e.g. asking for mother's maiden name in event of lost
 password.  The problem with these is that they are easily guessed/learned.
 Difficult questions or biometrics are better.  Proofing shouldn't grant
 immediate access, rather it should send access info to their email account.
-**** authentication protocols
+**** Authentication protocols
 - PAP (Password Authentication Protocol): Older system, not used.  Sends
   user/pass in plain text.
 - SPAP (Shiva Password Authentication Protocol): Replaced PAP.  Encrypts
@@ -1061,19 +1061,19 @@ immediate access, rather it should send access info to their email account.
   to create unique passwords.
 - HOTP (HMAC-Based One-Time Password): An algorithm using a Hash Message
   Authentication Code (HMAC) algorithm.
-**** account policy enforcement
+**** Account policy enforcement
 Account Policy: Determines security parameters regarding who can/cannot access
 the system.
 
 The following subsections are account policy enforcement best practices.
-***** password length and complexity
+***** Password length and complexity
 Obtain balance between ease of remembering and cracking difficulty.  Minimums:
 8 chars considered length, 1 non-alpha char.
 
 Windows can be set to not require passwords by setting min length 0.  Win
 8/7/Vista's Local Security Policy sets password complexity.  Physical access
 to Windows machines can allow password retrieval.
-***** password expiration
+***** Password expiration
 The longer a password is used, the more likely it is to be broken.  90 days is
 the standard, MS recommends 42.
 
@@ -1081,10 +1081,10 @@ Password history: Prevents users from using previous passwords, with
 configurable history lengths.  History of 24 passwords is recommended.
 
 Set minimum number of days that can exist between password changes to 2.
-***** password recovery
+***** Password recovery
 Only a hash is stored usually.  Admins should change it to something else then
 have users log in and change it.
-***** password disablement and lockout
+***** Password disablement and lockout
 Accounts should be disabled for employees on temporary leave and permanently
 for terminated employees.  For employees coming back as contractors, suspend
 accounts so the relative identifiers (RIDs) are reused.
@@ -1096,18 +1096,18 @@ preventing password guessing:
 - Account lockout threshold: Number of failed login attempts.
 - Reset account lockout counter after: Duration between failed login attempts
   that count as a sequence of failures.
-**** users with multiple accounts/roles
+**** Users with multiple accounts/roles
 Educate users with elevated privilege accounts to only use them when
 necessary.  Establish policies to this effect.
-**** generic account prohibition
+**** Generic account prohibition
 A generic account is any account shared by multiple users, including guest
 accounts.  Problems include shared passwords and auditing issues.  These
 should not be used.
-**** group-based and user-assigned privileges
+**** Group-based and user-assigned privileges
 Group privileges include groups and roles.
-*** understanding remote access connectivity
+*** Understanding remote access connectivity
 Remote authentication is any auth done for a remote user.
-**** using the Point-to-Point Protocol
+**** Using the Point-to-Point Protocol
 PPP supports multiple protocols and works with POTS, ISDN, T1, etc.  Doesn't
 provide data security (no encryption), but does use CHAP auth.
 
@@ -1117,7 +1117,7 @@ with Link Control Protocol (LCP).
 PPP's insecurity makes it unsuitable for WAN connections.  For direct
 connections, risk of phone line taps is small.  PPP connections through a
 network should use an encrypted tunnel system.
-**** working with tunneling protocols
+**** Working with tunneling protocols
 Tunneling protocols create tunnels between networks that can be more secure,
 support added protocols, and provide virtual paths.  Sensitive data is
 encapsulated in other packets and sent across a public network.
@@ -1137,7 +1137,7 @@ encapsulated in other packets and sent across a public network.
   protocols.  Primarily for LAN-to-LAN connections, but also remote
   connections.  Provides secure authentication and encryption of data and
   headers.
-**** working with RADIUS
+**** Working with RADIUS
 Remote Authentication Dial-in User Service (RADIUS), an IETF standard protocol,
 allows authentication of remote and other network connections.  Implemented by
 most major OSes.  Can be managed centrally.  Servers that allow access to a
@@ -1166,7 +1166,7 @@ levels.
 Security Assertion Markup Language (SAML) is an XML variant used for
 authentication and authorization data.  Service providers uses SAML to prove
 remote user identity.
-*** understanding authentication services
+*** Understanding authentication services
 Authentication services: The implementation of the authentication
 technology. Only need to know about LDAP, Kerberos, and SSO for exam.  LDAP
 and Kerberos are protocols, SSO is a property of access control.
@@ -1191,7 +1191,7 @@ Workflow:
   The TGT sends the user a service ticket.
 - The user's computer sends the service ticket to the server with the service.
   The server communicates with the TGT to validate the service ticket.
-**** single sign-on initiatives
+**** Single sign-on initiatives
 SSO gives users access to all needed applications/systems needed with one
 login.
 - Kerberos: A single token allows any Kerberos-enabled application to accept a
@@ -1205,7 +1205,7 @@ representing a security risk.  Enforcing password changes helps some.
 
 SSO has some of its own security issues, but is the simplest way to deal with
 users with multiple roles/accounts.
-*** understanding access control
+*** Understanding access control
 Four primary methods of access control:
 - Mandatory Access Control (MAC): All access predefined.
 - Discretionary Access Control (DAC): Incorporates some flexibility.
@@ -1234,11 +1234,11 @@ of DAC and MAC.  Windows uses this.
 Uses preconfigured security policies, like deny lists and allow lists.  Can be
 used in conjunction with role-based models to add flexibility.  Can implement
 this with ACLs.
-*** implementing access controlling best practices
-**** least privilege
+*** Implementing access controlling best practices
+**** Least privilege
 Users/systems are given the minimum privileges necessary to accomplish their
 job.  Reduces the risk of privilege escalation.
-**** separation of duties
+**** Separation of duties
 Differentiation between users and groups at varying levels, e.g., root/SA,
 administrative accounts, normal users, restricted accounts.
 
@@ -1247,15 +1247,15 @@ Do the following at minimum:
   functions.
 - Limit SA account to minimum group.
 - Separate audit/logging from SA.
-**** time of day restrictions
+**** Time of day restrictions
 Configuring when an account can have access.  Prevents attacks during the
 majority of the time accounts aren't in use.
-**** user access review
+**** User access review
 Access review is a process to determine whether a user's access level is still
 appropriate.  Accounts for change in roles over time.
 
 Continuous monitoring: Ongoing auditing of resources accessed by a user.
-**** smart cards
+**** Smart cards
 Contain memory storing permissions and access information.  Difficult to
 counterfeit but easy to steal.  Passwords/PINs are required to activate most
 smart cards.
@@ -1263,12 +1263,12 @@ smart cards.
 Used for accessing DoD computers, signing email, and implementing PKI.
 ***** Personal Identification Verification (PIV) card
 The same as CAC, but for federal employees and contractors.
-**** access control lists
+**** Access control lists
 Grants/denies devices access to network capabilities.
-***** implicit deny
+***** Implicit deny
 If the proviso in question has not be explicitly granted, then access is
 denied.  Can be based upon IP, destination, packet type, etc.
-***** firewall rules
+***** Firewall rules
 Dictates what traffic can pass between the firewall and internal network.
 Criteria:
 - Block the connection.
@@ -1277,7 +1277,7 @@ Criteria:
 
 Can be applied inbound/outbound and to any network type, and should be audited
 regularly.
-**** port security
+**** Port security
 Allows an administrator to configure switch ports so that only certain MAC
 addresses can use the port.  A feature of smart switches, which also include
 Dynamic ARP Inspection (DAI) to protect ports from ARP spoofing.
@@ -1287,12 +1287,12 @@ Areas to be familiar with:
   routers also have this feature.  Not foolproof.
 - 802.1X: Adding port authentication to MAC filtering increases security.
 - Unused ports: Disable these.
-**** working with 802.1X
+**** Working with 802.1X
 Defines port-based security for wireless network access control.  Adds
 authentication via Extensible Authentication Protocol (EAP) over IEEE 802,
 called EAP over LAN (EAPOL).  Allow APs and switches to not do authentication,
 but rely on an authentication server.
-**** flood guards and loop protection
+**** Flood guards and loop protection
 Flood guard: A protection feature built into some firewalls to vary the
 tolerance for unanswered login attacks.  Lessens the likelihood/success of DoS
 attacks.
@@ -1301,12 +1301,12 @@ Loop protection: Prevents broadcast loops.  Can disable broadcast forwarding
 to protect against duplicate ARP requests (those having the same target
 protocol address).  The Spanning Tree Protocol (STP) ensures loop-free bridged
 ethernet LANs.  STP ensures only one active path exists between two stations.
-**** preventing network bridging
+**** Preventing network bridging
 Network bridging: When a devices has multiple NICs where a user on one network
 can jump to the other.  A problem with modern laptops with multiple adapters.
 Preventable by shutting off a jack when bridging is detected.  Create profiles
 where only one interface is allowed.  Disable unused connections and ICS.
-**** log analylsis
+**** Log analylsis
 Collect and analyze logs.  Store them for future baseline comparisons.
 **** Trusted OS (TOS)
 Any OS meeting government requirements for security.  Common Criteria (CC) are
@@ -1321,7 +1321,7 @@ Assurance Levels (EALs):
 - EAL 6: Specialized security engineering.  Secure from penetration attackers.
 - EAL 7: Extremely high levels of security.  Requires extensive independent
   testing and measurement of every component.
-**** secure router configuration
+**** Secure router configuration
 Musts:
 - Change the default password.
 - Walk through the advanced settings: Block ping requests, perform MAC
@@ -1330,7 +1330,7 @@ Musts:
   discovered problems.
 
 Back up router configuration before changing anything.
-*** review questions
+*** Review questions
 1 B
 2 B
 3 A
@@ -1351,10 +1351,10 @@ Back up router configuration before changing anything.
 18 B
 19 C
 20 D
-*** additional notes
+*** Additional notes
 Tokens can be used to validate users per-session.
 ** Chapter 5: Protecting wireless networks
-*** working with wireless systems
+*** Working with wireless systems
 802.11 standards.
 **** IEEE 802.11x wireless protocols
 The 802.11x family of protocols provide wireless communication using radio
@@ -1417,7 +1417,7 @@ the host that it's still talking to the original connection.
 The security layer for WAP.  Provides authentication, encryption, and data
 integrity on wireless.  Uses lower bandwidth/processing than TLS.  Moderately
 secure.  WTLS is used to support devices that don't have much processing power.
-*** understanding wireless devices
+*** Understanding wireless devices
 Use RF signalling or cellular.
 
 Levels of security existing in WAP:
@@ -1434,16 +1434,16 @@ Technologies providing services between devices:
 - Wireless Transaction Protocol (WTP): Provides TCP/UDP analogs to WAP.
 - Wireless Transport Layer Security (WTLS): Security layer for WAP.
 - Wireless Datagram Protocol (WDP): Provides common interface between devices.
-**** wireless access points
+**** Wireless access points
 A low-power transmitter/receiver (transceiver), placed strategically for
 wireless access, using 802.11x protocols.  Uses a portion of the RF (radio
 frequency) spectrum called microwave.
-***** antenna placement
+***** Antenna placement
 Generally, the greater the distance, the more the signal will attenuate.
 Materials can reflect or absorb the signal.  Some include power level controls
 to reduce amount of output.  A site survey with a strength meter can be done
 while laying out a network.
-***** antenna types
+***** Antenna types
 - Omnidirectional antenna: Provide 360° patterns evenly.
 - Directional antenna: Can cover a greater distance, but in a particular
   direction.
@@ -1452,10 +1452,10 @@ while laying out a network.
 ***** MAC filtering
 Most APs include MAC filtering, but default it to off.  Synonymous with
 "network lock".  Vulnerable to MAC spoofing.
-***** captive portals
+***** Captive portals
 Common on public hotspots.  Requires users to agree to conditions before using
 the network/Internet.
-***** working with VPNs
+***** Working with VPNs
 VPNs can enhance security over wireless.
 **** Extensible Authentication Protocol (EAP)
 Provides a framework for authentication often used in wireless networks.
@@ -1476,7 +1476,7 @@ recommended.
 ***** Protected Extensible Authentication Protocol (PEAP)
 The current standard EAP.  Secure through establishing an encrypted channel
 between server/client.
-*** wireless vulnerabilities to know
+*** Wireless vulnerabilities to know
 Vulnerable to all the wired attacks, plus additional wireless ones.  Easy to
 intercept.  Network names are regularly broadcast via SSID broadcast.
 
@@ -1509,7 +1509,7 @@ non-discoverable.  Vulnerablities:
 - Bluejacking: Sending unsolicited messages (like spam) over Bluetooth
   connections.
 - Bluesnarfing: Gaining unauthorized access through a Bluetooth connection.
-*** review questions
+*** Review questions
 1 C
 2 A
 3 C
@@ -1531,7 +1531,7 @@ non-discoverable.  Vulnerablities:
 19 A
 20 D
 ** Chapter 6: Securing the cloud
-*** working with cloud computing
+*** Working with cloud computing
 Service models: SaaS, PaaS, IaaS.  Delivery models: private, public, community,
 hybrid.
 
@@ -1545,187 +1545,406 @@ infrastructure.
 
 Consumer: User.
 Provider: Application, middleware, OS, hardware, network, facility.
+
+Keywords: Consumer "uses", but doesn't "manage or control".
 **** Platform as a Service (PaaS)
 Consumer can deploy consumer-created/acquired applications on the cloud, using
 languages, libs, services, and tools provided by provider.
 
 Consumer: User, application.
 Provider: Middleware, OS, hardware, network, facility.
+
+Keywords: Consumer "deploys", but doesn't "manage or control".
 **** Infrastructure as a Service (IaaS)
 Consumer able to deploy and run arbitrary software, OSes, and applications.
 
 Consumer: User, application, middleware, OS.
 Provider: Hardware, network, facility.
-**** private cloud
+
+Keywords: Consumer "provisions" and "deploys and runs", but doesn't "manage or
+control".
+**** Private cloud
 Cloud is for exclusive use by an organization.  Organization acts as both
 provider and consumer.  Doesn't need to be online.
-**** public cloud
+**** Public cloud
 Cloud open for use by general public.  Cloud providers own public clouds.
-**** community cloud
+**** Community cloud
 Cloud for use by specific community or organizations with shared concerns.  May
 be owned/operated by some of the organizations or external.
-**** hybrid cloud
-Composition of two or more of public, private, community.
-*** working with virtualization
+**** Hybrid cloud
+Composition of two or more of public, private, community.  Most commonly a
+combination of private and public.
+*** Working with virtualization
 Hypervisor: The software/hardware combination making virtualization possible.
 Two methods of implementation exist:
 - Type I hypervisor (bare metal): Independent of the OS and boots before the
   OS.
 - Type II hypervisor (hosted): Dependent upon the OS and cannot boot until the
   OS is running.
-**** snapshots
+**** Snapshots
 Allow taking of an image of the system at a point in time.  The VM can then be
 reverted to a saved state.  Snapshots contain copies of the VM settings
 (hardware configuration), information on all virtual disks, and memory state of
 the VM.  Can be used for cloning.
-**** patch compatibility
-**** host availability/elasticity
-**** security control testing
-**** sandboxing
-*** security and the cloud
-**** cloud storage
-*** review questions
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+**** Patch compatibility
+Verify patch compatibility with VMs before updating them.  Verify sources of
+patches.
+**** Host availability/elasticity
+Availability: The goal is five 9s, the industry standard.
+
+Elasticity: Scaling up/down capabilities, sometimes automatically.
+**** Security Control Testing (SCT)
+Includes interviews, examinations, and testing of systems to look for
+weaknesses.  Also includes contract reviews of SLAs and history of prior
+breaches.  A subset of penetration testing.
+**** Sandboxing
+Running apps in restricted memory areas.  Limits the possibility of an app
+crash.  Removes the possibility of another customer's implementation exposes a
+"server hop" path.
+*** Security and the cloud
+Security issues regarding clouds:
+- Multitenancy: Workloads from different clients can be on the same system and
+  a flaw in implementation could compromise security.  Other customer security
+  issues could affect your data.  Protect data from other cloud customers.
+  Data segregation can help reduce some risks.
+- Laws and regulations: Responsibility of security remains with consumer.
+
+Software/services not necessary for the implementation should be
+removed/disabled, patches/firmware kept current, and logs monitored.  Cloud
+data storage should involve encryption.  VPN routing/forwarding can help.
+Backups should be done regularly.  Prioritize access control.
+**** Cloud storage
+SLA needs to spell out how provider will handle data protection (sandboxing,
+etc.), redundancy, disaster recovery, etc.
+*** Review questions
+1 C
+2 A
+3 B
+4 B
+5 A
+6 C
+7 D
+8 A
+9 D
+10 B
+11 D
+12 A
+13 C
+14 C
+15 B
+16 A
+17 B
+18 B
+19 B
+20 C
+*** Additional notes
+XaaS: Anything as a Service.  Combination of multiple service models.
 ** Chapter 7: Host, data, and application security
-*** application hardening
-**** database and technologies
-**** NoSQL
-**** big data
-**** SAN
-**** fuzzing
-**** secure cloud
-**** OWASP
-**** CERT secure coding standards
-**** application configuration baselining
-**** operating system patch management
-**** application patch management
-*** host security
-**** permissions
-**** access control lists
-**** antimalware
-**** host software baselining
-**** hardening web services
-**** hardening email servers
-**** hardening FTP servers
-**** hardening DNS servers
-**** hardening DHCP servers
-*** protecting data through fault tolerance
-**** backups
+*** Application hardening
+**** Databases and technologies
+RDBMSes, SQL.  To improve performance and improve security, companies have
+implemented a tiered systems (ones that include DBs) model:
+- One-tier model (single-tier environment): DB and application exist on a
+  single system.  Common on desktops running a standalone DB.  Early Unix
+  systems worked this way.
+- Two-tier model: Client workstation/system runs the application,
+  communicating with a DB running elsewhere.
+- Three-tier model: Isolates the end user by introducing a middle-tier server.
+  The middle tier controls access to the DB and provides additional security.
+***** NoSQL
+Used where scaling is important.  Uses "horizontal" scaling model (adding more
+servers), vs. RDBMs' "vertical" scaling (beefing up server).
+***** Big data
+Defined here as that which cannot normally fit on a single server, but is
+instead stored on a SAN.  Size causes it to become difficult to use/manage.
+***** Storage Area Network (SAN)
+A separate network setup to appear as a server storing data to the
+organization.  Abstracts storage/device complexity.  SANs usually have
+redundant servers, connected via fibre or iSCSI.
+
+SAN security: Similar to any server, except includes network isolation.  Needs
+a firewall, maybe an IDS, user access control, etc.
+**** Fuzzing
+Providing unexpected values as application input, in order to make it crash.
+A common method is to flood the input with a stream of random bits.
+
+Prevent this by validating all input and ensuring it is of an expected type.
+**** Secure coding
+The only prevention for attacks like XSS, SQL injection, and buffer overflows.
+***** OWASP
+The Open Web Application Security Project (OWASP) is a group that forms secure
+coding practices for web, mobile, and client applications, along with back-end
+design.
+
+Recommends all data input be validated before processing via:
+- Client-side validation: Accomplished within the client-side web page.
+- Server-side validation: Validates the data after the server's received it.
+  Normally done in conjunction with client-side validation.
+***** CERT secure coding standards
+Covers some of the same stuff as OWASP guidelines, but also includes
+language-specific guidelines.  Addresses exception handling.
+
+Exception handling: How errors are handled are critical to security.  Don't
+present detailed error information to end users.  Log it instead.
+**** Application configuration baselining
+Baselining compares performance to a metric.  Baseline key applications prior
+to a major configuration change.
+**** Operating system patch management
+The three patch levels for OSes, applied to urgency:
+- Hotfix: An immediate and urgent patch.  Represent serious security issues
+  and not optional.
+- Patch: Non-urgent fix, providing functionality.
+- Service pack: Should always be applied, but tested first to ensure no
+  problems are caused by it.
+***** Application patch management
+Same rules above apply to applications.  Routinely scan for available patches.
+Many attacks target client systems do to poorer patch management.
+*** Host security
+A network is only as strong as its weakest host.
+**** Permissions
+Apply least privileges.
+
+Microsoft's 5 file permissions:
+- Full control: +rwx, and assign permissions to other users.
+- Modify: +rw, with delete.
+- Read and execute: +rx.
+- Read: +r.
+- Write: +w.
+
+Folders have the same, plus one:
+- List folder contents: Allows user to see contents but not read files.
+**** Access Control Lists (ACLs)
+A list of who can access what resource and at what level.  Can be part of an OS
+or application.  Can also be a physical list for access to a room or building.
+
+Related to ACLs:
+- White list: A list of items allowed.
+- Black list: A list of things prohibited.  Includes black lists of websites.
+**** Antimalware
+Minimum actions to take:
+- Install antivirus software: Install and keep definitions current on all
+  servers/workstations.  Monitor incoming files and scan regularly.
+- Install antispam filters: Keeps spam away from users.
+- Install antispyware software: Standalone or combined with AV.  Scan
+  regularly.  Watch for tracking cookies.
+- Use pop-up blockers: Annoying and a security threat.
+- Use host-based firewalls: A line of defense against attackers/malware.
+  Good, but still need a Web Application Firewall (WAF) to check every request
+  between client and a web server.
+- Use host-based IDSs: SNORT is an example.
+**** Host software baselining
+A security baseline (or performance baseline) defines the level of security
+implemented and maintained.  Low is no security, high doesn't allow users to
+make any changes.  Most are somewhere between.
+**** Hardening web servers
+Web servers represent the greatest reach for attackers when compromised.
+Every service a web server provides could be an attack vector.  Ensure users
+have minimal permissions.  If anonymous accounts are used, ensure they can
+only view pages.
+
+Filters allow limiting traffic allowed through.
+
+Control access to executable scripts, like CGI, PHP, etc.  It's possible a user
+can break out of a script while at elevated level (while the script is
+running).  Thoroughly test, debug, and approve these scripts.
+
+All web servers create an OS account when services are installed.
+**** Hardening email servers
+Put an active virus scanner on email servers.  Also scan Exchange mail stores
+with specific AV scanners (normal ones can't open MS's open files).
+**** Hardening FTP servers
+FTP isn't intended for high-security applications due to inherent weaknesses.
+Create FTP file areas on separate drives.  Use VPNs or SSH for FTP-like
+activities instead.  FTP sends user/pass encrypted over the network.
+
+Give users a separate user/pass for FTP access, preventing normal accounts
+from getting compromised.  Scan all files stored on an FTP server.  Always
+disable the anonymous account.
+
+Like with web servers, an FTP server creates an account on service install.
+
+Even better, use a secure alternative, like SFTP.
+**** Hardening DNS servers
+Types of DNS attacks:
+- Domain Name Service Denial-of-Service attacks (DNS DoS): Disrupts operations
+  of the DNS server, making it unusable.  Minimize impact by ensuring server
+  software is up to date and use two-factor authentication with the registrar.
+- Network footprinting: The act of gathering data about a network to find ways
+  someone might intrude.  DNS servers store lots of network information.
+  Using nslookup, an attacker can learn about your network configuration.  DNS
+  entries include names and information on some of the key servers in the
+  network (email, web, etc.).  Keep information stored on external DNS
+  servers to a minimum, or use 2 DNS servers (one external, one internal).
+- Compromising record integrity: In DNS lookup systems involving a
+  primary/secondary, changes in one will propagate to the other.  An attacker
+  could redirect traffic to unintended destinations.  Ensure DNS servers
+  require authentication before updates are made.
+
+Domain Name System Security Extensions (DNSSE): Created to add security to and
+maintain backward compatibility with DNS, once exploits in DNS were discovered.
+DNSSE checks digital signatures and protects information with digitally signed
+records.  Protects against forged DNS data.
+**** Hardening DHCP servers
+DHCP can be provided by routers, switches, or servers, and leases an IP address
+to a workstation for a specified time along with other network configuration
+options.  Only one DHCP server can be active on a given network/segment (lest
+multiple DHCP servers clash), though redundant, non-overlapping servers are
+possible.  NAT servers can provide DHCP service.  DHCP usage should be limited
+to workstations.  Watch for rogue APs that act as DHCP servers.
+*** Protecting data through fault tolerance
+**** Backups
+The most basic level of fault tolerance.
+
+Backup types:
+- Full: All changes to data are archived.
+- Differential: All changes since last full backup are archived.  Balances
+  efficiency and ease of backup use.
+- Incremental: All changes since last backup of any type are archived.  Most
+  efficient, but more work to use backup.
+
+Hierarchical storage management (HSM): Provides continuous online backup on
+optical/tape.  Appears as an infinite disk to the system.  Closest to a
+real-time backup.
 **** RAID
-**** clustering and load balancing
-*** application security
-*** best practices for security
-**** data loss prevention
-**** hardware based encryption
-*** review questions
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+Same as RAID information from Chapter 1, with some additions:
+- RAID 0: Disk striping.
+- RAID 1: Disk mirroring/duplexing.
+- RAID 3/4: Striping with one dedicated parity disk.  Can lose 1 disk.
+- RAID 5: Striping with distributed parity.  Can lose 1 disk.
+- RAID 6: Striping with 2 parity disks.  4 or more disks.  Can lose 2 disks.
+- RAID 1+0 (or 10): A mirrored set (1), striped (0).  A stripe mirrors.
+- RAID 0+1: The reverse of 10.  A mirror of stripes.
+
+Data at rest: Data not currently being transmitted.  Includes backups and RAID.
+
+Data in transit: Active data.  Data being sent over some network connection.
+**** Clustering and load balancing
+Clustering: Anytime multiple computers work/act together as a single server.
+Use parallel processing (improving performance and availability) and add
+redundancy (but adding cost).
+
+Load balancing: Splitting the workload across multiple servers.  A mirror site
+is when server farm geo-locations are split.  This can add geographic
+redundancy.
+*** Application security
+- Key management: PKI services are popular and expanding to mobile.
+- Credential management: Credentials allow user/pass to be stored in one
+  location, then used to access websites/computers.
+- Authentication: More pressing with mobile.  Don't configure applications to
+  auto-login.
+- Geo-tagging: Allow GPS coordinates to embed in files like images.  Can
+  reveal the location of facilities/resources unintentionally.
+- Encryption: Company policies should address this.
+- Application white-listing: Identify applications approved/accepted on the
+  network.
+- Transitive trust/authentication: Problems possible anytime one entity accepts
+  a user without requiring additional authentication on behalf of another
+  entity.  More authentication checks generally equals more security.
+*** Best practices for security
+**** Data Loss Prevention (DLP)
+DLP systems monitor the contents of systems and ensure key content is not
+deleted/removed.  Also monitor who is using the data, look for unauthorized
+access, and who is transmitting data.  Examples include MyDLP, RSA, and
+Tripwire.
+**** Hardware-based encryption devices
+Some BIOS configurations allow enabling Trusted Platform Modules (TPMs), which
+can assist with hash key generation.  The TPM is a chip that can store some
+cryptographic keys, passwords, or certificates.  Used to protect smart phones
+and some PCs.  Whole disk encryption via BitLocker can use a TPM.
+*** Review questions
+1 A
+2 B
+3 B
+4 A
+5 B
+6 A
+7 C
+8 A
+9 C
+10 D
+11 B
+12 C
+13 D
+14 B
+15 A
+16 C
+17 D
+18 C
+19 D
+20 B
+*** Additional notes
+- Don't share root directories of disks.
+- Hotfixing also implies doing so on a running system.
+- Patching also implies manual updating.
 ** Chapter 8: Cryptography
-*** an overview of cryptography
-**** historical cryptography
-**** substitution ciphers
-**** multi-alphabet substitution
-**** transposition ciphers
-**** the Enigma Machine
-**** steganography
-**** transport encryption
-*** modern cryptography
-**** working with symmetric algorithms
-**** key exchange
-**** working with asymmetric algorithms
-**** what cryptography should you use?
-**** hashing algorithms
-**** rainbow tables and salt
-**** key stretching
-**** understanding quantum cryptography
-**** cryptanalysis methods
-**** wi-fi encryption
-*** using cryptographic services
-**** confidentiality and strength
-**** integrity
-**** digital signatures
-**** authentication
-**** nonrepudiation
-**** key features
-*** understanding cryptography standards and protocols
-**** the origins of encryption standards
-**** the role of government agencies
+*** An overview of cryptography
+**** Historical cryptography
+**** Substitution ciphers
+**** Multi-alphabet substitution
+**** Transposition ciphers
+**** The Enigma Machine
+**** Steganography
+**** Transport encryption
+*** Modern cryptography
+**** Working with symmetric algorithms
+**** Key exchange
+**** Working with asymmetric algorithms
+**** What cryptography should you use?
+**** Hashing algorithms
+**** Rainbow tables and salt
+**** Key stretching
+**** Understanding quantum cryptography
+**** Cryptanalysis methods
+**** Wi-Fi encryption
+*** Using cryptographic services
+**** Confidentiality and strength
+**** Integrity
+**** Digital signatures
+**** Authentication
+**** Nonrepudiation
+**** Key features
+*** Understanding cryptography standards and protocols
+**** The origins of encryption standards
+**** The role of government agencies
 - National Security Agency
 - National Security Agency/Central Security Service
 - National Institute of Standards and Technology
-**** industry associations and the development process
+**** Industry associations and the development process
 - American Bankers Association
 - Internet Engineering Task Force
 - Internet Society
 - World Wide Web Consortium
 - International Telecommunications Union
 - Institute of Electrical and Electronics Engineers
-**** public-key infrastructure X.509/public-key cryptography standards
+**** Public-key infrastructure X.509/public-key cryptography standards
 **** X.509
 **** SSL and TLS
-**** certificate management protocols
-**** secure multipurpose internet mail extensions
-**** secure eletronic transaction
+**** Certificate management protocols
+**** Secure multipurpose internet mail extensions
+**** Secure eletronic transaction
 **** Secure Shell
 **** Pretty Good Privacy
 **** HTTP Secure
 **** Secure HTTP
 **** IP Security
-**** tunneling protocols
+**** Tunneling protocols
 **** Federal Information Processing Standards (FIPS)
-*** using public-key infrastructure
-**** using a certificate authority
-**** working with registration authorities and local registration authorities
-***** implementing certificates
+*** Using public-key infrastructure
+**** Using a certificate authority
+**** Working with registration authorities and local registration authorities
+***** Implementing certificates
 ***** X.509
-***** certificate policies
-***** certificate best practices
-**** understanding certificate revocation
-**** implementing trust models
-***** hierarchical trust models
-***** bridge trust models
-***** mesh trust models
-***** hybrid trust model
-**** hardware-based encryption devices
-**** data encryption
-*** review questions
+***** Certificate policies
+***** Certificate best practices
+**** Understanding certificate revocation
+**** Implementing trust models
+***** Hierarchical trust models
+***** Bridge trust models
+***** Mesh trust models
+***** Hybrid trust model
+**** Hardware-based encryption devices
+**** Data encryption
+*** Review questions
 1
 2
 3
@@ -1747,59 +1966,59 @@ the VM.  Can be used for cloning.
 19
 20
 ** Chapter 9: Malware, vulnerabilities, and threats
-*** understanding malware
-*** surviving viruses
-**** symptoms of a virus infection
-**** how viruses work
-**** types of viruses
-**** managing spam to avoid viruses
-**** antivirus software
-*** understanding various type of attacks
-**** identifying denial-of-service and distributed denial-of-servce attacks
-**** spoofing attacks
-**** pharming attacks
-**** phishing, spear-phishing, and vishing
-**** xmas attack
-**** man-in-the-middle attacks
-**** replay attacks
-**** smurf attacks
-**** password attacks
-**** privilege escalation
-**** malicious insider threats
-**** transitive access
-**** client-side attacks
-**** typo squatting and URL hijacking
-**** watering hole attack
-*** identifying types of application attacks
-**** cross-site scripting and forgery
+*** Understanding malware
+*** Surviving viruses
+**** Symptoms of a virus infection
+**** How viruses work
+**** Types of viruses
+**** Managing spam to avoid viruses
+**** Antivirus software
+*** Understanding various type of attacks
+**** Identifying denial-of-service and distributed denial-of-servce attacks
+**** Spoofing attacks
+**** Pharming attacks
+**** Phishing, spear-phishing, and vishing
+**** Xmas attack
+**** Man-in-the-middle attacks
+**** Replay attacks
+**** Smurf attacks
+**** Password attacks
+**** Privilege escalation
+**** Malicious insider threats
+**** Transitive access
+**** Client-side attacks
+**** Typo squatting and URL hijacking
+**** Watering hole attack
+*** Identifying types of application attacks
+**** Cross-site scripting and forgery
 **** SQL injection
 **** LDAP injection
 **** XML injection
-**** directory traversal/command injection
-**** buffer overflow
-**** integer overflow
-**** zero-day exploits
-**** cookies and attachments
-**** locally shared objects and flash cookies
-**** malicious add-ons
-**** session hijacking
-**** header manipulation
-**** arbitrary code and remote code execution
-*** tools for finding threats
-**** interpreting assessment results
-**** tools to know
-**** understanding protocol analyzers
-**** working with vulnerability scanners
-**** honeypots and honeynets
-**** working with a port scanner
-**** banner grabbing
-**** risk calculations and assessment types
-**** baseline reporting
-**** code review
-**** determine attack surface
-**** architecture
-**** design review
-*** review questions
+**** Directory traversal/command injection
+**** Buffer overflow
+**** Integer overflow
+**** Zero-day exploits
+**** Cookies and attachments
+**** Locally shared objects and flash cookies
+**** Malicious add-ons
+**** Session hijacking
+**** Header manipulation
+**** Arbitrary code and remote code execution
+*** Tools for finding threats
+**** Interpreting assessment results
+**** Tools to know
+**** Understanding protocol analyzers
+**** Working with vulnerability scanners
+**** Honeypots and honeynets
+**** Working with a port scanner
+**** Banner grabbing
+**** Risk calculations and assessment types
+**** Baseline reporting
+**** Code review
+**** Determine attack surface
+**** Architecture
+**** Design review
+*** Review questions
 1
 2
 3
@@ -1821,42 +2040,42 @@ the VM.  Can be used for cloning.
 19
 20
 ** Chapter 10: Social engineering and other foes
-*** understanding social engineering
-**** types of social engineering attacks
-**** what motivates and attack?
-**** the principles behind social engineering
-**** social engineering attack examples
-*** understanding physical security
-**** hardware locks and security
-**** mantraps
-**** video surveillance
-**** camera vs. guard
-**** fencing
-**** access list
-**** proper lighting
-**** signs
-**** guards
-**** barricades
-**** biometrics
-**** protected distribution
-**** alarms
-**** motion detection
-*** environmental controls
+*** Understanding social engineering
+**** Types of social engineering attacks
+**** What motivates and attack?
+**** The principles behind social engineering
+**** Social engineering attack examples
+*** Understanding physical security
+**** Hardware locks and security
+**** Mantraps
+**** Video surveillance
+**** Camera vs. guard
+**** Fencing
+**** Access list
+**** Proper lighting
+**** Signs
+**** Guards
+**** Barricades
+**** Biometrics
+**** Protected distribution
+**** Alarms
+**** Motion detection
+*** Environmental controls
 **** HVAC
-**** fire supression
-**** fire extinguishers
-**** fixed systems
+**** Fire supression
+**** Fire extinguishers
+**** Fixed systems
 **** EMI shielding
-**** hot and cold aisles
-**** environmental monitoring
-**** temperature and humidity controls
-*** control types
-**** a control type analogy
-*** data policies
-**** destorying a flash drive
-**** some considerations
-**** optical discs
-*** review questions
+**** Hot and cold aisles
+**** Environmental monitoring
+**** Temperature and humidity controls
+*** Control types
+**** A control type analogy
+*** Data policies
+**** Destroying a flash drive
+**** Some considerations
+**** Optical discs
+*** Review questions
 1
 2
 3
@@ -1878,37 +2097,37 @@ the VM.  Can be used for cloning.
 19
 20
 ** Chapter 11: Security administration
-*** third-party integration
-**** transistioning
-**** ongoing operations
-*** understanding security awareness and training
-**** communicating with users to raise awareness
-**** providing education and training
-**** safety topics
-**** training topics
-*** classifying information
-**** public information
-***** limited distribution
-***** full distribution
-**** private information
-***** internal information
-***** restricted information
-*** information access controls
-**** security concepts
-*** complying with privacy and security regulations
-**** the Health Insurance Portability and Accountability Act
-**** the Gramm-Leach-Bliley Act
-**** the Computer Fraud and Abuse Act
-**** the Family Educational Rights and Privacy Act
-**** the Computer Security Act of 1987
-**** the Cyberspace Electronic Security Act
-**** the Cyber Security Enhancement Act
-**** the Patriot Act
-**** familiarizing yourself with international efforts
-*** mobile devices
+*** Third-party integration
+**** Transitioning
+**** Ongoing operations
+*** Understanding security awareness and training
+**** Communicating with users to raise awareness
+**** Providing education and training
+**** Safety topics
+**** Training topics
+*** Classifying information
+**** Public information
+***** Limited distribution
+***** Full distribution
+**** Private information
+***** Internal information
+***** Restricted information
+*** Information access controls
+**** Security concepts
+*** Complying with privacy and security regulations
+**** The Health Insurance Portability and Accountability Act
+**** The Gramm-Leach-Bliley Act
+**** The Computer Fraud and Abuse Act
+**** The Family Educational Rights and Privacy Act
+**** The Computer Security Act of 1987
+**** The Cyberspace Electronic Security Act
+**** The Cyber Security Enhancement Act
+**** The Patriot Act
+**** Familiarizing yourself with international efforts
+*** Mobile devices
 **** BOYD issues
-*** alternative methods to mitigate security risks
-*** review questions
+*** Alternative methods to mitigate security risks
+*** Review questions
 1
 2
 3
@@ -1930,33 +2149,33 @@ the VM.  Can be used for cloning.
 19
 20
 ** Chapter 12: Disaster recovery and incident response
-*** issues associated with business continuity
-**** types of storage mechanisms
-**** crafting a disaster-recover plan
-***** understanding backup plan issues
-***** knowing the backup types
-***** developing a backup plan
-***** recovering a system
-***** backout vs. backup
-***** planning for alternate sites
-**** incident response policies
-**** understanding incident response
-***** step 1: identify the incident
-***** step 2: investigating the incident
-***** step 3: repair the damage
-***** step 4: documenting and reporting the response
-***** step 5: adjusting procedures
-***** forensics from the Security+ perspective
-**** succession planning
-**** tabletop exercise
-*** reinforcing vendor support
-**** service-level agreements
-**** code escrow agreements
-*** penetration testings
-**** what should you test?
-**** vulnerability scanning
-***** credentialed vs. noncredentialed
-*** review questions
+*** Issues associated with business continuity
+**** Types of storage mechanisms
+**** Crafting a disaster-recover plan
+***** Understanding backup plan issues
+***** Knowing the backup types
+***** Developing a backup plan
+***** Recovering a system
+***** Backout vs. backup
+***** Planning for alternate sites
+**** Incident response policies
+**** Understanding incident response
+***** Step 1: identify the incident
+***** Step 2: investigating the incident
+***** Step 3: repair the damage
+***** Step 4: documenting and reporting the response
+***** Step 5: adjusting procedures
+***** Forensics from the Security+ perspective
+**** Succession planning
+**** Tabletop exercise
+*** Reinforcing vendor support
+**** Service-level agreements
+**** Code escrow agreements
+*** Penetration testings
+**** What should you test?
+**** Vulnerability scanning
+***** Credentialed vs. noncredentialed
+*** Review questions
 1
 2
 3
@@ -2048,7 +2267,7 @@ Score:
 
 
 * All review questions (second try)
-*** chapter 1
+*** Chapter 1
 1
 2
 3
@@ -2069,7 +2288,7 @@ Score:
 18
 19
 20
-*** chapter 2
+*** Chapter 2
 1
 2
 3
@@ -2090,7 +2309,7 @@ Score:
 18
 19
 20
-*** chapter 3
+*** Chapter 3
 1
 2
 3
@@ -2111,7 +2330,7 @@ Score:
 18
 19
 20
-*** chapter 4
+*** Chapter 4
 1
 2
 3
@@ -2132,7 +2351,7 @@ Score:
 18
 19
 20
-*** chapter 5
+*** Chapter 5
 1
 2
 3
@@ -2153,7 +2372,7 @@ Score:
 18
 19
 20
-*** chapter 6
+*** Chapter 6
 1
 2
 3
@@ -2174,7 +2393,7 @@ Score:
 18
 19
 20
-*** chapter 7
+*** Chapter 7
 1
 2
 3
@@ -2195,7 +2414,7 @@ Score:
 18
 19
 20
-*** chapter 8
+*** Chapter 8
 1
 2
 3
@@ -2216,7 +2435,7 @@ Score:
 18
 19
 20
-*** chapter 9
+*** Chapter 9
 1
 2
 3
@@ -2237,7 +2456,7 @@ Score:
 18
 19
 20
-*** chapter 10
+*** Chapter 10
 1
 2
 3
@@ -2258,7 +2477,7 @@ Score:
 18
 19
 20
-*** chapter 11
+*** Chapter 11
 1
 2
 3
@@ -2279,7 +2498,7 @@ Score:
 18
 19
 20
-*** chapter 12
+*** Chapter 12
 1
 2
 3
@@ -2300,4 +2519,4 @@ Score:
 18
 19
 20
-*** score
+*** Score
