@@ -1,4 +1,3 @@
-Time-stamp: <2014-12-05 16:54:50 (bmiller)>
 #+STARTUP: content
 
 * Security+ SY0-401
@@ -1877,48 +1876,324 @@ and some PCs.  Whole disk encryption via BitLocker can use a TPM.
 - Hotfixing also implies doing so on a running system.
 - Patching also implies manual updating.
 ** Chapter 8: Cryptography
+Cryptography: The study of cryptographic algorithms.  The science of altering
+information so it cannot be decoded without a key, transforming it with
+encryption and transformation.
+
+Cryptanalysis: The study of how to break cryptographic algorithms.
 *** An overview of cryptography
 **** Historical cryptography
-**** Substitution ciphers
-**** Multi-alphabet substitution
-**** Transposition ciphers
-**** The Enigma Machine
-**** Steganography
-**** Transport encryption
+Caesar cipher, ROT13, and the Vigenère cipher.
+
+Cipher: A method used to encode characters to hide their value.
+
+Ciphering: The process of using a cipher to encode a message.  The two
+ciphering methods are substitution and transposition.
+***** Substitution ciphers
+Changing one character into another.
+
+Caesar cipher: Shifting all letters a certain number of spaces in an alphabet.
+
+ROT13: Letters shifted 13 to the right.  To decrypt quickly, write two columns
+of letters, the first is the first 13, the second the second 13.  Thus, A
+lines up with N, and so on.
+***** Multi-alphabet substitution
+Having a pattern of character shifts, e.g. 1 char shifts 3 to the right, the
+2nd 2 chars, the 3rd 1 char, then repeating.
+
+Vigenère cipher: Used a keyword to look up the cipher text in a table.  Replace
+the original text with the keyword (repeated), then use the keyword letter at
+each index to encode the plaintext letter.  The keyword letter acts as the row
+designator and designates the shift.  Do the reverse to decrypt.
+***** Transposition ciphers
+Transposing or scrambling the letters in a certain manner.  Typically, a
+message is broken into equal size blocks, then each block is scrambled.
+***** The Enigma Machine
+A typewriter that implemented a multi-alphabet substitution cipher.  Each key
+used a different substitution alphabet.
+***** Steganography
+Hiding a message in a medium such as an image, audio, or other file.  Often
+done by storing information in the least significant bit (LSB).  Sometimes
+used for electronic watermarking to prove copyright infringement.
+***** Transport encryption
+Encryption modes:
+- Tunneling: The payload and message headers are encrypted.
+- Transport: Encrypts only the payload.
 *** Modern cryptography
+Three areas: Symmetric cryptography, asymmetric cryptography, hashing
+algorithms.
 **** Working with symmetric algorithms
-**** Key exchange
+Symmetric algorithms require both ends to have the same secret key and
+processing algorithms.  The symmetric key is also called a secret key or
+private key.
+
+Always faster than asymmetric cryptography and can use smaller key sizes for
+the same level of security.
+
+Symmetric methods use a block or stream cipher.  Block cipher algorithms work
+on chunks of data.  Stream ciphers encrypt one bit or byte at a time.
+
+Common symmetric standards:
+- Data Encryption Standard (DES): Used since the mid-1970s as the primary
+  standard in government and industry until replaced by AES.  Based on a 56-bit
+  key.
+- Triple-DES (3DES): A still-used upgrade to DES, though AES is the preferred
+  choice in government.  Increases the key length to 168 bits (3x 56-bit keys).
+- Advanced Encryption Standard (AES): The current standard using the Rijndael
+  algorithm.  Used extensively by government.  Supports key sizes of 128, 192,
+  and 256 bits, with 128-bit the default.
+- AES256: Uses 256 bits instead of 128.  Qualified for use with US Top Secret.
+- CAST: Used in some MS and IBM products.  Uses a 40 to 128-bit key.  Very
+  fast and efficient.  CAST-128 and CAST-256 also exist.
+- Ron's Cipher (RC): An encryption standard by RCA laboratories.  Levels are
+  RC4, RC5, and RC6.  RC5 uses a key size up to 2048 bits and is considered a
+  strong system.  RC4 is used in wireless, WEP/WPA encryption, and SSL/TLS.
+  It's a streaming cipher using 40 to 2048 bit keys.  Used for obfuscating
+  BitTorrent from service providers.
+- Blowfish and Twofish: Blowfish is a 64-bit block cipher and super fast.  It's
+  a symmetric block cipher that can use 32 to 448-bit keys.  Twofish is similar
+  and works with with 128-bit blocks and has a complex key schedule.
+- Indernational Data Encryption Algorithm (IDEA): Uses a 128-bit key.  Similar
+  is capability and speed to DES, but more secure.  Used in PGP.
+- One-time pads: The only truly completely secure cryptographic
+  implementations.  The key is long and has no pattern in the key application
+  an attacker could use.  Used once and discarded.
+***** Key exchange
+Critical in symmetric cryptography.  Two approaches:
+- In-band key exchange: Key is exchanged in the same communications channel
+  that is going to be encrypted.  Used by IPSec.
+- Out-of-band key exchange: A different channel is used for keys.
+
+Forward secrecy: A property of key exchange systems, meaning that when one key
+is compromised, subsequent keys won't be.
+
+Perfect forward security: When forward secrecy is unbreakable.  Ephemeral keys
+is a common example.
 **** Working with asymmetric algorithms
+Asymmetric algorithms use two keys (public and private) to encrypt and protect
+data.  Based on number theory.  One key encrypts, the other decrypts.  If a
+public key encrypts a message, then only the private key can decrypt it.
+
+Public-key cryptography (PCK): Two-key systems.  PKI is an infrastructure that
+uses PKC.
+
+Four popular asymmetric systems:
+- RSA: An early public-key cryptosystem that uses large integers as the
+  basis for the process.  Works with both encryption and digital signatures.
+  Used in SSL.
+- Diffie-Hellman key exchange: Algorithm used to send keys across public
+  networks.  Not used to encrypt/decrypt, only for creation of a symmetric key
+  between two parties.  An ephemeral key can also be used, called Ephemeral
+  Diffie-Hellman (DHE).
+- Elliptic Curve Cryptography (ECC): Similar functionality to RSA, but uses
+  smaller key sizes and gets the same security.  Based on the discrete
+  logarithmic problem of points on a curve, combined with a point at
+  infinity.  Should be common in cellular devices in the future.  Includes:
+  - Elliptic Curve Diffie-Hellman (ECC-DH)
+  - Elliptic Curve Digital Signature Algorithm (ECC-DSA)
+- ElGamal: An asymmetric algorithm using an ephemeral key (one that exists only
+  for that session).  Several variations exist, including Elliptic Curve
+  ElGamal.
+
+An abbreviated version of the above list:
+- Diffie-Hellman: Key agreement.
+- ElGamal: Transmitting digital signatures and key exchanges.
+- Elliptic Curve (ECC): Alternative to RSA using less computing power.
+- RSA: Most common.  Used for encryption and digital signatures.
 **** What cryptography should you use?
+Kerckhoff's principle: Security of an algorithm should depend on the secrecy
+of the key and not t he secrecy of the algorithm.
+
+Only use public, proved cryptography technology.
 **** Hashing algorithms
+Cryptographic hash functions must have 3 characteristics:
+- Must be one-way: Not reversible.  Cannot unhash that which has been hashed.
+- Variable-length input produces fixed-length output: Hash size is always the
+  same, regardless of input length.
+- Algorithm must have few or no collisions: Hashing two different inputs does
+  not the give the same output.
+
+These are used to allow one to easily verify that some input data matches a
+stored hash value, but makes it impossible to reconstruct the data from the
+hash alone.
+
+Hashing algorithms to be familiar with:
+- Secure Hash Algorithm (SHA): Designed to ensure the integrity of messages.  A
+  one-way hash that can be used with an encryption protocol. Produces a 160-bit
+  hash value.  SHA-2 has several sizes: 224, 256, 334, and 512-bit.  SHA-2 is
+  most widely used.  SHA-3 is now standard, though SHA-2 has no known issues
+  and SHA-3 still ins't recommended.
+- Message Digest Algorithm (MD): Also creates a hash value and is a one-way
+  hash.  Also validates message integrity.  Most common are MD5, MD4, and
+  MD2.  MD4 used to be used by NTLM.  MD5 creates a 128-bit hash, but the
+  algorithm is more complex and offers better security.  Weakness: no strong
+  collision resistance.  SHA is preferred.
+- RIPEMD: The RACE Integrity Primitives Evaluation Message Digest algorithm.
+  Originally based on MD4, but replaced by RIPEMD-160, which uses 160 bits.
+  RIPEMD-256 and RIPEMD-320 also exist.
+- GOST: A Soviet symmetric cipher modified to now be a hash function.  256-bit
+  output.
+- LANMAN: An authentication protocol for pre-NT MS OSes.  Used LM Hash and 2
+  DES keys.  Replaced by NTLM with Windows NT.  Used for authentication, not a
+  hashing algorithm.
+- NT LAN Manager (NTLM): Uses MD4/5.  v1 and v2 exist.  Still in use despite
+  MS preferring Kerberos for authentication.  Used for authentication, not a
+  hashing algorithm.
 **** Rainbow tables and salt
+Rainbow table: All possible hashes computed in advance, using a hashing
+algorithm.  If you know the hash, you can look up the text producing it.  A
+significant issue for passwords.  OphCrack uses these.
+
+Salt: The addition of bits at key locations, either before or after the hash.
+E.g., before a password is hashed, bits are added to it, then the hash is
+performed.  Lookups here won't return the correct original text.
 **** Key stretching
+Taking a possibly weak key and making it stronger, usually be making it longer
+and less susceptible to brute force attacks.  Two methods:
+- PBKDF2: Password-Based Key Derivation Function 2.  Applies some function
+  (like a hash or HMAC) to the password/passphrase along with salt to produce
+  a derived key.
+- bcrypt: Used with passwords.  Uses a derivation of Blowfish, converted to
+  be a hashing algorithm, to hash and add salt to it.
 **** Understanding quantum cryptography
+Quantum Key Exchange (QKE): Mentioned, but not covered here.
 **** Cryptanalysis methods
+Common code-breaking techniques:
+- Frequency analysis: Looking at blocks of an encrypted message to determine if
+  any common patterns exist.  With enough patterns, an cryptanalyst may be able
+  to deduce the method used to encrypt.  Does not work on modern algorithms.
+- Chosen plaintext: Obtain ciphertexts of plaintexts of the cryptanalyst's
+  choosing.  May allow attacker to derive the key used and then decrypt other
+  messages encrypted with the same key.  Difficult, but not impossible.
+- Related key attack: Similar to chosen plaintext, but the attacker can obtain
+  the ciphertexts encrypted under two different keys.  Useful if you can
+  obtain the plaintext and matching ciphertext.
+- Brute-force attacks: Applies every possible combination of characters that
+  could be the key.  Longer keys take longer to find.
+- Exploiting human error: A human might send a plaintext or part of it in the
+  clear.  Or, a key may be exposed, showing what they consist of.
 **** Wi-Fi encryption
+All clients and the AP use a shared key, using symmetric encryption.  WPA uses
+RC4+TKIP.  WPA2 uses CCMP, which uses 128-bit AES.  CCMP XORs block n with
+block n-1, ensuring block ciphertexts don't match even if the plaintext does.
 *** Using cryptographic services
+Cryptographic system: a system, method, or process that provides
+encryption/decryption.  Includes hardware, software, and manual processes.
 **** Confidentiality and strength
+Confidentiality: preventing unauthorized disclosure of information.
+
+Strength: The effectiveness of a cryptographic system in preventing
+unauthorized decryption.  Refers to the algorithm's work factor.
+
+Work factor: A estimate of the amount of time/effort needed to break the
+system.
+
+E.g. Sybase FIPS compliance requires encryption, hash, and key exchange
+algorithms of AES, 3DES, DES, and SHA1.
 **** Integrity
+Integrity: Providing assurance the message wasn't modified during transmission.
+Accomplished by adding redundant data used during the decryption process.
+
+Message Authentication Code (MAC): A common method of integrity verification.
+The MAC is derived from a message and shared (symmetric) secret key.  The MAC
+is then encrypted with the message, adding another layer of integrity checking.
+
+Hash-Based Message Authentication Code (HMAC): Uses a hashing algorithm along
+with a symmetric key.
 **** Digital signatures
+Validates the integrity of a message and sender.  The message is encryption
+and the digital signature is added to the message.
+
+Workflow:
+- Message created and sender users his private key to create a digital
+  signature.
+- Message sent.
+- Receiver uses the public key attached to the message to validate the digital
+  signature.  If it matches, then the message is authentic.
+- Receiver uses the public key to decrypt the message.  Most digital signature
+  implementations also use a hash to verify integrity.
+- The receiver compares the signature area (called the message digest) in the
+  message with the calculated value.  If the values match, integrity is
+  confirmed.
+
+This process provides message integrity, nonrepudiation, and authentication.
 **** Authentication
+The process of verifying the sender is who they say they are.  Often done with
+digital signatures or secret words.
 **** Nonrepudiation
+Prevents one party from denying actions they carried out.  Public keys can get
+a message received but no way exists the sender is who they say they are.  This
+is provided by third-party organizations called Certificate Authorities (CAs).
+These manage public keys and issue certificates verifying the validity of a
+sender's message.
 **** Key features
+Key escrow: Addresses the possibility that a third party may need access to
+keys.  The keys needed to encrypt/decrypt data are held in an escrow account,
+and made available upon request.  The third party is usually the government.
+
+Key recovery agent: An entity able to recover a key, key components, or
+plaintext messsages.  Typically used to access information encrypted with older
+keys.
+
+Key registration: The process of providing certificates to users. A
+registration authority (RA) usually does this to lift load from a CA.
+
+Certificate Revocation List (CRL): When a key is expired, canceled, or
+replaced, a CRL can be checked to see if a key is still valid.  A list of
+certificates that a specific CA states should no longer be used.  Now being
+replaced by a real-time protocol called Online Certificate Status Protocol
+(OCSP).
+
+Trust models: Exist in PKI implementations.  Four main types: bridge,
+hierarchical, hybrid, and mesh.
 *** Understanding cryptography standards and protocols
 **** The origins of encryption standards
 **** The role of government agencies
 - National Security Agency
-- National Security Agency/Central Security Service
-- National Institute of Standards and Technology
+- National Security Agency/Central Security Service (NSA/CSS): DoD support.
+- National Institute of Standards and Technology (NIST)
 **** Industry associations and the development process
-- American Bankers Association
-- Internet Engineering Task Force
-- Internet Society
-- World Wide Web Consortium
-- International Telecommunications Union
-- Institute of Electrical and Electronics Engineers
-**** Public-key infrastructure X.509/public-key cryptography standards
+RFC: Categorized as a standard, best practice, informational, experimental, or
+historic.
+- American Bankers Association (ABA): Finance
+- Internet Engineering Task Force (IETF): Internet, but also security.
+- Internet Society (ISOC): Internet experts, oversees IETF.
+- World Wide Web Consortium (W3C): Encryption in XML.
+- International Telecommunications Union (ITU): Telecommunications and radio.
+- Institute of Electrical and Electronics Engineers (IEEE): PKC, wireless, and
+  networking protocol standards.
+**** Public-Key Infrastructure X.509/Public-Key Cryptography Standards
+Public-Key Infrastructure X.509 (PKIX): A working group formed by the IETF.
+Develops standards/models for the PKI environment.  Responsible for the X.509
+standard.
+
+Public-Key Cryptography Standards (PKCS): A set of voluntary standards by RSA
+and industry corporations.
 **** X.509
+The standard defining the certificate formats and fields for public keys.
+Also defines procedures to distribute public keys.  v2 used as primary method
+for issuing CRL certificates.
+
+v3 (current version) comes in two types:
+- End-entity certificate: Issues by a CA to an end entity (system that just
+  uses certificates).
+- CA certificate: Issued by one CA to another CA, who can then issue to an end
+  entity.
+
+X.509 certificates have the following:
+- Signature (the primary purpose for the certificate)
+- Version
+- Serial number
+- Signature algorithm ID
+- Issuer ID
+- Validity period
+- Subject name
+- Subject public-key information
+- Issuer unique identifier (v2 and v3 only)
+- Subject unique identifier (v2 and v3 only)
+- Extensions (v3 only)
 **** SSL and TLS
+
 **** Certificate management protocols
 **** Secure multipurpose internet mail extensions
 **** Secure eletronic transaction
@@ -1929,8 +2204,8 @@ and some PCs.  Whole disk encryption via BitLocker can use a TPM.
 **** IP Security
 **** Tunneling protocols
 **** Federal Information Processing Standards (FIPS)
-*** Using public-key infrastructure
-**** Using a certificate authority
+*** Using Public-Key Infrastructure
+**** Using a Certificate Authority
 **** Working with registration authorities and local registration authorities
 ***** Implementing certificates
 ***** X.509
