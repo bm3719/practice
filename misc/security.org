@@ -1974,7 +1974,7 @@ Asymmetric algorithms use two keys (public and private) to encrypt and protect
 data.  Based on number theory.  One key encrypts, the other decrypts.  If a
 public key encrypts a message, then only the private key can decrypt it.
 
-Public-key cryptography (PCK): Two-key systems.  PKI is an infrastructure that
+Public-key cryptography (PKC): Two-key systems.  PKI is an infrastructure that
 uses PKC.
 
 Four popular asymmetric systems:
@@ -2002,7 +2002,7 @@ An abbreviated version of the above list:
 - RSA: Most common.  Used for encryption and digital signatures.
 **** What cryptography should you use?
 Kerckhoff's principle: Security of an algorithm should depend on the secrecy
-of the key and not t he secrecy of the algorithm.
+of the key and not the secrecy of the algorithm.
 
 Only use public, proved cryptography technology.
 **** Hashing algorithms
@@ -2129,7 +2129,8 @@ sender's message.
 **** Key features
 Key escrow: Addresses the possibility that a third party may need access to
 keys.  The keys needed to encrypt/decrypt data are held in an escrow account,
-and made available upon request.  The third party is usually the government.
+and made available upon request.  The third party is usually the government,
+like for law enforcement investigations.
 
 Key recovery agent: An entity able to recover a key, key components, or
 plaintext messsages.  Typically used to access information encrypted with older
@@ -2151,7 +2152,8 @@ hierarchical, hybrid, and mesh.
 **** The role of government agencies
 - National Security Agency
 - National Security Agency/Central Security Service (NSA/CSS): DoD support.
-- National Institute of Standards and Technology (NIST)
+- National Institute of Standards and Technology (NIST): General purpose
+  government encryption standards.  Also used by private sector.
 **** Industry associations and the development process
 RFC: Categorized as a standard, best practice, informational, experimental, or
 historic.
@@ -2193,77 +2195,390 @@ X.509 certificates have the following:
 - Subject unique identifier (v2 and v3 only)
 - Extensions (v3 only)
 **** SSL and TLS
+Establishes a secure communication connection between two TCP machines.  Uses
+the handshake method of establishing a session, where the number of steps (4
+to 9) depend on whether combined and/or mutual authentication is included.
 
-**** Certificate management protocols
-**** Secure multipurpose internet mail extensions
-**** Secure eletronic transaction
-**** Secure Shell
-**** Pretty Good Privacy
-**** HTTP Secure
-**** Secure HTTP
-**** IP Security
+Cipher suites: An early step is to select a cipher suite to use.  A cipher
+suite is a combination of methods, such as authentication, encryption, and
+message authentication code (MAC) algorithms used together.  TLS uses cipher
+suites.
+
+Clients need to support the level of encryption applied.  Modern browsers
+support 128-bit encrypted sessions/certificates.
+**** Certificate Management Protocols (CMP)
+CMP: A messaging protocol used between PKI entities.
+
+XML Key Management Specification (XKMS): Allows XML-based programs access to
+PKI services.  Built on top of CMP.
+**** Secure Multipurpose Internet Mail Extensions (S/MIME)
+A standard used for encrypting email, containing signature data.  MIME is the
+standard for email messages, and S/MIME is the secure version of it.  Provides
+encryption, integrity, and authentication when used with PKI.  Uses asymmetric
+encryption algorithms and digital certificates.
+**** Secure Eletronic Transaction (SET)
+Provides encryption for credit card numbers transmitted over the Internet.
+Developed by Visa and Mastercard.  Suitable for transmitting small amounts of
+data.  Works with an electronic wallet set up in advance of the transaction.
+**** Secure Shell (SSH)
+Tunneling protocol originally used on Unix and interactive terminal sessions.
+Similar handshake process to SSL.  Operates in two phases:
+- A secure channel to negotiate the channel connection.
+- A secure channel used to establish communications.
+**** Pretty Good Privacy (PGP)
+A freeware email encryption system.  Uses both symmetric and asymmetric
+systems.  Messages are encrypted with the public key and a session key (a
+one-use random number).  When received, the private key is used to ascertain
+the session key.  The session key and private key are then used to decrypt the
+message.
+
+GPG is an alternative to PGP and is interoperable with it.
+**** HTTP Secure (HTTPS)
+Uses SSL to secure the channel between client and server.
+**** Secure HTTP (S-HTTP)
+HTTP with message security.  HTTPS creates a secure channel, S-HTTP creates a
+secure message.  Provides data integrity and authentication.  Seldom used.
+Uses port 80.
+**** IP Security (IPSec)
+Provides authentication and encryption.  The two protocols used by IPSec are
+Authentication Header (AH) and Encapsulation Security Payload (ESP).  Both can
+operate in transport or tunnel mode.
 **** Tunneling protocols
+Can create tunnels between networks more secure, support additional protocols,
+and provide virtual paths.
+- Point-to-Point Tunneling Protocol (PPTP): PPTP encapsulates and encryptes PPP
+  packets.  A major weakness is negotiation done in the clear.
+- Layer 2 Forwarding (L2F): Cisco protocol for creating tunnels, mainly for
+  dial-up.  Similar to PPP, and shouldn't be used over WANs.  Provides
+  authentication but no encryption.
+- Layer 2 Tunneling Protocol (L2TP): Combination of PPTP and L2F.  Supports
+  multiple network protocols, can bridge systems, but doesn't provide data
+  security.  IPSec can be used to do so.
 **** Federal Information Processing Standards (FIPS)
-*** Using Public-Key Infrastructure
-**** Using a Certificate Authority
-**** Working with registration authorities and local registration authorities
-***** Implementing certificates
+A set of guidelines for US government systems.  NIST issues FIPS.
+*** Using Public-Key Infrastructure (PKI)
+PKI: A two-key, asymmetric system with four components: certificate authority
+(CA), registration authority (RA), RSA (the encryption algorithm), and digital
+certificates.  Messages are encrypted with public keys and decrypted with
+private keys.
+
+PKI is a framework, and not a specific technology, with vendor-specific
+implementations (some are incompatible).
+**** Using a Certificate Authority (CA)
+CAs are organizations responsible for issuing, revoking, and distributing
+certificates.  A certificate is a mechanism for associating a public key with
+an individual, containing information about the user.  Each PKI system user
+has a certificate used to verify their authenticity.
+
+To get a certificate, submit a certificate-signing request (CSR) to the CA.
+The CSR contains the public key you wish to use and your fully distinguished
+name (often a domain name).
+
+CAs can be private or public.  Verisign is the best known public CA.
+
+If a CA server gets overloaded, some work can be offloaded to an RA server.
+**** Working with registration authorities (RAs) and local registration authorities
+RAs offload some CA work.  It can distribute keys, accept registrations, and
+validate identities.  CAs still issue certificates.
+
+Local registration authorities (LRAs): Can also issue certificates.  LRAs can
+physically identify individuals, unlike RAs.
+**** Implementing certificates
 ***** X.509
+The most popular certificate used.  A standard format supported by the ITU and
+others.
+
+The certificate contains identifiers of two different algorithms used in the
+process.  The signature algorithm is Md2RSA and the digital signature algorithm
+is sha1.  It also contains the unique serial number issued by the CA.
 ***** Certificate policies
+Define what certificates do (e.g. email, finance, etc.) and affect how a
+certificate is issued and used.  The receiving organization uses the CA's
+policies to determine what certificates it will accept.  Cross certification
+occurs when CAs have interoperability.
 ***** Certificate best practices
+Certificate Practice Statement (CPS): CA uses this to issue certificates and
+implement policies.
 **** Understanding certificate revocation
+Certificate Revocation: The process of revoking a certificate before it
+expires.  Handled through a certificate revocation list (CRL) or by using OCSP.
+
+Must be done when the private key becomes known.
+
+Latency can be an issue due to hourly/daily CRL updates.  OCSP solves this
+problem.
 **** Implementing trust models
+Four main trust models used with PKI:
+- Hierarchical
+- Bridge
+- Mesh
+- Hybrid
 ***** Hierarchical trust models
+Also known as a tree.  A root CA provides all information.  Intermediate CAs
+only trust the root.  A root CA also trusts other intermediate CAs at the same
+level in the hierarchy.  Leaf CAs serve end entities.
 ***** Bridge trust models
+A peer-to-peer relationship between root CAs.  Root CAs can allow cross
+certification.  Useful for flexibility and interoperability between
+organizations, and geographically dispersed organizations.  Weakness is
+trustworthiness of all root CAs.  An illegitimate certificate can become
+available to all users in a bridge.
 ***** Mesh trust models
+Supports multiple paths between root CAs.  Provides more flexibility for
+configuring root CA structures.  Same weakness as bridge.
 ***** Hybrid trust model
+Arbitrary trust model structures, where intermediate CAs can trust each other,
+across hierarchies.  Downside is these can become complicated and unintentional
+trusting can occur.
 **** Hardware-based encryption devices
+Trusted Platform Modules (TPMs): Can be enabled in some BIOS configurations.
+TPMs are chips that store cryptographic keys, passwords, or certificates.  Used
+on PCs and smart phones.  Can generate values used with whole-disk encryption
+(e.g. BitLocker).  BitLocker can optionally use a TPM, and is much more secure
+when doing so.
+
+Hardware Security Module (HSM): A cryptoprocessor commonly used with PKI
+systems to augment security with CAs.  Traditionally are PCI modules.
 **** Data encryption
+BitLocker does full disk encryption of a volume with 128-bit encryption.
+Prevents bypassing security by booting another OS.  BitLocker to Go provides
+the same for removable media, such as flash drives.  TrueCrypt is another
+alternative.
+
+Some RDBMSes like SQL Server provide database encryption.
 *** Review questions
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 B
+2 B
+3 A
+4 C
+5 D
+6 A
+7 C
+8 B
+9 C
+10 A
+11 A
+12 C
+13 B
+14 C
+15 A
+16 A
+17 D
+18 A
+19 A
+20 D
+*** additional notes
+- Key transmission: The most serious threat to key security.  Use out-of-band
+  methods to do so.
+- Key storage: Physically stored in a secure environment.  Use locked cabinets,
+  hardened servers, and physical/administrative controls.
+- Suspending keys: A good practice for absent employees.  These can be
+  reactivated later.
 ** Chapter 9: Malware, vulnerabilities, and threats
 *** Understanding malware
+Software exploitation: Attacks launched against applications and higher-level
+services.
+
+Exploitations introduced by using viruses or access attacks:
+- Spyware: Monitors user's activity and reports it to a third party.  Usually
+  exist for commercial gain.
+- Adware: Displays ads and generates revenue for the creator.
+- Rootkits: Programs that have the ability to hide certain things from the
+  OS.  May hide tasks from Task Manager or connections from netstat.  Best
+  defense is system monitoring and catching the rootkit during install.
+- Trojan horses: Programs that enter a system/network under the guise of
+  another program.  Could create a backdoor or replace a valid program.  Best
+  defense is to not install them and back up systems pre/post-install of
+  software OSes.  Also check for open ports not regularly used.
+- Logic bombs: Programs or code that executes when certain preconditions are
+  met.  Some notify an attacker when the system is in a particular state.
+- Backdoors: Refers both to the intentionally created backdoors used by
+  developers and malware that creates an entrance for an attacker, bypassing
+  security.  Usually an access or modification attack, and sometimes use remote
+  administration tools.  Most conventional AV software will detect these.
+- Botnets: Bots running on zombies, under the control of a bot-herder.  Used
+  for DoS and DDoS attacks, adware, spyware, and spam (spambots).  No
+  universal defense, but some can be detected by looking at databases of known
+  threats, whereas others can be identified through detecting behavior.
+- Ransomware: Takes control of a system (often through a trojan) and demands a
+  payment.  Can encrypt a hard drive, change passwords, etc.
 *** Surviving viruses
+Viruses can get on a system via:
+- Contaminated media.
+- Through email and social networking sites.
+- As part of another program.
+
+Viruses can be classified as:
+- Polymorphic: Changes form to avoid detection.
+- Stealth: Avoid detection by masking themselves from applications.
+- Retroviruses: Attack or bypass installed AV software.
+- Multipartite: Attack a system in multiple ways.
+- Armored: Designed to make it difficult to detect or analyze.
+- Companion: Attaches to legitimate programs and creates versions of programs
+  with different extensions.
+- Phage: Modifies or alters other programs and databases.
+- Macro: Exploits scripting systems within other programs.
 **** Symptoms of a virus infection
+Some are obvious.  Others just cause slow down, cause files to disappear, or
+take over disk space.
+
+Symptoms to look for:
+- Programs load more slowly.
+- Unusual files appear or files disappear.
+- Program sizes change from installed versions.  Occurs with viruses that
+  attach to executables.
+- Applications (browsers, word processors, etc.) begin to exhibit unusual
+  behavior
+- System stops/starts itself and has unexplained disk activity.
+- Mysterious loss of disk access or other system resources.  Occurs when
+  viruses change device settings.
+- System doesn't reboot or gives unexpected error messages during startup.
 **** How viruses work
+Many viruses will infect every file or many of them on the system to spread to
+other systems.  Many spread via email or thumb drives.
 **** Types of viruses
+- Armored virus: Cover themselves with protective code that stops debuggers or
+  disassemblers from examining critical elements of the virus.  Delays
+  identification of the virus, allowing it time to spread.
+- Companion virus: Creates programs of different file extensions to existing
+  ones.  May reside in the system's temp directories.  Many on Windows change
+  program pointers in the registry.  When run, will perform its actions then
+  launch the real program.
+- Macro virus: Can infect documents and spread to other systems via email.
+  The fastest growing virus type.
+- Multipartite virus: Attack systems in multiple ways.  May infect the boot
+  sector, infect executables, and destroy application files.  The purpose is
+  to decrease likelihood of correcting all problems.
+- Phage virus: Modifies/alters other programs or databases.  The only way to
+  remove the virus is to reinstall the programs infected.  Easy to miss a
+  single instance of it.
+- Polymorphic virus: A subset of polymorphic malware, changing form to evade
+  detection.  Will attempt to hide from AV.  Will encrypt parts of itself to
+  avoid detection.  Performs mutation, making it hard for AV to detect common
+  patterns within it.
+- Retrovirus: Attacks or bypasses AV.  Can destroy the virus definition file,
+  or directly attack the AV program.
+- Stealth virus: Avoids detection by masking itself from applications.  May
+  attach to a boot sector.  May redirect commands from system utilities around
+  itself.  May report different file sizes than actual.  May move filenames
+  during a scan.
 **** Managing spam to avoid viruses
+While also annoying, spam can direct to sites infected with viruses, worms,
+etc.  SPIM: spam over IM.  SPIT: spam over telephony.
 **** Antivirus software
+AV scans for characteristics, or fingerprints, common in viruses, identifying
+and neutralizing them prior to causing damage.  Keep definition databases up to
+date.  Layer AV defense on gateways, servers, and desktops.  To go further, use
+AV from multiple vendors.  Educate users to not open suspicious files.
 *** Understanding various type of attacks
 **** Identifying denial-of-service and distributed denial-of-servce attacks
+DoS attacks prevent access to resources by users authorized to use them.
+These can:
+- Deny access to information, applications, systems, communications.
+- Bring down a website.
+- Crash an OS.
+- Fill a communications channel.
+- Open many TCP sessions.  Called a TCP SYN flood DoS.
+
+Two most common types:
+- Ping of death: Sending ICMP packets larger than the system can handle.
+- Buffer overflow: Put more data (e.g., long input strings) into the buffer
+  than it can hold.
+
+DDoS used multiple systems (often botnets) to conduct simultaneous DoS
+attacks.  Far more common and effective than DoS.
+
+Little can defend against DoS and DDoS attacks.  OS updates can minimize their
+effects.
 **** Spoofing attacks
+An access attack where identity masquerading occurs.  A fake login screen is
+one example.  Most common are:
+- IP spoofing: Makes data look as if it came from a trusted host, spoofing the
+  IP of the sending host.
+- ARP spoofing: Also known as ARP poisoning.  Faking a MAC address, making it
+  looking like it came from a network it didn't.  Can gain access to a network,
+  fool a router into sending data to it intended for another host, or launch a
+  DoS attack.  The address is that of a legitimate user, bypassing allow/deny
+  lists.
+- DNS spoofing: Giving a DNS server information about a name server that isn't
+  legitimate.  Can send users to other websites, reroute mail, or other
+  misdirection.  Also called DNS poisoning.
+
+Domain name kiting: Another DNS weakness that takes advantage of the 5 day
+grace period between registration and required payment, deleting and
+registering the account before the period ends.
 **** Pharming attacks
+A form of redirection where traffic intended for one host is sent to another.
+Can be done by changing entries in a host file or DNS server.
 **** Phishing, spear-phishing, and vishing
+Phishing: A form of social engineering involving a legitimate-looking
+information request.
+
+Spear phishing: Tailoring a message to recipients that impersonate entities
+they trust.  Uses obtainable information like email databases, friend lists,
+etc.
+
+Vishing: Combination of phishing and VOIP.  VOIP doesn't include caller ID or
+tracing.
 **** Xmas attack
+A scan using nmap to get around firewall detection to look for open ports.
 **** Man-in-the-middle attacks
+Secretly place software or a rogue router between a server and user.
+Intercepts data and sends the information between the server and client as if
+nothing is wrong.  Can collect or alter data, or otherwise compromise the
+security of a system.  A particular problem with wireless.
+
+TCP/IP hijacking: Gaining access to a host and logically disconnecting it from
+the network, then replacing it with another of the same IP.  Can give the
+attacker access to the session and other information of the original system.
+More difficult to engineer.
 **** Replay attacks
+Capturing and replaying information to a server over a network.  Login/password
+information can be captured and replayed to the server.  Also occurs with
+certificate systems like Kerberos.
+
+Countering replay attacks is the main reason for certificate session
+identifiers and time stamps.  Expired certificates should be rejected.
 **** Smurf attacks
+Spoofing the target machine's IP address and broadcasting to it's routers so
+the routers think the target is sending out the broadcast.  Every machine on
+the network then responds and overloads the target system.
+
+Solved by blocking ICMP traffic through the router.
 **** Password attacks
+Attack accounts repeatedly using password crackers.
+
+Types of password attacks:
+- Brute-force attack: Iterating through all possible guesses.  Defended by
+  minimum password length and password lockout policies.
+- Dictionary attack: Iterating through common words.
+- Hybrid: Combined brute-force/dictionary attacks, seeding known values into
+  those attempted.
+- Birthday attack: With hashed keys, finding a value that produces the same
+  hash.
+- Rainbow table: Comparing hashed phrases or words to identify a stored
+  value.  Defended with password salt.
+
+Don't confirm account existence when a password is incorrect but an account
+exists.
 **** Privilege escalation
+User gaining more privileges, often by unintentionally leftover backdoors.
 **** Malicious insider threats
+Defended by white box testing: testing systems from the premise of knowing
+about the network and systems in place.  Also called full disclosure testing.
 **** Transitive access
+Transitive trust is enabled by default in AD.
 **** Client-side attacks
+Targeting vulnerabilities in client applications that interact with a
+malicious server.  Rouge code runs at the same access level as the user.
 **** Typo squatting and URL hijacking
+Synonymous terms.  Setting up malicious servers on misspelled URLs.
+
+Register domains around yours for deviations and other top-level domains.
 **** Watering hole attack
+Identifying a site visited by those being targeted, then poisoning that site
+and waiting for results.  E.g., installing malware on a target's third part
+email provider.
 *** Identifying types of application attacks
 **** Cross-site scripting and forgery
 **** SQL injection
