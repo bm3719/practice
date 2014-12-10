@@ -1105,7 +1105,7 @@ should not be used.
 **** Group-based and user-assigned privileges
 Group privileges include groups and roles.
 *** Understanding remote access connectivity
-Remote authentication is any auth done for a remote user.
+Remote authentication is any authentication done for a remote user.
 **** Using the Point-to-Point Protocol
 PPP supports multiple protocols and works with POTS, ISDN, T1, etc.  Doesn't
 provide data security (no encryption), but does use CHAP auth.
@@ -2553,7 +2553,7 @@ Types of password attacks:
   minimum password length and password lockout policies.
 - Dictionary attack: Iterating through common words.
 - Hybrid: Combined brute-force/dictionary attacks, seeding known values into
-  those attempted.
+  those attempted.  Can use rainbow tables.
 - Birthday attack: With hashed keys, finding a value that produces the same
   hash.
 - Rainbow table: Comparing hashed phrases or words to identify a stored
@@ -2581,114 +2581,382 @@ and waiting for results.  E.g., installing malware on a target's third part
 email provider.
 *** Identifying types of application attacks
 **** Cross-site scripting and forgery
+XSS: An attacker tricking a user who visits a site into having code execute
+locally.
+
+An attacker might use a website control where input is allowed to be posted and
+insert malicious scripts.  The prevention for this is to filter input.
+
+Cross-site Request Forgery (XSRF): Also called session riding and one-click
+attack.  Unauthorized commands coming from a trusted user to a website.
+Exploits unexpired cookies on website user account logins.
+
+The best protection against XSS is disabling the running of scripts and
+using browser profiles.
 **** SQL injection
+Most common exploit categories, using SQL injection:
+- Escape characters not filtered correctly.
+- Type handling not properly done.
+- Conditional errors.
+- Time delays.
+
+Defend by filtering input.  Reject input with certain characters.
 **** LDAP injection
+Exploits weaknesses in LDAP implementations, where user input isn't properly
+filtered and commands are executed.  Defend by filtering input.
 **** XML injection
+Injecting values that query XML (XPath, which is a QL for XML).  XML doesn't
+have the same levels of access control and entire document contents can
+returned.  Defend by filtering input.
 **** Directory traversal/command injection
+Directory traversal attack: If an attacker can gain access to restricted
+directories of a website, they may be able to gain access to the root
+directory of the system.  The common method of this is to use a command
+injection attack to execute shell commands on the server.  Ability to do this
+limited today.  Defend by running scanners and patch web server software.
 **** Buffer overflow
+Causes applications to terminate or write data beyond the end of allocated
+space.  Termination may leave the system sending data with privileged access
+levels.  Overwriting can cause important data to be lost.
 **** Integer overflow
+Overflowing the bit-length of integer variables.
 **** Zero-day exploits
+Exploits used on the day of discovery, front-running the typical one-to-two day
+response time needed to patch.  Defend by turning off services between
+discovery and patch.
 **** Cookies and attachments
-**** Locally shared objects and flash cookies
+Cookies have the potential to contain personal information.
+
+Evercookie: Writes data to multiple locations and are hard to remove
+completely.
+
+Best protection is to disable cookies.  Can also disable cookies from external
+sites.  A compromise is to only allow session cookies.
+**** Locally Shared Objects (LSOs) and Flash Cookies
+Synonymous terms.  Data stored on the user's system by Adobe Flash.  Often used
+for Flash games or user preferences.  Can represent a security/privacy threat.
 **** Malicious add-ons
+Java applets run in a sandbox.  Usually safe, but errors in the JVM may allow
+breaking out.  Defend by only running applets from reputable sites.
+
+ActiveX uses Authenticode as a certificate technology to validate components
+with a server.  Uneducated users may enable ActiveX controls, creating a
+security risk.  Defend by configuring browsers to prompt the user before
+running ActiveX.
 **** Session hijacking
+Stealing the item used to validate a user's session, such as a cookie, and
+using it to establish a session with a host that thinks it's still
+communicating with the user.  Man-in-the-middle and sidejacking use session
+hijacking.
+
+Defend by encrypting sessions, encouraging users to log out of sites when
+done, and perform secondary checks on user identity.
 **** Header manipulation
+Uses other methods here to change values in HTTP headers and falsify access.
+When used with XSRF, can change user cookies.
 **** Arbitrary code and remote code execution
+Synonymous terms.  An application can be written in a way to accept arbitrary
+remote commands and run them on the host, under the privileges of the
+user/program.
 *** Tools for finding threats
 **** Interpreting assessment results
+Filtering and interpreting collected data.
 **** Tools to know
-**** Understanding protocol analyzers
-**** Working with vulnerability scanners
-**** Honeypots and honeynets
-**** Working with a port scanner
-**** Banner grabbing
+Active vs. passive response.
+***** Understanding protocol analyzers
+Protocol analyzers are synonymous with packet sniffers.
+***** Working with vulnerability scanners
+Checks a network for known security holes.  E.g., Nessus and Retina.
+
+Major tasks necessary in using vulnerability scanners:
+- Passively testing security controls: The scanner testing the security
+  controls without doing any actual harm.  Just looks for openings and reports.
+- Interpreting results: Scanners return a report of interpreted results.
+- Identifying vulnerability: Map open port to service.
+- Identifying lack of security controls: Find places with no controls, not
+  just weak ones.
+- Identifying common misconfigurations: Ensure applications and services are
+  properly configured.
+***** Honeypots and honeynets
+***** Working with a port scanner
+Part of fingerprinting a network, identifying services available on it.
+Possible internally and externally.  Many routers default to let all protocols
+pass through.
+***** Banner grabbing
+Looking at the header information of messages to find out about systems.
+Banners often identify the host, OS, etc.  Can be grabbed with telnet, netcat,
+or nmap.
 **** Risk calculations and assessment types
-**** Baseline reporting
-**** Code review
-**** Determine attack surface
-**** Architecture
-**** Design review
+Focus areas for network security and vulnerability:
+- Risk: What's the actual dangers and likelihood.
+- Threat: Means and source of attack, weighed against the likelihood.
+- Vulnerability: Identify flaws, holes, and areas of exposure.
+***** Baseline reporting
+Checks to make sure that things are operating status quo.  Change detection is
+used to alert administrators when modifications are made.  A
+changes-from-baseline report can be run to find security breaches.  Often
+combined with gap analysis to check against industry standards.
+***** Code review
+Part of gray box testing.  Reading code is called manual assessment.  Using
+tools is called automated assessment.
+***** Determine attack surface
+Attack surface: Area of application available to users (both authenticated and
+not).  Includes services, protocols, interfaces, and code.
+
+Attack surface reduction: Minimizing attack surface area.
+***** Architecture
+Architectural approach to security: Using a control framework to focus on
+underlying infrastructure.  Popular with regulatory and compliance standards.
+***** Design review
+Examines ports and protocols, rules, segmentation, and access control.  More
+granular than architecture assessments.
 *** Review questions
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 B
+2 B
+3 C
+4 A
+5 C
+6 D
+7 A
+8 A
+9 A
+10 B
+11 A
+12 B
+13 A
+14 D
+15 B
+16 C
+17 D
+18 C
+19 B
+20 D
+*** Additional notes
+nmap is a vulnerability scanner.
 ** Chapter 10: Social engineering and other foes
 *** Understanding social engineering
+Social engineering: Gaining access to facilities, networks, or employees by
+exploiting the trusting nature of people.  Also called wetware.
 **** Types of social engineering attacks
+Common attacks:
+- Shoulder surfing: Watching others enter sensitive data.  Defend by surveying
+  your environment before entering such information and position monitors in
+  directions others can't see.
+- Dumpster diving: Shred documents.
+- Tailgating: Following others through locked doors.
+- Impersonation: Can be done in person, over phone, by email, etc.
+- Hoaxes: Includes virus hoaxes.  Check CERT to confirm before forwarding
+  notice.
+- Whaling: Phishing or spear phishing, but targeting big users, usually an
+  owner or manager.
+- Vishing: Impersonation over VOIP, where caller ID and tracing don't exist.
+
+Counters are user education and tools to detect online phishing sites (such as
+IE's SmartScreen Filter).
 **** What motivates and attack?
+Greed, bribes, and malicious insider threats.
 **** The principles behind social engineering
+Reasons for effectiveness:
+- Authority: Authority figures are less likely to provoke questioning.
+- Intimidation
+- Consensus/social proof: Charming a target.
+- Scarcity: Limited supply of something.
+- Urgency: Time to act.
+- Familiarity/Liking
+- Trust: Reciprocation of trust.
 **** Social engineering attack examples
 *** Understanding physical security
+Access control: A critical part of physical security.
+
+Physical barriers: The most effective are multiple barrier systems, requiring
+more than one physical barrier to be crossed.  Ideally, you should have three:
+- Perimeter: External entrance to the building, protected by alarms, walls,
+  fencing, surveillance, etc.  Use with an access list, identifying who can
+  enter, to be verified by guard or others.
+- Locked door protecting computer center: Also include ID badges, proximity
+  readers, fobs, or keys.
+- Entrance to computer room: Another monitored, locked door.
+
+Escort temporary access individuals, like repair men.
+
+Proximity reader: Any ID or card reader reading proximity cards, which use
+RFID.
+
+Physical tokens/fobs: Anything a user must have on them to access network
+resources.  Often use one-time password authentication.
 **** Hardware locks and security
+Applying physical security modifications to prevent systems from leaving the
+facility.  A cable lock prevents a laptop from being removed from a desk.
+
+Add locks to desktop back covers to prevent removal of hard drives.  Use a safe
+and locking cabinets to protect backup media, documents, and other artifacts.
+Server racks should lock servers into cabinets.
 **** Mantraps
+Require visual identification and authentication to gain access.  Limits access
+to 1-2 people at a time.  Can contain an unauthorized person for authorities.
+Some include scales for weight checking.
 **** Video surveillance
-**** Camera vs. guard
+***** Camera vs. guard
+Camera/CCTV: Always running, records, and creates evidence.  Stationary, lacks
+intelligence, is possible to avoid, and needs someone to monitor or review the
+tape.
+
+Guard: Can move about, apply intelligence, and collect evidence.  Not
+recording, can be avoided, and has downtime.
 **** Fencing
+Perimeter security analogous to network security's border routers.
 **** Access list
+Specify those authorized to enter a facility.  Can be verified by guard or
+other authority.  Similar to ACLs for networks.
 **** Proper lighting
+A deterrent and useful for visual identification.
 **** Signs
+Authorized access only.  Violators will be prosecuted.
+
+Also used for login banners on computer systems.
 **** Guards
+Effective, but expensive and fallible.
 **** Barricades
+Also gauntlets.  Combined with other measures or used alone.
 **** Biometrics
+Use unique biological traits for identification.  Hand scanners, retinal
+scanners, facial recognition, and keystroke recognition.  Laptops often
+include fingerprint readers.
 **** Protected distribution
+Protected distribution systems (PDS): A system where the network is secure
+enough for classified information transmission unencrypted.  Substitute
+encryption security for physical security.  Called approved circuits.  Used by
+the US government.
 **** Alarms
+Draws attention to a suspected breach.
+
+Security zone: An area where access is individually monitored and controlled.
+Alarms identify the zone of intrusion.  Zone notification tells security where
+to look for intruders.
 **** Motion detection
+Detects movement via infrared, microwave, or sonic.  Can use hybrid sensors.
 *** Environmental controls
 **** HVAC
+Systems ideally located central in the building, with separate ducting from
+the rest of the HVAC system.  Zone-based environment control allows the rest
+of the facility's HVAC to be turned off while maintaining full-time service to
+the computer room.
 **** Fire supression
-**** Fire extinguishers
-**** Fixed systems
+Extinguishing active fires, not prevention.
+***** Fire extinguishers
+Portable.  Type classifications:
+| Type | Use               | Retardant composition     |
+|------+-------------------+---------------------------|
+| A    | Wood, paper       | Largely water or chemical |
+| B    | Flammable liquids | Fire-retardant chemicals  |
+| C    | Electrical        | Nonconductive chemicals   |
+| D    | Metal             | Varies; type specific     |
+| K    | Cooking oil       | Subset of B               |
+
+Multipurpose extinguishers combine capabilities.  Common are A-B, B-C, and ABC.
+
+Remove power from electrical fires to prevent recurrence.
+
+Extinguishers require annual inspection.
+***** Fixed systems
+Combine fire detectors with fire-suppression systems.  Detectors trigger on
+rapid temperature change or smoke.  Suppression uses water or fire-suppressing
+gas.
+
+Water: Can cause damage to active electrical equipment like computers.  Fixed
+systems can be tied to relays to cut power before releasing water.
+
+Gas: Halon no longer used for environmental reasons.  FM200 most common now.
+Displaces oxygen from a room.  Can suffocate humans.  Require sealed
+environments to work.  Expensive.
 **** EMI shielding
+Shielding: Preventing electronic emissions from computers being used to gather
+intelligence and preventing outside EMI from disrupting computers.  A Faraday
+cage does this, surrounding a room in a grounded wire mesh.
+
+Eletromagnetic interference (EMI): Caused by motors, lights, etc.  Can cause
+overload, spikes, or component failure.  Shield and ground signal lines and
+separate EMI generating equipment from cabling.
+
+Radio frequency interference (RFI): Similar to EMI but on the radio spectrum.
+Motors with defective brushes can cause RFI.  Can cause wireless receivers to
+become deaf, a process called desensitizing.  Only solution is to move devices
+farther apart.
+
+TEMPEST shielding protection: A system that doesn't emit significant EMI or
+RFI.  Control zones and white noise can accomplish shielding.  A certified
+standard.
 **** Hot and cold aisles
+Combine to regulate air flow in server racks.  Cold air usually comes from a
+raised floor.
 **** Environmental monitoring
+Computer rooms should have fire and moisture detectors.  Moisture monitors
+could detect a burst pipe and cut power.
 **** Temperature and humidity controls
+Electrostatic shock damage can occur if humidity is too low (below 50%).
+Regularly service environmental systems.
 *** Control types
+Six control types:
+- Deterrent: Delays/discourages attack, like warnings.
+- Preventive: Stop event from happening, like locks.
+- Detective: Uncover violations.  When prevention fails.  Sounds alarm.
+- Compensating: Backup for failed controls, like extra alarms, backup
+  generators, etc.
+- Technical: Implemented through technology.  Can be any other type too,
+  except administrative.
+- Administrative: Comes down through policies, procedures, and guidelines,
+  like an escalation procedure.
 **** A control type analogy
 *** Data policies
+Focuses of a data policy:
+- Wiping: How data is removed from media.
+- Disposing: Discarding media.
+- Retention: How long to keep data.
+- Storage: Where data is kept and access security for it.
 **** Destroying a flash drive
+Steps:
+- Open case and retrieve memory chips.
+- Turn chips to powder.  Hand drills work.
+- Finish it off by tossing into fire.
 **** Some considerations
+Add passwords and encrypt drives.
 **** Optical discs
+Use a disc shredder.  Optionally apply palm or belt sander to data side first.
 *** Review questions
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 A
+2 C
+3 A
+4 D
+5 D
+6 C
+7 A
+8 C
+9 B
+10 A
+11 C
+12 A
+13 A
+14 D
+15 A
+16 B
+17 C D
+18 A
+19 B
+20 C
+*** Additional notes
+Proximity readers work with 13.56Mhz smart cards and 125kHz proximity cards.
 ** Chapter 11: Security administration
 *** Third-party integration
 **** Transitioning
+Occurs during on-boarding or off-boarding of a business partner.
+
+On-boarding: Determine whether security policies of both organizations are
+compatible, at least in areas where interaction occurs.  Determine data
+ownership, data responsibility, and backups.  Interoperability agreements are
+documents that define how the systems will interoperate and what the
+requirements and specifications are.
+
+Off-boarding: 
 **** Ongoing operations
 *** Understanding security awareness and training
 **** Communicating with users to raise awareness
