@@ -252,7 +252,7 @@ Tips:
 - File and Print Servers: Primarily vulnerable to DoS.  Ensure only needed
   protocols are run.
 - Networks with PC-Based Systems: Disable NetBIOS on servers or provide an
-  effective firewall between them and the internet.  NetBIOS ports are 135,
+  effective firewall between them and the Internet.  NetBIOS ports are 135,
   137, 138, and 139.  On Unix systems, close port 111 (RPC).
 - Directory Sharing: Limit to what is essential for system functions.  Hide
   root directories from browsing -- instead, designate subfolders.
@@ -583,7 +583,7 @@ An area to place public servers accessible to people otherwise not trusted.
 Doesn't allow access to other parts of the network.  Can be built/demarcated
 using firewalls that can transmit in three directions:
 - To the internal network.
-- To the external internet.
+- To the external Internet.
 - To the public information (DMZ).
 
 If a web server was on a DMZ, the firewall would direct HTTP traffic there,
@@ -784,7 +784,7 @@ CPUs, etc.  This provides:
 Can be software or hardware.
 **** Proxies
 A device that acts on behalf of another.  All internal user interaction with
-the internet should be controlled through a proxy server.  Proxies should
+the Internet should be controlled through a proxy server.  Proxies should
 auto-block known bad sites.  Caching should be enabled.
 **** Web security gateway
 A proxy server (proxies and caches) with web protection software built-in.
@@ -793,7 +793,7 @@ content, P2P connections, IM, tunneling, HTTP/HTML exploits, ActiveX, etc.
 **** VPNs and VPN concentrators
 VPN: A private network connection that occurs through a public network,
 providing security over insecure environments.  Can connect LANs across the
-internet.  Requires special hardware/software.  VPNs usually use L2TP, IPSec,
+Internet.  Requires special hardware/software.  VPNs usually use L2TP, IPSec,
 PPTP.  Great for extra/intranets for remote offices.
 
 Main concern is encryption.  PPTP: weak encryption, IPSec: higher security.
@@ -1395,7 +1395,7 @@ Scripting capabilities are provided by WMLScript.  WML and WMLScript allow
 malicious code/viruses to be transmitted.
 
 WAP systems communicate via a WAP gateway.  The gateway interfaces between WAP
-and HTTP and TCP/IP.  If the WAP->internet communication isn't encrypted,
+and HTTP and TCP/IP.  If the WAP->Internet communication isn't encrypted,
 packets can be sniffed.  The security concern converting between WAP and
 SSL/TLS, exposing plain text, is called "gap in the WAP".  Fixed in WAP 2.0.
 
@@ -2952,63 +2952,263 @@ Occurs during on-boarding or off-boarding of a business partner.
 
 On-boarding: Determine whether security policies of both organizations are
 compatible, at least in areas where interaction occurs.  Determine data
-ownership, data responsibility, and backups.  Interoperability agreements are
-documents that define how the systems will interoperate and what the
-requirements and specifications are.
+ownership, data responsibility, and backups.  Also important are privacy
+concerns.
 
-Off-boarding: 
+Interoperability agreements are documents that define how the systems will
+interoperate and what the requirements and specifications are.  Some of the
+documents that need to be part of the interoperability agreement:
+- Service-Level Agreement (SLA): Level of service provided, such as support
+  response times.
+- Blanket Purchase Order (BPO): An agreement between the government and a
+  company for ongoing purchases.
+- Memorandum of Understanding (MOU): Summarizes which party is responsible for
+  what portion of work.
+- Interconnection Security Agreement (ISA): Details technical requirements of
+  connected systems.
 **** Ongoing operations
+Address security issues on and ongoing basis, including risk awareness
+(sharing information regarding risks).
 *** Understanding security awareness and training
 **** Communicating with users to raise awareness
+Use internal security websites, news servers, and emails.  Use a regular
+notifications process to inform on security and changes.
 **** Providing education and training
+Tailor for:
+- Organization: Rank and file employees.
+- Management.
+- Technical staff.
+
+Organization: Recommend doing during new employee orientation and staff
+meetings, repeating it periodically.  Have employees sign off on receiving
+training.  Security awareness training here should cover:
+- Importance of security.
+- Responsibilities of people in the organization.
+- Policies and procedures.
+- Usage policies.
+- Account and password-selection criteria.
+- Social engineering prevention.
+
+Management: Give additional training/exposure to issues, threats, and method
+of dealing with threats.  Discuss productivity impacts.
+
+Technical staff: Require special knowledge about methods, implementations, and
+capabilities of security systems.  Will need to be vendor-specific.
+
+Gather training metrics to validate compliance and effect on security.
 **** Safety topics
+Refers to safety of data and physical environment, and also to humans.  Topics
+related to safety:
+- Fencing.
+- Lighting.
+- Locks.
+- CCTV.
+- Escape plans.
+- Drills: Ensure knowledge of escape plans.
+- Escape routes: Include alternative routes.
+- Testing controls: Technical, management, and operational.
 **** Training topics
+Topics for user education:
+- Clean desk policy: Notes, papers, etc. on a desk can be a security risk.
+  Sensitive information should be stored when employees are away from their
+  desks.
+- Compliance with laws, best practices, and standards: Keep up to date on
+  regulations and laws.
+- Data handling: Limit access to only those needing it.  Implement and educate
+  on data safeguards.
+- Policy on personally owned devices: Segregate personal and company data.  Do
+  not allow syncing of smartphones to work systems.  Ban all P2P networking.
+- Personally Identifiable Information (PII): Includes names, biometrics,
+  and financial/health information.  NIST issues guidelines regarding PII.
+  Explain phone SIM modules contain PII.
+- Prevent tailgaiting: Also called piggybacking.
+- Safe Internet habits: Educate on phishing, pop-ups, and downloading software.
+- Smart computing habits: Never introduce stray media.  Require IT approval
+  for third-party software installs.
+- Social networking dangers: Educate on exercising caution when using.
+- The need for all computing to be safe: Educate on weakest link rule.
+  Recommend security like firewalls and AV for employee home systems.
+- The value of strong passwords: Password complexity, change policy, and
+  secrecy.
+- Understanding data labeling and handling: Differing value of various data.
+- What to do when disposing of old media: Data disposal, including for home
+  systems that have work data.
+- Responding to hoaxes: Scareware tries to convince a threat exists.
+  Rougeware tries to extract protection payment for nonexistent threats.
+  Policy when encountering possible hoaxes should be to contact IT.
 *** Classifying information
+Information classification: Support the organization's privacy requirements,
+preventing unauthorized disclosure of sensitive information.
+
+Classify information into three categories: public use, internal use, and
+restricted use.  Internal and restricted are also called private.  Most
+information is for internal use.
 **** Public information
+Includes information accessible to the general public or two just specific
+individuals who need it.  Need to develop policies about what information is
+available and for what purpose it's disseminated.  Assigned disclosure
+authorization.
 ***** Limited distribution
+Data not intended for public release.  Private, but not secret.
+
+Beta test is an example of limited distribution, requiring participants to
+sign NDAs.
+
+Statements about privacy and confidentiality are common on limited-access
+documents and indicate unauthorized disclosure is a breach of confidentiality.
 ***** Full distribution
+Marketing material, annual stockholder reports, and other PR.  Sometimes
+controlled by a corporate communications department.
 **** Private information
+Information intended only for internal use.  Also called "working documents" or
+"work product".
 ***** Internal information
+Includes personnel records, financial working documents, ledgers, customer
+lists, etc.
 ***** Restricted information
+Disclosure could seriously damage an organization.  Includes proprietary
+processes, trade secrets, strategic information, and marketing plans.  Usually
+considered need-to-know.
 *** Information access controls
+Access controls: Methods used to ensure users can access only what authorized
+for.  Should be detailed in the organization's security policies/standards.
+Key concepts:
+- Implicit deny.
+- Least privilege.
+- Job rotation: Redundancy in skills.
 **** Security concepts
+The CIA triad: Confidentiality, integrity, and availability.  The opposite of
+DAD: Disclosure, alteration, and destruction.
+- Confidentiality: Preventing unauthorized access to data.  Encryption,
+  passwords, access control, steganography.
+- Integrity: Ensuring data hasn't been altered.  Hashing, message
+  authentication codes, nonrepudiation with digital signatures.
+- Availability: Ensuring systems are available.  Backups, redundancy, disaster
+  recovery plans.
 *** Complying with privacy and security regulations
-**** The Health Insurance Portability and Accountability Act
+**** The Health Insurance Portability and Accountability Act (HIPAA)
+Standards and procedures for personal medical information.  Covers
+confidentiality, privacy, and security of records.
 **** The Gramm-Leach-Bliley Act
-**** The Computer Fraud and Abuse Act
-**** The Family Educational Rights and Privacy Act
+Also known as the Financial Modernization Act of 1999.  Requires financial
+institutions to develop privacy notices and inform customers on privacy.
+Prohibits release of customer information by banks.
+**** The Computer Fraud and Abuse Act (CFAA)
+Federal authorities granted power to prosecute hackers, spammers, and others
+as terrorists.
+**** The Family Educational Rights and Privacy Act (FERPA)
+Covers release of student information by educational institutions.
 **** The Computer Security Act of 1987
-**** The Cyberspace Electronic Security Act
+Requires federal agencies to protect systems containing sensitive information.
+**** The Cyberspace Electronic Security Act (CESA)
+Grants law enforcement the right to gain access to encryption keys and
+cryptography methods.
 **** The Cyber Security Enhancement Act
+Allows federal agencies access to ISP and data transmission facility data.
 **** The Patriot Act
+Includes authority to intercept electronic communication.
 **** Familiarizing yourself with international efforts
+Cybercrime Treaty: Makes hacking illegal in Europe.
 *** Mobile devices
+Security measures for mobile devices:
+- Screen lock: Set timeouts with password locks.  Include repeated failed login
+  lockouts.
+- Strong password.
+- Device encryption: Use TPMs.
+- Remote wipe/sanitation: Remotely clear data or stolen or transferred devices.
+- Voice encryption: Phone call encryption.
+- GPS tracking: Track location of stolen devices.
+- Application control: Controlling what applications are installed on the
+  device.
+- Storage segmentation: Keep work data separate and possibly separately
+  encrypted.
+- Asset tracking: Inventory control of devices.
+- Device access control: Controlling who has a mobile device.
 **** BOYD issues
+Employees bringing personal devices into the corporate network environment.
+
+Disallow connecting such devices to the network and use a second Wi-Fi guest
+network for this.  Have a policy to address cell phones photographing or
+recording sensitive information, like having it subject to random search.
+Address data ownership for situations like where company data is on personal
+devices.
 *** Alternative methods to mitigate security risks
+Use a combination of network segmentation and security layers.  Zone based
+upon security levels.
+
+Application firewalls (WAPs?) are better protection for database and web
+servers than other types, since they filter application content.
+
+Apply updates, including for firmware.  Certain viruses target router and
+switch firmware.  Use firmware version control.
+
+Control redundancy and diversity: Implement more than one of each security
+control.  Diversity means using different controls of the same type (e.g. using
+a Cisco IDS on the perimeter but a SNORT IDS inside the network).  Use
+wrappers around sensitive data, like having data servers on their own segment
+with their own firewall, IDS, and AV.
+
+Specialized systems:
+- SCADA (supervisory control and data acquisition): Equipment used to manage
+  automated factory equipment, dams, power generators, etc.  Stuxnet attacked
+  SCADA systems.
+- Embedded systems (printers, smart TVs, HVAC controls, game consoles): Device
+  dependent, but have similar security needs due to having HDs, RAM, and OSes.
+- Smartphones: Security issues differ between Android and iOS.
+- Mainframes: More secure generally, but not invulnerable.
+- In-vehicle computing systems: Use HDs and GPS.  Implementation dependent.
 *** Review questions
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 A
+2 D
+3 A
+4 C
+5 D
+6 D
+7 A
+8 B
+9 B
+10 B
+11 A
+12 C
+13 D
+14 A
+15 B
+16 B
+17 A
+18 A
+19 A
+20 B
 ** Chapter 12: Disaster recovery and incident response
 *** Issues associated with business continuity
+Business continuity: The processes, policies, and methods used to minimize
+impact of a system or network failure.
+
+Business continuity planning (BCP): Process of implementing business
+continuity.  A management tool ensuring critical business functions when normal
+ones are disrupted.
+
+Critical business functions (CBFs): The processes or systems that must be made
+operational immediately when an outage occurs.  The business cannot function
+without them.
 **** Types of storage mechanisms
+Reasons for restores:
+- Accidental deletion.
+- Application errors.
+- Natural disasters.
+- Physical attacks.
+- Server failure.
+- Virus infection.
+- Workstation failure.
+
+Data storage mechanisms:
+- Working copies: Also called shadow copies.  Partial or full backups kept for
+  immediate recovery.  Updated frequently and are usually the most recent.
+  Some filesystems include journaling.  A journaled file system (JSF) includes
+  a log of transactions within a recent time range.  With crashes, the OS can
+  check logs to see which transactions have been committed.
+- Onsite storage: Storage location on the site of the computer center.  Often
+  stored in fire-rated containers.
+- Offsite storage: 
 **** Crafting a disaster-recover plan
 ***** Understanding backup plan issues
 ***** Knowing the backup types
