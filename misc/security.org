@@ -1257,7 +1257,7 @@ Continuous monitoring: Ongoing auditing of resources accessed by a user.
 **** Smart cards
 Contain memory storing permissions and access information.  Difficult to
 counterfeit but easy to steal.  Passwords/PINs are required to activate most
-smart cards.
+smart cards.  Use private key to log in.
 ***** Common Access Card (CAC)
 Used for accessing DoD computers, signing email, and implementing PKI.
 ***** Personal Identification Verification (PIV) card
@@ -3208,52 +3208,254 @@ Data storage mechanisms:
   check logs to see which transactions have been committed.
 - Onsite storage: Storage location on the site of the computer center.  Often
   stored in fire-rated containers.
-- Offsite storage: 
-**** Crafting a disaster-recover plan
+- Offsite storage: Storage location away from the computer center where paper
+  copies and backup media are kept.
+**** Crafting a disaster-recovery plan
+Plan that helps an organization respond when a disaster (system, network,
+infrastructure failure or natural disaster) occurs.  Emphasis on reestablishing
+services and minimizing losses.  Involves access and storage of information,
+including the backup plan.
 ***** Understanding backup plan issues
+Backup plan: Identifies what information is stored, how it's stored, and the
+duration of storage.
+
+Systems/applications considerations:
+- Databases: Most provide backup in part or globally.  Some include
+  transaction auditing and data recovery.
+- User files: Documents, spreadsheets, etc.  Don't relegate to user
+  responsibility.
+- Applications: Keep a single, up-to-date version of each application used
+  that is available for download and reinstall.  Only a problem with software
+  that requires registration with a centralized license server.
 ***** Knowing the backup types
+Three backup methods:
+- Full: Complete backup of all files, turning off archive bits.
+- Incremental: Changes since the last full or incremental backup.  Fastest.
+  Only backs up files that have the archive bit turned on (it then turns them
+  off).
+- Differential: Changes since the last full backup.  Each successive
+  differential will be slower until the next full.
+- Hierarchical storage management (HSM): Continuous online backup using
+  optical or tape jukeboxes.  Appears as an infinite disk.  Closest available
+  to real-time backup.
+
+Can combine these except using incremental and differential at the same time.
 ***** Developing a backup plan
+Three models to deal with backup:
+- Grandfather, father, son method: Full backups occur at regular intervals,
+  with three tiers ordered by time interval.  Incremental backups occur
+  between.  For example: grandfather backups are annual (and stored offsite),
+  father are monthly, son are weekly.  Yearly backups are permanently retained.
+  Monthly are only retained for that year.  Weekly are only retained for that
+  month.  Uses tape rotation.
+- Full archival method: All backups, both full and incremental are kept
+  forever.  Can be prohibitively expensive.
+- Backup server method: A server examines and copies all files altered every
+  day.  This server can then be backed up regularly and those backups kept for
+  a specified period.  Some move rarely accessed files to slower media and
+  eventually store them offline.
 ***** Recovering a system
+Backup the base system prior to data load.  To use, restore this, applications,
+then the data.
 ***** Backout vs. backup
+Backout: Reverting a change that had negative consequences.  Can be
+uninstalling service packs, hotfixes, patches, or firmware.
 ***** Planning for alternate sites
+Also called backup sites.  A facility available on short notice that can
+restore network or systems operations.
+
+An alternative site can be one of:
+- Hot site: Can provide operations within hours of failure.  Provide everything
+  needed to restore services.  Databases here kept up-to-date.  Expensive and
+  suitable for short-term situations.  Some provide a location for employees to
+  relocate to.  Also called an active backup model.
+- Warm site: Provides some capabilities of a hot site, but requires more work
+  to become operational.  Staff still needs to install or configure some
+  systems to resume work.  A compromise between the expensive of a hot site and
+  a cold site.  Also called active/active model.  Can be part of a reciprocal
+  agreement between two companies to provide emergency services.
+- Cold site: Not ready for immediate use.  Must bring along equipment and
+  network.  A place for work to resume, but lacking the infrastructure.  Good
+  for planned extended outages.  Least expensive but require the most advance
+  planning.
+
+Should be part of business continuity planning (BCP).
 **** Incident response policies
+Define how an organization will respond to an incident (any attempt to violate
+security policy, a penetration, system compromise, or other unauthorized
+access).  Includes system failures and disruption of service.
+
+Should establish at least these:
+- Outside agencies that should be notified.
+- Resources used to deal with the incident.
+- Procedures to gather evidence.
+- Information that should be collected about the incident.
+- Outside experts who can be used if needed.
+- Policies and guidelines regarding how to handle an incident.
+
+Computer Security Incident Response Team (CSIRT): A predefined or ad hoc team
+to respond to an incident.
 **** Understanding incident response
+Forensics: The process of identifying what has occurred on a system by
+examining the data trail.
+
+Incident response: Includes forensics and investigating, repairing,
+documenting, and adjusting procedures to prevent further incidents.
+
+Incident response plan (IRP): Outlines steps needed and who is responsible for
+decisions.
+
+Chain of custody: Covers how evidence is secured, where it's stored, and who
+has access.  Tracks evidence to negate claims of evidence tampering.
 ***** Step 1: identify the incident
+Incident identification: The first step in determining what has occurred.  May
+be triggered by an IDS signal, which could be a false positive.  First
+responders determine whether an incident is real.
+
+First, implement "isolation".  If the incident is real, implement "escalation"
+by consulting policies and management.  Ensure proper information control.
 ***** Step 2: investigating the incident
-***** Step 3: repair the damage
+Search logs, files, and other data sources to determine nature and scope of the
+incident.  Determine if the incident is a false positive, isolated, or part of
+a larger attack.
+***** Step 3: repairing the damage
+Determine how to restore access to compromised resources.  Could be anything
+from rebooting to rebuilding systems from scratch.
+
+In cases where damage cannot be repaired, as in stolen data, take steps to
+mitigate the problem:
+- Immediately change all passwords.
+- Notify relevant parties.
+- Make procedural changes so stolen information cannot be used for additional
+  breaches.
 ***** Step 4: documenting and reporting the response
+Document steps taken to identify, detect, and repair.  May include informing
+software or system manufacturers of the problem and solution.  Staging fake
+emergencies can test incident response.
 ***** Step 5: adjusting procedures
+After the incident has been managed, review procedures and policies to
+determine if changes are needed.  Called a post-mortem.
 ***** Forensics from the Security+ perspective
+Topics:
+- Act in Order of Volatility (OOV): Volatility is the time available to
+  collect data before it's gone.  An example ordering is: RAM, HD, CDs/DVDs,
+  and printouts.
+- Capture system image: Capture an image of the system in its exploited state
+  for learning from.
+- Document network traffic and logs: Can be useful to identify treads
+  associated with repeated attacks.
+- Capture video.
+- Record time offset: Important in recreating incident chronology since
+  workstations may be slightly off from actual time.
+- Take hashes: NIST maintains a National Software Reference Library (NSRL) to
+  collect hashes of software and store them in a Reference Data Set (RDS).
+  Used by law enforcement, government, and business to determine files
+  important as evidence.
+- Capture screenshots.
+- Talk to witnesses: As soon as possible following an incident.  Document
+  interviews with video or audio.
+- Track man hours and expenses: May be necessary for cost justification, legal
+  reasons, or insurance.
 **** Succession planning
-**** Tabletop exercise
+Identifying who can take positions when they open.  Identify key roles that
+cannot be left unfilled.
+**** Tabletop exercises
+A simulation of a disaster, to verify planning.  Five levels of testing:
+- Document review: Review recovery, operations, resumption plans and
+  procedures.
+- Walkthrough: A group discussion of the above.
+- Simulation: A walkthrough of the same in a scripted case study.
+- Parallel test: Start up all backup systems but leave the main systems
+  functioning.
+- Cutover test: Shut down main systems and have everything fail over to
+  backups.  Only do this once a simulation and parallel test are successful.
+
+Big data adds challenges to these testing levels.
 *** Reinforcing vendor support
-**** Service-level agreements
+SLAs and code escrow help protect you in the event a software vendor goes out
+of business or if a dispute arises with a maintenance provider.
+**** Service-Level Agreements (SLAs)
+An agreement with a service provider, typically for technical support.
+Stipulate the performance expected by outlining what the vendor has agreed to
+meet.  Consider issues regarding data exposure.  Called maintenance contracts
+when referring to hardware or software.  Regularly review to ensure criteria
+match needs.
+
+Key SLA measures:
+- Recovery Time Objectives (RTOs): Maximum amount of time a process/service is
+  allowed to be down and the consequences considered acceptable.  The RTO is
+  agreed upon during BIA creation.
+- Mean Time Between Failures (MTBF): Measure of anticipated incidence of
+  failure, representing anticipated lifetime.
+- Mean Time To Restore (MTTR): How long it takes to repair once a failure
+  occurs.  Also called mean time to repair.
 **** Code escrow agreements
+Code escrow: The storage and conditions of release of source code provided by
+a vendor, e.g., release of source code in the event of vendor bankruptcy.
+
+An agreement with a vendor can support a code escrow clause allowing the
+customer to acquire the source code in certain events.
+
+Orphanware: Software from now non-existent companies.  Have no support.
 *** Penetration testings
 **** What should you test?
+Three types of penetration testing:
+- Black box: Tester has no knowledge of the system and is functioning the same
+  as an outside attacker.
+- White box: Tester has significant knowledge of the system.  Simulates a
+  rogue employee.
+- Gray box: Some limited knowledge exists.
+
+Another classification system:
+- Nonintrusive tests: Passively testing security controls.  Looking for
+  weaknesses, but not exploiting them.
+- Intrusive tests: Actually trying to break the network.
 **** Vulnerability scanning
+Usually part of penetration testing.  Allows identification of specific
+vulnerabilities.  The most egregious vulnerability revealed is a lack of
+security controls.
 ***** Credentialed vs. noncredentialed
+Vulnerability scanning can be done in two manners:
+- Credentialed: Scan that uses actual network credentials to connect to
+  systems.  Benefits according to Nessus creators:
+  - Doesn't disrupt operations or consume many resources.
+  - Finds lists of missing patches.
+  - Client-side vulnerabilities are uncovered.
+  - Other Nessus-specific stuff.
+- Noncredentialed.
 *** Review questions
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 A
+2 B
+3 B
+4 C
+5 A
+6 B
+7 D
+8 C
+9 C
+10 A
+11 C
+12 C
+13 A
+14 D
+15 C
+16 B
+17 A
+18 D
+19 B
+20 D
+*** Additional notes
+- Failover: When a malfunctioning system automatically switches over to another
+  system to continue operation.
+- Succession planning: Outlines those internal to the organization who have
+  the ability to step into positions.
+** General extra notes
+- Network IDs: The first 8-bits of the 32-bit IP address.
+- Public switched telephone network (PSTN).  Allows outsourcing of call
+  switching.
+- Slash notation: The /xx part of an address.  Convert the number to binary
+  then bitwise and it with the IP address to the get the subnet.
+  E.g. 192.168.1.101/16 is on the 192.168.0.0 subnet.
 
 
 * Assessment test (first try)
