@@ -1224,8 +1224,8 @@ change over time.  If confidentiality is paramount, use MAC.
 **** Discretionary Access Control (DAC)
 More flexible, allowing the share of information dynamically between users.
 Increases risk of unauthorized information disclosure and makes it harder to
-ensure only appropriate access is issued.  Unix file permissions are an
-example of DAC, with it's "other" group permissions.
+ensure only appropriate access is issued.  Unix file permissions are an example
+of DAC, with it's "other" group permissions.  Based on user identity.
 **** Role-Based Access Control (RBAC)
 Implement access by job function or responsibility.  Between the flexibility
 of DAC and MAC.  Windows uses this.
@@ -2531,7 +2531,7 @@ security of a system.  A particular problem with wireless.
 TCP/IP hijacking: Gaining access to a host and logically disconnecting it from
 the network, then replacing it with another of the same IP.  Can give the
 attacker access to the session and other information of the original system.
-More difficult to engineer.
+More difficult to engineer.  Alters session state.
 **** Replay attacks
 Capturing and replaying information to a server over a network.  Login/password
 information can be captured and replayed to the server.  Also occurs with
@@ -3450,6 +3450,42 @@ Vulnerability scanning can be done in two manners:
 - Succession planning: Outlines those internal to the organization who have
   the ability to step into positions.
 ** General extra notes
+Memorize this table:
+| Service          | TCP | UDP |  Port |
+|------------------+-----+-----+-------|
+| FTP data         | X   |     |    20 |
+| FTP control      | X   |     |    21 |
+| SSH, SCP         | X   |     |    22 |
+| SFTP             | X   |     |    22 |
+| TFTP             |     | X   |    69 |
+| FTPS             | X   |     |   443 |
+| SMTP             | X   |     |    25 |
+| POP3             | X   |     |   110 |
+| IMAP4            | X   |     |   143 |
+| Telnet           | X   |     |    23 |
+| TACACS           |     | X   |    49 |
+| TACACS+          | X   |     |    49 |
+| SSL VPN          | X   |     |   443 |
+| IPSec            |     | X   |   500 |
+| L2TP             |     | X   |  1701 |
+| PPTP             | X   | X   |  1723 |
+| RDP              | X   | X   |  3389 |
+| DNS              | X   | X   |    53 |
+| DHCP             |     | X   | 67-68 |
+| HTTP             | X   |     |    80 |
+| HTTPS            | X   |     |   443 |
+| Kerberos         | X   | X   |    88 |
+| NNTP             | X   |     |   119 |
+| SNMP             |     | X   |   161 |
+| SNMP Trap        | X   | X   |   162 |
+| LDAP             | X   | X   |   389 |
+| Syslog           |     | X   |   514 |
+| NetBIOS name     | X   | X   |   137 |
+| NetBIOS datagram | X   | X   |   138 |
+| NetBIOS session  | X   | X   |   139 |
+| FTPS data        | X   | X   |   989 |
+| FTPS control     | X   | X   |   990 |
+
 - Network IDs: The first 8-bits of the 32-bit IP address.
 - Public switched telephone network (PSTN).  Allows outsourcing of call
   switching.
@@ -3492,7 +3528,41 @@ Vulnerability scanning can be done in two manners:
 Score: 50%
 
 
-* Assessment test (second try)
+* Assessment test (second try, post book read)
+1 A
+2 D
+3 B
+4 A (B)
+5 B
+6 B
+7 D (A)
+8 C
+9 D
+10 B
+11 A
+12 A
+13 A (D)
+14 C (B)
+15 A
+16 B
+17 B
+18 D
+19 A
+20 C
+21 A
+22 B
+23 A
+24 C
+25 B
+26 A
+27 B
+28 C
+29 C
+30 A
+Score: 26/30 86.6%
+
+
+* Assessment test (second try, post review)
 1
 2
 3
