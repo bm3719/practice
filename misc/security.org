@@ -1755,7 +1755,7 @@ with specific AV scanners (normal ones can't open MS's open files).
 **** Hardening FTP servers
 FTP isn't intended for high-security applications due to inherent weaknesses.
 Create FTP file areas on separate drives.  Use VPNs or SSH for FTP-like
-activities instead.  FTP sends user/pass encrypted over the network.
+activities instead.  FTP sends user/pass unencrypted over the network.
 
 Give users a separate user/pass for FTP access, preventing normal accounts
 from getting compromised.  Scan all files stored on an FTP server.  Always
@@ -2023,7 +2023,7 @@ Hashing algorithms to be familiar with:
   one-way hash that can be used with an encryption protocol. Produces a 160-bit
   hash value.  SHA-2 has several sizes: 224, 256, 334, and 512-bit.  SHA-2 is
   most widely used.  SHA-3 is now standard, though SHA-2 has no known issues
-  and SHA-3 still ins't recommended.
+  and SHA-3 still isn't recommended.
 - Message Digest Algorithm (MD): Also creates a hash value and is a one-way
   hash.  Also validates message integrity.  Most common are MD5, MD4, and
   MD2.  MD4 used to be used by NTLM.  MD5 creates a 128-bit hash, but the
@@ -2578,7 +2578,7 @@ Synonymous terms.  Setting up malicious servers on misspelled URLs.
 Register domains around yours for deviations and other top-level domains.
 **** Watering hole attack
 Identifying a site visited by those being targeted, then poisoning that site
-and waiting for results.  E.g., installing malware on a target's third part
+and waiting for results.  E.g., installing malware on a target's third party
 email provider.
 *** Identifying types of application attacks
 **** Cross-site scripting and forgery
@@ -2968,8 +2968,8 @@ documents that need to be part of the interoperability agreement:
 - Interconnection Security Agreement (ISA): Details technical requirements of
   connected systems.
 **** Ongoing operations
-Address security issues on and ongoing basis, including risk awareness
-(sharing information regarding risks).
+Address security issues on an ongoing basis, including risk awareness (sharing
+information regarding risks).
 *** Understanding security awareness and training
 **** Communicating with users to raise awareness
 Use internal security websites, news servers, and emails.  Use a regular
@@ -3451,7 +3451,7 @@ Vulnerability scanning can be done in two manners:
 - Succession planning: Outlines those internal to the organization who have
   the ability to step into positions.
 ** General extra notes
-Memorize this table:
+Memorize these tables:
 | Service          | TCP | UDP |  Port |
 |------------------+-----+-----+-------|
 | FTP data         | X   |     |    20 |
@@ -3486,6 +3486,15 @@ Memorize this table:
 | NetBIOS session  | X   | X   |   139 |
 | FTPS data        | X   | X   |   989 |
 | FTPS control     | X   | X   |   990 |
+
+| protocol | speed         | 2.4Ghz | 5Ghz | Note                       |
+|----------+---------------+--------+------+----------------------------|
+| 802.11   | 1 or 2Mbps    | X      |      |                            |
+| 802.11a  | up to 54Mbps  |        | X    |                            |
+| 802.11b  | up to 11Mbps  | X      |      | Fallback to 5.5 and 1Mbps. |
+| 802.11g  | up to 54Mbps  | X      |      |                            |
+| 802.11i  |               |        |      | WPA2.  Used for security.  |
+| 802.11n  | up to 600Mpbs | X      | X    | Multiple antennas.         |
 
 - Network IDs: The first 8-bits of the 32-bit IP address.
 - Public switched telephone network (PSTN).  Allows outsourcing of call
@@ -3565,72 +3574,38 @@ Score: 50%
 Score: 26/30 86.6%
 
 
-* Assessment test (second try, post review)
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-Score:
-
-
-* Assessment test (second try, final)
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-Score:
+* Assessment test (final)
+1 A
+2 D
+3 B
+4 C (B)
+5 B
+6 B
+7 A
+8 C
+9 D
+10 B
+11 A
+12 A
+13 D
+14 D (B)
+15 A 
+16 B
+17 B
+18 D
+19 A
+20 C
+21 A
+22 B
+23 A
+24 C
+25 B
+26 A
+27 B
+28 C
+29 C
+30 A
+Score: 28/30 93.3%
 
 
 
@@ -3699,207 +3674,207 @@ Score:
 19 D
 20 A
 *** Chapter 4
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 B
+2 B
+3 A
+4 A
+5 A
+6 A
+7 A
+8 C
+9 B
+10 A
+11 A
+12 A
+13 A
+14 C
+15 B
+16 D
+17 A
+18 B
+19 C
+20 D
 *** Chapter 5
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 C
+2 A
+3 C
+4 C (D)
+5 B
+6 C
+7 A
+8 A
+9 C
+10 A
+11 B
+12 B
+13 B (C)
+14 A
+15 C (A)
+16 C
+17 D
+18 B
+19 A
+20 D
 *** Chapter 6
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 C
+2 A
+3 B
+4 B
+5 A
+6 C
+7 D
+8 A
+9 D
+10 B
+11 D
+12 A
+13 C
+14 C
+15 B
+16 A
+17 B
+18 B
+19 B
+20 C
 *** Chapter 7
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 A
+2 B
+3 B
+4 A
+5 B
+6 A
+7 C
+8 A
+9 C
+10 D
+11 B
+12 C
+13 D
+14 B
+15 A
+16 C
+17 D
+18 C
+19 D
+20 B
 *** Chapter 8
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 B
+2 B
+3 A
+4 C
+5 D
+6 A
+7 C
+8 B
+9 C
+10 A
+11 A
+12 C
+13 B
+14 C
+15 A
+16 A
+17 D
+18 A
+19 A
+20 D
 *** Chapter 9
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 B
+2 B
+3 C
+4 A
+5 C
+6 D
+7 A
+8 A
+9 B (A)
+10 B
+11 A
+12 B
+13 A
+14 D
+15 B
+16 C
+17 D
+18 C
+19 B
+20 D
 *** Chapter 10
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 A
+2 C
+3 A
+4 D
+5 D
+6 C
+7 A
+8 C
+9 B
+10 A
+11 B (C)
+12 A
+13 A
+14 D
+15 A
+16 B
+17 A D (C D)
+18 A
+19 B
+20 C
 *** Chapter 11
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 A
+2 D
+3 A
+4 C
+5 D
+6 D
+7 A
+8 B
+9 B
+10 B
+11 A
+12 C
+13 D
+14 A
+15 B
+16 B
+17 A
+18 A
+19 A
+20 B
 *** Chapter 12
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+1 B (A)
+2 B
+3 B
+4 C
+5 A
+6 B
+7 D
+8 C
+9 C
+10 A
+11 C
+12 C
+13 A
+14 D
+15 C
+16 B
+17 A
+18 D
+19 D (B)
+20 D
 *** Score
 1 90
 2 85
 3 95
-4
-5
-6
-7
-8
-9
-10
-11
-12
+4 100
+5 85
+6 100
+7 100
+8 100
+9 95
+10 90
+11 100
+12 90
 
 * All review questions (third try)
 *** Chapter 1
@@ -4155,3 +4130,36 @@ Score:
 19
 20
 *** Score
+
+* CompTIA sample questions
+1 D
+2 D
+3 D
+4 B
+5 D
+6 C
+7 D X
+8 B
+9 C
+10 A
+11 B
+12 A
+13 D
+14 A
+15 A
+16 A
+17 D
+18 D
+19 B
+20 A
+21 A X
+22 B
+23 B
+24 C
+25 A
+26 C
+27 D
+28 A
+29 A
+30 C X
+Score: 27/30, 90%
