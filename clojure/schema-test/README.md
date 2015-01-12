@@ -14,6 +14,13 @@ A test project to investigate Prismatic Schema.
 
 Look at dev/user.clj for code representing the proof of concept.
 
+## TODO
+
+Some things to improve this:
+- Combine the validation schema and the transform map into the same structure.
+  This will prevent the programmer from having to ensure that the keys match
+  up.
+
 ## License
 
 None.
