@@ -9,10 +9,6 @@
             [clojure.repl :refer :all]
             [clojure.pprint :refer [pp pprint]]))
 
-(defn test-ns
-  "A confirmation function to run from the user REPL" []
-  "user namespace active.")
-
 ;;; Field transform functions.
 
 (defn str->int
@@ -28,6 +24,8 @@
   (try
     (apply t/date-time (map read-string (clojure.string/split dstr #"/")))
     (catch Exception e (str "Unable to parse date from " dstr))))
+
+;;; Input maps.
 
 ;; A simple test schema.
 (def test-schema
@@ -78,6 +76,8 @@
    :some-number str->int
    :some-pos-number str->int})
 
+;;; Interface functions.
+
 (defn find-missing-keys
   "Find if there exist keys in the schema that aren't in the data and return
   them." [schema data]
@@ -113,3 +113,7 @@
           ;; exceptions, like if the transform calls first on an integer, or
           ;; it's missing completely.
           (catch Exception e [k (str "Transformation error: " (.getMessage e))])))))
+
+;;; Test expressions.
+;; (validate-map source1-schema source1-fns source1-test-data)
+;; (validate-map source1-schema source1-fns source1-bad-test-data)
