@@ -16,7 +16,9 @@ The 2 maps are:
 
 ## Usage
 
-Look at dev/user.clj for code representing the proof of concept.
+Look at
+[dev/user.clj](https://github.com/bm3719/practice/blob/master/clojure/schema-test/dev/user.clj)
+for code representing the proof of concept.
 
 ## TODO
 
