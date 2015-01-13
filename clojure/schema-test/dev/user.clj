@@ -25,13 +25,24 @@
     (apply t/date-time (map read-string (clojure.string/split dstr #"/")))
     (catch Exception e (str "Unable to parse date from " dstr))))
 
-(defn apply-fns
+;;; Transform application functions.
+
+(defmacro param-fn
+  "A macro that returns a lambda with args inserted." [f args]
+  `#(~f ~@args %))
+
+(defn xform
   "Given a list of functions, return a comp of them, applied in the order they
-  are in the input vector." [fn-vec]
-  (apply comp (reverse (map resolve fn-vec))))
+  are in the input vector.  For example:
 
-;;(def fs [['inc] ['str] ['take 1]])
-
+  (apply-fns [['inc] ['str] ['take 1]])
+  > #(comp #(take 1 %) str inc)"
+  [fs]
+  {:pre [(or (vector? fs) (list? fs))]}
+  (apply comp
+         (map #(if (= (count %) 1)
+                 (resolve (first %))
+                 (param-fn (resolve (first %)) (rest %))) (reverse fs))))
 
 ;;; Input maps.
 
