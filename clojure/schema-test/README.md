@@ -1,6 +1,7 @@
 # schema-test
 
-A test project to investigate Prismatic Schema.
+A test project creating a data hygiene system using
+[Prismatic Schema](https://github.com/Prismatic/schema).
 
 3 maps are relevant here.
 - Schema: This represents the validation conditions that the data map must meet
