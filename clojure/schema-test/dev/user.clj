@@ -25,6 +25,14 @@
     (apply t/date-time (map read-string (clojure.string/split dstr #"/")))
     (catch Exception e (str "Unable to parse date from " dstr))))
 
+(defn apply-fns
+  "Given a list of functions, return a comp of them, applied in the order they
+  are in the input vector." [fn-vec]
+  (apply comp (reverse (map resolve fn-vec))))
+
+;;(def fs [['inc] ['str] ['take 1]])
+
+
 ;;; Input maps.
 
 ;; A simple test schema.
@@ -111,5 +119,6 @@
           (catch Exception e [k (str "Transformation error: " (.getMessage e))])))))
 
 ;;; Test expressions.
-;; (validate-map source1-schema source1-fns source1-test-data)
-;; (validate-map source1-schema source1-fns source1-bad-test-data)
+;; (validate-map source1-schema source1-test-data)
+;; (validate-map source1-schema source1-bad-test-data)
+
