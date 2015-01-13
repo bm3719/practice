@@ -31,14 +31,22 @@
 (def test-schema
   {:a (s/pred (and s/Int pos?))})
 
-;; The final schema that the data must match.
+;; A data structure representing the keys expected.  For each key, there exists
+;; a check field, representing the schema validation it must pass, and the
+;; transforms necessary to get it into a passing state.
 (def source1-schema
-  {:uic (s/pred (and s/Str #(= (count %) 6)))
-   :free-text s/Str
-   :date-something-happened org.joda.time.DateTime
-   :enum-value (s/enum "DIV" "BDE" "BN" "CO")
-   :some-number s/Int
-   :some-pos-number (s/pred (and s/Int pos?))
+  {:uic {:check (s/pred (and s/Str #(= (count %) 6)))
+         :fns #(->> % (take 6) (apply str))}
+   :free-text {:check s/Str
+               :fns identity}
+   :date-something-happened {:check org.joda.time.DateTime
+                             :fns interpret-date-str}
+   :enum-value {:check (s/enum "DIV" "BDE" "BN" "CO")
+                :fns identity}
+   :some-number {:check s/Int
+                 :fns str->int}
+   :some-pos-number {:check (s/pred (and s/Int pos?))
+                     :fns str->int}
    ;; :some-2char-string-that-could-be-blank (s/pred (or s/))
    })
 
@@ -64,18 +72,6 @@
    ;; :some-2char-string-that-could-be-blank "FFFF"
    :some-extra-field "sdf"})
 
-;; A collection of operations, to be performed on the test data, prior to it
-;; being validated.
-;;
-;; TODO: Make this a list of function symbols that are applied in sequence.
-(def source1-fns
-  {:uic #(->> % (take 6) (apply str))
-   :free-text identity
-   :date-something-happened interpret-date-str
-   :enum-value identity
-   :some-number str->int
-   :some-pos-number str->int})
-
 ;;; Interface functions.
 
 (defn find-missing-keys
@@ -100,12 +96,12 @@
   Note: In the final version of this, once things are successful, we'll want to
   propagate the transformed data to the datastore.  At that point, the hygiene
   phase is complete and we can't go back to it."
-  [schema data-transforms data]
+  [schema data]
   (into
    {} (for [k (keys schema)]
         (try
-          (when (s/validate (into {} [[k (k schema)]])
-                            (into {} [[k ((k data-transforms) (k data))]]))
+          (when (s/validate (into {} [[k (:check (k schema))]])
+                            (into {} [[k ((:fns (k schema)) (k data))]]))
             [k true])
           ;; If the validation fails, grab the message.
           (catch clojure.lang.ExceptionInfo e [k (.getMessage e)])
