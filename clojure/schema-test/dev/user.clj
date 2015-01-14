@@ -27,22 +27,22 @@
 
 ;;; Transform application functions.
 
-(defmacro param-fn
-  "A macro that returns a lambda with args inserted." [f args]
-  `#(~f ~@args %))
+;; (defmacro param-fn
+;;   "A macro that returns a lambda with args inserted." [f args]
+;;   `#(~f ~@args %))
 
-(defn xform
-  "Given a list of functions, return a comp of them, applied in the order they
-  are in the input vector.  For example:
+;; (defn xform
+;;   "Given a list of functions, return a comp of them, applied in the order they
+;;   are in the input vector.  For example:
 
-  (apply-fns [['inc] ['str] ['take 1]])
-  > #(comp #(take 1 %) str inc)"
-  [fs]
-  {:pre [(or (vector? fs) (list? fs))]}
-  (apply comp
-         (map #(if (= (count %) 1)
-                 (resolve (first %))
-                 (param-fn (resolve (first %)) (rest %))) (reverse fs))))
+;;   (apply-fns [['inc] ['str] ['take 1]])
+;;   > #(comp #(take 1 %) str inc)"
+;;   [fs]
+;;   {:pre [(or (vector? fs) (list? fs))]}
+;;   (apply comp
+;;          (map #(if (= (count %) 1)
+;;                  (resolve (first %))
+;;                  (param-fn (resolve (first %)) (rest %))) (reverse fs))))
 
 ;;; Input maps.
 
