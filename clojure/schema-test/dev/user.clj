@@ -25,24 +25,27 @@
     (apply t/date-time (map read-string (clojure.string/split dstr #"/")))
     (catch Exception e (str "Unable to parse date from " dstr))))
 
-;;; Transform application functions.
+;; A sample field transform that does something useless.
+(defn truncate-uic
+  "Ensures the UIC input is max 6 chars long." [s]
+  (->> s (take 6) (apply str)))
 
-;; (defmacro param-fn
-;;   "A macro that returns a lambda with args inserted." [f args]
-;;   `#(~f ~@args %))
+;; A sample field transform that does something useless.
+(defn add-100
+  "Add 100 to a number." [n]
+  (+ n 100))
 
-;; (defn xform
-;;   "Given a list of functions, return a comp of them, applied in the order they
-;;   are in the input vector.  For example:
+;;; Transform application function.
 
-;;   (apply-fns [['inc] ['str] ['take 1]])
-;;   > #(comp #(take 1 %) str inc)"
-;;   [fs]
-;;   {:pre [(or (vector? fs) (list? fs))]}
-;;   (apply comp
-;;          (map #(if (= (count %) 1)
-;;                  (resolve (first %))
-;;                  (param-fn (resolve (first %)) (rest %))) (reverse fs))))
+(defn xform
+  "Given a list of function symbols, return a comp of them, applied in the
+  order they are in the input vector.  For example:
+
+  (xform ['str->int 'add-100]
+  > #(comp times-100 str->int)"
+  [fs]
+  {:pre [(or (vector? fs) (list? fs))]}
+  (apply comp (map resolve (reverse fs))))
 
 ;;; Input maps.
 
@@ -55,17 +58,17 @@
 ;; transforms necessary to get it into a passing state.
 (def source1-schema
   {:uic {:check (s/pred (and s/Str #(= (count %) 6)))
-         :fns #(->> % (take 6) (apply str))}
+         :fns ['truncate-uic]}
    :free-text {:check s/Str
-               :fns identity}
+               :fns ['identity]}
    :date-something-happened {:check org.joda.time.DateTime
-                             :fns interpret-date-str}
+                             :fns ['interpret-date-str]}
    :enum-value {:check (s/enum "DIV" "BDE" "BN" "CO")
-                :fns identity}
+                :fns ['identity]}
    :some-number {:check s/Int
-                 :fns str->int}
+                 :fns ['str->int 'add-100]}
    :some-pos-number {:check (s/pred (and s/Int pos?))
-                     :fns str->int}
+                     :fns ['str->int]}
    ;; :some-2char-string-that-could-be-blank (s/pred (or s/))
    })
 
@@ -120,7 +123,7 @@
    {} (for [k (keys schema)]
         (try
           (when (s/validate (into {} [[k (:check (k schema))]])
-                            (into {} [[k ((:fns (k schema)) (k data))]]))
+                            (into {} [[k ((xform (:fns (k schema))) (k data))]]))
             [k true])
           ;; If the validation fails, grab the message.
           (catch clojure.lang.ExceptionInfo e [k (.getMessage e)])
