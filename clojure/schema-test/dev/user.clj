@@ -132,6 +132,16 @@
           ;; it's missing completely.
           (catch Exception e [k (str "Transformation error: " (.getMessage e))])))))
 
+;; This function could be useful for a front end to get all of the functions
+;; available to be used in transform vectors, provided they're all in the same
+;; namespace.  Ensure there's only the functions you want to expose in that
+;; namespace, however.
+(defn get-fn-list
+  "Get a list of functions in a namespace, along with their docstrings."
+  [ns]
+  (for [[name var] (ns-publics ns)]
+    [name (:doc (meta var))]))
+
 ;;; Test expressions.
 ;; (validate-map source1-schema source1-test-data)
 ;; (validate-map source1-schema source1-bad-test-data)
