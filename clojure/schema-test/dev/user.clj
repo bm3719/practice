@@ -140,7 +140,7 @@
   "Get a list of functions in a namespace, along with their docstrings."
   [ns]
   (for [[name var] (ns-publics ns)]
-    [name (:doc (meta var))]))
+    [name (clojure.string/replace (:doc (meta var)) "  " " ")]))
 
 ;;; Test expressions.
 ;; (validate-map source1-schema source1-test-data)
