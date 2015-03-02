@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GfmiedmGetOrgHierarchyResponse xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ResponseTimestamp="2015-01-21T10:29:56.609375" ResponseStatus="Success" RequestTimestamp="2015-01-21T10:29:00.015625">
+  <ResponseMessages xmlns="urn:us:gov:dodent:defred:ofsc:gfmcore">
+    <ResponseMessage Message="AOS Web Service GetOrgHierarchy results using DB aosdb" MessageType="Information" />
+  </ResponseMessages>
+  <GFMIEDM36 TITLE="1 BCT 1AD" xmlns="urn:us:gov:dod:gfmdi:v36">
+    <GFM_ALIAS_TYPE_TBL>
+      <GFM_ALIAS_TYPE d4p1:classification="U" d4p1:ownerProducer="USA" xmlns:d4p1="urn:us:gov:ic:ism">
+        <GFM_ALIAS_TYPE_ID>72060772313740001</GFM_ALIAS_TYPE_ID>
+        <GFM_ALIAS_TYPE_NAME_TXT>ALO</GFM_ALIAS_TYPE_NAME_TXT>
+        <GFM_ALIAS_TYPE_ABBR_NAME_TXT>ALO</GFM_ALIAS_TYPE_ABBR_NAME_TXT>
+        <GFM_ALIAS_TYPE_TYPE_CD>BOTH</GFM_ALIAS_TYPE_TYPE_CD>
+        <GFM_ALIAS_TYPE_MAX_LEN />
+        <GFM_ALIAS_TYPE_SPEC />
+        <GFM_ALIAS_TYPE_OWNER_CD>USA</GFM_ALIAS_TYPE_OWNER_CD>
+        <GFM_ALIAS_TYPE_S_DTG>1900-01-01T00:00:00Z</GFM_ALIAS_TYPE_S_DTG>
+        <GFM_ALIAS_TYPE_T_DTG>2999-12-01T00:00:00Z</GFM_ALIAS_TYPE_T_DTG>
+      </GFM_ALIAS_TYPE>
+    </GFM_ALIAS_TYPE_TBL>
+  </GFMIEDM36>
+</GfmiedmGetOrgHierarchyResponse>
