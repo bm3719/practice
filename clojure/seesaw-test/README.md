@@ -1,14 +1,14 @@
 # seesaw-test
 
-A Clojure library designed to ... well, that part is up to you.
+A sample seesaw application, created while walking through the seesaw tutorial:
+http://murilopereira.com/the-case-for-reactjs-and-clojurescript/#/56
+
+Code is in user.clj.
 
 ## Usage
 
-FIXME
+    lein repl :headless
 
 ## License
 
-Copyright © 2015 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+None

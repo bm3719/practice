@@ -11,7 +11,8 @@
 (sc/native!)
 
 ;; Create a new frame.
-(def f (sc/frame :title "Test Application"))
+(def f (sc/frame :title "Test Application"
+                 :minimum-size [640 :by 480]))
 
 ;; Display the frame.
 (-> f sc/pack! sc/show!)
@@ -50,3 +51,4 @@
 
 ;; Buttons
 (def b (sc/button :text "Click Me"))
+(display b)
