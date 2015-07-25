@@ -1,7 +1,7 @@
 # seesaw-test
 
 A sample seesaw application, created while walking through the seesaw tutorial:
-http://murilopereira.com/the-case-for-reactjs-and-clojurescript/#/56
+https://gist.github.com/daveray/1441520
 
 Code is in user.clj.
 
