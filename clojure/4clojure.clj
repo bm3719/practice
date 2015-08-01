@@ -281,17 +281,11 @@
 (= (#(reduce * (map inc (range %))) 8) 40320)
 
 ;; #30: Compress a Sequence
-(= (apply str ((fn f [s] (cond (empty? s) '()
-                               (= (first s) (second s)) (f (rest s))
-                               :else (conj (f (rest s)) (first s))))
+(= (apply str (#(map first (partition-by identity %))
                "Leeeeeerrroyyy")) "Leroy")
-(= ((fn f [s] (cond (empty? s) '()
-                    (= (first s) (second s)) (f (rest s))
-                    :else (conj (f (rest s)) (first s))))
+(= (#(map first (partition-by identity %))
     [1 1 2 3 3 2 2 3]) '(1 2 3 2 3))
-(= ((fn f [s] (cond (empty? s) '()
-                    (= (first s) (second s)) (f (rest s))
-                    :else (conj (f (rest s)) (first s))))
+(= (#(map first (partition-by identity %))
     [[1 2] [1 2] [3 4] [1 2]]) '([1 2] [3 4] [1 2]))
 
 ;; #47: Contain Yourself
