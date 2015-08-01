@@ -323,14 +323,14 @@
 (= (#(partition-by identity %) [[1 2] [1 2] [3 4]]) '(([1 2] [1 2]) ([3 4])))
 
 ;; #41: Drop Every Nth Item
-(= ((fn f [lst n] (if (< (count lst) n) lst
-                      (concat (take (- n 1) lst) (f (drop n lst) n))))
+(= (#(filter (complement nil?)
+             (flatten (partition (dec %2) %2 (repeat nil) %1)))
     [1 2 3 4 5 6 7 8] 3) [1 2 4 5 7 8])
-(= ((fn f [lst n] (if (< (count lst) n) lst
-                      (concat (take (- n 1) lst) (f (drop n lst) n))))
+(= (#(filter (complement nil?)
+             (flatten (partition (dec %2) %2 (repeat nil) %1)))
     [:a :b :c :d :e :f] 2) [:a :c :e])
-(= ((fn f [lst n] (if (< (count lst) n) lst
-                      (concat (take (- n 1) lst) (f (drop n lst) n))))
+(= (#(filter (complement nil?)
+             (flatten (partition (dec %2) %2 (repeat nil) %1)))
     [1 2 3 4 5 6] 4) [1 2 3 5 6])
 
 ;; #52: Intro to Destructuring
