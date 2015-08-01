@@ -310,11 +310,11 @@
 (= '(1 4 7 10 13) (take 5 (iterate #(+ 3 %) 1)))
 
 ;; #40: Interpose a Seq
-(= ((fn f [k s] (if (< (count s) 2) s (conj (f k (rest s)) k (first s))))
+(= (#(conj (vec (apply concat (for [e (butlast %2)] [e %1]))) (last %2))
     0 [1 2 3]) [1 0 2 0 3])
-(= (apply str ((fn f [k s] (if (< (count s) 2) s (conj (f k (rest s)) k (first s))))
+(= (apply str (#(conj (vec (apply concat (for [e (butlast %2)] [e %1]))) (last %2))
                ", " ["one" "two" "three"])) "one, two, three")
-(= ((fn f [k s] (if (< (count s) 2) s (conj (f k (rest s)) k (first s))))
+(= (#(conj (vec (apply concat (for [e (butlast %2)] [e %1]))) (last %2))
     :z [:a :b :c :d]) [:a :z :b :z :c :z :d])
 
 ;; #31: Pack a Sequence
