@@ -1149,7 +1149,18 @@
     8128) true)
 
 ;; #77: Anagram Finder
-;; (= (__ ["meat" "mat" "team" "mate" "eat"])
-;;    #{#{"meat" "team" "mate"}})
-;; (= (__ ["veer" "lake" "item" "kale" "mite" "ever"])
-;;    #{#{"veer" "ever"} #{"lake" "kale"} #{"mite" "item"}})
+(= ((fn [col] (set (filter #(> (count %) 1)
+                           (for [s (set (map set col))]
+                             (set (filter #(= s (set %)) col))))))
+    ["meat" "mat" "team" "mate" "eat"])
+   #{#{"meat" "team" "mate"}})
+(= ((fn [col] (set (filter #(> (count %) 1)
+                           (for [s (set (map set col))]
+                             (set (filter #(= s (set %)) col))))))
+    ["veer" "lake" "item" "kale" "mite" "ever"])
+   #{#{"veer" "ever"} #{"lake" "kale"} #{"mite" "item"}})
+
+;; #60: Sequence Reductions
+;; (= (take 5 (__ + (range))) [0 1 3 6 10])
+;; (= (__ conj [1] [2 3 4]) [[1] [1 2] [1 2 3] [1 2 3 4]])
+;; (= (last (__ * 2 [3 4 5])) (reduce * 2 [3 4 5]) 120)
