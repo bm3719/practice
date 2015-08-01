@@ -152,26 +152,22 @@
 (= (#(first (reverse %)) ["b" "c" "d"]) "d")
 
 ;; #20: Penultimate Element
-(= (#(->> % (reverse) (take 2) (last)) (list 1 2 3 4 5)) 4)
-(= (#(->> % (reverse) (take 2) (last)) ["a" "b" "c"]) "b")
-(= (#(->> % (reverse) (take 2) (last)) [[1 2] [3 4]]) [1 2])
+(= (#(last (take 2 (reverse %))) (list 1 2 3 4 5)) 4)
+(= (#(last (take 2 (reverse %))) ["a" "b" "c"]) "b")
+(= (#(last (take 2 (reverse %))) [[1 2] [3 4]]) [1 2])
 
 ;; #21: Nth Element
-(= ((fn f [lst n] (if (= n 0) (first lst) (f (rest lst) (- n 1))))
-    '(4 5 6 7) 2) 6)
-(= ((fn f [lst n] (if (= n 0) (first lst) (f (rest lst) (- n 1))))
-    [:a :b :c] 0) a)
-(= ((fn f [lst n] (if (= n 0) (first lst) (f (rest lst) (- n 1))))
-    [1 2 3 4] 1) 2)
-(= ((fn f [lst n] (if (= n 0) (first lst) (f (rest lst) (- n 1))))
-    '([1 2] [3 4] [5 6]) 2) [5 6])
+(= (#(last (take (inc %2) %1)) '(4 5 6 7) 2) 6)
+(= (#(last (take (inc %2) %1)) [:a :b :c] 0) a)
+(= (#(last (take (inc %2) %1)) [1 2 3 4] 1) 2)
+(= (#(last (take (inc %2) %1)) '([1 2] [3 4] [5 6]) 2) [5 6])
 
 ;; #22: Count a Sequence
-(= ((fn f [lst] (if (= lst '()) 0 (+ 1 (f (rest lst))))) '(1 2 3 3 1)) 5)
-(= ((fn f [lst] (if (= lst '()) 0 (+ 1 (f (rest lst))))) "Hello World") 11)
-(= ((fn f [lst] (if (= lst '()) 0 (+ 1 (f (rest lst))))) [[1 2] [3 4] [5 6]]) 3)
-(= ((fn f [lst] (if (= lst '()) 0 (+ 1 (f (rest lst))))) '(13)) 1)
-(= ((fn f [lst] (if (= lst '()) 0 (+ 1 (f (rest lst))))) '(:a :b :c)) 3)
+(= (#(reduce + (for [_ %] 1)) '(1 2 3 3 1)) 5)
+(= (#(reduce + (for [_ %] 1)) "Hello World") 11)
+(= (#(reduce + (for [_ %] 1)) [[1 2] [3 4] [5 6]]) 3)
+(= (#(reduce + (for [_ %] 1)) '(13)) 1)
+(= (#(reduce + (for [_ %] 1)) '(:a :b :c)) 3)
 
 ;; #24: Sum It All Up
 (= (#(reduce + %) [1 2 3]) 6)
@@ -187,62 +183,43 @@
 (= (#(filter odd? %) [1 1 1 3]) '(1 1 1 3))
 
 ;; #23: Reverse a Sequence
-(= ((fn f [lst] (if (<= (count lst) 1) lst
-                    (cons (last lst) (f (butlast lst)))))
+(= ((fn f [lst] (if (seq lst) (cons (last lst) (f (butlast lst))) lst))
     [1 2 3 4 5]) [5 4 3 2 1])
-(= ((fn f [lst] (if (<= (count lst) 1) lst
-                    (cons (last lst) (f (butlast lst)))))
+(= ((fn f [lst] (if (seq lst) (cons (last lst) (f (butlast lst))) lst))
     (sorted-set 5 7 2 7)) '(7 5 2))
-(= ((fn f [lst] (if (<= (count lst) 1) lst
-                    (cons (last lst) (f (butlast lst)))))
+(= ((fn f [lst] (if (seq lst) (cons (last lst) (f (butlast lst))) lst))
     [[1 2] [3 4] [5 6]]) [[5 6] [3 4] [1 2]])
 
 ;; #27: Palindrome Detector
-;; There's probably a cleaner way to do this.
-(false? (#(if (= (type %) java.lang.String)
-            (= % (apply str (reverse %)))
-            (= % (reverse %)))
+;; NOTE: On the site, you can't use as-> for some reason.  Would have to use ->>.
+(false? (#(as-> (vec %) $ (= $ (reverse $)))
          '(1 2 3 4 5)))
-(true? (#(if (= (type %) java.lang.String)
-           (= % (apply str (reverse %)))
-           (= % (reverse %)))
+(true? (#(as-> (vec %) $ (= $ (reverse $)))
         "racecar"))
-(true? (#(if (= (type %) java.lang.String)
-           (= % (apply str (reverse %)))
-           (= % (reverse %)))
+(true? (#(as-> (vec %) $ (= $ (reverse $)))
         [:foo :bar :foo]))
-(true? (#(if (= (type %) java.lang.String)
-           (= % (apply str (reverse %)))
-           (= % (reverse %)))
+(true? (#(as-> (vec %) $ (= $ (reverse $)))
         '(1 1 3 3 1 1)))
-(false? (#(if (= (type %) java.lang.String)
-            (= % (apply str (reverse %)))
-            (= % (reverse %)))
+(false? (#(as-> (vec %) $ (= $ (reverse $)))
          '(:a :b :c)))
 
 ;; #26: Fibonacci Sequence
-(= (#(map (fn fib [x] (if (< x 3) 1 (+ (fib (- x 1)) (fib (- x 2)))))
-          (range 1 (+ % 1)))
+(= (#(take % ((fn f [] (lazy-cat [1 1] (map + (f) (rest (f)))))))
     3) '(1 1 2))
-(= (#(map (fn fib [x] (if (< x 3) 1 (+ (fib (- x 1)) (fib (- x 2)))))
-          (range 1 (+ % 1)))
+(= (#(take % ((fn f [] (lazy-cat [1 1] (map + (f) (rest (f)))))))
     6) '(1 1 2 3 5 8))
-(= (#(map (fn fib [x] (if (< x 3) 1 (+ (fib (- x 1)) (fib (- x 2)))))
-          (range 1 (+ % 1)))
+(= (#(take % ((fn f [] (lazy-cat [1 1] (map + (f) (rest (f)))))))
     8) '(1 1 2 3 5 8 13 21))
 
 ;; #38: Maximum value
-(= ((fn mymax [x & xs] (if (= (count xs) 0) x
-                           (let [ox (apply mymax xs)]
-                             (if (> x ox) x ox))))
+(= ((fn f [x & xs]
+      (if (seq xs) (let [ox (apply f xs)] (if (> x ox) x ox)) x))
     1 8 3 4) 8)
-(= ((fn mymax [x & xs] (if (= (count xs) 0) x
-                           (let [ox (apply mymax xs)]
-                             (if (> x ox) x ox))))
+(= ((fn f [x & xs]
+      (if (seq xs) (let [ox (apply f xs)] (if (> x ox) x ox)) x))
     30 20) 30)
-(= ((fn mymax [x & xs] (if (= (count xs) 0) x
-                           (let [ox (apply mymax xs)]
-                             (if (> x ox) x ox))))
+(= ((fn f [x & xs]
+      (if (seq xs) (let [ox (apply f xs)] (if (> x ox) x ox)) x))
     45 67 11) 67)
 
 ;; #29: Get the Caps
@@ -254,14 +231,11 @@
     "$#A(*&987Zf") "AZ")
 
 ;; #32: Duplicate a Sequence
-(= ((fn f [lst] (if (= (count lst) 0) lst
-                    (conj (conj (f (rest lst)) (first lst)) (first lst))))
+(= (#(apply concat (for [e %] [e e]))
     [1 2 3]) '(1 1 2 2 3 3))
-(= ((fn f [lst] (if (= (count lst) 0) lst
-                    (conj (conj (f (rest lst)) (first lst)) (first lst))))
+(= (#(apply concat (for [e %] [e e]))
     [:a :a :b :b]) '(:a :a :a :a :b :b :b :b))
-(= ((fn f [lst] (if (= (count lst) 0) lst
-                    (conj (conj (f (rest lst)) (first lst)) (first lst))))
+(= (#(apply concat (for [e %] [e e]))
     [[1 2] [3 4]]) '([1 2] [1 2] [3 4] [3 4]))
 
 ;; #48: Intro to some
@@ -269,32 +243,26 @@
 (= 6 (some #(when (even? %) %) [5 6 7 8]))
 
 ;; #34: Implement range
-(= ((fn myrange [s n] (if (= s n) '() (conj (myrange (+ s 1) n) s)))
+(= (#(take (- %2 %1) ((fn f [] (lazy-cat [%1] (map inc (f))))))
     1 4) '(1 2 3))
-(= ((fn myrange [s n] (if (= s n) '() (conj (myrange (+ s 1) n) s)))
+(= (#(take (- %2 %1) ((fn f [] (lazy-cat [%1] (map inc (f))))))
     -2 2) '(-2 -1 0 1))
-(= ((fn myrange [s n] (if (= s n) '() (conj (myrange (+ s 1) n) s)))
+(= (#(take (- %2 %1) ((fn f [] (lazy-cat [%1] (map inc (f))))))
     5 8) '(5 6 7))
 
 ;; #28: Flatten a sequence
-(= ((fn f [lst] (cond (= nil (first lst)) lst
+(= ((fn f [lst] (cond (nil? (first lst)) lst
                       (sequential? (first lst)) (concat (f (first lst)) (f (rest lst)))
                       :else (conj (f (rest lst)) (first lst))))
     '((1 2) 3 [4 [5 6]])) '(1 2 3 4 5 6))
-(= ((fn f [lst] (cond (= nil (first lst)) lst
+(= ((fn f [lst] (cond (nil? (first lst)) lst
                       (sequential? (first lst)) (concat (f (first lst)) (f (rest lst)))
                       :else (conj (f (rest lst)) (first lst))))
     ["a" ["b"] "c"]) '("a" "b" "c"))
-(= ((fn f [lst] (cond (= nil (first lst)) lst
+(= ((fn f [lst] (cond (nil? (first lst)) lst
                       (sequential? (first lst)) (concat (f (first lst)) (f (rest lst)))
                       :else (conj (f (rest lst)) (first lst))))
     '(((:a)))) '(:a))
-
-;; #42: Factorial Fun
-(= ((fn fac [x] (if (< x 3) x (* x (fac (- x 1))))) 1) 1)
-(= ((fn fac [x] (if (< x 3) x (* x (fac (- x 1))))) 3) 6)
-(= ((fn fac [x] (if (< x 3) x (* x (fac (- x 1))))) 5) 120)
-(= ((fn fac [x] (if (< x 3) x (* x (fac (- x 1))))) 8) 40320)
 
 ;; #39: Interleave Two Seqs
 (= (#(flatten (map list %1 %2))
@@ -305,6 +273,12 @@
     [1 2 3 4] [5]) [1 5])
 (= (#(flatten (map list %1 %2))
     [30 20] [25 15]) [30 25 20 15])
+
+;; #42: Factorial Fun
+(= (#(reduce * (map inc (range %))) 1) 1)
+(= (#(reduce * (map inc (range %))) 3) 6)
+(= (#(reduce * (map inc (range %))) 5) 120)
+(= (#(reduce * (map inc (range %))) 8) 40320)
 
 ;; #30: Compress a Sequence
 (= (apply str ((fn f [s] (cond (empty? s) '()
@@ -404,6 +378,13 @@
 (= (#(into {} (map vector %1 %2))
     [:foo :bar] ["foo" "bar" "baz"]) {:foo "foo" :bar "bar"})
 
+;; #66: Greatest Common Divisor
+;; Using the Euclidean algorithm.
+(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 2 4) 2)
+(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 10 5) 5)
+(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 5 7) 1)
+(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 1023 858) 33)
+
 ;; #166: Comparisons
 (= :gt (#(cond (%1 %2 %3) :lt (%1 %3 %2) :gt :else :eq) < 5 1))
 (= :eq (#(cond (%1 %2 %3) :lt (%1 %3 %2) :gt :else :eq)
@@ -411,13 +392,6 @@
 (= :lt (#(cond (%1 %2 %3) :lt (%1 %3 %2) :gt :else :eq)
         (fn [x y] (< (mod x 5) (mod y 5))) 21 3))
 (= :gt (#(cond (%1 %2 %3) :lt (%1 %3 %2) :gt :else :eq) > 0 2))
-
-;; #66: Greatest Common Divisor
-;; Using the Euclidean algorithm.
-(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 2 4) 2)
-(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 10 5) 5)
-(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 5 7) 1)
-(= ((fn g [x y] (if (= y 0) x (g y (mod x y)))) 1023 858) 33)
 
 ;; #81: Set Intersection
 (= (#(clojure.set/difference %1 (clojure.set/difference %1 %2))
