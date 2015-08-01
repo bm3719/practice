@@ -337,14 +337,11 @@
 (= [2 4] (let [[a b c d e f g] (range)] [c e]))
 
 ;; #49: Split a sequence
-(= ((fn f [n lst] (if (<= (count lst) n) (list lst)
-                      (conj (list (drop n lst)) (take n lst))))
+(= (#(conj (list (drop %1 %2)) (take %1 %2))
     3 [1 2 3 4 5 6]) [[1 2 3] [4 5 6]])
-(= ((fn f [n lst] (if (<= (count lst) n) (list lst)
-                      (conj (list (drop n lst)) (take n lst))))
+(= (#(conj (list (drop %1 %2)) (take %1 %2))
     1 [:a :b :c :d]) [[:a] [:b :c :d]])
-(= ((fn f [n lst] (if (<= (count lst) n) (list lst)
-                      (conj (list (drop n lst)) (take n lst))))
+(= (#(conj (list (drop %1 %2)) (take %1 %2))
     2 [[1 2] [3 4] [5 6]]) [[[1 2] [3 4]] [[5 6]]])
 
 ;; #51: Advanced Destructuring
