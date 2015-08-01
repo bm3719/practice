@@ -294,20 +294,20 @@
 (contains? {4 :a 2 :b} 4)
 (not (contains? '(1 2 4) 4))
 
+;; #33: Replicate a Sequence
+(= (#(apply concat (for [e %1] (repeat %2 e)))
+    [1 2 3] 2) '(1 1 2 2 3 3))
+(= (#(apply concat (for [e %1] (repeat %2 e)))
+    [:a :b] 4) '(:a :a :a :a :b :b :b :b))
+(= (#(apply concat (for [e %1] (repeat %2 e)))
+    [4 5 6] 1) '(4 5 6))
+(= (#(apply concat (for [e %1] (repeat %2 e)))
+    [[1 2] [3 4]] 2) '([1 2] [1 2] [3 4] [3 4]))
+(= (#(apply concat (for [e %1] (repeat %2 e)))
+    [44 33] 2) [44 44 33 33])
+
 ;; #45: Intro to Iterate
 (= '(1 4 7 10 13) (take 5 (iterate #(+ 3 %) 1)))
-
-;; #33: Replicate a Sequence
-(= ((fn f [s n] (reduce concat (map #(take n (iterate identity %)) s)))
-    [1 2 3] 2) '(1 1 2 2 3 3))
-(= ((fn f [s n] (reduce concat (map #(take n (iterate identity %)) s)))
-    [:a :b] 4) '(:a :a :a :a :b :b :b :b))
-(= ((fn f [s n] (reduce concat (map #(take n (iterate identity %)) s)))
-    [4 5 6] 1) '(4 5 6))
-(= ((fn f [s n] (reduce concat (map #(take n (iterate identity %)) s)))
-    [[1 2] [3 4]] 2) '([1 2] [1 2] [3 4] [3 4]))
-(= ((fn f [s n] (reduce concat (map #(take n (iterate identity %)) s)))
-    [44 33] 2) [44 44 33 33])
 
 ;; #40: Interpose a Seq
 (= ((fn f [k s] (if (< (count s) 2) s (conj (f k (rest s)) k (first s))))
