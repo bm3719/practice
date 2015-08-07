@@ -11,6 +11,8 @@ main = do
   let full = first ++ " " ++ last
   putStrLn ("Pleased to meet you, " ++ full ++ "!")
 
+-- Chapter 1
+
 doubleMe x = x * x
 
 doubleSmallNumber x = if x > 100
@@ -36,3 +38,50 @@ doubleSmallNumber x = if x > 100
 
 -- Ranges: Possible to specify a step, like [2,4..20].  To make decrementing
 -- lists, a comma is needed, like [20,19..1].
+
+-- List-producing functions:
+-- cycle: Takes a list and cycles it infinitely.
+-- repeat: Takes an element and creates infinite list of it.
+-- replicate: Produces specified number of elements in a list.
+
+-- List comprehensions
+
+-- S = {2 ⋅ x | x ∈ ℕ, x ≤ 10 }
+s = [x * 2 | x <- [1..10]]
+
+-- Adding a predicate.
+s' = [x * 2 | x <- [1..10], x * 2 >= 12]
+
+-- All number from 50 to 100 whose remainder when divided with 7 is 3.
+s'' = [x | x <- [50..100], x `mod` 7 == 3]
+
+-- With a parameter
+boomBangs xs = [if x < 10 then "Boom!" else "Bang!" | x <- xs, odd x]
+-- boomBangs [7..13]
+
+-- Multiple variables.
+s''' = [x * y | x <- [2, 5, 10], y <- [8, 10, 11], x * y > 50]
+
+-- Length implementation.
+length' xs = sum [1 | _ <- xs]
+
+-- Strings
+removeNonUppercase st = [c | c <- st, c `elem` ['A'..'Z']]
+
+-- Sublists: Remove odd numbers.
+xxs = [[1, 3, 5, 2, 3, 1, 2, 4, 5],
+       [1, 2, 3, 4, 5, 6, 7, 8, 9],
+       [1, 2, 4, 2, 1, 6, 3, 1, 2, 3, 6]]
+removeOdd xxs = [[x | x <- xs, even x] | xs <- xxs]
+
+-- Tuples: Used when exact number of elements known and for grouping different
+-- types.
+
+-- Tuple functions: fst (first from a pair), snd (second from a pair), zip
+-- (create list of pairs).
+
+-- A list of all right triangles.
+rts = [(a, b, c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2]
+
+
+-- Chapter 2
