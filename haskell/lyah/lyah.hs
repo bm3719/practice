@@ -11,7 +11,7 @@ main = do
   let full = first ++ " " ++ last
   putStrLn ("Pleased to meet you, " ++ full ++ "!")
 
--- Chapter 1
+-- Chapter 2
 
 doubleMe x = x * x
 
@@ -84,4 +84,4 @@ removeOdd xxs = [[x | x <- xs, even x] | xs <- xxs]
 rts = [(a, b, c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2]
 
 
--- Chapter 2
+-- Chapter 3
