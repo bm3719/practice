@@ -17,11 +17,11 @@ version :: Version
 version = Version {versionBranch = [0,1,0,0], versionTags = []}
 bindir, libdir, datadir, libexecdir, sysconfdir :: FilePath
 
-bindir     = "/Users/bmiller/Library/Haskell/bin"
-libdir     = "/Users/bmiller/Library/Haskell/ghc-7.8.3-x86_64/lib/lyah-0.1.0.0"
-datadir    = "/Users/bmiller/Library/Haskell/share/ghc-7.8.3-x86_64/lyah-0.1.0.0"
-libexecdir = "/Users/bmiller/Library/Haskell/libexec"
-sysconfdir = "/Users/bmiller/Library/Haskell/etc"
+bindir     = "/home/bm3719/.cabal/bin"
+libdir     = "/home/bm3719/.cabal/lib/x86_64-freebsd-ghc-7.6.3/lyah-0.1.0.0"
+datadir    = "/home/bm3719/.cabal/share/x86_64-freebsd-ghc-7.6.3/lyah-0.1.0.0"
+libexecdir = "/home/bm3719/.cabal/libexec"
+sysconfdir = "/home/bm3719/.cabal/etc"
 
 getBinDir, getLibDir, getDataDir, getLibexecDir, getSysconfDir :: IO FilePath
 getBinDir = catchIO (getEnv "lyah_bindir") (\_ -> return bindir)
