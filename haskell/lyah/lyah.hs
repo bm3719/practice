@@ -11,7 +11,7 @@ main = do
   let full = first ++ " " ++ last
   putStrLn ("Pleased to meet you, " ++ full ++ "!")
 
--- Chapter 2
+-- Chapter 2: Starting Out
 
 doubleMe x = x * x
 
@@ -83,5 +83,27 @@ removeOdd xxs = [[x | x <- xs, even x] | xs <- xxs]
 -- A list of all right triangles.
 rts = [(a, b, c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2]
 
+-- Chapter 3: Types and Typeclasses
 
--- Chapter 3
+-- Types: Int (bounded), Integer (unbounded), Float, Double, Bool, Char.
+
+-- Typeclasses: In a type signature, => is a "class constraint".  In the case
+-- of `:t (==)', the types of the two parameter values must be a member of the
+-- Eq class.
+
+-- Some typeclasses: Eq (equality testing), Ord (ordering, must also be a
+-- member of Eq), Show (presentable as strings, e.g. using show function), Read
+-- (opposite of show, e.g. using the read function), Enum (sequential ordering,
+-- e.g. list ranges, succ, pred), Bounded (upper/lower bounded, use minBound
+-- and maxBound), Num (numeric, polymorphic), Integral (Int and Integer),
+-- Floating (Float and Double).
+
+-- Ordering: A type that can be GT, LT, or EQ.  See `:t compare'.
+
+-- fromIntegral: Promote an Integral type to the more general Num.
+-- fromIntegral (length [1,2,3]) + 3.4
+
+-- Chapter 4: Syntax in Functions
+
+-- Pattern matching: Specifying patterns to which some data should conform,
+-- then deconstructing data and checking it against those forms.
