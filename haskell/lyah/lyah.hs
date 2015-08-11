@@ -107,3 +107,11 @@ rts = [(a, b, c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2]
 
 -- Pattern matching: Specifying patterns to which some data should conform,
 -- then deconstructing data and checking it against those forms.
+
+factorial :: (Integral a) => a -> a
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+
+fac :: (Integral a) => a -> a
+fac 0 = 1
+fac n = foldr (*) 1 [1..n]
