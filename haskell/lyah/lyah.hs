@@ -115,3 +115,28 @@ factorial n = n * factorial (n - 1)
 fac :: (Integral a) => a -> a
 fac 0 = 1
 fac n = foldr (*) 1 [1..n]
+
+-- Add three tuples.
+addVectors :: Num a => (a, a) -> (a, a) -> (a, a)
+addVectors a b = (fst a + fst b, snd a + snd b)
+
+addVectors' :: Num a => (a, a) -> (a, a) -> (a, a)
+addVectors' (x1, x2) (y1, y2) = (x1 + y1, x2 + y2)
+
+-- List decomposition using `:'.  Parens are necessary when binding multiple
+-- values.
+head' :: [a] -> a
+head' [] = error "List empty."
+head' (x:_) = x
+
+length'' :: Num b => [a] -> b
+length'' [] = 0
+length'' (_:xs) = 1 + length'' xs
+
+sum' :: Num a => [a] -> a
+sum' [] = 0
+sum' (x:xs) = x + sum' xs
+
+capital :: String -> String
+capital "" = "Empty string."
+capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
