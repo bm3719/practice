@@ -140,3 +140,14 @@ sum' (x:xs) = x + sum' xs
 capital :: String -> String
 capital "" = "Empty string."
 capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
+
+-- Guards: Test some property of a value or values are true or false.
+
+-- Note: RealFloat is a subclass of Floating.  Float and Double fall into the
+-- class RealFloat.
+bmiTell :: (RealFloat a) => a -> String
+bmiTell bmi
+  | bmi <= 18.5 = "You're underweight, you emo, you!"
+  | bmi <= 25.0 = "You're supposedly normal. Pffft, I bet you're ugly!"
+  | bmi <= 30.0 = "You're fat! Lose some weight, fatty!"
+  | otherwise  = "You're a whale, congratulations!"
