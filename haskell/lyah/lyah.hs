@@ -219,3 +219,10 @@ head'' xs = case xs of [] -> error "List empty."
                        (x:_) -> x
 
 --- Chapter 5: Recursion
+
+maximum' :: (Ord a) => [a] -> a
+maximum' [] = error "Empty list."
+maximum' [x] = x
+maximum' (x:xs) | x > maxTail = x
+                | otherwise   = maxTail
+  where maxTail = maximum' xs
