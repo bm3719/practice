@@ -164,8 +164,58 @@ compare' a b | a > b     = GT
 -- BMI calculator using `where'.
 bmiTell' :: (RealFloat a) => a -> a -> String
 bmiTell' weight height
-  | bmi <= 18.5 = "You're underweight, you emo, you!"
-  | bmi <= 25.0 = "You're supposedly normal. Pffft, I bet you're ugly!"
-  | bmi <= 30.0 = "You're fat! Lose some weight, fatty!"
-  | otherwise  = "You're a whale, congratulations!"
+  | bmi <= skinny = "You're underweight, you emo, you!"
+  | bmi <= normal = "You're supposedly normal. Pffft, I bet you're ugly!"
+  | bmi <= fat    = "You're fat! Lose some weight, fatty!"
+  | otherwise    = "You're a whale, congratulations!"
   where bmi = weight / height ^ 2
+        (skinny, normal, fat) = (18.5, 25.0, 30.0)
+
+initials :: String -> String -> String
+initials first last = [f] ++ ". " ++ [l] ++ "."
+  where (f:_) = first
+        (l:_) = last
+
+-- A better version of the above.
+initials' :: String -> String -> String
+initials' (f:_) (l:_) = [f] ++ ". " ++ [l] ++ "."
+
+-- Take a list of weight-height pairs, and return a list of BMIs.
+calcBmis :: (RealFloat a) => [(a, a)] -> [a]
+calcBmis xs = map bmi xs
+  where bmi (weight, height) = weight / height ^ 2
+
+--- Let bindings: Full expressions, versus where bindings, which are just
+--- syntactic constructs.  This means you can use let anywhere, like with if
+--- statements.
+
+-- Volume of a cylinder.
+cylinder :: (RealFloat a) => a -> a -> a
+cylinder r h =
+  let topArea  = pi * r ^ 2
+      sideArea = 2 * pi * r * h
+  in  sideArea + 2 * topArea
+
+-- Example of inline let, introducing locally scoped functions:
+-- [let square x = x * x in (square 5, square 3, square 2)]
+
+-- Semicolons are used for multiple value inline let bindings.
+-- (let a = 100; b = 200; c = 300 in a * b * c,
+--  let foo = "Hey "; bar = "there!" in foo ++ bar)
+
+-- let can be used in list comprehensions, as one would a predicate.
+calcBmis' :: (RealFloat a) => [(a, a)] -> [a]
+calcBmis' xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2, bmi >= 25.0]
+
+-- Note that let statements can't be used across guards, hence the need for
+-- where.
+
+--- case expressions: Equivalent to pattern matching function parameters, but
+--- can be used anywhere.
+
+-- Equivalent to head' above.
+head'' :: [a] -> a
+head'' xs = case xs of [] -> error "List empty."
+                       (x:_) -> x
+
+--- Chapter 5: Recursion
