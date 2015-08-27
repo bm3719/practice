@@ -218,6 +218,27 @@ head'' :: [a] -> a
 head'' xs = case xs of [] -> error "List empty."
                        (x:_) -> x
 
+--- FizzBuzz in Haskell interlude
+
+-- First attempt.
+fizzBuzz :: (Show a, Integral a) => [a] -> [[Char]]
+fizzBuzz xs = map (\x -> case () of
+                      _ | mod3 && mod5 -> "FizzBuzz"
+                        | mod3 -> "Fizz"
+                        | mod5 -> "Buzz"
+                        | otherwise -> show x
+                        where mod3 = mod x 3 == 0
+                              mod5 = mod x 5 == 0) xs
+
+-- Probably nicer to just write a function that converts one number and apply
+-- it.
+fizzBuzz' :: Integer -> String
+fizzBuzz' x | mod x 15 == 0 = "FizzBuzz"
+            | mod x 5 == 0  = "Buzz"
+            | mod x 3 == 0  = "Fizz"
+            | otherwise    = show x
+-- map fizzBuzz' [1..100]
+
 --- Chapter 5: Recursion
 
 maximum' :: (Ord a) => [a] -> a
@@ -226,3 +247,23 @@ maximum' [x] = x
 maximum' (x:xs) | x > maxTail = x
                 | otherwise   = maxTail
   where maxTail = maximum' xs
+
+-- Same as above, but using the max function.
+maximum'' :: (Ord a) => [a] -> a
+maximum'' [] = error "Empty list."
+maximum'' [x] = x
+maximum'' (x:xs) = max x (maximum'' xs)
+
+-- Reimplement replicate using recursion.  A better solution uses take and
+-- repeat.
+replicate' :: (Num a, Ord a) => a -> b -> [b]
+replicate' x e
+  | x <= 0     = []
+  | otherwise = e:replicate' (x - 1) e
+
+-- Reimplement take using recursion.
+take' :: (Num a, Ord a) => a -> [b] -> [b]
+take' n _
+  | n <= 0      = []
+take' _ []     = []
+take' n (x:xs) = x:take' (n - 1) xs
