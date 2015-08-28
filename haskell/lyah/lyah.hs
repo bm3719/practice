@@ -267,3 +267,39 @@ take' n _
   | n <= 0      = []
 take' _ []     = []
 take' n (x:xs) = x:take' (n - 1) xs
+
+-- Reimplement reverse.
+reverse' :: [a] -> [a]
+reverse' [] = []
+reverse' (x:xs) = reverse' xs ++ [x]
+
+-- Reimplement repeat.
+repeat' :: a -> [a]
+repeat' x = x:repeat' x
+
+-- Reimplement zip.
+zip' :: [a] -> [b] -> [(a, b)]
+zip' _ [] = []
+zip' [] _ = []
+zip' (x:xs) (y:ys) = (x,y):zip' xs ys
+
+-- Reimplement elem.
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' e [] = False
+elem' e (x:xs) = if e == x then True else elem' e xs
+
+-- Implement quicksort (my attempt).
+qsort :: (Ord a) => [a] -> [a]
+qsort [] = []
+qsort (x:xs) = qsort [e | e <- xs, e < x] ++ [x] ++
+               qsort [e | e <- xs, e >= x]
+
+-- Book's version of the above.
+quicksort :: (Ord a) => [a] -> [a]
+quicksort [] = []
+quicksort (x:xs) =
+  let smallerSorted = quicksort [a | a <- xs, a <= x]
+      biggerSorted = quicksort [a | a <- xs, a > x]
+  in  smallerSorted ++ [x] ++ biggerSorted
+
+-- Chapter 6: Higher order functions
