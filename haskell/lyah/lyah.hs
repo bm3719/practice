@@ -303,3 +303,28 @@ quicksort (x:xs) =
   in  smallerSorted ++ [x] ++ biggerSorted
 
 -- Chapter 6: Higher order functions
+
+-- (Some talk about curried functions and partial application is here.)
+
+-- Sectioning an infix function: Surround it with parentheses and only supply
+-- the parameter on one side.
+divideByTen :: Double -> Double
+divideByTen = (/10)
+
+-- Take a function and apply it twice.
+applyTwice :: (a -> a) -> a -> a
+applyTwice f a = f (f a)
+
+-- Reimplement zipWith using higher order programming.
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' _ _ [] = []
+zipWith' _ [] _ = []
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
+
+-- Reimplement flip.
+flip' :: (a -> b -> c) -> (b -> a -> c)
+flip' f = g
+  where g x y = f y x
+
+flip'' :: (a -> b -> c) -> b -> a -> c
+flip'' f x y = f y x
