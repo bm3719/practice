@@ -328,3 +328,66 @@ flip' f = g
 
 flip'' :: (a -> b -> c) -> b -> a -> c
 flip'' f x y = f y x
+
+-- λ> zip [1,2] "hi"
+-- [(1,'h'),(2,'i')]
+-- λ> flip zip [1,2] "hi"
+-- [('h',1),('i',2)]
+
+-- Quicksort using filter.
+qsort' :: (Ord a) => [a] -> [a]
+qsort' [] = []
+qsort' (x:xs) = qsort' (filter (< x) xs) ++ [x] ++
+                qsort' (filter (>= x) xs)
+
+-- Find the largest number under 100000 divisible by 3829 (my attempt).
+-- foldl max 0 (filter (\n -> 0 == n `mod` 3829) [1..100000])
+
+-- Book's version of the above.  Definitely better, since it doesn't filter a
+-- whole range, instead just finding the first one that satisfies the
+-- predicate.
+largestDivisible :: (Integral a) => a
+largestDivisible = head (filter p [100000,99999..])
+  where p x = x `mod` 3829 == 0
+
+-- Rewriting my version.
+-- head (filter (\n -> 0 == mod n 3829) [100000,99999..])
+
+-- Find the sum of all odd squares that are smaller than 10000 using takeWhile.
+-- foldl (+) 0 (takeWhile (<10000) (filter odd (map (^2) [1..])))
+
+-- The sum function could have replaced foldl above.
+
+-- Collatz sequences: Find how many numbers between 1 and 100 have Collatz
+-- sequences greater than 15.
+collatzSeq :: (Integral a) => a -> [a]
+collatzSeq 1 = [1]
+collatzSeq n | even n = n:collatzSeq (div n 2)
+             | otherwise = n:collatzSeq (n * 3 + 1)
+
+-- length [chain | chain <- map collatzSeq [1..100], 15 < length chain]
+
+-- Note: !! == .indexOf in Clojure.
+-- ((map (*) [0..10]) !! 4) 5
+
+-- Same as the above, but using a lambda function.
+-- length (filter (\xs -> 15 < length xs) (map collatzSeq [1..100]))
+
+-- Pattern matching in lambdas also works.
+-- map (\(a,b) -> a + b) [(1,2),(3,5),(6,3)]
+
+-- flip redefined using lambda syntax.
+flip''' :: (a -> b -> c) -> b -> a -> c
+flip''' f = \x y -> f y x
+
+-- Implement sum using foldl.
+sum'' :: (Num a) => [a] -> a
+sum'' (x:xs) = foldl (+) x xs
+
+-- Better implementation of the above.
+sum''' :: (Num a) => [a] -> a
+sum''' = foldl (+) 0
+
+-- Implement elem using foldl.
+elem'' :: (Eq a) => a -> [a] -> Bool
+elem'' x xs = foldl (\y1 y2 -> if (y2 == x) then True else y1) False xs
