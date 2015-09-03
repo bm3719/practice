@@ -461,3 +461,26 @@ sumAnswer'' :: Int
 sumAnswer'' = (+1) . length . takeWhile (<1000) . scanl1 (+) . map sqrt $ [1..]
 
 -- Chapter 7: Modules
+
+-- import: At the REPL, use `:m + Data.List Data.Map'.
+
+-- Import only nub and sort.
+-- import Data.List (nub, sort)
+
+-- Import all except nub.
+-- import Data.List hiding (nub)
+
+-- For modules imports that would result in name collisions, use qualified:
+-- import qualified Data.Map
+
+-- To alias qualified imports, use the `as' syntax.
+-- import qualified Data.Map as M
+
+-- List of everything in the standard library:
+-- https://downloads.haskell.org/~ghc/latest/docs/html/libraries/
+
+--- Data.List
+
+-- intersperse: Same as Clojure's interpose.
+-- intercalate: Intersperses list between a list of lists and flattens.
+-- transpose: Rotates a matrix (list of lists).
