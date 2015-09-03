@@ -390,4 +390,74 @@ sum''' = foldl (+) 0
 
 -- Implement elem using foldl.
 elem'' :: (Eq a) => a -> [a] -> Bool
-elem'' x xs = foldl (\y1 y2 -> if (y2 == x) then True else y1) False xs
+elem'' x xs = foldl (\acc y -> if (y == x) then True else False) False xs
+
+-- Implement map using foldr.  Note that the accumulator's position is reversed
+-- for foldr.
+map' :: (a -> b) -> [a] -> [b]
+map' f = foldr (\x acc -> f x : acc) []
+
+-- foldl1 and foldr1: Use these to skip initialization of the accumulator (it's
+-- initialized to the first element in the input list).  Will throw an
+-- exception on an empty list, however.
+
+-- Try implementing a bunch of functions using folds.
+maximum''' :: (Ord a) => [a] -> a
+maximum''' = foldl1 (\acc x -> if acc > x then acc else x)
+
+reverse'' :: [a] -> [a]
+reverse'' = foldl (\acc x -> x:acc) []
+
+-- Book uses foldr1 (*) for this, but that's not how product behaves.
+product' :: (Num a) => [a] -> a
+product' = foldl (\acc x -> acc * x) 1
+
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' f = foldr (\x acc -> (if f x then [x] else []) ++ acc) []
+
+head''' :: [a] -> a
+head''' = foldr1 (\x _ -> x)
+
+last' :: [a] -> a
+last' = foldl1 (\_ x -> x)
+
+-- scanl, scanl1, scanr, and scanr2 work like their fold counterparts, but
+-- return a list of intermediate results.
+
+-- How many elements does it take for the sum of the roots of ℕ to exceed 1000.
+sumAnswer :: Int
+sumAnswer = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
+
+--- Function application
+
+-- The $ operator is function application.  Has lowest precedence and is
+-- right-associative.
+
+-- Map a function application over a list of functions.
+-- map ($ 3) [(4+), (10*), (^2), sqrt]
+
+-- sumAnswer using ($).
+sumAnswer' :: Int
+sumAnswer' = (+1) $ length $ takeWhile (<1000) $ scanl1 (+) $ (map sqrt [1..])
+
+--- Function composition
+
+-- Same as Clojure's comp.
+
+-- map ((+1) . (/2)) [1..10]
+
+-- Function composition + partial application: Useful for multi-argument
+-- functions.
+
+-- sum (replicate 5 (max 6.7 8.9))
+-- sum . replicated 5 . max 6.7 $ 8.9
+
+-- Write this in point-free style:
+-- fn x = ceiling (negate (tan (cos (max 50 x))))
+pF = ceiling . negate . tan . cos . max 50
+
+-- sumAnswer using (.)
+sumAnswer'' :: Int
+sumAnswer'' = (+1) . length . takeWhile (<1000) . scanl1 (+) . map sqrt $ [1..]
+
+-- Chapter 7: Modules
