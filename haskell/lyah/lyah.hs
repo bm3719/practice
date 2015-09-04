@@ -2,6 +2,8 @@
 -- This is a test project for notes gathered while reading Learn You a Haskell
 -- For Great Good.  http://learnyouahaskell.com/
 
+import Data.List
+
 main :: IO ()
 main = do
   putStr "What is your first name? "
@@ -484,3 +486,67 @@ sumAnswer'' = (+1) . length . takeWhile (<1000) . scanl1 (+) . map sqrt $ [1..]
 -- intersperse: Same as Clojure's interpose.
 -- intercalate: Intersperses list between a list of lists and flattens.
 -- transpose: Rotates a matrix (list of lists).
+
+-- Add the polynomials 3x² + 5x + 9, 10x³ + 9, and 8x³ + 5x² + x - 1.
+polySum = map sum $ transpose [[0, 3, 5, 9], [10, 0, 0, 9], [8, 5, 1, -1]]
+
+-- foldl' and foldr': Stricter versions of the lazy folds.  Avoids stack
+-- overflows due to many thunks.
+
+-- concat: Same as Clojure's flatten.
+-- concatMap: Same as concat + map.
+-- and: Ands boolean lists.
+-- or: Ors boolean lists.
+-- all: Same as Clojure's every?.
+-- any: Same as Clojure's some, except returns Bool.
+
+-- iterate: Takes function f and start value and returns lazy list of f
+-- continuously applied.
+
+-- splitAt: Splits a list at specified index, returning two lists in a tuple.
+-- takeWhile: Same as Clojure's take-while.
+-- dropWhile: Same as Clojure's drop-while.
+
+-- span: Like takeWhile, except it returns a tuple with the first list
+-- containing the takeWhile results and the second containing the remainder.
+-- let (fw, rest) = span (/= ' ') "This is a sentence"
+--   in "First word:" ++ fw ++ ", the rest:" ++ rest
+
+-- break: Same as `span (not . p)'.
+-- sort: Sorts list of Ord elements.
+-- sortBy: sort, with a specified predicate function.
+-- group: Groups adjacent elements into sublists if equal.
+
+-- Find out how many times each element appears in this list.
+-- map (\lst -> (head lst, length lst)) $ group $ sort [1,1,1,1,2,2,2,2,3,3,2,2,2,5,6,7]
+
+-- Book's version of the above:
+-- map (\l@(x:xs) -> (x,length l)) . group . sort $ [1,1,1,1,2,2,2,2,3,3,2,2,2,5,6,7]
+
+-- Note: Use id@(..) syntax to both alias and destructure a value.
+
+-- inits and tails: Recursively apply init and tail, returning a list.
+
+-- Use tails and a fold to search for a sublist in a list.
+search :: (Eq a) => [a] -> [a] -> Bool
+search xs ss = foldl (\acc s -> if ss == take (length ss) s
+                               then True
+                               else acc)
+               False (tails xs)
+
+-- isInfixOf: Basically the same as the above exercise.
+-- isPrefixOf and isSuffixOf: Search for sublist at begin and end of list.
+-- elem and notElem: ...
+
+-- partition: Return a tuple containing list of things that satisfy the
+-- predicate and a list of things that don't.
+
+-- find: Returns first element of a list that satisfies a predicate, wrapped in
+-- a Maybe ADT.  A good example of when to use find is to replace `head
+-- . dropWhile'.  head is not safe for empty lists, but find would just return
+-- Nothing.
+
+-- elemIndex: Like elem, but returns the index of the thing searched for.  Also
+-- returns a Maybe.
+
+-- elemIndices: Same as above but returns a list for multiple matches.
