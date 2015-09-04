@@ -3,6 +3,8 @@
 -- For Great Good.  http://learnyouahaskell.com/
 
 import Data.List
+import Data.Function (on)
+import Data.Char
 
 main :: IO ()
 main = do
@@ -550,3 +552,114 @@ search xs ss = foldl (\acc s -> if ss == take (length ss) s
 -- returns a Maybe.
 
 -- elemIndices: Same as above but returns a list for multiple matches.
+-- findIndex: Like find, but returns the index.
+-- zip3..zip7, zipWith3..zipWith7: Same as zip, zipWith, but for more params.
+-- lines: Splits strings on CRLF.
+-- unlines: Joins strings with CRLFs.
+-- words, unwords: Splits/joins on whitespace.
+-- delete: Deletes first occurrence of element in a list.
+-- \\: Set difference, for lists.
+-- union: Set union, for lists (removes duplicates from second list).
+-- intersect: Set intersection, for lists.
+
+-- insert: Inserts element into a list at position where it's greater or equal
+-- to an element.  Good way to add stuff to a sorted list and keep it sorted.
+
+-- genericLength, genericTake, genericDrop, genericSplitAt, genericIndex,
+-- genericReplace: Generic versions of their respective functions that take Num
+-- or Integral instead of Int.
+
+-- numBy, deleteBy, unionBy, intersectBy, groupBy: More general versions of
+-- their respective functions, that take specified equality tests.
+
+-- Note: groupBy = Clojure's partition-by.
+
+-- Group these numbers based on whether they've changed to negative or not.
+values = [-4.3, -2.4, -1.2, 0.4, 2.3, 5.9, 10.5, 29.1, 5.3, -2.4, -14.5, 2.9, 2.3]
+-- groupBy (\x y -> (x<0) == (y<0)) values
+
+-- In Clojure, this would be: (partition-by #(< % 0) values)
+
+-- Data.Function.on: f `on` g = \x y -> f (g x) (g y)
+
+groupValues = groupBy ((==) `on` (<0)) values
+
+-- sortBy, insertBy, maximumBy, minimumBy: General versions of their respective
+-- functions that take an Ordering-returning function.
+
+-- Sort these lists by length instead of the default lexicographic comparison.
+listOfLists = [[5,4,5,4,4],[1,2,3],[3,5,4,3],[],[2],[2,2]]
+sortListsByLength = sortBy (\l1 l2 -> compare (length l1) (length l2)) listOfLists
+
+-- A Clojure version of the above would be: (sort-by count values).
+
+-- Book's version.  I guess I forgot about `on` already. :(
+sortListsByLength' = sortBy (compare `on` length) listOfLists
+
+--- Data.Char: A module for dealing with Chars and Strings (which are just
+--- lists of Chars).
+
+-- Char Predicates of type Char -> Bool:
+-- isControl: Is Char a control Char.
+-- isSpace: Is Char whitespace (space, tab, newline).
+-- isLower, isUpper: Case check.
+-- isAlphaNum: Is Char alphanumeric.
+-- isPrint: Is Char printable (control Chars are not).
+-- isDigit, isOctDigit, isHexDigit: Digit check.
+-- isLetter: Is Char a letter.
+-- isMark: Is Char a Unicode mark (Chars that combine with preceding ones).
+-- isNumber: Is Char numeric.
+-- isPunctuation: Is Char punctuation.
+-- isSymbol: Is Char a mathematical or currency symbol.
+-- isSeparator: Is Char a Unicode separator.
+-- isAscii: Is Char in the first 128 Unicode character set.
+-- isLatini: Is Char in the first 256 Unicode character set.
+-- isAsciiLower, isAsciiUpper: Is Char ASCII lower/upper.
+
+-- To filter strings with these, use the function Data.List.all.
+-- all isAlphaNum "bobby123"
+
+-- Use isSpace to simulate Data.List.words.
+words' = filter (not . all isSpace) $ groupBy ((==) `on` isSpace) "hey guys its me"
+
+-- GeneralCategory: An enumeration type that classifies Chars.  The function
+-- generalCategory will return this category for a given Char.  GeneralCategory
+-- is part of the EQ typeclass.
+
+-- toUpper, toLower, toTitle, digitToInt, intToDigit: Char conversions.
+-- ord, chr: Covert Chars to their ASCII numbers and vice versa.
+
+-- Implement a Caesar cipher.
+encode :: Int -> String -> String
+encode n msg = map chr . map (+n) . map ord $ msg
+
+-- I'd probably solve this like this in Clojure:
+-- (defn encode [n msg]
+--   (->> msg (map int) (map #(+ n %)) (map char) (apply str)))
+
+--- Data.Map
+
+-- Building a map system from lists of pairs.
+phoneBook =
+    [ ("betty","555-2938")
+    , ("bonnie","452-2928")
+    , ("patsy","493-2928")
+    , ("lucille","205-2928")
+    , ("wendy","939-8282")
+    , ("penny","853-2492")
+    ]
+
+-- Look up the value of a key.
+findKey :: (Eq k) => k -> [(k, v)] -> v
+findKey k (x:xs) | k == (fst x) = snd x
+                 | otherwise   = findKey k xs
+
+-- Book's solution, which I like better.
+findKey' :: (Eq k) => k -> [(k, v)] -> v
+findKey' key xs = snd . head . filter (\(k,v) -> key == k) $ xs
+
+-- Implement the above with Maybe to handle missing keys.
+findKeyMaybe :: (Eq k) => k -> [(k, v)] -> Maybe v
+findKeyMaybe key ((k,v):xs) = if k == key
+                              then Just v
+                              else Nothing
