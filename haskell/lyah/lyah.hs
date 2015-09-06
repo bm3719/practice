@@ -5,6 +5,9 @@
 import Data.List
 import Data.Function (on)
 import Data.Char
+import qualified Data.Map as Map
+import qualified Data.Set as Set
+import Geometry
 
 main :: IO ()
 main = do
@@ -15,7 +18,7 @@ main = do
   let full = first ++ " " ++ last
   putStrLn ("Pleased to meet you, " ++ full ++ "!")
 
--- Chapter 2: Starting Out
+--- Chapter 2: Starting Out
 
 doubleMe x = x * x
 
@@ -87,7 +90,7 @@ removeOdd xxs = [[x | x <- xs, even x] | xs <- xxs]
 -- A list of all right triangles.
 rts = [(a, b, c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2]
 
--- Chapter 3: Types and Typeclasses
+--- Chapter 3: Types and Typeclasses
 
 -- Types: Int (bounded), Integer (unbounded), Float, Double, Bool, Char.
 
@@ -107,7 +110,7 @@ rts = [(a, b, c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2]
 -- fromIntegral: Promote an Integral type to the more general Num.
 -- fromIntegral (length [1,2,3]) + 3.4
 
--- Chapter 4: Syntax in Functions
+--- Chapter 4: Syntax in Functions
 
 -- Pattern matching: Specifying patterns to which some data should conform,
 -- then deconstructing data and checking it against those forms.
@@ -258,36 +261,36 @@ maximum'' [] = error "Empty list."
 maximum'' [x] = x
 maximum'' (x:xs) = max x (maximum'' xs)
 
--- Reimplement replicate using recursion.  A better solution uses take and
+-- Implement replicate using recursion.  A better solution uses take and
 -- repeat.
 replicate' :: (Num a, Ord a) => a -> b -> [b]
 replicate' x e
   | x <= 0     = []
   | otherwise = e:replicate' (x - 1) e
 
--- Reimplement take using recursion.
+-- Implement take using recursion.
 take' :: (Num a, Ord a) => a -> [b] -> [b]
 take' n _
   | n <= 0      = []
 take' _ []     = []
 take' n (x:xs) = x:take' (n - 1) xs
 
--- Reimplement reverse.
+-- Implement reverse.
 reverse' :: [a] -> [a]
 reverse' [] = []
 reverse' (x:xs) = reverse' xs ++ [x]
 
--- Reimplement repeat.
+-- Implement repeat.
 repeat' :: a -> [a]
 repeat' x = x:repeat' x
 
--- Reimplement zip.
+-- Implement zip.
 zip' :: [a] -> [b] -> [(a, b)]
 zip' _ [] = []
 zip' [] _ = []
 zip' (x:xs) (y:ys) = (x,y):zip' xs ys
 
--- Reimplement elem.
+-- Implement elem.
 elem' :: (Eq a) => a -> [a] -> Bool
 elem' e [] = False
 elem' e (x:xs) = if e == x then True else elem' e xs
@@ -306,7 +309,7 @@ quicksort (x:xs) =
       biggerSorted = quicksort [a | a <- xs, a > x]
   in  smallerSorted ++ [x] ++ biggerSorted
 
--- Chapter 6: Higher order functions
+--- Chapter 6: Higher order functions
 
 -- (Some talk about curried functions and partial application is here.)
 
@@ -319,13 +322,13 @@ divideByTen = (/10)
 applyTwice :: (a -> a) -> a -> a
 applyTwice f a = f (f a)
 
--- Reimplement zipWith using higher order programming.
+-- Implement zipWith using higher order programming.
 zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
 zipWith' _ _ [] = []
 zipWith' _ [] _ = []
 zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 
--- Reimplement flip.
+-- Implement flip.
 flip' :: (a -> b -> c) -> (b -> a -> c)
 flip' f = g
   where g x y = f y x
@@ -637,7 +640,8 @@ encode n msg = map chr . map (+n) . map ord $ msg
 -- (defn encode [n msg]
 --   (->> msg (map int) (map #(+ n %)) (map char) (apply str)))
 
---- Data.Map
+--- Data.Map: Some functions herein clash with Prelude ones, so use a qualified
+--- import.
 
 -- Building a map system from lists of pairs.
 phoneBook =
@@ -649,7 +653,7 @@ phoneBook =
     , ("penny","853-2492")
     ]
 
--- Look up the value of a key.
+-- Look up the value of a key.  Same as Data.List.lookup.
 findKey :: (Eq k) => k -> [(k, v)] -> v
 findKey k (x:xs) | k == (fst x) = snd x
                  | otherwise   = findKey k xs
@@ -663,3 +667,89 @@ findKeyMaybe :: (Eq k) => k -> [(k, v)] -> Maybe v
 findKeyMaybe key ((k,v):xs) = if k == key
                               then Just v
                               else Nothing
+
+-- Implement the above, using a fold.
+findKeyMaybe' :: (Eq k) => k -> [(k, v)] -> Maybe v
+findKeyMaybe' key xs = foldl (\acc (k,v) -> if k == key
+                                           then Just v
+                                           else acc) Nothing xs
+
+-- fromList: Take an association list (like above) and return a map of it.
+phoneMap = Map.fromList phoneBook
+
+-- empty: Returns empty map.
+-- insert: Inserts key and value into a map.
+-- Map.insert 3 100 Map.empty
+
+-- Implement fromList using insert and a fold.
+fromList' :: Ord k => [(k, v)] -> Map.Map k v
+fromList' = foldl (\acc (k,v) -> Map.insert k v acc) Map.empty
+
+-- null: Empty map predicate.
+-- size: Return size of map.
+-- singleton: Create a map with one entry.
+-- lookup: Same as Data.List.lookup, but for maps.
+-- member: Key existence predicate.
+-- map, filter: Same as list versions (operates on values).
+-- toList: Inverse of fromList.
+-- keys, elems: Same as Clojure's keys and vals functions.
+
+-- fromListWith: Same as fromList, but uses supplied function to decide what to
+-- do with duplicate keys.
+
+phoneBookDupes =
+  [ ("betty","555-2938")
+  , ("betty","342-2492")
+  , ("bonnie","452-2928")
+  , ("patsy","493-2928")
+  , ("patsy","943-2929")
+  , ("patsy","827-9162")
+  , ("lucille","205-2928")
+  , ("wendy","939-8282")
+  , ("penny","853-2492")
+  , ("penny","555-2111")
+  ]
+
+-- Note: Since the types of the values of the output map need to match the
+-- input values in the list form, it isn't possible to use this function to
+-- transform the values of the output into something else, like a list.
+-- Map.fromListWith (\x y -> [x] ++ [y]) phoneBookDupes  -- Doesn't work.
+
+-- This works, but just concats strings.
+-- Map.fromListWith (\x y -> x ++ ", " ++ y) phoneBookDupes
+
+-- This does what I wanted to do above by first converting the values to
+-- lists.
+phoneBookToMap :: (Ord k) => [(k, v)] -> Map.Map k [v]
+phoneBookToMap xs = Map.fromListWith (++) $ map (\(k, v) -> (k, [v])) xs
+
+-- insertWith: Inserts key/value pair, but accepts a function to handle
+-- pre-existence of the key.
+-- Map.insertWith (+) 2 4 $ (Map.fromList [(1,2),(2,3),(3,4)])
+
+-- Data.Set: Sets, with built-in ordering.
+
+-- Find out which characters were used in both of these strings.
+text1 = "I just had an anime dream. Anime... Reality... Are they so different?"
+text2 = "The old man left his garbage can out and now his trash is all over my lawn!"
+
+textIntersection = Set.intersection (Set.fromList text1) (Set.fromList text2)
+
+-- fromList: Same as Data.Map.fromList, but for sets.
+-- intersection: Set intersection.
+-- difference: Set difference.
+-- union: Set union.
+-- null, size, member, empty, singleton, insert, delete: Set operations.
+-- isSubsetof, isProperSubsetOf: Subset predicates.
+-- map, filter: Also work on sets.
+
+-- toList: Covert set into list.  (list->set and set->list is faster than nub
+-- for large lists, provided they are type Ord).  nub also preserves ordering.
+
+-- Making modules: See Geometry.hs.
+
+-- Hierarchical structures: For example, to section off Geometry, create a
+-- folder called that with other modules within it.  Then name them stuff like
+-- Geometry.Sphere.  Not doing that here since it's pretty obvious.
+
+--- Chapter 8: Making Our Own Types and Typeclasses
