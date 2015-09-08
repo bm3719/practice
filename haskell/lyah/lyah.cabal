@@ -19,6 +19,8 @@ executable lyah
   main-is:             lyah.hs
   -- other-modules:
   other-extensions:    UnicodeSyntax
-  build-depends:       base >=4.6 && <4.8, containers
+  build-depends:       base >=4.6 && <4.8
+                     , containers
+                     , directory >= 1.2.1.0
   -- hs-source-dirs:
   default-language:    Haskell2010

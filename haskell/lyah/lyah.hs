@@ -8,6 +8,12 @@ import Data.Char
 import qualified Data.Map as Map
 import qualified Data.Set as Set
 import Geometry
+import Control.Monad
+import System.IO           -- For openFile, withFile, etc.
+import System.Environment  -- For getArgs.
+import System.Directory    -- For doesFileExist.
+import System.IO.Error
+import Control.Exception   -- New location of catch.
 
 main :: IO ()
 main = do
@@ -1176,3 +1182,176 @@ instance Functor (Barry a b) where
 
 
 --- Chapter 9: Input and Output
+
+-- Note: Putting main functions here instead of external files.
+
+-- SOP for normal stand-alone file compilation (of a file called
+-- helloworld.hs): ghc --make hellworld
+
+-- To interpret a .hs file on the fly: runhaskell helloword.hs
+
+-- The <- operator binds a value inside an I/O action to a name.
+
+-- return: Makes an I/O action that doesn't do anything (like end execution)
+-- out of a pure value.
+
+-- putStr: Like putStrLn except without the CRLF.
+-- putChar: Takes a Char and returns an I/O action that prints.
+
+-- getChar: Reads a Char from input.  Note that this only reads when the user
+-- hits the return key.
+
+-- when: Takes a boolean, and if true, returns the I/O action supplied.
+-- Otherwise it will return ().  A useful abstraction of a typical "if
+-- something then do some I/O action else return ()" idiom.
+
+main' = do
+  c <- getChar
+  when (c /= ' ') $ do
+    putChar c
+    main'
+
+-- sequence: Takes a list of I/O actions and returns an I/O action that will
+-- perform them sequentially.
+
+main'' = do
+  rs <- sequence [getLine, getLine, getLine]
+  print rs
+
+-- mapM: Map a function over a list, then sequence it.
+-- mapM_: Same, except it discards the result of the sequence.
+-- forever: Takes an I/O actions and returns an I/O action that repeats forever.
+
+-- forM: Like mapM, except the parameters are reversed.
+
+-- forM is good for situations like this:
+main''' = do
+  colors <- forM [1,2,3,4] (\a -> do
+                              putStrLn $ "Which color do you associate with the number " ++ show a ++ "?"
+                              color <- getLine
+                              return color)
+  putStrLn "The colors you associate with 1, 2, 3, and 4 are: "
+  mapM putStrLn colors
+
+-- Note: The last line would probably be better served with a mapM_.
+
+--- Files and streams
+
+-- getContents: An I/O action that lazily reads everything from stdio until EOF.
+
+-- Use getContents to upcase input as long as there is some.
+main'''' = do
+  contents <- getContents
+  putStr (map toUpper contents)
+
+-- interact: Replaces a common idiom of getting an input string, transforming
+-- it with a function, then writing output.
+
+main''''' = interact shortLinesOnly
+
+shortLinesOnly :: String -> String
+shortLinesOnly = unlines . filter (\line -> (length line) < 10) . lines
+
+-- Book has an even better version:
+-- main''''' = interact $ unlines . filter ((<10) . length) . lines
+
+-- Make a program that detects palindromes using interact.
+main'''''' = interact $ detectPalindromes
+
+detectPalindromes :: String -> String
+detectPalindromes xs = unlines (map (\line -> if (line == reverse line)
+                                             then "Palindrome"
+                                             else "Not palindrome") (lines xs))
+
+-- Reading files (requires System.IO):
+main1' = do
+  handle <- openFile "girlfriend.txt" ReadMode
+  contents <- hGetContents handle
+  putStr contents
+  hClose handle
+
+-- openFile: Takes a FilePath (a string) and an IOMode (type defined as
+-- ReadMode, WriteMode, AppendMode, or ReadWriteMode) and returns an IO Handle.
+
+-- hGetContents: Takes a Handle and returns IO String, similar to getContents.
+-- hClose: Close an open file.
+
+-- withFile: Does all of the above.
+
+-- The previous function using withFile.
+main1'' = do
+  withFile "girlfriend.txt" ReadMode (\h -> do
+                                         contents <- hGetContents h
+                                         putStr contents)
+
+-- hGetLine, hPutStr, hPutStrLn, hGetChar: More handler functions.
+
+-- TODO: Skipping ahead to Exceptions.  Come back and read this content later.
+
+--- Exceptions: Haskell supports these for I/O contexts and for pure code like
+--- div and head.  Pure code exceptions can only be caught in the impure parts
+--- of code.
+
+-- Dealing with missing files without exceptions:
+main2' = do (fileName:_) <- getArgs
+            fileExists <- doesFileExist fileName
+            if fileExists
+              then do contents <- readFile fileName
+                      putStrLn $ "The file has " ++ show (length (lines contents)) ++ " lines!"
+              else do putStrLn "The file doesn't exist!"
+
+-- catch: From System.IO.Error.  Takes an I/O action (like opening a file), the
+-- exception handler of type (IOError -> IO a).  Returns an I/O action that
+-- will either act the same as the first parameter, or it will do what the
+-- exception handler tells it to if the first throws an exception.
+
+-- Note: catch has been moved to Control.Exception.
+
+-- The same, but using exceptions:
+main2'' = toTry `catch` handler
+
+toTry :: IO ()
+toTry = do (fileName:_) <- getArgs
+           contents <- readFile fileName
+           putStrLn $ "The file has " ++ show (length (lines contents)) ++ " lines!"
+
+handler :: IOError -> IO ()
+handler e = putStrLn "Whoops, had some trouble!"
+
+-- The above catches all IOError types.  Change the above to see what kind of
+-- error occurred.
+main2''' = toTry `catch` handler'
+
+handler' :: IOError -> IO ()
+handler' e
+  | isDoesNotExistError e = putStrLn "The file doesn't exist!"
+  | otherwise = ioError e
+
+-- isDoesNotExistError: A predicate over IOError types.
+-- ioError: Takes an IOError and produces an I/O action that will throw it.
+
+-- isAlreadyExistError, isAlreadyInUseError, isFullError, isEOFError,
+-- isIllegalOperation, isPermissionError, isUserError: Other IOError
+-- predicates.
+
+-- isUserError is unique in that it evaluates to True when the userError
+-- function is used to produce a custom exception with accompanying string.
+
+-- ioe functions: System.IO.Error exports functions that allow interrogating
+-- exceptions for attributes.  For example, to print the filename that caused
+-- an error, ioeGetFileName can do that.
+
+handler'' :: IOError -> IO ()
+handler'' e
+  | isDoesNotExistError e =
+    case ioeGetFileName e of Just path -> putStrLn $ "Whoops! File does not exist at: " ++ path
+                             Nothing -> putStrLn "Whoops! File does not exist at unknown location!"
+  | otherwise = ioError e
+
+-- Cover parts of code with multiple handlers if it makes sense.
+-- main = do toTry `catch` handler1
+--        thenTryThis `catch` hander2
+--        launchRockets
+
+
+--- Chapter 10: Functionally Solving Problems
