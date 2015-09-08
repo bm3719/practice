@@ -1355,3 +1355,36 @@ handler'' e
 
 
 --- Chapter 10: Functionally Solving Problems
+
+-- Make an RPN calculator that can take a bunch of operators (skipping the
+-- version with just 3).
+solveRPN :: String -> Float
+solveRPN = head . foldl foldingFunction [] . words
+  where foldingFunction (x:y:ys) "*" = (x * y):ys
+        foldingFunction (x:y:ys) "+" = (x + y):ys
+        foldingFunction (x:y:ys) "-" = (y - x):ys
+        foldingFunction (x:y:ys) "/" = (y / x):ys
+        foldingFunction (x:y:ys) "^" = (y ** x):ys
+        foldingFunction (x:ys) "ln" = log x:ys
+        foldingFunction xs "sum" = [sum xs]
+        foldingFunction xs numberString = read numberString:xs
+
+-- reads: Test if a read was successful.
+
+-- Make a path optimizer for the Heathrow to London problem.  Input can look
+-- like this:
+-- 50
+-- 10
+-- 30
+-- 5
+-- 90
+-- 20
+-- 40
+-- 2
+-- 25
+-- 10
+-- 8
+-- 0
+
+data Node' = Node' Road Road | EndNode Road
+data Road  = Road Int Node'
