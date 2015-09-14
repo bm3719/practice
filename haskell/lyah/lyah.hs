@@ -1427,3 +1427,43 @@ optimalPath roadSystem =
 
 
 -- Chapter 11: Functors, Applicative Functors and Monoids
+
+-- Functors redux: The correct way to think about functors instead of the
+-- common box analogy is that of a computational context.
+
+-- To make a type constructor an instance of Functor, it needs to have a kind
+-- of * -> * (it has to take a concrete type as a type parameter, like Maybe
+-- does).  Otherwise, we have to partially apply the type constructor
+-- (i.e. `instance Functor (Either a) where ...').
+
+-- Functor IO: If a value has the type of IO String, it's an I/O action that
+-- will go out to the real work and get a string, yielding the string as a
+-- result.
+
+-- instance Functor IO where
+--   fmap f action = do
+--     result <- action
+--     return (f result)
+
+-- fmap (++"!") getLine
+
+-- Use fmap instead of binding an I/O action to a name then applying a function
+-- to it.
+
+-- The above is the same as:
+f = do
+  name <- getLine
+  let name' = name ++ "!"
+  putStrLn name'
+
+-- (->) r: The function type `r -> a' can be written as `(-> r a)'.  (->) is
+-- just a type constructor that takes two type parameters, just like Either.
+-- But to be an instance of Functor, it can only take only type parameter, so
+-- it needs to be partially applied.  This illustrates that functions are
+-- functors.
+
+-- Implementation, from Control.Monad.Instances:
+-- instance Functor ((->) r) where
+--   fmap f g = (\x -> f (g x))
+
+-- fmap could have been defined as (.) as well.
