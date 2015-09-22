@@ -2,4 +2,7 @@
 ;;;; interacting with the data at the REPL, or for general development.
 
 (ns user
-  (:require [practice.core :as p]))
+  (:require [practice.core :as core]
+            [clojure.tools.namespace.repl :refer [refresh]]))
+
+(def v [])
