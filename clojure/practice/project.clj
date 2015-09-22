@@ -8,5 +8,5 @@
   :repl-options {:init-ns user}
   :global-vars {*print-length* 100}
   :profiles {:dev {:resource-paths ["dev"]
-                   :dependencies [[org.clojure/tools.namespace "0.2.8"]]}
+                   :dependencies [[org.clojure/tools.namespace "0.2.10"]]}
              :uberjar {:aot :all}})
