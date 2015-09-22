@@ -1,14 +1,13 @@
 # practice
 
-A Clojure library designed to ... well, that part is up to you.
+A project to collect some random practice problems.
 
 ## Usage
 
-FIXME
+Call top-level functions from core or user.
 
 ## License
 
-Copyright © 2015 FIXME
+Copyright © 2015 Bruce C. Miller
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the BSD 2-Clause License.
