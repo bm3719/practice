@@ -2,4 +2,5 @@
 ;;;; interacting with the data at the REPL, or for general development.
 
 (ns user
-  (:require [template.core :as core]))
+  (:require [template.core :as core]
+            [clojure.tools.namespace.repl :refer [refresh]]))
