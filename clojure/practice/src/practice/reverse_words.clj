@@ -13,8 +13,8 @@ all your base")
   (str "Case #" case-num ": " (clojure.string/join " " col)))
 
 (defn solve-reverse-words
-  "Solve the reverse words problem" [input]
-  (doseq [[n output] (->> (rest (clojure.string/split input #"\n"))
+  "Solve the reverse words problem" []
+  (doseq [[n output] (->> (rest (clojure.string/split test-input #"\n"))
                           (map #(clojure.string/split % #" "))
                           (map reverse)
                           (map (fn [n s] [n s]) (map inc (range))))]
