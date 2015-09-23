@@ -3,6 +3,5 @@
 
 (ns user
   (:require [practice.core :as core]
+            [practice.store-credit :as sc]
             [clojure.tools.namespace.repl :refer [refresh]]))
-
-(def v [])
