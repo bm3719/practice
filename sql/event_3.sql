@@ -352,17 +352,17 @@ insert into npc values(
   'Event 3 Mob', -- note
   'L1Monster', -- impl
   4667, -- gfxid
-  49, -- lvl
-  580, -- hp
-  500, -- mp
-  42, -- ac
+  59, -- lvl
+  780, -- hp
+  700, -- mp
+  48, -- ac
   16, -- str
   17, -- con
   16, -- dex
   18, -- wis
   22, -- intel
-  35, -- mr
-  2402, -- exp
+  45, -- mr
+  2702, -- exp
   -80, -- lawful
   'small', -- size
   0, -- weakAttr
@@ -376,8 +376,8 @@ insert into npc values(
   0, -- undead
   0, -- poison_atk
   0, -- paralysis_atk
-  0, -- agro
-  0, -- agrososc
+  1, -- agro
+  1, -- agrososc
   0, -- agrocoi
   'nambla', -- family
   1, -- agrofamily
@@ -625,10 +625,10 @@ insert into npc values(
   'Event 3 Mob', -- note
   'L1Monster', -- impl
   4618, -- gfxid
-  70, -- lvl
-  7520, -- hp
-  2580, -- mp
-  -57, -- ac
+  78, -- lvl
+  8520, -- hp
+  3580, -- mp
+  -62, -- ac
   24, -- str
   17, -- con
   16, -- dex
@@ -685,8 +685,8 @@ insert into npc values(
   0 -- cant_resurrect
   );
 
--- HOTBOY
-INSERT INTO `npc` VALUES ('190010', 'HOTBOY', 'HOTBOY', 'Event 3 Mob', 'L1Monster', '4003', '49', '400', '400', '-27', '10', '16', '9', '19', '20', '-80', '1000', '1000', 'small', '0', '1', '0', '640', '560', '560', '560', '560', '0', '0', '0', '0', '0', '0', 'nainn', '0', '-1', '-1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '-1', '0', '0', '0', '0', '0');
+-- HotBoy
+INSERT INTO `npc` VALUES ('190010', 'HotBoy', 'HotBoy', 'Event 3 Mob', 'L1Monster', '4003', '49', '400', '400', '-27', '10', '16', '9', '19', '20', '-80', '1000', '1000', 'small', '0', '1', '0', '640', '560', '560', '560', '560', '0', '0', '0', '0', '0', '0', 'nainn', '0', '-1', '-1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '-1', '0', '0', '0', '0', '0');
 
 -- Dekem
 INSERT INTO `npc` VALUES ('190011', 'Dekem', 'Dekem', 'Event 3 Mob', 'L1Monster', '3891', '55', '400', '500', '-35', '8', '12', '7', '16', '23', '-50', '1000', '1000', 'small', '0', '1', '0', '640', '680', '680', '680', '680', '0', '0', '0', '0', '0', '0', 'nainn', '0', '-1', '-1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '-1', '0', '0', '0', '0', '0');
@@ -706,8 +706,8 @@ insert into npc values(
   'Event 3 Mob', -- note
   'L1Monster', -- impl
   4420, -- gfxid
-  30, -- lvl
-  290, -- hp
+  35, -- lvl
+  450, -- hp
   20, -- mp
   -20, -- ac
   18, -- str
@@ -787,7 +787,7 @@ insert into mobskill values(
  0, -- Range
  0, -- AreaWidth
  0, -- AreaHeight
- 11, -- Leverage
+ 14, -- Leverage
  45, -- SkillId
  0, -- Gfxid
  0, -- ActId
@@ -813,7 +813,7 @@ insert into mobskill values(
  0, -- Range
  0, -- AreaWidth
  0, -- AreaHeight
- 22, -- Leverage
+ 24, -- Leverage
  45, -- SkillId
  0, -- Gfxid
  0, -- ActId
@@ -837,7 +837,7 @@ insert into mobskill values(
  0, -- Range
  0, -- AreaWidth
  0, -- AreaHeight
- 34, -- Leverage
+ 36, -- Leverage
  53, -- SkillId
  0, -- Gfxid
  0, -- ActId
@@ -871,11 +871,11 @@ insert into mobskill values(
  0 -- PolyId
  );
 
--- HOTBOY
+-- HotBoy
 insert into mobskill values(
  190010, -- mobid
  0, -- actNo
- 'HOTBOY', -- mobname
+ 'HotBoy', -- mobname
  '', -- Skill_Description
  2, -- Type
  90, -- TriRnd
@@ -887,7 +887,7 @@ insert into mobskill values(
  0, -- Range
  0, -- AreaWidth
  0, -- AreaHeight
- 3, -- Leverage
+ 5, -- Leverage
  4, -- SkillId
  0, -- Gfxid
  0, -- ActId
@@ -936,7 +936,7 @@ insert into npcchat values(
  'Has anyone seen any children?', -- chat_id1
  'Lions, tigers, handcuffs, and Peter Pan!', -- chat_id2
  'Bumper to bumper!', -- chat_id3
- 'There was feces and doodoo everywhere!', -- chat_id4
+ 'There was doodoo and feces everywhere!', -- chat_id4
  'Nothing wrong with sharing your bed!', -- chat_id5
  20000, -- chat_interval
  1, -- is_shout
@@ -949,12 +949,12 @@ insert into npcchat values(
 insert into npcchat values(
  190010, -- npc_id
  0, -- chat_timing
- 'HOTBOY', -- note
+ 'HotBoy', -- note
  0, -- start_delay_time
- 'FOK BOYS', -- chat_id1
+ 'FUK BOY', -- chat_id1
  'fk NAMBLA haters Q_Q', -- chat_id2
- 'bro ur diaper needs changed.', -- chat_id3
- 'NAMBLA rules... MEXICO too.', -- chat_id4
+ 'boy ur diaper needs changed.', -- chat_id3
+ 'NAMBLA rules fgts... MEXICO too.', -- chat_id4
  'when i was a BOY i was loved by a MAN.', -- chat_id5
  30000, -- chat_interval
  1, -- is_shout
@@ -968,13 +968,13 @@ insert into npcchat values(
  190011, -- npc_id
  0, -- chat_timing
  'Dekem', -- note
- 0, -- start_delay_time
+ 1, -- start_delay_time
  'Where can I get a fursuit cleaned?', -- chat_id1
- 'Ur anus is insecure. I did you a favor.', -- chat_id2
+ 'Ur anus was insecure. I did u a favor.', -- chat_id2
  'My mom let me join NAMBLA.', -- chat_id3
- 'Kneel before the throne of King Dekem!', -- chat_id4
+ 'Its kinda ur fault for having an anus.', -- chat_id4
  'brb mom yelling again.', -- chat_id5
- 30000, -- chat_interval
+ 39000, -- chat_interval
  1, -- is_shout
  0, -- is_world_chat
  1, -- is_repeat
@@ -986,13 +986,13 @@ insert into npcchat values(
  190012, -- npc_id
  0, -- chat_timing
  'Uncle Gary', -- note
- 0, -- start_delay_time
+ 2, -- start_delay_time
  'Time for a bath!', -- chat_id1
  'How about a game of twister?', -- chat_id2
  'Kids love candy.', -- chat_id3
  'Ever seen a grown man naked?', -- chat_id4
  'How about a van ride?', -- chat_id5
- 30000, -- chat_interval
+ 36000, -- chat_interval
  1, -- is_shout
  0, -- is_world_chat
  1, -- is_repeat
@@ -1078,60 +1078,60 @@ insert into etcitem values(
 -- altar boy
 insert into droplist values(190000, '', 40308, '', 22, 128, 1000000); -- adena
 insert into droplist values(190000, '', 40065, '', 1, 10, 100000); -- candy
-insert into droplist values(190000, '', 40074, '', 1, 1, 85000); -- nzel
-insert into droplist values(190000, '', 40087, '', 1, 1, 20000); -- ndai
-insert into droplist values(190000, '', 140074, '', 1, 1, 4000); -- bzel
-insert into droplist values(190000, '', 140087, '', 1, 1, 1000); -- bdai
-insert into droplist values(190000, '', 40551, '', 1, 1, 10000); -- claw of varlok (elf)
-insert into droplist values(190000, '', 40550, '', 1, 1, 10000); -- eye of varlok (mage)
-insert into droplist values(190000, '', 40552, '', 1, 1, 10000); -- heart of varlok (prince)
-insert into droplist values(190000, '', 40549, '', 1, 1, 10000); -- sword of varlok (knight)
-insert into droplist values(190000, '', 20004, '', 1, 1, 3600); -- shadow mask
-insert into droplist values(190000, '', 20021, '', 1, 1, 3600); -- dex helm
-insert into droplist values(190000, '', 20039, '', 1, 1, 3600); -- con helm
-insert into droplist values(190000, '', 20027, '', 1, 1, 3600); -- rkh
-insert into droplist values(190000, '', 20226, '', 1, 1, 3600); -- bomp
-insert into droplist values(190000, '', 20065, '', 1, 1, 3600); -- red cloak
-insert into droplist values(190000, '', 20164, '', 1, 1, 1800); -- shadow gloves
-insert into droplist values(190000, '', 20084, '', 1, 1, 1800); -- ets
-insert into droplist values(190000, '', 20230, '', 1, 1, 1800); -- rksheild
-insert into droplist values(190000, '', 30, '', 1, 1, 1800); -- rksword
-insert into droplist values(190000, '', 126, '', 1, 1, 1800); -- som
-insert into droplist values(190000, '', 115, '', 1, 1, 1800); -- csom
-insert into droplist values(190000, '', 20051, '', 1, 1, 900); -- sovereign's majesty cloak
-insert into droplist values(190000, '', 20195, '', 1, 1, 900); -- shadow boots
-insert into droplist values(190000, '', 20171, '', 1, 1, 900); -- gop
-insert into droplist values(190000, '', 20055, '', 1, 1, 900); -- com
-insert into droplist values(190000, '', 40051, '', 1, 1, 15000); -- easter basket
+insert into droplist values(190000, '', 40074, '', 1, 1, 80000); -- nzel
+insert into droplist values(190000, '', 40087, '', 1, 1, 13000); -- ndai
+insert into droplist values(190000, '', 140074, '', 1, 1, 3000); -- bzel
+insert into droplist values(190000, '', 140087, '', 1, 1, 800); -- bdai
+insert into droplist values(190000, '', 40551, '', 1, 1, 8000); -- claw of varlok (elf)
+insert into droplist values(190000, '', 40550, '', 1, 1, 8000); -- eye of varlok (mage)
+insert into droplist values(190000, '', 40552, '', 1, 1, 8000); -- heart of varlok (prince)
+insert into droplist values(190000, '', 40549, '', 1, 1, 8000); -- sword of varlok (knight)
+insert into droplist values(190000, '', 20004, '', 1, 1, 3200); -- shadow mask
+insert into droplist values(190000, '', 20021, '', 1, 1, 3200); -- dex helm
+insert into droplist values(190000, '', 20039, '', 1, 1, 3200); -- con helm
+insert into droplist values(190000, '', 20027, '', 1, 1, 3200); -- rkh
+insert into droplist values(190000, '', 20226, '', 1, 1, 3200); -- bomp
+insert into droplist values(190000, '', 20065, '', 1, 1, 3200); -- red cloak
+insert into droplist values(190000, '', 20164, '', 1, 1, 1600); -- shadow gloves
+insert into droplist values(190000, '', 20084, '', 1, 1, 1600); -- ets
+insert into droplist values(190000, '', 20230, '', 1, 1, 1600); -- rksheild
+insert into droplist values(190000, '', 30, '', 1, 1, 1400); -- rksword
+insert into droplist values(190000, '', 126, '', 1, 1, 1400); -- som
+insert into droplist values(190000, '', 115, '', 1, 1, 1400); -- csom
+insert into droplist values(190000, '', 20051, '', 1, 1, 800); -- sovereign's majesty cloak
+insert into droplist values(190000, '', 20195, '', 1, 1, 800); -- shadow boots
+insert into droplist values(190000, '', 20171, '', 1, 1, 800); -- gop
+insert into droplist values(190000, '', 20055, '', 1, 1, 800); -- com
+insert into droplist values(190000, '', 40051, '', 1, 1, 35000); -- easter basket
 
 -- boy scout
 insert into droplist values(190001, '', 40308, '', 22, 128, 1000000); -- adena
 insert into droplist values(190001, '', 40065, '', 1, 10, 100000); -- candy
-insert into droplist values(190001, '', 40074, '', 1, 1, 85000); -- nzel
-insert into droplist values(190001, '', 40087, '', 1, 1, 20000); -- ndai
-insert into droplist values(190001, '', 140074, '', 1, 1, 4000); -- bzel
-insert into droplist values(190001, '', 140087, '', 1, 1, 1000); -- bdai
-insert into droplist values(190001, '', 40551, '', 1, 1, 10000); -- claw of varlok (elf)
-insert into droplist values(190001, '', 40550, '', 1, 1, 10000); -- eye of varlok (mage)
-insert into droplist values(190001, '', 40552, '', 1, 1, 10000); -- heart of varlok (prince)
-insert into droplist values(190001, '', 40549, '', 1, 1, 10000); -- sword of varlok (knight)
-insert into droplist values(190001, '', 20004, '', 1, 1, 3600); -- shadow mask
-insert into droplist values(190001, '', 20021, '', 1, 1, 3600); -- dex helm
-insert into droplist values(190001, '', 20039, '', 1, 1, 3600); -- con helm
-insert into droplist values(190001, '', 20027, '', 1, 1, 3600); -- rkh
-insert into droplist values(190001, '', 20226, '', 1, 1, 3600); -- bomp
-insert into droplist values(190001, '', 20065, '', 1, 1, 3600); -- red cloak
-insert into droplist values(190001, '', 20164, '', 1, 1, 1800); -- shadow gloves
-insert into droplist values(190001, '', 20084, '', 1, 1, 1800); -- ets
-insert into droplist values(190001, '', 20230, '', 1, 1, 1800); -- rksheild
-insert into droplist values(190001, '', 30, '', 1, 1, 1800); -- rksword
-insert into droplist values(190001, '', 126, '', 1, 1, 1800); -- som
-insert into droplist values(190001, '', 115, '', 1, 1, 1800); -- csom
-insert into droplist values(190001, '', 20051, '', 1, 1, 900); -- sovereign's majesty cloak
-insert into droplist values(190001, '', 20195, '', 1, 1, 900); -- shadow boots
-insert into droplist values(190001, '', 20171, '', 1, 1, 900); -- gop
-insert into droplist values(190001, '', 20055, '', 1, 1, 900); -- com
-insert into droplist values(190001, '', 40051, '', 1, 1, 15000); -- easter basket
+insert into droplist values(190001, '', 40074, '', 1, 1, 80000); -- nzel
+insert into droplist values(190001, '', 40087, '', 1, 1, 13000); -- ndai
+insert into droplist values(190001, '', 140074, '', 1, 1, 3000); -- bzel
+insert into droplist values(190001, '', 140087, '', 1, 1, 800); -- bdai
+insert into droplist values(190001, '', 40551, '', 1, 1, 8000); -- claw of varlok (elf)
+insert into droplist values(190001, '', 40550, '', 1, 1, 8000); -- eye of varlok (mage)
+insert into droplist values(190001, '', 40552, '', 1, 1, 8000); -- heart of varlok (prince)
+insert into droplist values(190001, '', 40549, '', 1, 1, 8000); -- sword of varlok (knight)
+insert into droplist values(190001, '', 20004, '', 1, 1, 3200); -- shadow mask
+insert into droplist values(190001, '', 20021, '', 1, 1, 3200); -- dex helm
+insert into droplist values(190001, '', 20039, '', 1, 1, 3200); -- con helm
+insert into droplist values(190001, '', 20027, '', 1, 1, 3200); -- rkh
+insert into droplist values(190001, '', 20226, '', 1, 1, 3200); -- bomp
+insert into droplist values(190001, '', 20065, '', 1, 1, 3200); -- red cloak
+insert into droplist values(190001, '', 20164, '', 1, 1, 1600); -- shadow gloves
+insert into droplist values(190001, '', 20084, '', 1, 1, 1600); -- ets
+insert into droplist values(190001, '', 20230, '', 1, 1, 1600); -- rksheild
+insert into droplist values(190001, '', 30, '', 1, 1, 1600); -- rksword
+insert into droplist values(190001, '', 126, '', 1, 1, 1600); -- som
+insert into droplist values(190001, '', 115, '', 1, 1, 1600); -- csom
+insert into droplist values(190001, '', 20051, '', 1, 1, 800); -- sovereign's majesty cloak
+insert into droplist values(190001, '', 20195, '', 1, 1, 800); -- shadow boots
+insert into droplist values(190001, '', 20171, '', 1, 1, 800); -- gop
+insert into droplist values(190001, '', 20055, '', 1, 1, 800); -- com
+insert into droplist values(190001, '', 40051, '', 1, 1, 35000); -- easter basket
 
 -- nambla member
 insert into droplist values(190002, '', 40308, '', 32, 148, 1000000); -- adena
@@ -1141,29 +1141,29 @@ insert into droplist values(190002, '', 50002, '', 1, 1, 80000); -- sperm
 insert into droplist values(190002, '', 50003, '', 1, 1, 180000); -- pubes
 insert into droplist values(190002, '', 40065, '', 1, 10, 120000); -- candy
 insert into droplist values(190002, '', 40074, '', 1, 1, 55000); -- nzel
-insert into droplist values(190002, '', 40087, '', 1, 1, 9500); -- ndai
+insert into droplist values(190002, '', 40087, '', 1, 1, 6500); -- ndai
 insert into droplist values(190002, '', 140074, '', 1, 1, 1100); -- bzel
 insert into droplist values(190002, '', 140087, '', 1, 1, 400); -- bdai
 insert into droplist values(190002, '', 40551, '', 1, 1, 300); -- claw of varlok (elf)
 insert into droplist values(190002, '', 40550, '', 1, 1, 300); -- eye of varlok (mage)
 insert into droplist values(190002, '', 40552, '', 1, 1, 300); -- heart of varlok (prince)
 insert into droplist values(190002, '', 40549, '', 1, 1, 300); -- sword of varlok (knight)
-insert into droplist values(190002, '', 20004, '', 1, 1, 2400); -- shadow mask
-insert into droplist values(190002, '', 20021, '', 1, 1, 2400); -- dex helm
-insert into droplist values(190002, '', 20039, '', 1, 1, 2400); -- con helm
-insert into droplist values(190002, '', 20027, '', 1, 1, 2400); -- rkh
-insert into droplist values(190002, '', 20226, '', 1, 1, 2400); -- bomp
-insert into droplist values(190002, '', 20065, '', 1, 1, 2400); -- red cloak
-insert into droplist values(190002, '', 20164, '', 1, 1, 1300); -- shadow gloves
-insert into droplist values(190002, '', 20084, '', 1, 1, 1300); -- ets
-insert into droplist values(190002, '', 20230, '', 1, 1, 1300); -- rksheild
-insert into droplist values(190002, '', 30, '', 1, 1, 1300); -- rksword
-insert into droplist values(190002, '', 126, '', 1, 1, 1300); -- som
-insert into droplist values(190002, '', 115, '', 1, 1, 1300); -- csom
-insert into droplist values(190002, '', 20051, '', 1, 1, 800); -- sovereign's majesty cloak
-insert into droplist values(190002, '', 20195, '', 1, 1, 800); -- shadow boots
-insert into droplist values(190002, '', 20171, '', 1, 1, 800); -- gop
-insert into droplist values(190002, '', 20055, '', 1, 1, 800); -- com
+insert into droplist values(190002, '', 20004, '', 1, 1, 2200); -- shadow mask
+insert into droplist values(190002, '', 20021, '', 1, 1, 2200); -- dex helm
+insert into droplist values(190002, '', 20039, '', 1, 1, 2200); -- con helm
+insert into droplist values(190002, '', 20027, '', 1, 1, 2200); -- rkh
+insert into droplist values(190002, '', 20226, '', 1, 1, 2200); -- bomp
+insert into droplist values(190002, '', 20065, '', 1, 1, 2200); -- red cloak
+insert into droplist values(190002, '', 20164, '', 1, 1, 1100); -- shadow gloves
+insert into droplist values(190002, '', 20084, '', 1, 1, 1100); -- ets
+insert into droplist values(190002, '', 20230, '', 1, 1, 1100); -- rksheild
+insert into droplist values(190002, '', 30, '', 1, 1, 1100); -- rksword
+insert into droplist values(190002, '', 126, '', 1, 1, 1100); -- som
+insert into droplist values(190002, '', 115, '', 1, 1, 1100); -- csom
+insert into droplist values(190002, '', 20051, '', 1, 1, 700); -- sovereign's majesty cloak
+insert into droplist values(190002, '', 20195, '', 1, 1, 700); -- shadow boots
+insert into droplist values(190002, '', 20171, '', 1, 1, 700); -- gop
+insert into droplist values(190002, '', 20055, '', 1, 1, 700); -- com
 insert into droplist values(190002, '', 40013, '', 1, 1, 25000); -- haste pot
 insert into droplist values(190002, '', 40051, '', 1, 1, 40000); -- hqe
 
@@ -1175,29 +1175,29 @@ insert into droplist values(190014, '', 50002, '', 1, 1, 80000); -- sperm
 insert into droplist values(190014, '', 50003, '', 1, 1, 180000); -- pubes
 insert into droplist values(190014, '', 40065, '', 1, 10, 120000); -- candy
 insert into droplist values(190014, '', 40074, '', 1, 1, 55000); -- nzel
-insert into droplist values(190014, '', 40087, '', 1, 1, 9500); -- ndai
+insert into droplist values(190014, '', 40087, '', 1, 1, 6500); -- ndai
 insert into droplist values(190014, '', 140074, '', 1, 1, 1100); -- bzel
 insert into droplist values(190014, '', 140087, '', 1, 1, 400); -- bdai
 insert into droplist values(190014, '', 40551, '', 1, 1, 350); -- claw of varlok (elf)
 insert into droplist values(190014, '', 40550, '', 1, 1, 350); -- eye of varlok (mage)
 insert into droplist values(190014, '', 40552, '', 1, 1, 350); -- heart of varlok (prince)
 insert into droplist values(190014, '', 40549, '', 1, 1, 350); -- sword of varlok (knight)
-insert into droplist values(190014, '', 20004, '', 1, 1, 2400); -- shadow mask
-insert into droplist values(190014, '', 20021, '', 1, 1, 2400); -- dex helm
-insert into droplist values(190014, '', 20039, '', 1, 1, 2400); -- con helm
-insert into droplist values(190014, '', 20027, '', 1, 1, 2400); -- rkh
-insert into droplist values(190014, '', 20226, '', 1, 1, 2400); -- bomp
-insert into droplist values(190014, '', 20065, '', 1, 1, 2400); -- red cloak
-insert into droplist values(190014, '', 20164, '', 1, 1, 1300); -- shadow gloves
-insert into droplist values(190014, '', 20084, '', 1, 1, 1300); -- ets
-insert into droplist values(190014, '', 20230, '', 1, 1, 1300); -- rksheild
-insert into droplist values(190014, '', 30, '', 1, 1, 1300); -- rksword
-insert into droplist values(190014, '', 126, '', 1, 1, 1300); -- som
-insert into droplist values(190014, '', 115, '', 1, 1, 1300); -- csom
-insert into droplist values(190014, '', 20051, '', 1, 1, 800); -- sovereign's majesty cloak
-insert into droplist values(190014, '', 20195, '', 1, 1, 800); -- shadow boots
-insert into droplist values(190014, '', 20171, '', 1, 1, 800); -- gop
-insert into droplist values(190014, '', 20055, '', 1, 1, 800); -- com
+insert into droplist values(190014, '', 20004, '', 1, 1, 2200); -- shadow mask
+insert into droplist values(190014, '', 20021, '', 1, 1, 2200); -- dex helm
+insert into droplist values(190014, '', 20039, '', 1, 1, 2200); -- con helm
+insert into droplist values(190014, '', 20027, '', 1, 1, 2200); -- rkh
+insert into droplist values(190014, '', 20226, '', 1, 1, 2200); -- bomp
+insert into droplist values(190014, '', 20065, '', 1, 1, 2200); -- red cloak
+insert into droplist values(190014, '', 20164, '', 1, 1, 1200); -- shadow gloves
+insert into droplist values(190014, '', 20084, '', 1, 1, 1200); -- ets
+insert into droplist values(190014, '', 20230, '', 1, 1, 1200); -- rksheild
+insert into droplist values(190014, '', 30, '', 1, 1, 1200); -- rksword
+insert into droplist values(190014, '', 126, '', 1, 1, 1200); -- som
+insert into droplist values(190014, '', 115, '', 1, 1, 1200); -- csom
+insert into droplist values(190014, '', 20051, '', 1, 1, 700); -- sovereign's majesty cloak
+insert into droplist values(190014, '', 20195, '', 1, 1, 700); -- shadow boots
+insert into droplist values(190014, '', 20171, '', 1, 1, 700); -- gop
+insert into droplist values(190014, '', 20055, '', 1, 1, 700); -- com
 insert into droplist values(190014, '', 40013, '', 1, 1, 25000); -- haste pot
 insert into droplist values(190014, '', 40017, '', 1, 1, 85000); -- cure pot
 insert into droplist values(190014, '', 40051, '', 1, 1, 40000); -- hqe
@@ -1211,29 +1211,29 @@ insert into droplist values(190003, '', 50002, '', 1, 1, 120000); -- sperm
 insert into droplist values(190003, '', 50003, '', 1, 1, 200000); -- pubes
 insert into droplist values(190003, '', 40065, '', 1, 10, 200000); -- candy
 insert into droplist values(190003, '', 40074, '', 1, 1, 75000); -- nzel
-insert into droplist values(190003, '', 40087, '', 1, 1, 20000); -- ndai
+insert into droplist values(190003, '', 40087, '', 1, 1, 10000); -- ndai
 insert into droplist values(190003, '', 140074, '', 1, 1, 2300); -- bzel
 insert into droplist values(190003, '', 140087, '', 1, 1, 700); -- bdai
 insert into droplist values(190003, '', 40551, '', 1, 1, 600); -- claw of varlok (elf)
 insert into droplist values(190003, '', 40550, '', 1, 1, 600); -- eye of varlok (mage)
 insert into droplist values(190003, '', 40552, '', 1, 1, 600); -- heart of varlok (prince)
 insert into droplist values(190003, '', 40549, '', 1, 1, 600); -- sword of varlok (knight)
-insert into droplist values(190003, '', 20004, '', 1, 1, 3200); -- shadow mask
-insert into droplist values(190003, '', 20021, '', 1, 1, 3200); -- dex helm
-insert into droplist values(190003, '', 20039, '', 1, 1, 3200); -- con helm
-insert into droplist values(190003, '', 20027, '', 1, 1, 3200); -- rkh
-insert into droplist values(190003, '', 20226, '', 1, 1, 3200); -- bomp
-insert into droplist values(190003, '', 20065, '', 1, 1, 3200); -- red cloak
-insert into droplist values(190003, '', 20164, '', 1, 1, 2200); -- shadow gloves
-insert into droplist values(190003, '', 20084, '', 1, 1, 2200); -- ets
-insert into droplist values(190003, '', 20230, '', 1, 1, 2200); -- rksheild
-insert into droplist values(190003, '', 30, '', 1, 1, 2200); -- rksword
-insert into droplist values(190003, '', 126, '', 1, 1, 2200); -- som
-insert into droplist values(190003, '', 115, '', 1, 1, 2200); -- csom
-insert into droplist values(190003, '', 20051, '', 1, 1, 1500); -- sovereign's majesty cloak
-insert into droplist values(190003, '', 20195, '', 1, 1, 1500); -- shadow boots
-insert into droplist values(190003, '', 20171, '', 1, 1, 1500); -- gop
-insert into droplist values(190003, '', 20055, '', 1, 1, 1500); -- com
+insert into droplist values(190003, '', 20004, '', 1, 1, 3000); -- shadow mask
+insert into droplist values(190003, '', 20021, '', 1, 1, 3000); -- dex helm
+insert into droplist values(190003, '', 20039, '', 1, 1, 3000); -- con helm
+insert into droplist values(190003, '', 20027, '', 1, 1, 3000); -- rkh
+insert into droplist values(190003, '', 20226, '', 1, 1, 3000); -- bomp
+insert into droplist values(190003, '', 20065, '', 1, 1, 3000); -- red cloak
+insert into droplist values(190003, '', 20164, '', 1, 1, 2000); -- shadow gloves
+insert into droplist values(190003, '', 20084, '', 1, 1, 2000); -- ets
+insert into droplist values(190003, '', 20230, '', 1, 1, 2000); -- rksheild
+insert into droplist values(190003, '', 30, '', 1, 1, 2000); -- rksword
+insert into droplist values(190003, '', 126, '', 1, 1, 2000); -- som
+insert into droplist values(190003, '', 115, '', 1, 1, 2000); -- csom
+insert into droplist values(190003, '', 20051, '', 1, 1, 1400); -- sovereign's majesty cloak
+insert into droplist values(190003, '', 20195, '', 1, 1, 1400); -- shadow boots
+insert into droplist values(190003, '', 20171, '', 1, 1, 1400); -- gop
+insert into droplist values(190003, '', 20055, '', 1, 1, 1400); -- com
 insert into droplist values(190003, '', 209, '', 1, 1, 400); -- ess:con
 insert into droplist values(190003, '', 40013, '', 1, 1, 75000); -- haste pot
 insert into droplist values(190003, '', 40405, '', 1, 1, 50000); -- fur
@@ -1248,33 +1248,33 @@ insert into droplist values(190004, '', 50003, '', 1, 1, 380000); -- pubes
 insert into droplist values(190004, '', 40065, '', 1, 10, 300000); -- candy
 insert into droplist values(190004, '', 40062, '', 1, 1, 5000); -- banana
 insert into droplist values(190004, '', 40074, '', 1, 1, 75000); -- nzel
-insert into droplist values(190004, '', 40087, '', 1, 1, 20000); -- ndai
+insert into droplist values(190004, '', 40087, '', 1, 1, 10000); -- ndai
 insert into droplist values(190004, '', 140074, '', 1, 1, 4500); -- bzel
-insert into droplist values(190004, '', 140087, '', 1, 1, 1500); -- bdai
-insert into droplist values(190004, '', 40551, '', 1, 1, 5000); -- claw of varlok (elf)
-insert into droplist values(190004, '', 40550, '', 1, 1, 5000); -- eye of varlok (mage)
-insert into droplist values(190004, '', 40552, '', 1, 1, 5000); -- heart of varlok (prince)
-insert into droplist values(190004, '', 40549, '', 1, 1, 5000); -- sword of varlok (knight)
-insert into droplist values(190004, '', 20004, '', 1, 1, 5000); -- shadow mask
-insert into droplist values(190004, '', 20021, '', 1, 1, 5000); -- dex helm
-insert into droplist values(190004, '', 20039, '', 1, 1, 5000); -- con helm
-insert into droplist values(190004, '', 20027, '', 1, 1, 5000); -- rkh
-insert into droplist values(190004, '', 20226, '', 1, 1, 5000); -- bomp
-insert into droplist values(190004, '', 20065, '', 1, 1, 5000); -- red cloak
-insert into droplist values(190004, '', 20164, '', 1, 1, 3500); -- shadow gloves
-insert into droplist values(190004, '', 20084, '', 1, 1, 3500); -- ets
-insert into droplist values(190004, '', 20230, '', 1, 1, 3500); -- rksheild
-insert into droplist values(190004, '', 30, '', 1, 1, 3500); -- rksword
-insert into droplist values(190004, '', 126, '', 1, 1, 3500); -- som
-insert into droplist values(190004, '', 115, '', 1, 1, 3500); -- csom
-insert into droplist values(190004, '', 20051, '', 1, 1, 2800); -- sovereign's majesty cloak
-insert into droplist values(190004, '', 20195, '', 1, 1, 2800); -- shadow boots
-insert into droplist values(190004, '', 20171, '', 1, 1, 2800); -- gop
-insert into droplist values(190004, '', 20055, '', 1, 1, 2800); -- com
-insert into droplist values(190004, '', 209, '', 1, 1, 650); -- ess:con
+insert into droplist values(190004, '', 140087, '', 1, 1, 1200); -- bdai
+insert into droplist values(190004, '', 40551, '', 1, 1, 1000); -- claw of varlok (elf)
+insert into droplist values(190004, '', 40550, '', 1, 1, 1000); -- eye of varlok (mage)
+insert into droplist values(190004, '', 40552, '', 1, 1, 1000); -- heart of varlok (prince)
+insert into droplist values(190004, '', 40549, '', 1, 1, 1000); -- sword of varlok (knight)
+insert into droplist values(190004, '', 20004, '', 1, 1, 4000); -- shadow mask
+insert into droplist values(190004, '', 20021, '', 1, 1, 4000); -- dex helm
+insert into droplist values(190004, '', 20039, '', 1, 1, 4000); -- con helm
+insert into droplist values(190004, '', 20027, '', 1, 1, 4000); -- rkh
+insert into droplist values(190004, '', 20226, '', 1, 1, 4000); -- bomp
+insert into droplist values(190004, '', 20065, '', 1, 1, 4000); -- red cloak
+insert into droplist values(190004, '', 20164, '', 1, 1, 3200); -- shadow gloves
+insert into droplist values(190004, '', 20084, '', 1, 1, 3200); -- ets
+insert into droplist values(190004, '', 20230, '', 1, 1, 3200); -- rksheild
+insert into droplist values(190004, '', 30, '', 1, 1, 3200); -- rksword
+insert into droplist values(190004, '', 126, '', 1, 1, 3200); -- som
+insert into droplist values(190004, '', 115, '', 1, 1, 3200); -- csom
+insert into droplist values(190004, '', 20051, '', 1, 1, 2500); -- sovereign's majesty cloak
+insert into droplist values(190004, '', 20195, '', 1, 1, 2500); -- shadow boots
+insert into droplist values(190004, '', 20171, '', 1, 1, 2500); -- gop
+insert into droplist values(190004, '', 20055, '', 1, 1, 2500); -- com
+insert into droplist values(190004, '', 209, '', 1, 1, 600); -- ess:con
 insert into droplist values(190004, '', 40013, '', 1, 1, 75000); -- haste pot
-insert into droplist values(190004, '', 40856, '', 1, 1, 15000); -- pi tele scroll
-insert into droplist values(190004, '', 42049, '', 1, 1, 2000); -- fi tele scroll
+insert into droplist values(190004, '', 40856, '', 1, 1, 12000); -- pi tele scroll
+insert into droplist values(190004, '', 42049, '', 1, 1, 1500); -- fi tele scroll
 insert into droplist values(190004, '', 40050, '', 1, 1, 80000); -- hqe
 
 -- catholic priest
@@ -1285,46 +1285,46 @@ insert into droplist values(190005, '', 50002, '', 1, 3, 275000); -- sperm
 insert into droplist values(190005, '', 50003, '', 1, 1, 400000); -- pubes
 insert into droplist values(190005, '', 40062, '', 1, 1, 20000); -- banana
 insert into droplist values(190005, '', 40074, '', 1, 3, 125000); -- nzel
-insert into droplist values(190005, '', 40087, '', 1, 1, 45000); -- ndai
+insert into droplist values(190005, '', 40087, '', 1, 1, 25000); -- ndai
 insert into droplist values(190005, '', 140074, '', 1, 1, 6000); -- bzel
 insert into droplist values(190005, '', 140087, '', 1, 1, 2000); -- bdai
 insert into droplist values(190005, '', 240074, '', 1, 1, 7000); -- czel
 insert into droplist values(190005, '', 240087, '', 1, 1, 2500); -- cdai
-insert into droplist values(190005, '', 40551, '', 1, 1, 5000); -- claw of varlok (elf)
-insert into droplist values(190005, '', 40550, '', 1, 1, 5000); -- eye of varlok (mage)
-insert into droplist values(190005, '', 40552, '', 1, 1, 5000); -- heart of varlok (prince)
-insert into droplist values(190005, '', 40549, '', 1, 1, 5000); -- sword of varlok (knight)
-insert into droplist values(190005, '', 20004, '', 1, 1, 10000); -- shadow mask
-insert into droplist values(190005, '', 20021, '', 1, 1, 10000); -- dex helm
-insert into droplist values(190005, '', 20039, '', 1, 1, 10000); -- con helm
-insert into droplist values(190005, '', 20027, '', 1, 1, 10000); -- rkh
-insert into droplist values(190005, '', 20226, '', 1, 1, 10000); -- bomp
-insert into droplist values(190005, '', 20065, '', 1, 1, 10000); -- red cloak
-insert into droplist values(190005, '', 20164, '', 1, 1, 8500); -- shadow gloves
-insert into droplist values(190005, '', 20084, '', 1, 1, 8500); -- ets
-insert into droplist values(190005, '', 20230, '', 1, 1, 8500); -- rksheild
-insert into droplist values(190005, '', 30, '', 1, 1, 8500); -- rksword
-insert into droplist values(190005, '', 126, '', 1, 1, 8500); -- som
-insert into droplist values(190005, '', 115, '', 1, 1, 8500); -- csom
-insert into droplist values(190005, '', 20051, '', 1, 1, 7000); -- sovereign's majesty cloak
-insert into droplist values(190005, '', 20195, '', 1, 1, 7000); -- shadow boots
-insert into droplist values(190005, '', 20171, '', 1, 1, 7000); -- gop
-insert into droplist values(190005, '', 20055, '', 1, 1, 7000); -- com
-insert into droplist values(190005, '', 209, '', 1, 1, 5500); -- ess:con
+insert into droplist values(190005, '', 40551, '', 1, 1, 4000); -- claw of varlok (elf)
+insert into droplist values(190005, '', 40550, '', 1, 1, 4000); -- eye of varlok (mage)
+insert into droplist values(190005, '', 40552, '', 1, 1, 4000); -- heart of varlok (prince)
+insert into droplist values(190005, '', 40549, '', 1, 1, 4000); -- sword of varlok (knight)
+insert into droplist values(190005, '', 20004, '', 1, 1, 9000); -- shadow mask
+insert into droplist values(190005, '', 20021, '', 1, 1, 9000); -- dex helm
+insert into droplist values(190005, '', 20039, '', 1, 1, 9000); -- con helm
+insert into droplist values(190005, '', 20027, '', 1, 1, 9000); -- rkh
+insert into droplist values(190005, '', 20226, '', 1, 1, 9000); -- bomp
+insert into droplist values(190005, '', 20065, '', 1, 1, 9000); -- red cloak
+insert into droplist values(190005, '', 20164, '', 1, 1, 8000); -- shadow gloves
+insert into droplist values(190005, '', 20084, '', 1, 1, 8000); -- ets
+insert into droplist values(190005, '', 20230, '', 1, 1, 8000); -- rksheild
+insert into droplist values(190005, '', 30, '', 1, 1, 8000); -- rksword
+insert into droplist values(190005, '', 126, '', 1, 1, 8000); -- som
+insert into droplist values(190005, '', 115, '', 1, 1, 8000); -- csom
+insert into droplist values(190005, '', 20051, '', 1, 1, 6000); -- sovereign's majesty cloak
+insert into droplist values(190005, '', 20195, '', 1, 1, 6000); -- shadow boots
+insert into droplist values(190005, '', 20171, '', 1, 1, 6000); -- gop
+insert into droplist values(190005, '', 20055, '', 1, 1, 6000); -- com
+insert into droplist values(190005, '', 209, '', 1, 1, 4500); -- ess:con
 insert into droplist values(190005, '', 20074, '', 1, 1, 350); -- s-cloak
 insert into droplist values(190005, '', 40013, '', 1, 1, 75000); -- haste pot
 insert into droplist values(190005, '', 40856, '', 1, 1, 20000); -- pi tele scroll
-insert into droplist values(190005, '', 42049, '', 1, 1, 5000); -- fi tele scroll
-insert into droplist values(190005, '', 450003, '', 1, 1, 5); -- bume
-insert into droplist values(190005, '', 450000, '', 1, 1, 5); -- thors
-insert into droplist values(190005, '', 36, '', 1, 1, 5); -- eva scorn
+insert into droplist values(190005, '', 42049, '', 1, 1, 4000); -- fi tele scroll
+insert into droplist values(190005, '', 450003, '', 1, 1, 20); -- bume
+insert into droplist values(190005, '', 450000, '', 1, 1, 20); -- thors
+insert into droplist values(190005, '', 36, '', 1, 1, 20); -- eva scorn
 insert into droplist values(190005, '', 40048, '', 1, 1, 190000); -- hqd
 
 -- bubbles
 insert into droplist values(190006, '', 40308, '', 2, 5, 1000000); -- adena
 insert into droplist values(190006, '', 40062, '', 20, 50, 1000000); -- banana
 insert into droplist values(190006, '', 40074, '', 1, 5, 275000); -- nzel
-insert into droplist values(190006, '', 40087, '', 1, 1, 95000); -- ndai
+insert into droplist values(190006, '', 40087, '', 1, 1, 75000); -- ndai
 insert into droplist values(190006, '', 140074, '', 1, 1, 18000); -- bzel
 insert into droplist values(190006, '', 140087, '', 1, 1, 4000); -- bdai
 insert into droplist values(190006, '', 20004, '', 1, 1, 8000); -- shadow mask
@@ -1347,7 +1347,7 @@ insert into droplist values(190006, '', 20055, '', 1, 1, 3000); -- com
 -- elephant man skeleton
 insert into droplist values(190007, '', 40308, '', 22, 98, 1000000); -- adena
 insert into droplist values(190007, '', 40074, '', 1, 1, 200000); -- nzel
-insert into droplist values(190007, '', 40087, '', 1, 1, 60000); -- ndai
+insert into droplist values(190007, '', 40087, '', 1, 1, 40000); -- ndai
 insert into droplist values(190007, '', 20004, '', 1, 1, 4000); -- shadow mask
 insert into droplist values(190007, '', 20021, '', 1, 1, 4000); -- dex helm
 insert into droplist values(190007, '', 20039, '', 1, 1, 4000); -- con helm
@@ -1368,7 +1368,7 @@ insert into droplist values(190007, '', 20055, '', 1, 1, 1800); -- com
 -- macaulay culkin
 insert into droplist values(190008, '', 40308, '', 14000, 45000, 1000000); -- adena
 insert into droplist values(190008, '', 40074, '', 1, 1, 200000); -- nzel
-insert into droplist values(190008, '', 40087, '', 1, 1, 60000); -- ndai
+insert into droplist values(190008, '', 40087, '', 1, 1, 40000); -- ndai
 insert into droplist values(190008, '', 20004, '', 1, 1, 1800); -- shadow mask
 insert into droplist values(190008, '', 20021, '', 1, 1, 1800); -- dex helm
 insert into droplist values(190008, '', 20039, '', 1, 1, 1800); -- con helm
@@ -1395,19 +1395,19 @@ insert into droplist values(190009, '', 50002, '', 8, 20, 500000); -- sperm
 insert into droplist values(190009, '', 40025, '', 1, 3, 1000000); -- blind pot
 insert into droplist values(190009, '', 20162, '', 1, 1, 1000000); -- Leather Gloves
 insert into droplist values(190009, '', 20163, '', 1, 1, 350000); -- Iron Gloves
-insert into droplist values(190009, '', 20165, '', 1, 1, 13000); -- Demon Gloves
-insert into droplist values(190009, '', 20166, '', 1, 1, 11000); -- Death Knight Gloves
+insert into droplist values(190009, '', 20165, '', 1, 1, 23000); -- Demon Gloves
+insert into droplist values(190009, '', 20166, '', 1, 1, 21000); -- Death Knight Gloves
 insert into droplist values(190009, '', 20167, '', 1, 1, 2000); -- Gloves of Lizardman Hero
 insert into droplist values(190009, '', 20168, '', 1, 1, 7500); -- Gloves of Pretender King
 insert into droplist values(190009, '', 20172, '', 1, 1, 75000); -- Glove of Ice Spirit
-insert into droplist values(190009, '', 20174, '', 1, 1, 85000); -- Snow Gloves
-insert into droplist values(190009, '', 20175, '', 1, 1, 12000); -- Crystal Gloves
-insert into droplist values(190009, '', 20176, '', 1, 1, 9000); -- Gloves of the New King
+insert into droplist values(190009, '', 20174, '', 1, 1, 95000); -- Snow Gloves
+insert into droplist values(190009, '', 20175, '', 1, 1, 13000); -- Crystal Gloves
+insert into droplist values(190009, '', 20176, '', 1, 1, 10000); -- Gloves of the New King
 insert into droplist values(190009, '', 20177, '', 1, 1, 80000); -- Glove of Dark Spirit
-insert into droplist values(190009, '', 20180, '', 1, 1, 280000); -- Dark Gloves
-insert into droplist values(190009, '', 20181, '', 1, 1, 25000); -- Glove of Fire Spirit
+insert into droplist values(190009, '', 20180, '', 1, 1, 290000); -- Dark Gloves
+insert into droplist values(190009, '', 20181, '', 1, 1, 26000); -- Glove of Fire Spirit
 insert into droplist values(190009, '', 20182, '', 1, 1, 1000000); -- Gloves
-insert into droplist values(190009, '', 20187, '', 1, 1, 68000); -- Power Gloves
+insert into droplist values(190009, '', 20187, '', 1, 1, 69000); -- Power Gloves
 insert into droplist values(190009, '', 120182, '', 1, 1, 400000); -- b-Gloves
 insert into droplist values(190009, '', 21054, '', 1, 1, 400000); -- Wet Gloves
 insert into droplist values(190009, '', 40074, '', 1, 5, 1000000); -- nzel
@@ -1442,11 +1442,11 @@ insert into droplist values(190009, '', 40013, '', 3, 5, 1000000); -- haste pot
 insert into droplist values(190009, '', 40520, '', 3, 30, 1000000); -- fairydust
 insert into droplist values(190009, '', 40856, '', 1, 1, 50000); -- pi tele scroll
 insert into droplist values(190009, '', 42049, '', 1, 1, 15000); -- fi tele scroll
-insert into droplist values(190009, '', 450003, '', 1, 1, 300); -- bume
-insert into droplist values(190009, '', 450000, '', 1, 1, 300); -- thors
-insert into droplist values(190009, '', 36, '', 1, 1, 300); -- eva scorn
+insert into droplist values(190009, '', 450003, '', 1, 1, 350); -- bume
+insert into droplist values(190009, '', 450000, '', 1, 1, 350); -- thors
+insert into droplist values(190009, '', 36, '', 1, 1, 350); -- eva scorn
 
--- HOTBOY
+-- HotBoy
 insert into droplist values(190010, '', 40308, '', 12, 78, 1000000); -- adena
 insert into droplist values(190010, '', 40060, '', 1, 5, 180000); -- carrot
 insert into droplist values(190010, '', 50000, '', 1, 2, 180000); -- lube
@@ -1463,8 +1463,8 @@ insert into droplist values(190011, '', 40308, '', 23, 86, 1000000); -- adena
 insert into droplist values(190011, '', 41424, '', 3, 8, 300000); -- panda feed
 insert into droplist values(190011, '', 40060, '', 1, 5, 180000); -- carrot
 insert into droplist values(190011, '', 50000, '', 1, 2, 180000); -- lube
-insert into droplist values(190011, '', 41275, '', 1, 1, 55000); -- bear meat
-insert into droplist values(190011, '', 50003, '', 1, 1, 350000); -- pubes
+insert into droplist values(190011, '', 41275, '', 1, 1, 75000); -- bear meat
+insert into droplist values(190011, '', 50003, '', 1, 1, 450000); -- pubes
 insert into droplist values(190011, '', 20213, '', 1, 1, 50000); -- low boots
 insert into droplist values(190011, '', 20114, '', 1, 1, 50000); -- cotton robe
 insert into droplist values(190011, '', 20043, '', 1, 1, 50000); -- helmet
@@ -1477,8 +1477,8 @@ insert into droplist values(190012, '', 40308, '', 6, 20, 1000000); -- adena
 insert into droplist values(190012, '', 40039, '', 1, 1, 300000); -- wine
 insert into droplist values(190012, '', 40040, '', 1, 1, 200000); -- whiskey
 insert into droplist values(190012, '', 40060, '', 1, 4, 150000); -- carrot
-insert into droplist values(190012, '', 50000, '', 1, 1, 150000); -- lube
-insert into droplist values(190012, '', 50003, '', 1, 1, 375000); -- pubes
+insert into droplist values(190012, '', 50000, '', 1, 1, 450000); -- lube
+insert into droplist values(190012, '', 50003, '', 1, 1, 575000); -- pubes
 insert into droplist values(190012, '', 20193, '', 1, 1, 40000); -- leather sandals
 insert into droplist values(190012, '', 20322, '', 1, 1, 40000); -- leather jacket
 insert into droplist values(190012, '', 20001, '', 1, 1, 40000); -- leather cap
@@ -1510,10 +1510,10 @@ insert into mobgroup values(
 
 -- ===========================================================================
 -- shop additions
-insert into shop values(70074, '', 50002, '', 0, -1, 0, 1000);
-insert into shop values(70021, '', 50002, '', 0, -1, 0, 1000);
-insert into shop values(70030, '', 50002, '', 0, -1, 0, 1000);
-insert into shop values(70014, '', 50002, '', 0, -1, 0, 1000);
+insert into shop values(70074, '', 50002, '', 0, -1, 0, 700);
+insert into shop values(70021, '', 50002, '', 0, -1, 0, 700);
+insert into shop values(70030, '', 50002, '', 0, -1, 0, 700);
+insert into shop values(70014, '', 50002, '', 0, -1, 0, 700);
 insert into shop values(70014, '', 50000, '', 0, -1, 0, 100);
 insert into shop values(70074, '', 50003, '', 0, -1, 0, 32);
 insert into shop values(70021, '', 50003, '', 0, -1, 0, 32);
@@ -1583,7 +1583,7 @@ INSERT INTO `spawnlist` VALUES ('811500491', 'Boy Scout', '3', '190001', '0', '3
 
 
 -- add inn spawn
-INSERT INTO `spawnlist` VALUES ('811500427', 'HOTBOY', '1', '190010', '0', '32599', '32929', '0', '0', '0', '0', '0', '0', '6', '60', '120', '0', '1', '40', '1', '0','1','8','2','100');
+INSERT INTO `spawnlist` VALUES ('811500427', 'HotBoy', '1', '190010', '0', '32599', '32929', '0', '0', '0', '0', '0', '0', '6', '60', '120', '0', '1', '40', '1', '0','1','8','2','100');
 INSERT INTO `spawnlist` VALUES ('811500428', 'Dekem', '1', '190011', '0', '32597', '32931', '0', '0', '0', '0', '0', '0', '4', '60', '120', '0', '1', '40', '1', '0','1','8','2','100');
 INSERT INTO `spawnlist` VALUES ('811500429', 'Uncle Gary', '1', '190012', '0', '32596', '32931', '0', '0', '0', '0', '0', '0', '4', '60', '120', '0', '1', '40', '1', '0','1','8','2','100');
 
