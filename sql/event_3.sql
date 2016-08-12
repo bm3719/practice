@@ -422,32 +422,32 @@ INSERT INTO `npc` VALUES (
   3644, -- gfxid
   24,  -- lvl
   2152,  -- hp
-  50, 
-  -30, 
+  50,
+  -30,
   22,  -- str
   20,  -- con
-  11, 
-  9, 
-  9, 
-  19, 
-  362, 
-  -39, 
-  'small', 
-  2, 
-  2, 
-  0, 
-  853, 
+  11,
+  9,
+  9,
+  19,
+  362,
+  -39,
+  'small',
+  2,
+  2,
+  0,
+  853,
   1520,
   1520, -- alt_atk_speed
-  1520, 
-  1520, 
-  0, 
-  0, 
-  0, 
-  0, 
-  0, 
-  0, 
-  'nambla', 
+  1520,
+  1520,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  'nambla',
   1, -- agrofamily
   -1, -- agrogfxid1
   -1, -- agrogfxid2
@@ -464,18 +464,18 @@ INSERT INTO `npc` VALUES (
   0, -- randommp
   0, -- randomac
   0, -- randomexp
-  0, 
-  0, 
-  0, 
-  0, 
-  0, 
-  1, 
-  0, 
-  0, 
-  -1, 
-  0, 
-  0, 
-  0, 
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+  0,
+  -1,
+  0,
+  0,
+  0,
   0, -- change_head
   0 -- cant_resurrect
   );
@@ -488,10 +488,10 @@ INSERT INTO `npc` VALUES (
   'Event 3 Mob', -- note
   'L1Monster', -- impl
   5014, -- gfxid
-  35, -- lvl 
+  35, -- lvl
   420, -- hp
   0, -- mp
-  -22, -- ac 
+  -22, -- ac
   20, -- str
   16, -- con
   14, -- dex
@@ -685,11 +685,11 @@ insert into npc values(
   0 -- cant_resurrect
   );
 
--- Keshenberk
-INSERT INTO `npc` VALUES ('190010', 'Keshenberk', 'Keshenberk', 'Event 3 Mob', 'L1Monster', '4003', '49', '400', '400', '-27', '10', '16', '9', '19', '20', '-80', '1000', '1000', 'small', '0', '1', '0', '640', '560', '560', '560', '560', '0', '0', '0', '0', '0', '0', 'nainn', '0', '-1', '-1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '-1', '0', '0', '0', '0', '0');
+-- HOTBOY
+INSERT INTO `npc` VALUES ('190010', 'HOTBOY', 'HOTBOY', 'Event 3 Mob', 'L1Monster', '4003', '49', '400', '400', '-27', '10', '16', '9', '19', '20', '-80', '1000', '1000', 'small', '0', '1', '0', '640', '560', '560', '560', '560', '0', '0', '0', '0', '0', '0', 'nainn', '0', '-1', '-1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '-1', '0', '0', '0', '0', '0');
 
--- Panda
-INSERT INTO `npc` VALUES ('190011', 'Panda', 'Panda', 'Event 3 Mob', 'L1Monster', '3891', '55', '400', '500', '-35', '8', '12', '7', '16', '23', '-50', '1000', '1000', 'small', '0', '1', '0', '640', '680', '680', '680', '680', '0', '0', '0', '0', '0', '0', 'nainn', '0', '-1', '-1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '-1', '0', '0', '0', '0', '0');
+-- Dekem
+INSERT INTO `npc` VALUES ('190011', 'Dekem', 'Dekem', 'Event 3 Mob', 'L1Monster', '3891', '55', '400', '500', '-35', '8', '12', '7', '16', '23', '-50', '1000', '1000', 'small', '0', '1', '0', '640', '680', '680', '680', '680', '0', '0', '0', '0', '0', '0', 'nainn', '0', '-1', '-1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '-1', '0', '0', '0', '0', '0');
 
 -- Uncle Gary
 INSERT INTO `npc` VALUES ('190012', 'Uncle Gary', 'Uncle Gary', 'Event 3 Mob', 'L1Monster', '2907', '1', '330', '15', '-22', '2', '3', '3', '4', '5', '4', '1', '-39', 'small', '0', '0', '0', '960', '960', '960', '960', '960', '0', '0', '0', '0', '0', '0', 'nainn', '0', '-1', '-1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '-1', '0', '0', '0', '0', '0');
@@ -776,7 +776,7 @@ insert into mobskill values(
  190005, -- mobid
  0, -- actNo
  'Catholic Priest', -- mobname
- '', -- Skill_Description 
+ '', -- Skill_Description
  2, -- Type
  40, -- TriRnd
  0, -- TriHp
@@ -802,7 +802,7 @@ insert into mobskill values(
  190009, -- mobid
  0, -- actNo
  'Michael Jackson: erupt', -- mobname
- '', -- Skill_Description 
+ '', -- Skill_Description
  2, -- Type
  32, -- TriRnd
  0, -- TriHp
@@ -826,7 +826,7 @@ insert into mobskill values(
  190009, -- mobid
  1, -- actNo
  'Michael Jackson: tornado', -- mobname
- '', -- Skill_Description 
+ '', -- Skill_Description
  2, -- Type
  26, -- TriRnd
  0, -- TriHp
@@ -850,7 +850,7 @@ insert into mobskill values(
  190009, -- mobid
  2, -- actNo
  'Michael Jackson: summon', -- mobname
- '', -- Skill_Description 
+ '', -- Skill_Description
  3, -- Type
  10, -- TriRnd
  0, -- TriHp
@@ -871,12 +871,12 @@ insert into mobskill values(
  0 -- PolyId
  );
 
--- Keshenberk
+-- HOTBOY
 insert into mobskill values(
  190010, -- mobid
  0, -- actNo
- 'Keshenberk', -- mobname
- '', -- Skill_Description 
+ 'HOTBOY', -- mobname
+ '', -- Skill_Description
  2, -- Type
  90, -- TriRnd
  0, -- TriHp
@@ -897,12 +897,12 @@ insert into mobskill values(
  0 -- PolyId
  );
 
--- Panda
+-- Dekem
 insert into mobskill values(
  190011, -- mobid
  0, -- actNo
- 'Panda', -- mobname
- '', -- Skill_Description 
+ 'Dekem', -- mobname
+ '', -- Skill_Description
  2, -- Type
  40, -- TriRnd
  0, -- TriHp
@@ -921,8 +921,8 @@ insert into mobskill values(
  0, -- SummonMin
  0, -- SummonMax
  0 -- PolyId
- ); 
- 
+ );
+
 
 
 -- ===========================================================================
@@ -949,13 +949,13 @@ insert into npcchat values(
 insert into npcchat values(
  190010, -- npc_id
  0, -- chat_timing
- 'Keshanberk', -- note
+ 'HOTBOY', -- note
  0, -- start_delay_time
- 'NAMBLA sure knows how to throw a party.', -- chat_id1
- 'Boylove has been around since Roman times.', -- chat_id2
- 'Equal rights for boylovers!', -- chat_id3
- 'Boys have a right to be loved!', -- chat_id4
- 'When I was a boy, I was loved by a man.', -- chat_id5
+ 'FOK BOYS', -- chat_id1
+ 'fk NAMBLA haters Q_Q', -- chat_id2
+ 'bro ur diaper needs changed.', -- chat_id3
+ 'NAMBLA rules... MEXICO too.', -- chat_id4
+ 'when i was a BOY i was loved by a MAN.', -- chat_id5
  30000, -- chat_interval
  1, -- is_shout
  0, -- is_world_chat
@@ -967,13 +967,13 @@ insert into npcchat values(
 insert into npcchat values(
  190011, -- npc_id
  0, -- chat_timing
- 'Panda', -- note
+ 'Dekem', -- note
  0, -- start_delay_time
  'Where can I get a fursuit cleaned?', -- chat_id1
- 'Man lips, meeting panda lips.', -- chat_id2
- 'I\'m not ghey, I\'m pandasexual.', -- chat_id3
- 'Pandasechs has been around since Roman times.', -- chat_id4
- 'When I was a boy, I was loved by a Panda.', -- chat_id5
+ 'Ur anus is insecure. I did you a favor.', -- chat_id2
+ 'My mom let me join NAMBLA.', -- chat_id3
+ 'Kneel before the throne of King Dekem!', -- chat_id4
+ 'brb mom yelling again.', -- chat_id5
  30000, -- chat_interval
  1, -- is_shout
  0, -- is_world_chat
@@ -989,8 +989,8 @@ insert into npcchat values(
  0, -- start_delay_time
  'Time for a bath!', -- chat_id1
  'How about a game of twister?', -- chat_id2
- 'Just reach into my pocket.', -- chat_id3
- 'Looks like we will have to wash those shorts!', -- chat_id4
+ 'Kids love candy.', -- chat_id3
+ 'Ever seen a grown man naked?', -- chat_id4
  'How about a van ride?', -- chat_id5
  30000, -- chat_interval
  1, -- is_shout
@@ -1071,7 +1071,7 @@ insert into etcitem values(
  1 -- save_at_once
  );
 
- 
+
 -- ===========================================================================
 -- drops
 
@@ -1082,9 +1082,9 @@ insert into droplist values(190000, '', 40074, '', 1, 1, 85000); -- nzel
 insert into droplist values(190000, '', 40087, '', 1, 1, 20000); -- ndai
 insert into droplist values(190000, '', 140074, '', 1, 1, 4000); -- bzel
 insert into droplist values(190000, '', 140087, '', 1, 1, 1000); -- bdai
-insert into droplist values(190000, '', 40551, '', 1, 1, 10000); -- claw of varlok (elf) 
-insert into droplist values(190000, '', 40550, '', 1, 1, 10000); -- eye of varlok (mage) 
-insert into droplist values(190000, '', 40552, '', 1, 1, 10000); -- heart of varlok (prince) 
+insert into droplist values(190000, '', 40551, '', 1, 1, 10000); -- claw of varlok (elf)
+insert into droplist values(190000, '', 40550, '', 1, 1, 10000); -- eye of varlok (mage)
+insert into droplist values(190000, '', 40552, '', 1, 1, 10000); -- heart of varlok (prince)
 insert into droplist values(190000, '', 40549, '', 1, 1, 10000); -- sword of varlok (knight)
 insert into droplist values(190000, '', 20004, '', 1, 1, 3600); -- shadow mask
 insert into droplist values(190000, '', 20021, '', 1, 1, 3600); -- dex helm
@@ -1102,7 +1102,7 @@ insert into droplist values(190000, '', 20051, '', 1, 1, 900); -- sovereign's ma
 insert into droplist values(190000, '', 20195, '', 1, 1, 900); -- shadow boots
 insert into droplist values(190000, '', 20171, '', 1, 1, 900); -- gop
 insert into droplist values(190000, '', 20055, '', 1, 1, 900); -- com
-insert into droplist values(190000, '', 40051, '', 1, 1, 15000); -- easter basket 
+insert into droplist values(190000, '', 40051, '', 1, 1, 15000); -- easter basket
 
 -- boy scout
 insert into droplist values(190001, '', 40308, '', 22, 128, 1000000); -- adena
@@ -1111,9 +1111,9 @@ insert into droplist values(190001, '', 40074, '', 1, 1, 85000); -- nzel
 insert into droplist values(190001, '', 40087, '', 1, 1, 20000); -- ndai
 insert into droplist values(190001, '', 140074, '', 1, 1, 4000); -- bzel
 insert into droplist values(190001, '', 140087, '', 1, 1, 1000); -- bdai
-insert into droplist values(190001, '', 40551, '', 1, 1, 10000); -- claw of varlok (elf) 
-insert into droplist values(190001, '', 40550, '', 1, 1, 10000); -- eye of varlok (mage) 
-insert into droplist values(190001, '', 40552, '', 1, 1, 10000); -- heart of varlok (prince) 
+insert into droplist values(190001, '', 40551, '', 1, 1, 10000); -- claw of varlok (elf)
+insert into droplist values(190001, '', 40550, '', 1, 1, 10000); -- eye of varlok (mage)
+insert into droplist values(190001, '', 40552, '', 1, 1, 10000); -- heart of varlok (prince)
 insert into droplist values(190001, '', 40549, '', 1, 1, 10000); -- sword of varlok (knight)
 insert into droplist values(190001, '', 20004, '', 1, 1, 3600); -- shadow mask
 insert into droplist values(190001, '', 20021, '', 1, 1, 3600); -- dex helm
@@ -1131,7 +1131,7 @@ insert into droplist values(190001, '', 20051, '', 1, 1, 900); -- sovereign's ma
 insert into droplist values(190001, '', 20195, '', 1, 1, 900); -- shadow boots
 insert into droplist values(190001, '', 20171, '', 1, 1, 900); -- gop
 insert into droplist values(190001, '', 20055, '', 1, 1, 900); -- com
-insert into droplist values(190001, '', 40051, '', 1, 1, 15000); -- easter basket 
+insert into droplist values(190001, '', 40051, '', 1, 1, 15000); -- easter basket
 
 -- nambla member
 insert into droplist values(190002, '', 40308, '', 32, 148, 1000000); -- adena
@@ -1144,9 +1144,9 @@ insert into droplist values(190002, '', 40074, '', 1, 1, 55000); -- nzel
 insert into droplist values(190002, '', 40087, '', 1, 1, 9500); -- ndai
 insert into droplist values(190002, '', 140074, '', 1, 1, 1100); -- bzel
 insert into droplist values(190002, '', 140087, '', 1, 1, 400); -- bdai
-insert into droplist values(190002, '', 40551, '', 1, 1, 300); -- claw of varlok (elf) 
-insert into droplist values(190002, '', 40550, '', 1, 1, 300); -- eye of varlok (mage) 
-insert into droplist values(190002, '', 40552, '', 1, 1, 300); -- heart of varlok (prince) 
+insert into droplist values(190002, '', 40551, '', 1, 1, 300); -- claw of varlok (elf)
+insert into droplist values(190002, '', 40550, '', 1, 1, 300); -- eye of varlok (mage)
+insert into droplist values(190002, '', 40552, '', 1, 1, 300); -- heart of varlok (prince)
 insert into droplist values(190002, '', 40549, '', 1, 1, 300); -- sword of varlok (knight)
 insert into droplist values(190002, '', 20004, '', 1, 1, 2400); -- shadow mask
 insert into droplist values(190002, '', 20021, '', 1, 1, 2400); -- dex helm
@@ -1178,9 +1178,9 @@ insert into droplist values(190014, '', 40074, '', 1, 1, 55000); -- nzel
 insert into droplist values(190014, '', 40087, '', 1, 1, 9500); -- ndai
 insert into droplist values(190014, '', 140074, '', 1, 1, 1100); -- bzel
 insert into droplist values(190014, '', 140087, '', 1, 1, 400); -- bdai
-insert into droplist values(190014, '', 40551, '', 1, 1, 350); -- claw of varlok (elf) 
-insert into droplist values(190014, '', 40550, '', 1, 1, 350); -- eye of varlok (mage) 
-insert into droplist values(190014, '', 40552, '', 1, 1, 350); -- heart of varlok (prince) 
+insert into droplist values(190014, '', 40551, '', 1, 1, 350); -- claw of varlok (elf)
+insert into droplist values(190014, '', 40550, '', 1, 1, 350); -- eye of varlok (mage)
+insert into droplist values(190014, '', 40552, '', 1, 1, 350); -- heart of varlok (prince)
 insert into droplist values(190014, '', 40549, '', 1, 1, 350); -- sword of varlok (knight)
 insert into droplist values(190014, '', 20004, '', 1, 1, 2400); -- shadow mask
 insert into droplist values(190014, '', 20021, '', 1, 1, 2400); -- dex helm
@@ -1214,9 +1214,9 @@ insert into droplist values(190003, '', 40074, '', 1, 1, 75000); -- nzel
 insert into droplist values(190003, '', 40087, '', 1, 1, 20000); -- ndai
 insert into droplist values(190003, '', 140074, '', 1, 1, 2300); -- bzel
 insert into droplist values(190003, '', 140087, '', 1, 1, 700); -- bdai
-insert into droplist values(190003, '', 40551, '', 1, 1, 600); -- claw of varlok (elf) 
-insert into droplist values(190003, '', 40550, '', 1, 1, 600); -- eye of varlok (mage) 
-insert into droplist values(190003, '', 40552, '', 1, 1, 600); -- heart of varlok (prince) 
+insert into droplist values(190003, '', 40551, '', 1, 1, 600); -- claw of varlok (elf)
+insert into droplist values(190003, '', 40550, '', 1, 1, 600); -- eye of varlok (mage)
+insert into droplist values(190003, '', 40552, '', 1, 1, 600); -- heart of varlok (prince)
 insert into droplist values(190003, '', 40549, '', 1, 1, 600); -- sword of varlok (knight)
 insert into droplist values(190003, '', 20004, '', 1, 1, 3200); -- shadow mask
 insert into droplist values(190003, '', 20021, '', 1, 1, 3200); -- dex helm
@@ -1251,9 +1251,9 @@ insert into droplist values(190004, '', 40074, '', 1, 1, 75000); -- nzel
 insert into droplist values(190004, '', 40087, '', 1, 1, 20000); -- ndai
 insert into droplist values(190004, '', 140074, '', 1, 1, 4500); -- bzel
 insert into droplist values(190004, '', 140087, '', 1, 1, 1500); -- bdai
-insert into droplist values(190004, '', 40551, '', 1, 1, 5000); -- claw of varlok (elf) 
-insert into droplist values(190004, '', 40550, '', 1, 1, 5000); -- eye of varlok (mage) 
-insert into droplist values(190004, '', 40552, '', 1, 1, 5000); -- heart of varlok (prince) 
+insert into droplist values(190004, '', 40551, '', 1, 1, 5000); -- claw of varlok (elf)
+insert into droplist values(190004, '', 40550, '', 1, 1, 5000); -- eye of varlok (mage)
+insert into droplist values(190004, '', 40552, '', 1, 1, 5000); -- heart of varlok (prince)
 insert into droplist values(190004, '', 40549, '', 1, 1, 5000); -- sword of varlok (knight)
 insert into droplist values(190004, '', 20004, '', 1, 1, 5000); -- shadow mask
 insert into droplist values(190004, '', 20021, '', 1, 1, 5000); -- dex helm
@@ -1290,9 +1290,9 @@ insert into droplist values(190005, '', 140074, '', 1, 1, 6000); -- bzel
 insert into droplist values(190005, '', 140087, '', 1, 1, 2000); -- bdai
 insert into droplist values(190005, '', 240074, '', 1, 1, 7000); -- czel
 insert into droplist values(190005, '', 240087, '', 1, 1, 2500); -- cdai
-insert into droplist values(190005, '', 40551, '', 1, 1, 5000); -- claw of varlok (elf) 
-insert into droplist values(190005, '', 40550, '', 1, 1, 5000); -- eye of varlok (mage) 
-insert into droplist values(190005, '', 40552, '', 1, 1, 5000); -- heart of varlok (prince) 
+insert into droplist values(190005, '', 40551, '', 1, 1, 5000); -- claw of varlok (elf)
+insert into droplist values(190005, '', 40550, '', 1, 1, 5000); -- eye of varlok (mage)
+insert into droplist values(190005, '', 40552, '', 1, 1, 5000); -- heart of varlok (prince)
 insert into droplist values(190005, '', 40549, '', 1, 1, 5000); -- sword of varlok (knight)
 insert into droplist values(190005, '', 20004, '', 1, 1, 10000); -- shadow mask
 insert into droplist values(190005, '', 20021, '', 1, 1, 10000); -- dex helm
@@ -1416,9 +1416,9 @@ insert into droplist values(190009, '', 140074, '', 1, 2, 500000); -- bzel
 insert into droplist values(190009, '', 140087, '', 1, 1, 300000); -- bdai
 insert into droplist values(190009, '', 40062, '', 1, 5, 100000); -- banana
 insert into droplist values(190009, '', 140062, '', 1, 1, 10000); -- b-banana
-insert into droplist values(190009, '', 40551, '', 1, 1, 120000); -- claw of varlok (elf) 
-insert into droplist values(190009, '', 40550, '', 1, 1, 120000); -- eye of varlok (mage) 
-insert into droplist values(190009, '', 40552, '', 1, 1, 120000); -- heart of varlok (prince) 
+insert into droplist values(190009, '', 40551, '', 1, 1, 120000); -- claw of varlok (elf)
+insert into droplist values(190009, '', 40550, '', 1, 1, 120000); -- eye of varlok (mage)
+insert into droplist values(190009, '', 40552, '', 1, 1, 120000); -- heart of varlok (prince)
 insert into droplist values(190009, '', 40549, '', 1, 1, 120000); -- sword of varlok (knight)
 insert into droplist values(190009, '', 20004, '', 1, 1, 20000); -- shadow mask
 insert into droplist values(190009, '', 20021, '', 1, 1, 20000); -- dex helm
@@ -1446,7 +1446,7 @@ insert into droplist values(190009, '', 450003, '', 1, 1, 300); -- bume
 insert into droplist values(190009, '', 450000, '', 1, 1, 300); -- thors
 insert into droplist values(190009, '', 36, '', 1, 1, 300); -- eva scorn
 
--- Keshenberk
+-- HOTBOY
 insert into droplist values(190010, '', 40308, '', 12, 78, 1000000); -- adena
 insert into droplist values(190010, '', 40060, '', 1, 5, 180000); -- carrot
 insert into droplist values(190010, '', 50000, '', 1, 2, 180000); -- lube
@@ -1458,7 +1458,7 @@ insert into droplist values(190010, '', 20182, '', 1, 1, 50000); -- gloves
 insert into droplist values(190010, '', 20072, '', 1, 1, 50000); -- orcish cloak
 insert into droplist values(190010, '', 128, '', 1, 1, 50000); -- oak staff
 
--- Panda
+-- Dekem
 insert into droplist values(190011, '', 40308, '', 23, 86, 1000000); -- adena
 insert into droplist values(190011, '', 41424, '', 3, 8, 300000); -- panda feed
 insert into droplist values(190011, '', 40060, '', 1, 5, 180000); -- carrot
@@ -1583,15 +1583,10 @@ INSERT INTO `spawnlist` VALUES ('811500491', 'Boy Scout', '3', '190001', '0', '3
 
 
 -- add inn spawn
-INSERT INTO `spawnlist` VALUES ('811500427', 'Keshenberk', '1', '190010', '0', '32599', '32929', '0', '0', '0', '0', '0', '0', '6', '60', '120', '0', '1', '40', '1', '0','1','8','2','100');
-INSERT INTO `spawnlist` VALUES ('811500428', 'Panda', '1', '190011', '0', '32597', '32931', '0', '0', '0', '0', '0', '0', '4', '60', '120', '0', '1', '40', '1', '0','1','8','2','100');
+INSERT INTO `spawnlist` VALUES ('811500427', 'HOTBOY', '1', '190010', '0', '32599', '32929', '0', '0', '0', '0', '0', '0', '6', '60', '120', '0', '1', '40', '1', '0','1','8','2','100');
+INSERT INTO `spawnlist` VALUES ('811500428', 'Dekem', '1', '190011', '0', '32597', '32931', '0', '0', '0', '0', '0', '0', '4', '60', '120', '0', '1', '40', '1', '0','1','8','2','100');
 INSERT INTO `spawnlist` VALUES ('811500429', 'Uncle Gary', '1', '190012', '0', '32596', '32931', '0', '0', '0', '0', '0', '0', '4', '60', '120', '0', '1', '40', '1', '0','1','8','2','100');
 
 
 -- add boss spawn
 INSERT INTO `spawnlist_boss` VALUES ('150', '1Drake', 'Night', '1', '190009', '90', '32635', '32959', '0', '0', '32621', '32951', '32640', '32971', '0', '0', '1', '35', '0', '0', '100');
-
-
-
-
-
