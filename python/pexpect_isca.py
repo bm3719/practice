@@ -5,6 +5,9 @@ import pexpect
 child = pexpect.spawn ('telnet bbs.iscabbs.com')
 child.expect('Name: ')
 child.sendline('Guest')
+# The new version (vDOC, I think) supports ANSI terminals.
+child.expect('.*(Y/N).*', timeout=10)
+child.send('y')
 # Wait for the continue prompt, then hit return.
 child.expect('continue...', timeout=10)
 child.sendline('')
