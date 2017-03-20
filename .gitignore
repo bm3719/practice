@@ -1,1 +1,10 @@
 /haskell/lyah/dist
+/clojure/*/target
+/clojure/*/classes
+/clojure/*/checkouts
+/clojure/*/pom.xml
+/clojure/*/pom.xml.asc
+*.jar
+*.class
+/clojure/*/.lein-*
+/clojure/*/.nrepl-port
