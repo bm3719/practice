@@ -1,4 +1,4 @@
-% -*- mode: prolog-mode -*-
+% -*- mode: prolog -*-
 
 % This is my notes file from reading The Art of Prolog.  This code is only
 % tested with SWI-Prolog.
