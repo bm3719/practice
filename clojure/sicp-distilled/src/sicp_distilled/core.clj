@@ -21,9 +21,7 @@
 
 (ns sicp-distilled.core)
 
-;;; Chapter 1
-
-;; 1.1
+;;; 1.1
 
 ;; Below is a sequence of expressions. What is the result printed by the
 ;; interpreter in response to each expression? Assume that the sequence is to
@@ -62,7 +60,7 @@ false
 16
 
 
-;; 1.2
+;;; 1.2
 
 ;; Translate the following expression into prefix form:
 
@@ -71,7 +69,7 @@ false
 (/ (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5))))) (* 3 (- 6 2) (- 2 7)))
 
 
-;; 1.3
+;;; 1.3
 
 ;; Define a function that takes three numbers as arguments and returns the sum
 ;; of the squares of the two larger numbers.
@@ -82,7 +80,7 @@ false
    (map #(* % %) [x y z])))
 
 
-;; 1.4
+;;; 1.4
 
 ;; Observe that our model of evaluation allows for combinations whose operators
 ;; are compound expressions. Use this observation to describe the behavior of
@@ -96,7 +94,7 @@ false
 ;; Answer: The function to be applied is determined at runtime.
 
 
-;; 1.5
+;;; 1.5
 
 ;; Ben Bitdiddle has invented a test to determine whether the interpreter he is
 ;; faced with is using applicative-order evaluation or normal-order evaluation.
@@ -129,7 +127,7 @@ false
 ;; Answer: Applicative order: returns 0. Normal order: infinitely recurses.
 
 
-;; 1.6
+;;; 1.6
 
 ;; Alyssa P. Hacker doesn’t see why if needs to be provided as a special
 ;; form. “Why can’t I just define it as an ordinary function in terms of cond
@@ -162,7 +160,7 @@ false
 ;; the body of new-if.
 
 
-;; 1.7
+;;; 1.7
 
 ;; The `good-enough?` test used in computing square roots will not be very
 ;; effective for finding the square roots of very small numbers. Also, in real
@@ -207,7 +205,7 @@ false
   (< (abs (/ (square guess) x)) 0.001))
 
 
-;; 1.9
+;;; 1.9
 
 ;; Each of the following two procedures defines a method for adding two
 ;; positive integers in terms of the procedures inc , which increments its
@@ -228,7 +226,7 @@ false
 ;; the second iterative.
 
 
-;; 1.10
+;;; 1.10
 
 ;; The following procedure computes a mathematical function called Ackermann’s
 ;; function.
@@ -264,7 +262,7 @@ false
 ;; (h n) -> 2_1^2_2...2_(n-1)^2_n
 
 
-;; 1.11
+;;; 1.11
 
 ;; A function f is defined by the rule that
 
@@ -296,7 +294,7 @@ false
     (last (take (+ n 1) (f-seq 0 1 2)))))
 
 
-;; 1.15
+;;; 1.15
 
 ;; The sine of an angle (specified in radians) can be computed by making use of
 ;; the approximation sin x ≈ x if x is sufficiently small, and the
@@ -330,7 +328,7 @@ false
 ;; Answer: Θ(log a).
 
 
-;; 1.16
+;;; 1.16
 
 ;; Design a procedure that evolves an iterative exponentiation process
 ;; that uses successive squaring and uses a logarithmic number of steps,
@@ -353,7 +351,7 @@ false
    1 n b))
 
 
-;; 1.20
+;;; 1.20
 
 (defn gcd [a b]
   (if (= b 0)
@@ -379,3 +377,140 @@ false
 ;; * the applicative-order evaluation?
 
 ;; Answer: 4
+
+
+;; 1.41
+
+;; Define a function double that takes a function of one argument as argument
+;; and returns a function that applies the original function twice. For
+;; example, if inc is a function that adds 1 to its argument, then `(double
+;; inc)` should be a function that adds 2.  What value is returned by
+
+;; (((double (double double)) inc) 5)
+
+(defn double-f [f]
+  "Renaming to double-f, so as not to clobber clojure.core/double."
+  #(f (f %)))
+
+;; (((double-f (double-f double-f)) inc) 5) returns 21.
+
+
+;;; 1.42
+
+;; Let f and g be two one-argument functions.
+
+;; The *composition* of f and g, denoted $ f \circ  g $ is defined to be the function
+
+;; $$ x \rightarrow f(g(x)) $$
+
+;; Define a function `compose` that implements composition.
+
+;; You should find that
+
+;; > ((compose square inc) 6)
+;; 49
+
+;; After you are done, take a peek at `(source comp)` to see how clojure does it in
+;; a variadic way
+
+(defn compose [f g]
+  #(f (g %)))
+
+
+;;; 1.43
+
+;; If f is a numerical function and n is a positive integer, then we can form
+;; the n<sup>th</sup> repeated application of f , which is defined to be the
+;; function whose value at x is
+
+;; $$ f (f (\dots (f (x )) \dots )) $$
+
+;; For example, if f is the function $ x \rightarrow x + 1 $ then the
+;; n<sup>th</sup> repeated application of f is the function $ x \rightarrow x+n
+;; $
+
+;; If f is the operation of squaring a number, then the n<sup>th</sup> repeated
+;; application of f is the function
+
+;; $$ x \rightarrow x^{2^n} $$
+
+;; Write a function that takes as inputs a function that computes f and a
+;; positive integer n and returns the function that computes the n<sup>th</sup>
+;; repeated application of f . Your function should be able to be used as
+;; follows:
+
+;; => ((repeated square 2) 5)
+;; 625
+
+(defn repeated [f x]
+  #((apply comp (repeat x f)) %))
+
+
+;;; 2.53
+
+;; What would the interpreter print in response
+;; to evaluating each of the following expressions?
+
+;; (list 'a 'b 'c)
+
+;; Answer: (a b c)
+
+;; (list (list 'george))
+
+;; Answer: ((george))
+
+;; (rest '((x1 x2) (y1 y2)))
+
+;; Answer: ((y1 y2))
+
+;; (list? (first '(a short list)))
+
+;; Answer: a
+
+;; (memq 'red '((red shoes) (blue socks)))
+
+;; Answer: false
+
+;; (memq 'red '(red shoes blue socks))
+
+;; Answer: (red shoes blue socks)
+
+
+;;; 2.54
+
+;; Two lists are said to be equal? if they contain equal elements arranged in
+;; the same order. For example,
+
+;; (equal? '(this is a list) '(this is a list))
+
+;; is true, but
+
+;; (equal? '(this is a list) '(this (is a) list))
+
+;; is false. To be more precise, we can define equal? recursively in terms of
+;; the basic `=` equality of symbols by saying that a and b are equal? if they
+;; are both symbols and the symbols are eq? , or if they are both lists such
+;; that `(first a)` is `equal?` to `(first b)` and `(rest a)` is `equal?` to
+;; `(rest b)` .
+
+;; Using this idea, implement equal? as a procedure
+
+(defn equal? [a b]
+  (cond (and (symbol? a) (symbol? b)) (= a b)
+        (and (empty? a) (empty? b)) true
+        (or (empty? a) (empty? b)) false
+        (and (list? a) (list? b)) (and (= (first a) (first b))
+                                       (equal? (rest a) (rest b)))
+        :else false))
+
+
+;;; 2.55
+
+;; Eva Lu Ator types to the interpreter the expression
+
+;; (first ''abracadabra)
+
+;; To her surprise, the interpreter prints back `quote` why?
+
+;; Answer: ''a is just syntactic sugar for (quote (quote a)).  In this case,
+;; the first quote gets evaluated.
