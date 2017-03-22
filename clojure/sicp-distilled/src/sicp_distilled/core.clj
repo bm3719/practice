@@ -74,8 +74,8 @@ false
 ;; Define a function that takes three numbers as arguments and returns the sum
 ;; of the squares of the two larger numbers.
 
-(defn sum-squares-larger-2 [x y z]
-  "A little more clear than the juxt-based solution."
+(defn sum-squares-larger-2
+  "A little more clear than the juxt-based solution." [x y z]
   (#(- (apply + %) (apply min %))
    (map #(* % %) [x y z])))
 
@@ -274,21 +274,21 @@ false
 ;; * a recursive process
 ;; * an iterative process
 
-(defn f1 [n]
-  "Recursive solution."
+(defn f1
+  "Recursive solution." [n]
   (if (< n 3) n
       (+ (f1 (- n 1)) (* 2 (f1 (- n 2))) (* 3 (f1 (- n 3))))))
 
-(defn f2 [n]
-  "Iterative solution."
+(defn f2
+  "Iterative solution." [n]
   (letfn [(iter [a b c count]
             (if (< count 3) a
                 (iter (+ a (* 2 b) (* 3 c)) a b (- count 1))))]
     (if (< n 3) n
         (iter 2 1 0 n))))
 
-(defn f3 [n]
-  "A more idiomatic Clojure solution, using lazy sequences."
+(defn f3
+  "A more idiomatic Clojure solution, using lazy sequences." [n]
   (letfn [(f-seq [c b a]
             (lazy-seq (cons c (f-seq b a (+ a (* 2 b) (* 3 c))))))]
     (last (take (+ n 1) (f-seq 0 1 2)))))
@@ -388,8 +388,8 @@ false
 
 ;; (((double (double double)) inc) 5)
 
-(defn double-f [f]
-  "Renaming to double-f, so as not to clobber clojure.core/double."
+(defn double-f
+  "Renaming to double-f, so as not to clobber clojure.core/double." [f]
   #(f (f %)))
 
 ;; (((double-f (double-f double-f)) inc) 5) returns 21.
