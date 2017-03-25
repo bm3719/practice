@@ -110,3 +110,64 @@ son(X, Y) :- father(Y, X), male(X).
 % The above will cause son(abraham, isaac) to return true.
 
 grandfather(X, Y) :- father(X, Z), father(Z, Y).
+
+% Defining a grandparent is more conveniently done via an auxilliary
+% relationship, rather than enumerating all the combinations of father and
+% mother relationships.
+parent(X, Y) :- father(X, Y).
+parent(X, Y) :- mother(X, Y).
+
+grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+
+% Procedure: A collection of rules with the same predicate in the head.  parent
+% here is an example.
+
+
+% Chapter 2
+
+% Instead of doing exercises, I'm going to use ideas in chapters to write
+% programs.
+
+killed(me, slug).
+killed(me, warthog).
+killed(me, mole-rat).
+killed(larry, harry).
+
+human(me).
+human(gary).
+human(larry).
+human(harry).
+
+ugly(slug).
+ugly(warthog).
+ugly(mole-rat).
+cute(cat).
+
+murderer(Suspect) :- killed(Suspect, Victim), human(Victim).
+
+%% killed(me, gary).
+
+%% killed(me, cat).
+
+%% murderer(Suspect) :- killed(Suspect, Victim),
+%%                      (human(Victim) ; cute(Victim)).
+
+%% killed(me, me).
+
+%% murderer(Suspect) :- killed(Suspect, Victim),
+%%                      (human(Victim) ; cute(Victim)),
+%%                      Suspect \= Victim.
+
+
+% Structured data
+
+trial(murderer(larry), judge(brice, moore), monday).
+
+presides(FirstName, Day) :- trial(murderer(_), judge(FirstName, _), Day).
+
+
+% Chapter 3
+
+%% factorial(0, s(0)).
+%% factorial(s(N), F) :- factorial(N, F1), times(s(N), F1, F).
+%% times(X, Y, Z).
