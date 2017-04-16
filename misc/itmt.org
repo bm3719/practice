@@ -1,0 +1,781 @@
+#+STARTUP: content
+
+Notes and exercises from Introduction to Mathmatical Thinking (Devlin, 2012).
+
+* Chapter 1: What is mathematics?
+The dichotomy between the computational and abstract is summarized as
+procedural vs. describing behavior.
+* Chapter 2: Getting precise about language
+** § 2.1: Mathematical statements
+Every key statement in math is one of these statements, a negation of, or a
+combination with combinators (and, or, not) of:
+- Object a has property P.
+- Every object of type T has property P.
+- There is an object of type T having property P.
+- If statement a, then statement b.
+** Exercises 2.1.1
+*** 1
+How would you show that not every number of the form N = (p₁ ⋅ p₂ ⋅ p₃ ⋅ ... ⋅
+p_n) + 1 is prime, where p₁, p₂, p₃, ..., p_n, ... is the list of all prime
+numbers?
+
+Answer:
+
+Show that there must be at least one prime q, where q < N and q divides N.
+*** 2
+Find two unambiguous (but natural sounding) sentences equivalent to the
+sentence "The man saw the woman with a telescope", the first where the man has
+the telescope, the second where the woman has the telescope.
+
+Answer:
+
+With the telescope, the man saw the woman.
+
+The woman with the telescope was seen by the man.
+*** 3
+For each of the four ambiguous newspaper headlines I stated earlier, rewrite it
+in a way that avoids the amusing second meaning, while retaining the brevity of
+a typical headline:
+
+Answer:
+
+(a) Sisters reunited after ten years in checkout line at Safeway.
+
+After ten years, sisters reunited in checkout line at Safeway.
+
+(b) Prostitutes appeal to the Pope.
+
+The Pope appealed to by prostitutes.
+
+(c) Large hole appears in High Street. City authorities are looking into it.
+
+City authorities are looking into appearance of large hole in High Street.
+
+(d) Mayor says bus passengers should be belted.
+
+Mayor says bus passengers should wear seat belts.
+*** 4
+The following notice was posted on the wall of a hospital emergency room:
+
+No head injury is too trivial to ignore.
+
+Reformulate to avoid the unintended second reading.
+
+Answer:
+
+For all head injuries, do not ignore.
+*** 5
+You often see the following notice posted in elevators:
+
+In case of fire, do not use elevator.
+
+Comment on the two meaning and reformulate to avoid the unintended second
+meaning.
+
+Answer:
+
+If fire, do not use elevator.
+*** 6
+Official documents often contain one or more pages that are empty apart from
+one sentence at the bottom:
+
+This page intentionally left blank.
+
+Does the sentence make a true statement?  What is the purpose of making such a
+statement.  What reformulation of the sentence would avoid any logical problems
+about truth?
+
+Answer:
+
+With the presence of the statement, since the page is not blank.  A better
+sentence would be: This page left intentionally blank, apart from this
+statement.
+*** 7
+Find (and provide citations for) three examples of published sentences whose
+literal meaning is (clearly) not what the writer intended.
+
+Answer:
+
+Skipping.
+*** 8
+Comment on the sentence "The temperature is hot today".  You hear people say
+things like this all the time, and everyone understands what is meant.  But
+using language is this sloppy way in mathematics would be disastrous.
+
+Answer:
+
+Two points: hot is relative, ambiguity about what is hot.
+*** 9
+Provide a context and a sentence within that context, where the word "and"
+occurs five times in succession, with no other word between those five
+occurrences (you are allowed to use punctuation).
+
+Answer:
+
+Skipping.
+*** 10
+Provide a context and a sentence within that context, where the words "and, or,
+and, or, and" occur in that order, with no other word between them.  (Again,
+you can use punctuation).
+
+Answer:
+
+Skipping.
+** § 2.2: The logical combinator and, or, and not
+The joint statement φ ∧ ψ is a /conjunction/.  φ and ψ are the /conjuncts/.
+
+In natural language, "or" can mean "inclusive or" or "xor".  In math, we only
+mean inclusive.
+
+The statement φ ∨ ψ is a /disjunction/.  φ and ψ are the /disjuncts/.
+
+Negation, ¬, ≠.
+
+Negation of "All foreign cars are badly made" is "At least one foreign car is
+not badly made" or "At least one foreign car is well made".
+** Exercises 2.2.1
+*** 1
+The mathematical concept of conjunction captures the meaning of "and" in
+everyday language.  True or false?  Explain your answer.
+
+Answer:
+
+False.  In natural language, it can imply order.
+*** 2
+Simplify the following symbolic statements as much as you can, leaving your
+answer in the standard symbolic form.  (In case you are not familiar with the
+notation, I'll answer the first one for you.)
+
+Answer:
+
+(a) (π > 0) ∧ (π < 10)
+
+0 < π < 10
+
+(b) (p ≥ 7) ∧ (p < 12)
+
+7 ≤ p < 12
+
+(c) (x > 5) ∧ (x < 7)
+
+5 < x < 7
+
+(d) (x < 4) ∧ (x < 6)
+
+x < 4
+
+(e) (y < 3) ∧ (y² < 9)
+
+y < 3
+
+(f) (x ≥ 0) ∧ (x ≤ 0)
+
+x = 0
+*** 3
+Express each of your simplified statements from question 1 in natural English.
+
+Answer:
+
+Skipping.
+*** 4
+What strategy would you adopt to show that the conjunction φ₁ ∧ φ₂ ∧ ... ∧ φ_n
+is true?
+
+Answer:
+
+Prove all conjuncts.
+*** 5
+What strategy would you adopt to show that the conjunction φ₁ ∧ φ₂ ∧ ... ∧ φ_n
+is false?
+
+Answer:
+
+Attempt to prove all conjuncts until finding one false.
+*** 6
+Is it possible for one of (φ ∧ ψ) ∧ θ and φ ∧ (ψ ∧ θ) to be true and the other
+false, or does the associative property hold for conjunction?  Prove your
+answer.
+
+Answer:
+
+The associative property holds for conjunction.  If one of {φ, ψ, θ} were
+false, which is required to make one of the statements false, that would also
+negate the other statement.
+*** 7
+Which of the following is more likely?
+
+(a) Alice is a rock star and works in a bank.
+(b) Alice is quiet and works in a bank.
+(c) Alice is quiet and reserved and works in a bank.
+(d) Alice is honest and works in a bank.
+(e) Alice works in a bank.
+
+If you believe there is no definite answer, say so.
+
+Answer:
+
+Presuming the conditionals in a - d have non-zero likelihoods of being false,
+then e is more likely.
+*** 8
+In the following table, T denotes 'true' and F denotes 'false'.  The first two
+columns list all the possible combinations of values of T and F that the two
+statements φ and ψ can have.  The third column should give the truth value
+
+Fill in the final column.  The resulting table is an example of a
+"propositional truth table".
+
+Answer:
+
+| φ | ψ | (φ ∧ ψ) |
+|---+---+---------|
+| T | T | T       |
+| T | F | F       |
+| F | T | F       |
+| F | F | F       |
+** Exercises 2.2.2
+*** 1
+Simplify the following symbolic statements as much as you can, leaving your
+answer in a standard symbolic form (assuming you are familiar with the
+notation):
+
+Answer:
+
+(a) (π > 3) ∨ (π > 10)
+
+(π > 3)
+
+(b) (x < 0) ∨ (x > 0)
+
+x ≠ 0
+
+(c) (x = 0) ∨ (x > 0)
+
+x ≥ 0
+
+(d) (x > 0) ∨ (x ≥ 0)
+
+x ≥ 0
+
+(e) (x > 3) ∨ (x² > 9)
+
+x > 3
+*** 2
+Express each of your simplified statements from Question 1 in natural English.
+
+Answer:
+
+Skipping.
+*** 3
+What strategy would you adopt to show the disjunction φ₁ ∨ φ₂ ∨ ... ∨ φ_n
+is true?
+
+Answer:
+
+Prove any disjunct true.
+*** 4
+What strategy would you adopt to show the disjunction φ₁ ∨ φ₂ ∨ ... ∨ φ_n
+is false?
+
+Answer:
+
+Prove all disjuncts false.
+*** 5
+Is it possible for one of (φ ∨ ψ) ∨ θ or φ ∨ (ψ ∨ θ) to be true and the other
+false, or does the associative property hold for disjunction?  Prove your
+answer.
+
+Answer:
+
+The associative property holds for disjunction.  If all of {φ, ψ, θ} where
+false, which is required to make one of the statements false, that would also
+negate the other statement.
+*** 6
+Which of the following is more likely?
+
+(a) Alice is a rock star or works in a bank.
+(b) Alice is quiet and works in a bank.
+(c) Alice is a rock star.
+(d) Alice is honest and works in a bank.
+(e) Alice works in a bank.
+
+If you believe there is no definite answer, say so.
+
+Answer:
+
+a is more likely.
+*** 7
+Fill in the entries in the final column of the following truth table:
+
+Answer:
+
+| φ | ψ | (φ ∨ ψ) |
+|---+---+---------|
+| T | T | T       |
+| T | F | T       |
+| F | T | T       |
+| F | F | F       |
+** Exercises 2.2.3
+*** 1
+Simplify the following symbolic statements as much as you can, leaving your
+answer in a standard symbolic form (assuming you are familiar with the
+notation).
+
+Answer:
+
+(a) ¬(π > 3.2)
+
+π ≤ 3.2
+
+(b) ¬(x < 0)
+
+x ≥ 0
+
+(c) ¬(x² > 0)
+
+x² ≤ 0
+
+(d) ¬(x = 1)
+
+x ≠ 1
+
+(e) ¬¬ψ
+
+ψ
+*** 2
+Express each of your simplified statements from Question 1 in natural English.
+
+Answer:
+
+Skipping.
+*** 3
+Is showing that the negation ¬φ is true the same as showing that φ is false?
+Explain your answer.
+
+Answer:
+
+Yes.  The negation only applies to just φ.
+*** 4
+Fill in the entries in the final column of the following truth table:
+
+Answer:
+
+| φ | ¬φ |
+|---+----|
+| T | F  |
+| F | T  |
+*** 5
+Let D be the statement "The dollar is strong", Y the statement "The yuan is
+strong", and T the statement "New US-China trade agreement signed".  Express
+the main content of each of the following (fictitious) newspaper headlines in
+logical notation.  (Note that logical notation captures truth, but not the many
+nuance of inferences of natural language).  Be prepared to justify and defend
+your answers.
+
+Answer:
+
+(a) Dollar and Yuan both strong.
+
+D ∧ Y
+
+(b) Trade agreement fails on news of weak Dollar.
+
+¬T ∧ ¬D
+
+(c) Dollar weak but Yuan strong, following new trade agreement.
+
+¬D ∧ Y ∧ T
+
+(d) Strong Dollar means a weak Yuan.
+
+D ∧ ¬Y
+
+(e) Yuan weak despite new trade agreement, but Dollar remains strong.
+
+¬Y ∧ T ∧ D
+
+(f) Dollar and Yuan can't both be strong at the same time.
+
+¬(D ∧ Y)
+
+(g) If new trade agreement is signed, Dollar and Yuan can't both remain strong.
+
+T ∧ ¬(D ∧ Y)
+
+(h) New trade agreement does not prevent fail in Dollar and Yuan.
+
+T ∧ ¬D ∧ ¬Y
+
+(i) US-China trade agreement fails but both currencies remain strong.
+
+¬T ∧ D ∧ Y
+
+(j) New trade agreement will be good for one side, but no one knows which.
+
+T ∧ ((D ∧ ¬Y) ∨ (¬D ∧ Y))
+*** 6
+In US law, a trial verdict of "Not guilty" is given when the prosecution fails
+to prove guilt.  This, of course, does not mean the defendant is, as a matter
+of actual fact, innocent.  Is this state of affairs captured accurately when we
+use "not" in the mathematical sense?  (i.e., Do "Not guilty" And "¬ guilty"
+mean the same thing?)  What if we change the question to ask if "Not proven"
+and "¬ proven" mean the same thing.
+
+Answer:
+
+"Not guilty" ≠ "¬ guilty"
+
+"Not proven" = "¬ proven"
+*** 7
+The truth table for ¬¬φ is clearly the same as that for φ itself, so the two
+expressions make identical truth assertions.  This is not necessarily true for
+negation in everyday life.  For example, you might find yourself saying "I was
+not displeased with the movie".  In terms of formal negation, this has the
+form ¬(¬pleased), but your statement clearly does not mean that you were
+pleased with the movie.  Indeed, it means something considerably less
+positive.  How would you capture this kind of use of language is the formal
+framework we have been looking at?
+
+Answer:
+
+"Not displeased" = ¬displeased.
+** § 2.3 Implication
+Intuitively: Implication = conditional + causation.
+
+The conditional is the truth part of intuitive implication.
+
+This book uses right double arrow to denote conditional, e.g., φ ⇒ ψ.  Most
+texts generally use →.
+
+Expressions of the form φ ⇒ ψ are called a /conditional expression/, or just a
+/conditional/.  Here, φ is the /antecedent/ and ψ is the /consequent/.
+
+Conditional expressions ignore causality.  Only the truth values of the
+conditional are relevant.
+
+| φ | ψ | φ ⇒ ψ |
+|---+---+-------|
+| T | T | T     |
+| T | F |       |
+| F | T |       |
+| F | F |       |
+
+Regarding the last two cases (where the antecedent is false), consider the
+negation of the implication, φ ⇏ ψ.  This means precisely the case that φ is
+true and ψ is false.  Since there is only one case were this is true in the
+truth table, we can fill in the rest knowing that φ ⇒ ψ is the opposite of
+this.
+
+One way to think about the above is that the math definition extends the
+intuitive definition of implication to cover the false antecedent cases, those
+which intuition has nothing to say.  To do otherwise would result is undefined
+truth values.
+
+Note that φ ⇒ ψ is the same as saying ¬φ ∨ ψ.
+
+Equivalence: Two statements φ and ψ are said to be /logically equivalent/ if
+each implies the other.  This is known as the /biconditional/, denoted as:
+
+φ ⇔ ψ
+
+This is formally defined as:
+
+(φ ⇒ ψ) ∧ (ψ ⇒ φ)
+
+This is true only if both φ and ψ are true.
+
+Terminology for φ ⇒ ψ, all meaning the same thing:
+- φ implies ψ
+- if φ then ψ
+- φ is sufficient for ψ
+- φ only if ψ
+- ψ if φ
+- ψ whenever φ
+- ψ is necessary for φ
+
+Note the distinction between "φ only if ψ" and "ψ if φ".
+** Exercises 2.3.1
+*** 1
+Fill in the second row of the truth table.
+
+Answer:
+
+| φ | ψ | φ ⇒ ψ |
+|---+---+-------|
+| T | T | T     |
+| T | F | F     |
+| F | T |       |
+| F | F |       |
+*** 2
+Provide justification for your entry.
+
+Answer:
+
+If φ is true, but ψ is false, then the implication is false because ψ's truth
+is conditional upon φ.
+** Exercises 2.3.2
+*** 1
+Fill in the third and fourth rows of the truth table.
+
+Answer:
+
+| φ | ψ | φ ⇒ ψ |
+|---+---+-------|
+| T | T | T     |
+| T | F | F     |
+| F | T | T     |
+| F | F | T     |
+*** 2
+Provide justification for your entries.
+
+Answer:
+
+The truth of ψ does not follow as φ is false, so the conditional still holds.
+** Exercises 2.3.3
+*** 1
+Which of the following are true and which are false?
+
+Answer:
+
+(a) (φ² > 2) ⇒ (φ > 1.4)
+
+T
+
+(b) (φ² < 0) ⇒ (φ = 3)
+
+F
+
+(c) (φ² > 0) ⇒ (1 + 2 = 4)
+
+T
+
+(d) (φ > φ²) ⇒ (φ = 5)
+
+F
+
+(e) (ℯ² ≥ 0) ⇒ (ℯ < 0)
+
+F
+
+(f) ¬(5 is an integer) ⇒ (5² ≥ 1)
+
+T
+
+(g) (The area of a circle of radius 1 is φ) ⇒ (3 is prime)
+
+T
+
+(h) (Squares have three sides) ⇒ (Triangles have four sides)
+
+T
+
+(i) (Elephants can climb trees) ⇒ (3 is irrational)
+
+T
+
+(j) (Euclid's birthday was July 4) ⇒ (Rectangles have four sides)
+
+T
+*** 2
+
+As in Exercise 2.2.3(5), let D be the statement “The dollar is strong,” Y the
+statement “The Yuan is strong,” and T the statement “New US–China trade
+agreement signed.” Express the main content of each of the following
+(fictitious) newspaper headlines in logical notation. (Remember, logical
+notation captures truth, but not the many nuances and inferences of natural
+language.) As before, be prepared to justify and defend your answers.
+
+Answer:
+
+(a) New trade agreement will lead to strong currencies in both countries.
+
+T ⇒ D ∧ Y
+
+(b) If the trade agreement is signed, a rise in the Yuan will result in a fall
+in the Dollar.
+
+T ∧ Y ⇒ D
+
+(c) Dollar weak but Yuan strong, following new trade agreement
+
+T ⇒ ¬D ∧ Y
+
+(d) Strong Dollar means a weak Yuan
+
+D ⇒ ¬Y
+
+(e) New trade agreement means Dollar and Yuan will be tightly linked.
+
+T ⇒ (D ∧ Y) ∨ (¬D ∧ ¬Y)
+*** 3
+Complete the following truth table.
+
+Note: ¬ has the same binding rules as − (minus) in arithmetic and algebra, so
+¬φ ∨ ψ is the same as (¬φ) ∨ ψ.
+
+Answer:
+
+| φ | ¬φ | ψ | φ ⇒ ψ | ¬φ ∨ ψ |
+|---+----+---+-------+--------|
+| T | F  | T | T     | T      |
+| T | F  | F | F     | F      |
+| F | T  | T | T     | T      |
+| F | T  | F | T     | T      |
+*** 4
+What conclusions can you draw from the above table?
+
+Answer:
+
+φ ⇒ ψ = ¬φ ∨ ψ
+** Exercises 2.3.4
+*** 1
+Build a truth table to prove the claim I made earlier that φ ⇔ ψ is true if φ
+and ψ are both true or both false and φ ⇔ ψ is false if exactly one of φ, ψ is
+true and the other false. (To constitute a proof, your table should have
+columns that show how the entries for φ ⇔ ψ are derived, one operator at a
+time, as in the previous exercises.)
+
+Answer:
+
+Skipping.
+*** 2
+Build a truth table to show that
+
+(φ ⇒ ψ) ⇔ (¬φ ∨ ψ)
+
+is true for all truth values of φ and ψ. A statement whose truth values are all
+T is called a logical validity, or sometimes a tautology.
+
+Answer:
+
+| φ | ψ | φ ⇒ ψ | ¬φ | ¬φ ∨ ψ | (φ ⇒ ψ) ⇔ (¬φ ∨ ψ) |
+|---+---+-------+----+--------+--------------------|
+| T | T | T     | F  | T      | T                  |
+| T | F | F     | F  | F      | T                  |
+| F | T | T     | T  | T      | T                  |
+| F | F | T     | T  | T      | T                  |
+*** 3
+Build a truth table to show that
+
+(φ ⇏ ψ) ⇔ (φ ∧ ¬ψ)
+
+is a tautology.
+
+Answer:
+
+| φ | ψ | ¬ψ | (φ ⇏ ψ) | (φ ∧ ¬ψ) | (φ ⇏ ψ) ⇔ (φ ∧ ¬ψ) |
+|---+---+----+---------+----------+--------------------|
+| T | T | F  | F       | F        | T                  |
+| T | F | T  | T       | T        | T                  |
+| F | T | F  | F       | F        | T                  |
+| F | F | T  | F       | F        | T                  |
+*** 4
+The ancient Greeks formulated a basic rule of reasoning for proving
+mathematical statements. Called modus ponens, it says that if you know φ and
+you know φ ⇒ ψ, then you can conclude ψ.
+
+Answer:
+
+(a) Construct a truth table for the logical statement
+
+[φ ∧ (φ ⇒ ψ)] ⇒ ψ
+
+| φ | ψ | (φ ⇒ ψ) | φ ∧ (φ ⇒ ψ) | [φ ∧ (φ ⇒ ψ)] ⇒ ψ |
+|---+---+---------+-------------+-------------------|
+| T | T | T       | T           | T                 |
+| T | F | F       | F           | T                 |
+| F | T | T       | F           | T                 |
+| F | F | T       | F           | T                 |
+
+(b) Explain how the truth table you obtain demonstrates that modus ponens is a
+valid rule of inference.
+
+For all values of φ and ψ, the statement [φ ∧ (φ ⇒ ψ)] ⇒ ψ holds.
+*** 5
+Mod-2 arithmetic has just the two numbers 0 and 1 and follows the usual rules
+of arithmetic together with the additional rule 1 + 1 = 0. (It is the
+arithmetic that takes place in a single bit location in a digital computer.)
+Complete the following table:
+
+| M | N | M × N | M + N |
+|---+---+-------+-------|
+| 1 | 1 |     1 |     0 |
+| 1 | 0 |     0 |     1 |
+| 0 | 1 |     0 |     1 |
+| 0 | 0 |     0 |     0 |
+*** 6
+In the table you obtained in the above exercise, interpret 1 as T and 0 as F and
+view M, N as statements.
+
+Answer:
+
+| M | N | M × N | M + N | M - N |
+|---+---+-------+-------+-------|
+| T | T | T     | F     | F     |
+| T | F | F     | T     | T     |
+| F | T | F     | T     | T     |
+| F | F | F     | F     | F     |
+
+(a) Which of the logical combinators ∧, ∨ corresponds to ×?
+
+∧
+
+(b) Which logical combinator corresponds to +?
+
+xor
+
+(c) Does ¬ correspond to − (minus)?
+
+xor
+*** 7
+Repeat the above exercise, but interpret 0 as T and 1 as F. What conclusions
+can you draw?
+
+Answer:
+
+Binary operations in binary arithmetic correspond to Boolean logic operations.
+*** 8
+The following puzzle was introduced by the psychologist Peter Wason in 1966,
+and is one of the most famous subject tests in the psychology of
+reasoning. Most people get it wrong. (So you have been warned!)
+
+Four cards are placed on the table in front of you. You are told (truthfully)
+that each has a letter printed on one side and a digit on the other, but of
+course you can only see one face of each. What you see is:
+
+B E 4 7
+
+You are now told that the cards you are looking at were chosen to follow the
+rule “If there is a vowel on one side, then there is an odd number on the other
+side.”  What is the least number of cards you have to turn over to verify this
+rule, and which cards do you in fact have to turn over?
+
+Answer:
+
+E and 4, I think.
+** Exercises 2.3.5
+*** 1
+*** 2
+*** 3
+*** 4
+*** 5
+*** 6
+*** 7
+*** 8
+*** 9
+*** 10
+*** 11
+*** 12
+*** 13
+*** 14
+*** 15
+*** 16
+*** 17
+*** 18
+*** 19
+*** 20
+*** 21
+*** 22
+*** 23
+*** 24
+*** 25
+** § 2.4 Quantifiers
