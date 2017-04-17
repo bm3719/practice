@@ -13,8 +13,8 @@ combination with combinators (and, or, not) of:
 - Every object of type T has property P.
 - There is an object of type T having property P.
 - If statement a, then statement b.
-** Exercises 2.1.1
-*** 1
+*** Exercises 2.1.1
+**** 1
 How would you show that not every number of the form N = (p₁ ⋅ p₂ ⋅ p₃ ⋅ ... ⋅
 p_n) + 1 is prime, where p₁, p₂, p₃, ..., p_n, ... is the list of all prime
 numbers?
@@ -22,7 +22,7 @@ numbers?
 Answer:
 
 Show that there must be at least one prime q, where q < N and q divides N.
-*** 2
+**** 2
 Find two unambiguous (but natural sounding) sentences equivalent to the
 sentence "The man saw the woman with a telescope", the first where the man has
 the telescope, the second where the woman has the telescope.
@@ -32,7 +32,7 @@ Answer:
 With the telescope, the man saw the woman.
 
 The woman with the telescope was seen by the man.
-*** 3
+**** 3
 For each of the four ambiguous newspaper headlines I stated earlier, rewrite it
 in a way that avoids the amusing second meaning, while retaining the brevity of
 a typical headline:
@@ -54,7 +54,7 @@ City authorities are looking into appearance of large hole in High Street.
 (d) Mayor says bus passengers should be belted.
 
 Mayor says bus passengers should wear seat belts.
-*** 4
+**** 4
 The following notice was posted on the wall of a hospital emergency room:
 
 No head injury is too trivial to ignore.
@@ -64,7 +64,7 @@ Reformulate to avoid the unintended second reading.
 Answer:
 
 For all head injuries, do not ignore.
-*** 5
+**** 5
 You often see the following notice posted in elevators:
 
 In case of fire, do not use elevator.
@@ -75,7 +75,7 @@ meaning.
 Answer:
 
 If fire, do not use elevator.
-*** 6
+**** 6
 Official documents often contain one or more pages that are empty apart from
 one sentence at the bottom:
 
@@ -90,14 +90,14 @@ Answer:
 With the presence of the statement, since the page is not blank.  A better
 sentence would be: This page left intentionally blank, apart from this
 statement.
-*** 7
+**** 7
 Find (and provide citations for) three examples of published sentences whose
 literal meaning is (clearly) not what the writer intended.
 
 Answer:
 
 Skipping.
-*** 8
+**** 8
 Comment on the sentence "The temperature is hot today".  You hear people say
 things like this all the time, and everyone understands what is meant.  But
 using language is this sloppy way in mathematics would be disastrous.
@@ -105,7 +105,7 @@ using language is this sloppy way in mathematics would be disastrous.
 Answer:
 
 Two points: hot is relative, ambiguity about what is hot.
-*** 9
+**** 9
 Provide a context and a sentence within that context, where the word "and"
 occurs five times in succession, with no other word between those five
 occurrences (you are allowed to use punctuation).
@@ -113,7 +113,7 @@ occurrences (you are allowed to use punctuation).
 Answer:
 
 Skipping.
-*** 10
+**** 10
 Provide a context and a sentence within that context, where the words "and, or,
 and, or, and" occur in that order, with no other word between them.  (Again,
 you can use punctuation).
@@ -133,15 +133,15 @@ Negation, ¬, ≠.
 
 Negation of "All foreign cars are badly made" is "At least one foreign car is
 not badly made" or "At least one foreign car is well made".
-** Exercises 2.2.1
-*** 1
+*** Exercises 2.2.1
+**** 1
 The mathematical concept of conjunction captures the meaning of "and" in
 everyday language.  True or false?  Explain your answer.
 
 Answer:
 
 False.  In natural language, it can imply order.
-*** 2
+**** 2
 Simplify the following symbolic statements as much as you can, leaving your
 answer in the standard symbolic form.  (In case you are not familiar with the
 notation, I'll answer the first one for you.)
@@ -171,27 +171,27 @@ y < 3
 (f) (x ≥ 0) ∧ (x ≤ 0)
 
 x = 0
-*** 3
+**** 3
 Express each of your simplified statements from question 1 in natural English.
 
 Answer:
 
 Skipping.
-*** 4
+**** 4
 What strategy would you adopt to show that the conjunction φ₁ ∧ φ₂ ∧ ... ∧ φ_n
 is true?
 
 Answer:
 
 Prove all conjuncts.
-*** 5
+**** 5
 What strategy would you adopt to show that the conjunction φ₁ ∧ φ₂ ∧ ... ∧ φ_n
 is false?
 
 Answer:
 
 Attempt to prove all conjuncts until finding one false.
-*** 6
+**** 6
 Is it possible for one of (φ ∧ ψ) ∧ θ and φ ∧ (ψ ∧ θ) to be true and the other
 false, or does the associative property hold for conjunction?  Prove your
 answer.
@@ -201,7 +201,7 @@ Answer:
 The associative property holds for conjunction.  If one of {φ, ψ, θ} were
 false, which is required to make one of the statements false, that would also
 negate the other statement.
-*** 7
+**** 7
 Which of the following is more likely?
 
 (a) Alice is a rock star and works in a bank.
@@ -216,7 +216,7 @@ Answer:
 
 Presuming the conditionals in a - d have non-zero likelihoods of being false,
 then e is more likely.
-*** 8
+**** 8
 In the following table, T denotes 'true' and F denotes 'false'.  The first two
 columns list all the possible combinations of values of T and F that the two
 statements φ and ψ can have.  The third column should give the truth value
@@ -232,8 +232,8 @@ Answer:
 | T | F | F       |
 | F | T | F       |
 | F | F | F       |
-** Exercises 2.2.2
-*** 1
+*** Exercises 2.2.2
+**** 1
 Simplify the following symbolic statements as much as you can, leaving your
 answer in a standard symbolic form (assuming you are familiar with the
 notation):
@@ -259,27 +259,27 @@ x ≥ 0
 (e) (x > 3) ∨ (x² > 9)
 
 x > 3
-*** 2
+**** 2
 Express each of your simplified statements from Question 1 in natural English.
 
 Answer:
 
 Skipping.
-*** 3
+**** 3
 What strategy would you adopt to show the disjunction φ₁ ∨ φ₂ ∨ ... ∨ φ_n
 is true?
 
 Answer:
 
 Prove any disjunct true.
-*** 4
+**** 4
 What strategy would you adopt to show the disjunction φ₁ ∨ φ₂ ∨ ... ∨ φ_n
 is false?
 
 Answer:
 
 Prove all disjuncts false.
-*** 5
+**** 5
 Is it possible for one of (φ ∨ ψ) ∨ θ or φ ∨ (ψ ∨ θ) to be true and the other
 false, or does the associative property hold for disjunction?  Prove your
 answer.
@@ -289,7 +289,7 @@ Answer:
 The associative property holds for disjunction.  If all of {φ, ψ, θ} where
 false, which is required to make one of the statements false, that would also
 negate the other statement.
-*** 6
+**** 6
 Which of the following is more likely?
 
 (a) Alice is a rock star or works in a bank.
@@ -303,7 +303,7 @@ If you believe there is no definite answer, say so.
 Answer:
 
 a is more likely.
-*** 7
+**** 7
 Fill in the entries in the final column of the following truth table:
 
 Answer:
@@ -314,8 +314,8 @@ Answer:
 | T | F | T       |
 | F | T | T       |
 | F | F | F       |
-** Exercises 2.2.3
-*** 1
+*** Exercises 2.2.3
+**** 1
 Simplify the following symbolic statements as much as you can, leaving your
 answer in a standard symbolic form (assuming you are familiar with the
 notation).
@@ -341,20 +341,20 @@ x ≠ 1
 (e) ¬¬ψ
 
 ψ
-*** 2
+**** 2
 Express each of your simplified statements from Question 1 in natural English.
 
 Answer:
 
 Skipping.
-*** 3
+**** 3
 Is showing that the negation ¬φ is true the same as showing that φ is false?
 Explain your answer.
 
 Answer:
 
 Yes.  The negation only applies to just φ.
-*** 4
+**** 4
 Fill in the entries in the final column of the following truth table:
 
 Answer:
@@ -363,7 +363,7 @@ Answer:
 |---+----|
 | T | F  |
 | F | T  |
-*** 5
+**** 5
 Let D be the statement "The dollar is strong", Y the statement "The yuan is
 strong", and T the statement "New US-China trade agreement signed".  Express
 the main content of each of the following (fictitious) newspaper headlines in
@@ -412,7 +412,7 @@ T ∧ ¬D ∧ ¬Y
 (j) New trade agreement will be good for one side, but no one knows which.
 
 T ∧ ((D ∧ ¬Y) ∨ (¬D ∧ Y))
-*** 6
+**** 6
 In US law, a trial verdict of "Not guilty" is given when the prosecution fails
 to prove guilt.  This, of course, does not mean the defendant is, as a matter
 of actual fact, innocent.  Is this state of affairs captured accurately when we
@@ -425,7 +425,7 @@ Answer:
 "Not guilty" ≠ "¬ guilty"
 
 "Not proven" = "¬ proven"
-*** 7
+**** 7
 The truth table for ¬¬φ is clearly the same as that for φ itself, so the two
 expressions make identical truth assertions.  This is not necessarily true for
 negation in everyday life.  For example, you might find yourself saying "I was
@@ -498,8 +498,8 @@ For equivalence, φ ⇔ ψ can also be stated as:
 - φ is equivalent to ψ
 - φ is necessary and sufficient for ψ
 - φ if and only if ψ (φ iff ψ)
-** Exercises 2.3.1
-*** 1
+*** Exercises 2.3.1
+**** 1
 Fill in the second row of the truth table.
 
 Answer:
@@ -510,15 +510,15 @@ Answer:
 | T | F | F     |
 | F | T |       |
 | F | F |       |
-*** 2
+**** 2
 Provide justification for your entry.
 
 Answer:
 
 If φ is true, but ψ is false, then the implication is false because ψ's truth
 is conditional upon φ.
-** Exercises 2.3.2
-*** 1
+*** Exercises 2.3.2
+**** 1
 Fill in the third and fourth rows of the truth table.
 
 Answer:
@@ -529,14 +529,14 @@ Answer:
 | T | F | F     |
 | F | T | T     |
 | F | F | T     |
-*** 2
+**** 2
 Provide justification for your entries.
 
 Answer:
 
 The truth of ψ does not follow as φ is false, so the conditional still holds.
-** Exercises 2.3.3
-*** 1
+*** Exercises 2.3.3
+**** 1
 Which of the following are true and which are false?
 
 Answer:
@@ -580,7 +580,7 @@ T
 (j) (Euclid's birthday was July 4) ⇒ (Rectangles have four sides)
 
 T
-*** 2
+**** 2
 
 As in Exercise 2.2.3(5), let D be the statement “The dollar is strong,” Y the
 statement “The Yuan is strong,” and T the statement “New US–China trade
@@ -611,7 +611,7 @@ D ⇒ ¬Y
 (e) New trade agreement means Dollar and Yuan will be tightly linked.
 
 T ⇒ (D ∧ Y) ∨ (¬D ∧ ¬Y)
-*** 3
+**** 3
 Complete the following truth table.
 
 Note: ¬ has the same binding rules as − (minus) in arithmetic and algebra, so
@@ -625,14 +625,14 @@ Answer:
 | T | F  | F | F     | F      |
 | F | T  | T | T     | T      |
 | F | T  | F | T     | T      |
-*** 4
+**** 4
 What conclusions can you draw from the above table?
 
 Answer:
 
 φ ⇒ ψ = ¬φ ∨ ψ
-** Exercises 2.3.4
-*** 1
+*** Exercises 2.3.4
+**** 1
 Build a truth table to prove the claim I made earlier that φ ⇔ ψ is true if φ
 and ψ are both true or both false and φ ⇔ ψ is false if exactly one of φ, ψ is
 true and the other false. (To constitute a proof, your table should have
@@ -642,7 +642,7 @@ time, as in the previous exercises.)
 Answer:
 
 Skipping.
-*** 2
+**** 2
 Build a truth table to show that
 
 (φ ⇒ ψ) ⇔ (¬φ ∨ ψ)
@@ -658,7 +658,7 @@ Answer:
 | T | F | F     | F  | F      | T                  |
 | F | T | T     | T  | T      | T                  |
 | F | F | T     | T  | T      | T                  |
-*** 3
+**** 3
 Build a truth table to show that
 
 (φ ⇏ ψ) ⇔ (φ ∧ ¬ψ)
@@ -673,7 +673,7 @@ Answer:
 | T | F | T  | T       | T        | T                  |
 | F | T | F  | F       | F        | T                  |
 | F | F | T  | F       | F        | T                  |
-*** 4
+**** 4
 The ancient Greeks formulated a basic rule of reasoning for proving
 mathematical statements. Called modus ponens, it says that if you know φ and
 you know φ ⇒ ψ, then you can conclude ψ.
@@ -695,7 +695,7 @@ Answer:
 valid rule of inference.
 
 For all values of φ and ψ, the statement [φ ∧ (φ ⇒ ψ)] ⇒ ψ holds.
-*** 5
+**** 5
 Mod-2 arithmetic has just the two numbers 0 and 1 and follows the usual rules
 of arithmetic together with the additional rule 1 + 1 = 0. (It is the
 arithmetic that takes place in a single bit location in a digital computer.)
@@ -707,7 +707,7 @@ Complete the following table:
 | 1 | 0 |     0 |     1 |
 | 0 | 1 |     0 |     1 |
 | 0 | 0 |     0 |     0 |
-*** 6
+**** 6
 In the table you obtained in the above exercise, interpret 1 as T and 0 as F and
 view M, N as statements.
 
@@ -731,14 +731,14 @@ xor
 (c) Does ¬ correspond to − (minus)?
 
 No.
-*** 7
+**** 7
 Repeat the above exercise, but interpret 0 as T and 1 as F. What conclusions
 can you draw?
 
 Answer:
 
 Binary operations in binary arithmetic correspond to Boolean logic operations.
-*** 8
+**** 8
 The following puzzle was introduced by the psychologist Peter Wason in 1966,
 and is one of the most famous subject tests in the psychology of
 reasoning. Most people get it wrong. (So you have been warned!)
@@ -757,8 +757,8 @@ rule, and which cards do you in fact have to turn over?
 Answer:
 
 E and 4, I think.
-** Exercises 2.3.5
-*** 1
+*** Exercises 2.3.5
+**** 1
 ¬(φ ∧ ψ) and (¬φ) ∨ (¬ψ) are equivalent.
 
 An way to prove this is to argue directly with the meaning of the first
@@ -780,7 +780,7 @@ Answer:
 - That means ¬(φ ∨ ψ) means that this is not the case, one of them is not true.
 - That means that both are false.
 - This is the same as saying (¬φ) ∧ (¬ψ).
-*** 2
+**** 2
 By a denial of a statement φ we mean any statement equivalent to ¬φ. Give a
 useful denial of each of the following statements.
 
@@ -809,7 +809,7 @@ x is positive and x < 10.
 (f) We will win the first game or the second.
 
 We will lose the first and second game.
-*** 3
+**** 3
 Which of the following conditions is necessary for the natural number n to be
 divisible by 6?
 
@@ -823,20 +823,20 @@ divisible by 6?
 Answer:
 
 a, f.
-*** 4
+**** 4
 In Exercise 3, which conditions are sufficient for n to be divisible by 6?
 
 Answer:
 
 c, d, f.
-*** 5
+**** 5
 In Exercise 3, which conditions are necessary and sufficient for n to be
 divisible by 6?
 
 Answer:
 
 f
-*** 6
+**** 6
 Let /m/, /n/ denote any two natural numbers. Prove that /mn/ is odd iff /m/ and
 /n/ are odd.
 
@@ -851,21 +851,21 @@ Answer:
   if n and m are odd, (nm odd) is true.
 - If both (mn odd) ⇒ (m odd ∧ n odd) and (m odd ∧ n odd) ⇒ (nm odd) are true,
   then (mn odd) ⇔ (m odd ∧ n odd).
-*** 7
+**** 7
 With reference to the previous question, is it true that /mn/ is even iff /m/
 and /n/ are even?
 
 Answer:
 
 No.
-*** 8
+**** 8
 Show that φ ⇔ ψ is equivalent to (¬φ) ⇔ (¬ψ). How does this relate to your
 answers to Questions 6 and 7 above?
 
 Answer:
 
 Skipping.
-*** 9
+**** 9
 Construct truth tables to illustrate the following:
 
 Answer:
@@ -891,7 +891,7 @@ Answer:
 | F | T | F | T       | T           |
 | F | F | T | T       | T           |
 | F | F | F | F       | T           |
-*** 10
+**** 10
 Use truth tables to prove that the following are equivalent:
 
 (a) ¬(φ ⇒ ψ) and φ ∧ (¬ψ)
@@ -901,7 +901,7 @@ Use truth tables to prove that the following are equivalent:
 Answer:
 
 Skipping.
-*** 11
+**** 11
 Verify the equivalences in (b) and (c) in the previous question by means of a
 logical argument. (So, in the case of (b), for example, you must show that
 assuming φ and deducing ψ ∧ θ is the same as both deducing ψ from φ and θ from
@@ -910,7 +910,7 @@ assuming φ and deducing ψ ∧ θ is the same as both deducing ψ from φ and �
 Answer:
 
 TODO
-*** 12
+**** 12
 Use truth tables to prove the equivalence of φ ⇒ ψ and (¬ψ) ⇒ (¬φ).  (¬ψ) ⇒
 (¬φ) is called the /contrapositive/ of φ ⇒ ψ. The logical equivalence of a
 conditional and its contrapositive means that one way to prove an implication
@@ -925,7 +925,7 @@ Answer:
 | T | F | F     | T  | F  | F           |
 | F | T | T     | F  | T  | T           |
 | F | F | T     | T  | T  | T           |
-*** 13
+**** 13
 Write down the contrapositives of the following statements:
 
 Answer:
@@ -946,7 +946,7 @@ If n is not prime, 2n - 1 is not prime.
 (d) If the Yuan rises, the Dollar will fall.
 
 D ⇒ ¬Y
-*** 14
+**** 14
 It is important not to confuse the contrapositive of a conditional φ ⇒ ψ with
 its /converse/ ψ ⇒ φ. Use truth tables to show that the contrapositive and the
 converse of φ ⇒ ψ are not equivalent.
@@ -959,7 +959,7 @@ Answer:
 | T | F | F     | F  | T  | F       | T     |
 | F | T | T     | T  | F  | T       | F     |
 | F | F | T     | T  | T  | T       | T     |
-*** 15
+**** 15
 Write down the converses of the four statements in Question 13.
 
 Answer:
@@ -980,7 +980,7 @@ If n is prime, 2n - 1 is prime.
 (d) If the Yuan rises, the Dollar will fall.
 
 ¬D ⇒ Y
-*** 16
+**** 16
 Show that for any two statements φ and ψ either φ ⇒ ψ or its converse is true
 (or both). This is another reminder that the conditional is not the same as
 implication.
@@ -988,7 +988,7 @@ implication.
 Answer:
 
 Skipping.
-*** 17
+**** 17
 Express the combinator
 
 φ unless ψ
@@ -998,7 +998,7 @@ in terms of the standard logical combinators.
 Answer:
 
 ψ ⇒ ¬φ
-*** 18
+**** 18
 Identify the antecedent and the consequent in each of the following
 conditionals:
 
@@ -1043,14 +1043,14 @@ Consequent: team wins
 
 Antecedent: Karl plays
 Consequent: team wins
-*** 19
+**** 19
 Write the converse and contrapositive of each conditional in the previous
 question.
 
 Answer:
 
 Skipping.
-*** 20
+**** 20
 Let ⊻ denote the ‘exclusive or’ that corresponds to the English expression
 “either one or the other but not both”. Construct a truth table for this
 connective.
@@ -1063,13 +1063,13 @@ Answer:
 | T | F | T     |
 | F | T | T     |
 | F | F | F     |
-*** 21
+**** 21
 Express φ ⊻ ψ in terms of the basic combinators ∧, ∨, ¬.
 
 Answer:
 
 ¬(φ ∧ ψ) ∧ ¬(φ ∧ ψ)
-*** 22
+**** 22
 Which of the following pairs of propositions are equivalent?
 
 (a) ¬(P ∨ Q), ¬P ∧ ¬Q
@@ -1081,7 +1081,7 @@ Which of the following pairs of propositions are equivalent?
 Answer:
 
 a, c, d
-*** 23
+**** 23
 Give, if possible, an example of a true conditional sentence for which
 
 (a) the converse is true.
@@ -1092,7 +1092,7 @@ Give, if possible, an example of a true conditional sentence for which
 Answer:
 
 Skipping.
-*** 24
+**** 24
 You are in charge of a party where there are young people. Some are drinking
 alcohol, others soft drinks. Some are old enough to drink alcohol legally,
 others are under age. You are responsible for ensuring that the drinking laws
@@ -1107,7 +1107,7 @@ check to make sure that no one is breaking the law?
 Answer:
 
 Skipping.
-*** 25
+**** 25
 Compare the logical structure of the previous question with Wason’s problem
 (Exercise 2.3.4(8)). Comment on your answers to those two questions. In
 particular, identify any logical rules you used in solving each problem, say
@@ -1117,3 +1117,15 @@ Answer:
 
 Skipping.
 ** § 2.4 Quantifiers
+* Chapter 3: Proofs
+** § 3.1 What is a proof?
+** § 3.2 Proof by contradiction
+** § 3.3 Proving conditionals
+** § 3.4 Proving quantified statements
+** § 3.5 Induction proofs
+* Chapter 4: Proving results about numbers
+** § 4.1 The integers
+** § 4.2 The real numbers
+** § 4.3 Completeness
+** § 4.4 Sequences
+* Appendix: Set theory
