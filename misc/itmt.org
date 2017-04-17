@@ -493,6 +493,11 @@ Terminology for φ ⇒ ψ, all meaning the same thing:
 - ψ is necessary for φ
 
 Note the distinction between "φ only if ψ" and "ψ if φ".
+
+For equivalence, φ ⇔ ψ can also be stated as:
+- φ is equivalent to ψ
+- φ is necessary and sufficient for ψ
+- φ if and only if ψ (φ iff ψ)
 ** Exercises 2.3.1
 *** 1
 Fill in the second row of the truth table.
@@ -725,7 +730,7 @@ xor
 
 (c) Does ¬ correspond to − (minus)?
 
-xor
+No.
 *** 7
 Repeat the above exercise, but interpret 0 as T and 1 as F. What conclusions
 can you draw?
@@ -754,28 +759,361 @@ Answer:
 E and 4, I think.
 ** Exercises 2.3.5
 *** 1
+¬(φ ∧ ψ) and (¬φ) ∨ (¬ψ) are equivalent.
+
+An way to prove this is to argue directly with the meaning of the first
+statement:
+- φ ∧ ψ means both φ and ψ are true.
+- Thus ¬(φ ∧ ψ) means it is not the case that both φ and ψ are true.
+- If they are not both true, then at least one of φ, ψ must be false.
+- This is clearly the same as saying that at least one of ¬φ and ¬ψ is
+  true. (By the definition of
+- By the meaning of or, this can be expressed as (¬φ) ∨ (¬ψ).
+
+Provide an analogous logical argument to show that ¬(φ∨ψ) and (¬φ)∧(¬ψ) are
+equivalent.
+
+Answer:
+
+¬(φ ∨ ψ) and (¬φ) ∧ (¬ψ) are equivalent:
+- φ ∨ ψ means that at least one of φ and ψ are true.
+- That means ¬(φ ∨ ψ) means that this is not the case, one of them is not true.
+- That means that both are false.
+- This is the same as saying (¬φ) ∧ (¬ψ).
 *** 2
+By a denial of a statement φ we mean any statement equivalent to ¬φ. Give a
+useful denial of each of the following statements.
+
+Answer:
+
+(a) 34,159 is a prime number.
+
+34,159 is not a prime number.
+
+(b) Roses are red and violets are blue.
+
+Roses are not red or violets are not blue.
+
+(c) If there are no hamburgers, I’ll have a hot-dog.
+
+If there are no hamburgers, I'll not have a hot-dog.
+
+(d) Fred will go but he will not play.
+
+Fred will not go or he will play.
+
+(e) The number x is either negative or greater than 10.
+
+x is positive and x < 10.
+
+(f) We will win the first game or the second.
+
+We will lose the first and second game.
 *** 3
+Which of the following conditions is necessary for the natural number n to be
+divisible by 6?
+
+(a) n is divisible by 3.
+(b) n is divisible by 9.
+(c) n is divisible by 12.
+(d) n = 24.
+(e) n² is divisible by 3.
+(f) n is even and divisible by 3.
+
+Answer:
+
+a, f.
 *** 4
+In Exercise 3, which conditions are sufficient for n to be divisible by 6?
+
+Answer:
+
+c, d, f.
 *** 5
+In Exercise 3, which conditions are necessary and sufficient for n to be
+divisible by 6?
+
+Answer:
+
+f
 *** 6
+Let /m/, /n/ denote any two natural numbers. Prove that /mn/ is odd iff /m/ and
+/n/ are odd.
+
+Answer:
+
+- (mn odd) ⇔ (m odd ∧ n odd)
+- For one side of the equivalence: (mn odd) ⇒ (m odd ∧ n odd)
+- Only the product of two odd numbers returns an odd number, meaning that if mn
+  is odd, (m odd ∧ n odd) is true.
+- For the other side: (m odd ∧ n odd) ⇒ (nm odd)
+- When multiplying two odd numbers, an odd number is returned.  This means that
+  if n and m are odd, (nm odd) is true.
+- If both (mn odd) ⇒ (m odd ∧ n odd) and (m odd ∧ n odd) ⇒ (nm odd) are true,
+  then (mn odd) ⇔ (m odd ∧ n odd).
 *** 7
+With reference to the previous question, is it true that /mn/ is even iff /m/
+and /n/ are even?
+
+Answer:
+
+No.
 *** 8
+Show that φ ⇔ ψ is equivalent to (¬φ) ⇔ (¬ψ). How does this relate to your
+answers to Questions 6 and 7 above?
+
+Answer:
+
+Skipping.
 *** 9
+Construct truth tables to illustrate the following:
+
+Answer:
+
+(a) φ ⇔ ψ
+
+| φ | ψ | φ ⇔ ψ |
+|---+---+-------|
+| T | T | T     |
+| T | F | F     |
+| F | T | F     |
+| F | F | T     |
+
+(b) φ ⇒ (ψ ∨ θ)
+
+| φ | ψ | θ | (ψ ∨ θ) | φ ⇒ (ψ ∨ θ) |
+|---+---+---+---------+-------------|
+| T | T | T | T       | T           |
+| T | T | F | T       | T           |
+| T | F | T | T       | T           |
+| T | F | F | F       | F           |
+| F | T | T | T       | T           |
+| F | T | F | T       | T           |
+| F | F | T | T       | T           |
+| F | F | F | F       | T           |
 *** 10
+Use truth tables to prove that the following are equivalent:
+
+(a) ¬(φ ⇒ ψ) and φ ∧ (¬ψ)
+(b) φ ⇒ (ψ ∧ θ) and (φ ⇒ ψ) ∧ (φ ⇒ θ)
+(c) (φ ∨ ψ) ⇒ θ and (ψ ⇒ θ) ∧ (ψ ⇒ θ)
+
+Answer:
+
+Skipping.
 *** 11
+Verify the equivalences in (b) and (c) in the previous question by means of a
+logical argument. (So, in the case of (b), for example, you must show that
+assuming φ and deducing ψ ∧ θ is the same as both deducing ψ from φ and θ from
+φ.)
+
+Answer:
+
+TODO
 *** 12
+Use truth tables to prove the equivalence of φ ⇒ ψ and (¬ψ) ⇒ (¬φ).  (¬ψ) ⇒
+(¬φ) is called the /contrapositive/ of φ ⇒ ψ. The logical equivalence of a
+conditional and its contrapositive means that one way to prove an implication
+is to verify the contrapositive. This is a common form of proof in mathematics
+that we’ll encounter later.
+
+Answer:
+
+| φ | ψ | φ ⇒ ψ | ¬ψ | ¬φ | (¬ψ) ⇒ (¬φ) |
+|---+---+-------+----+----+-------------|
+| T | T | T     | F  | F  | T           |
+| T | F | F     | T  | F  | F           |
+| F | T | T     | F  | T  | T           |
+| F | F | T     | T  | T  | T           |
 *** 13
+Write down the contrapositives of the following statements:
+
+Answer:
+
+(a) If two rectangles are congruent, they have the same area.
+
+If two rectangles don't have the same area, they are not congruent.
+
+(b) If a triangle with sides a, b, c (c largest) is right-angled, then a² + b²
+= c².
+
+If a² + b² ≠ c², a triangle with sides a, b, c is not right-angled.
+
+(c) If 2n − 1 is prime, then n is prime.
+
+If n is not prime, 2n - 1 is not prime.
+
+(d) If the Yuan rises, the Dollar will fall.
+
+D ⇒ ¬Y
 *** 14
+It is important not to confuse the contrapositive of a conditional φ ⇒ ψ with
+its /converse/ ψ ⇒ φ. Use truth tables to show that the contrapositive and the
+converse of φ ⇒ ψ are not equivalent.
+
+Answer:
+
+| φ | ψ | φ ⇒ ψ | ¬φ | ¬ψ | ¬ψ ⇒ ¬φ | ψ ⇒ φ |
+|---+---+-------+----+----+---------+-------|
+| T | T | T     | F  | F  | T       | T     |
+| T | F | F     | F  | T  | F       | T     |
+| F | T | T     | T  | F  | T       | F     |
+| F | F | T     | T  | T  | T       | T     |
 *** 15
+Write down the converses of the four statements in Question 13.
+
+Answer:
+
+(a) If two rectangles are congruent, they have the same area.
+
+If two rectangles have the same area, they are congruent.
+
+(b) If a triangle with sides a, b, c (c largest) is right-angled, then a² + b²
+= c².
+
+If a² + b² = c², a triangle with sides a, b, c is right-angled.
+
+(c) If 2n − 1 is prime, then n is prime.
+
+If n is prime, 2n - 1 is prime.
+
+(d) If the Yuan rises, the Dollar will fall.
+
+¬D ⇒ Y
 *** 16
+Show that for any two statements φ and ψ either φ ⇒ ψ or its converse is true
+(or both). This is another reminder that the conditional is not the same as
+implication.
+
+Answer:
+
+Skipping.
 *** 17
+Express the combinator
+
+φ unless ψ
+
+in terms of the standard logical combinators.
+
+Answer:
+
+ψ ⇒ ¬φ
 *** 18
+Identify the antecedent and the consequent in each of the following
+conditionals:
+
+Answer:
+
+(a) If the apples are red, they are ready to eat.
+
+Antecedent: apples are red
+Consequent: apples are ready to eat
+
+(b) The differentiability of a function f is sufficient for f to be continuous.
+
+Antecedent: f is differential
+Consequent: f is continuous
+
+(c) A function f is bounded if f is integrable.
+
+Antecedent: f is integrable
+Consequent: f is bounded
+
+(d) A sequence s is bounded whenever s is convergent.
+
+Antecedent: s is convergent
+Consequent: s is bounded
+
+(e) It is necessary that n is prime in order for 2n − 1 to be prime.
+
+Antecedent: 2n -1 is prime
+Consequent: n is prime
+
+(f) The team wins only when Karl is playing.
+
+Antecedent: team wins
+Consequent: Karl is playing
+
+(g) When Karl plays the team wins.
+
+Antecedent: Karl plays
+Consequent: team wins
+
+(h) The team wins when Karl plays.
+
+Antecedent: Karl plays
+Consequent: team wins
 *** 19
+Write the converse and contrapositive of each conditional in the previous
+question.
+
+Answer:
+
+Skipping.
 *** 20
+Let ⊻ denote the ‘exclusive or’ that corresponds to the English expression
+“either one or the other but not both”. Construct a truth table for this
+connective.
+
+Answer:
+
+| φ | ψ | φ ⊻ ψ |
+|---+---+-------|
+| T | T | F     |
+| T | F | T     |
+| F | T | T     |
+| F | F | F     |
 *** 21
+Express φ ⊻ ψ in terms of the basic combinators ∧, ∨, ¬.
+
+Answer:
+
+¬(φ ∧ ψ) ∧ ¬(φ ∧ ψ)
 *** 22
+Which of the following pairs of propositions are equivalent?
+
+(a) ¬(P ∨ Q), ¬P ∧ ¬Q
+(b) ¬P ∨ ¬Q, ¬(P ∨ ¬Q)
+(c) ¬(P ∧ Q), ¬P ∨ ¬Q
+(d) ¬(P ⇒ (Q ∧ R)), ¬(P ⇒ Q) ∨ ¬(P ⇒ R)
+(e) P ⇒ (Q ⇒ R), (P ∧ Q) ⇒ R
+
+Answer:
+
+a, c, d
 *** 23
+Give, if possible, an example of a true conditional sentence for which
+
+(a) the converse is true.
+(b) the converse is false.
+(c) the contrapositive is true.
+(d) the contrapositive is false.
+
+Answer:
+
+Skipping.
 *** 24
+You are in charge of a party where there are young people. Some are drinking
+alcohol, others soft drinks. Some are old enough to drink alcohol legally,
+others are under age. You are responsible for ensuring that the drinking laws
+are not broken, so you have asked each person to put his or her photo ID on the
+table. At one table are four young people. One person has a beer, another has a
+Coke, but their IDs happen to be face down so you cannot see their ages. You
+can, however, see the IDs of the other two people. One is under the drinking
+age, the other is above it. Unfortunately, you are not sure if they are
+drinking Seven-up or vodka and tonic. Which IDs and/or drinks do you need to
+check to make sure that no one is breaking the law?
+
+Answer:
+
+Skipping.
 *** 25
+Compare the logical structure of the previous question with Wason’s problem
+(Exercise 2.3.4(8)). Comment on your answers to those two questions. In
+particular, identify any logical rules you used in solving each problem, say
+which one was easier, and why you felt it was easier.
+
+Answer:
+
+Skipping.
 ** § 2.4 Quantifiers
