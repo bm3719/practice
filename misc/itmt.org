@@ -1,6 +1,7 @@
 #+STARTUP: content
 
-Notes and exercises from Introduction to Mathmatical Thinking (Devlin, 2012).
+Notes and (most of the) exercises from Introduction to Mathmatical Thinking
+(Devlin, 2012).
 
 * Chapter 1: What is mathematics?
 The dichotomy between the computational and abstract is summarized as
@@ -583,11 +584,11 @@ T
 **** 2
 
 As in Exercise 2.2.3(5), let D be the statement “The dollar is strong,” Y the
-statement “The Yuan is strong,” and T the statement “New US–China trade
-agreement signed.” Express the main content of each of the following
-(fictitious) newspaper headlines in logical notation. (Remember, logical
+statement "The Yuan is strong", and T the statement "New US–China trade
+agreement signed".  Express the main content of each of the following
+(fictitious) newspaper headlines in logical notation.  (Remember, logical
 notation captures truth, but not the many nuances and inferences of natural
-language.) As before, be prepared to justify and defend your answers.
+language).  As before, be prepared to justify and defend your answers.
 
 Answer:
 
@@ -750,8 +751,8 @@ course you can only see one face of each. What you see is:
 B E 4 7
 
 You are now told that the cards you are looking at were chosen to follow the
-rule “If there is a vowel on one side, then there is an odd number on the other
-side.”  What is the least number of cards you have to turn over to verify this
+rule "If there is a vowel on one side, then there is an odd number on the other
+side".  What is the least number of cards you have to turn over to verify this
 rule, and which cards do you in fact have to turn over?
 
 Answer:
@@ -1051,8 +1052,8 @@ Answer:
 
 Skipping.
 **** 20
-Let ⊻ denote the ‘exclusive or’ that corresponds to the English expression
-“either one or the other but not both”. Construct a truth table for this
+Let ⊻ denote the /exclusive or/ that corresponds to the English expression
+"either one or the other but not both".  Construct a truth table for this
 connective.
 
 Answer:
@@ -1117,6 +1118,401 @@ Answer:
 
 Skipping.
 ** § 2.4 Quantifiers
+Two (related) quantifiers:
+- /there exists/: ∃, the /existential quantifier/.
+- /for all/: ∀, the /universal quantifier/.
+
+An existence example: "There exists a real number x such that x² + 2x + 1 =
+0" can be written as:
+
+∃x[x² + 2x + 1 = 0]
+
+Another example:
+
+√2 is rational → (∃p ∈ ℕ)(∃q ∈ ℕ)(√2 = p/q)
+
+An universal example: "The square of any real number is greater than or equal
+to 0" can be written as:
+
+(∀x ∈ ℝ)(x² ≥ 0)
+
+Order matters when combining existential and universal quantifiers.  E.g., (∀m
+∈ ℕ)(∃n ∈ ℕ)(n > m) is fine, but (∃n ∈ ℕ)(∀m ∈ ℕ)(n > m) says there is an n
+which exceeds all natural numbers.
+
+Negation:
+
+¬[∀x A(x)] ⇔ ∃x[¬A(x)]
+
+Reminder: Negation of an implication takes this form, which is useful in
+existential/universal negation:
+- ¬∀x [p ⇒ q]
+- ∃x ¬[p ⇒ q]
+- ∃x [p ⇏ q]
+- ∃x [p ∧ ¬q]
+
+Also:
+- ∀x [¬p ∨ q]
+- ∀x [p ⇒ q]
+
+/Domain of quantification/: The collection of all objects a quantification
+refers to, e.g., ℚ, ℕ, etc.
+
+Uniqueness: "There exists a unique x such that..." is written as
+
+∃!x φ(x)
+
+which is equivalent to:
+
+∃x [φ(x) ∧ ∀y[φ(y) ⇒ x = y]]
+*** Exercise 2.4.1
+The same kind of argument I just outlined to show that the cubic equation y =
+x³ + 3x + 1 has a real root, can be used to prove the "Wobbly Table Theorem".
+Suppose you are sitting in a restaurant at a perfectly square table, with four
+identical legs, one at each corner.  Because the floor is uneven, the table
+wobbles.  One solution is to fold a small piece of paper and insert it under
+one leg until the table is stable.  But there is another solution.  Simply by
+rotating the table you will be able to position it so it does not wobble.
+Prove this.  [WARNING: This is a thinking-outside-the-box question.  The
+solution is simple, but it can take a lot of effort before you find it.  This
+would be an unfair question on a timed exam but is a great puzzle to keep
+thinking about until you hit upon the right idea.]
+
+Answer:
+
+TODO
+*** Exercises 2.4.2
+**** 1
+Express the following as existence assertions. (Feel free to use a mix of
+symbols and words.)
+
+Answer:
+
+(a) The equation x³ = 27 has a natural number solution.
+
+(∃x ∈ ℕ)(x³ = 27)
+
+(b) 1,000,000 is not the largest natural number.
+
+(∃n ∈ ℕ)(n > 1000000)
+
+(c) The natural number n is not a prime.
+
+(∃n ∈ ℕ)(n is not prime)
+**** 2
+Express the following as ‘for all’ assertions (using symbols and words):
+
+Answer:
+
+(a) The equation x³ = 28 does not have a natural number solution.
+
+(∀n ∈ ℕ)(x³ = 28)
+
+(b) 0 is less than every natural number.
+
+(∀n ∈ ℕ)(n > 0)
+
+(c) the natural number n is a prime.
+
+(∀n ∈ ℕ)(n is prime)
+**** 3
+Express the following in symbolic form, using quantifiers for people:
+
+Answer:
+
+(a) Everybody loves somebody.
+
+∀a∃b[a loves b]
+
+(b) Everyone is tall or short.
+
+∀p[p is tall ∨ p is short]
+
+(c) Everyone is tall or everyone is short.
+
+∀p[p is tall] ∨ ∀p[p is short]
+
+(d) Nobody is at home.
+
+¬∃p[p is home]
+
+(e) If John comes, all the women will leave.
+
+∀w[john comes ⇒ w leave]
+
+(f) If a man comes, all the women will leave.
+
+∀m∀w[m comes ⇒ w leave]
+**** 4
+Express the following using quantifiers that refer (only) to the sets ℝ and ℕ:
+
+Answer:
+
+(a) The equation x² + a = 0 has a real root for any real number a.
+
+TODO
+
+(b) The equation x² + a = 0 has a real root for any negative real number a.
+
+TODO
+
+(c) Every real number is rational.
+
+(∀n ∈ ℝ)(n ∈ ℚ)
+
+(d) There is an irrational number.
+
+(∃n)(n ∉ ℚ)
+
+(e) There is no largest irrational number. (This one looks quite complicated.)
+
+(∀n ∈ ℚ)(∃m ∈ ℚ)(m > n)
+**** 5
+Let C be the set of all cars, let D(x) mean that x is domestic, and let M(x)
+mean that x is badly made. Express the following in symbolic form using these
+symbols:
+
+Answer:
+
+(a) All domestic cars are badly made.
+
+(∀c)(D(c) ⇒ M(c))
+
+(b) All foreign cars are badly made.
+
+(∀c)(¬D(c) ⇒ M(c))
+
+(c) All badly made cars are domestic.
+
+(∀c)(M(c) ⇒ D(c))
+
+(d) There is a domestic car that is not badly made.
+
+(∃c)(D(c) ∧ ¬M(c))
+
+(e) There is a foreign car that is badly made.
+
+(∃c)(¬D(c) ∧ M(c))
+**** 6
+Express the following sentence symbolically, using only quantifiers for real
+numbers, logical connectives, the order relation <, and the symbol Q(x) having
+the meaning ‘x is rational’:
+
+There is a rational number between any two unequal real numbers.
+
+Answer:
+
+(∀n,m ∈ ℝ)(∃x ∈ ℚ)((n < x < m) ∨ (n > x > m))
+**** 7
+Express the following famous statement (by Abraham Lincoln) using quantifiers
+for people and times: "You may fool all the people some of the time, you can
+even fool some of the people all of the time, but you cannot fool all of the
+people all the time."
+
+Answer:
+
+(∀p)[fooled_some(p)] ∨ (∃p)[fooled_all(p)] ∨ ¬(∀p)[fooled_all(p)]
+**** 8
+A US newspaper headline read, "A driver is involved in an accident every six
+seconds."  Let x be a variable to denote a driver, t a variable for a
+six-second interval, and A(x, t) the property that x is in an accident during
+interval t.  Express the headline in logical notation.
+
+Answer:
+
+(∃x)(∀t)(A(x, t))
+*** Exercises 2.4.3
+**** 1
+Show that ¬[∃xA(x)] is equivalent to ∀x[¬A(x)].
+
+Answer:
+
+- Assume ¬[∃xA(x)].
+- It is not the case that there exists a x where A(x) holds.
+- This is the same as saying all x, A(x) always doesn't hold.
+- Symbolically, this is ∀x[¬A(x)].
+
+
+- Assume ∀x[¬A(x)].
+- For all x, A(x) always doesn't hold.
+- This is the same as saying it is not the case that there exists a x where
+  A(x) holds.
+- Symbolically, this is ¬[∃xA(x)].
+**** 2
+Give an everyday example to illustrate this equivalence, and verify it by an
+argument specific to your example.
+
+Skipping.
+*** Exercise 2.4.4
+Prove that the statement
+
+There is an even prime bigger than 2
+
+is false.
+
+Answer:
+
+- Prove ∃x(P(x) ∧ x > 2) false.
+- ¬∃x(P(x) ∧ x > 2)
+- ∀x ¬(P(x) ∧ x > 2)
+- ∀x (¬P(x) ∨ x ≤ 2)
+- ∀x (x > 2 ⇒ x mod 2 = 0)
+- ∀x (x > 2 ⇒ ¬P(x))
+- ∀x (¬P(x) ∨ x ≤ 2)
+*** Exercises 2.4.5
+**** 1
+Translate the following sentences into symbolic form using quantifiers. In each
+case the assumed domain is given in parentheses.
+
+Answer:
+
+(a) All students like pizza. (All people)
+
+(∀s)[student(s) ⇒ likes(s, pizza)]
+
+(b) One of my friends does not have a car. (All people)
+
+(∃f)¬[friend(f) ∧ has(f, car)]
+
+(c) Some elephants do not like muffins. (All animals)
+
+(∃e)¬[elephant(e) ∧ likes(e, muffins)]
+
+(d) Every triangle is isosceles. (All geometric figures)
+
+(∀t)[triangle(t) ⇒ isosceles(t)]
+
+(e) Some of the students in the class are not here today. (All people)
+
+(∃s)[student(s) ∧ in_class(s) ∧ not_here(s)]
+
+(f) Everyone loves somebody. (All people)
+
+(∀x)(∃y)[loves(x, y)]
+
+(g) Nobody loves everybody. (all people)
+
+(∀x)(∃y)¬[loves(x, y)]
+
+(h) If a man comes, all the women will leave. (All people)
+
+(∀m)[man(x) ∧ x comes ⇒ (∀w)[woman(w) ⇒ w leaves]]
+
+(i) All people are tall or short. (All people)
+
+(∀p)[tall(p) ∨ short(p)]
+
+(j) All people are tall or all people are short. (All people)
+
+(∀p)[tall(p)] ∨ (∀p)[short(p)]
+
+(k) Not all precious stones are beautiful. (All stones)
+
+(∃x)¬[precious(x) ∧ beautiful(x)]
+
+(l) Nobody loves me. (All people)
+
+(∀p)¬[loves_me(p)]
+
+(m) At least one American snake is poisonous. (All snakes)
+
+(∃s)[American(s) ∧ poisonous(s)]
+
+(n) At least one American snake is poisonous. (All animals)
+
+(∃s ∈ snakes)[American(s) ∧ poisonous(s)]
+**** 2
+Which of the following are true?  The domain for each is given in parentheses.
+
+(a) ∀x(x + 1 ≥ x) (Real numbers)
+(b) ∃x(2x + 3 = 5x + 1) (Natural numbers)
+(c) ∃x(x² + 1 = 2x) (Real numbers)
+(d) ∃x(x² = 2) (Rational numbers)
+(e) ∃x(x² = 2) (Real numbers)
+(f) ∀x(x³ + 17x² + 6x+ 100 ≥ 0) (Real numbers)
+(g) ∃x(x³ + x² + x + 1 ≥ 0) (Real numbers)
+(h) ∀x∃y(x + y = 0) (Real numbers)
+(i) ∃x∀y(x + y = 0) (Real numbers)
+(j) ∀x∃!y(y = x²) (Real numbers)
+(k) ∀x∃!y(y = x²) (Natural numbers)
+(l) ∀x∃y∀z(xy = xz) (Real numbers)
+(m) ∀x∃y∀z(xy = xz) (Prime numbers)
+(n) ∀x∃y(x ≥ 0 ⇒ y² = x) (Real numbers)
+(o) ∀x[x < 0 ⇒ ∃y(y² = x)] (Real numbers)
+(p) ∀x[x < 0 ⇒ ∃y(y² = x)] (Positive real numbers)
+
+Answer:
+c, e, g, h, j, k, n
+**** 3
+Negate each of the symbolic statements you wrote in Question 1, putting your
+answers in positive form. Express each negation in natural, idiomatic English.
+
+Answer:
+
+Skipping.
+**** 4
+Negate each of the statements in Question 2, putting your answers in positive
+form.
+
+Answer:
+
+Skipping.
+**** 5
+Negate the following statements and put each answer into positive form:
+
+Answer:
+
+(a) (∀x ∈ ℕ)(∃y ∈ ℕ)(x + y = 1)
+
+¬(∀x ∈ ℕ)(∃y ∈ ℕ)(x + y = 1)
+(∃x ∈ ℕ)¬(∃y ∈ ℕ)(x + y = 1)
+(∃x ∈ ℕ)(∀y ∈ ℕ)¬(x + y = 1)
+(∃x ∈ ℕ)(∀y ∈ ℕ)(x + y ≠ 1)
+
+(b) (∀x > 0)(∃y < 0)(x + y = 0) (where x, y are real number variables)
+
+¬(∀x > 0)(∃y < 0)(x + y = 0)
+(∃x > 0)¬(∃y < 0)(x + y = 0)
+(∃x > 0)(∀y < 0)¬(x + y = 0)
+(∃x > 0)(∀y < 0)(x + y ≠ 0)
+
+(c) ∃x(∀∊ > 0)(−∊ < x < ∊) (where x, y are real number variables)
+
+¬∃x(∀∊ > 0)(−∊ < x < ∊)
+∀x¬(∀∊ > 0)(−∊ < x < ∊)
+∀x(∃∊ > 0)¬(−∊ < x < ∊)
+∀x(∃∊ > 0)(−∊ ≥ x ≥ ∊)
+
+(d) (∀x ∈ ℕ)(∀y ∈ ℕ)(∃z ∈ ℕ)(x + y = z²)
+
+¬(∀x ∈ ℕ)(∀y ∈ ℕ)(∃z ∈ ℕ)(x + y = z²)
+(∃x ∈ ℕ)¬(∀y ∈ ℕ)(∃z ∈ ℕ)(x + y = z²)
+(∃x ∈ ℕ)(∃y ∈ ℕ)¬(∃z ∈ ℕ)(x + y = z²)
+(∃x ∈ ℕ)(∃y ∈ ℕ)(∀z ∈ ℕ)¬(x + y = z²)
+(∃x ∈ ℕ)(∃y ∈ ℕ)(∀z ∈ ℕ)(x + y ≠ z²)
+**** 6
+Give a negation (in positive form) of the quotation which you met in Exercise
+2.4.2(7): "You may fool all the people some of the time, you can even fool some
+of the people all of the time, but you cannot fool all of the people all the
+time."
+
+Answer:
+
+¬[(∀p)[fooled_some(p)] ∨ (∃p)[fooled_all(p)] ∨ ¬(∀p)[fooled_all(p)]]
+¬(∀p)[fooled_some(p)] ∧ ¬(∃p)[fooled_all(p)] ∧ (∀p)[fooled_all(p)]
+(∃p)[¬fooled_some(p)] ∧ (∀p)[¬fooled_all(p)] ∧ (∀p)[fooled_all(p)]
+**** 7
+The standard definition of a real function f being continuous at a point x = a
+is:
+
+(∀∊ > 0)(∃δ > 0)(∀x)[|x − a| < δ ⇒ |f(x) − f(a)| < ∊]
+
+Write down a formal definition for f being discontinuous at a. Your definition
+should be in positive form.
+
+Answer:
+
+TODO
 * Chapter 3: Proofs
 ** § 3.1 What is a proof?
 ** § 3.2 Proof by contradiction
