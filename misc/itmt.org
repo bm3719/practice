@@ -1424,22 +1424,22 @@ Answer:
 **** 2
 Which of the following are true?  The domain for each is given in parentheses.
 
-(a) ∀x(x + 1 ≥ x) (Real numbers)
-(b) ∃x(2x + 3 = 5x + 1) (Natural numbers)
-(c) ∃x(x² + 1 = 2x) (Real numbers)
-(d) ∃x(x² = 2) (Rational numbers)
-(e) ∃x(x² = 2) (Real numbers)
-(f) ∀x(x³ + 17x² + 6x+ 100 ≥ 0) (Real numbers)
-(g) ∃x(x³ + x² + x + 1 ≥ 0) (Real numbers)
-(h) ∀x∃y(x + y = 0) (Real numbers)
-(i) ∃x∀y(x + y = 0) (Real numbers)
-(j) ∀x∃!y(y = x²) (Real numbers)
-(k) ∀x∃!y(y = x²) (Natural numbers)
-(l) ∀x∃y∀z(xy = xz) (Real numbers)
-(m) ∀x∃y∀z(xy = xz) (Prime numbers)
-(n) ∀x∃y(x ≥ 0 ⇒ y² = x) (Real numbers)
-(o) ∀x[x < 0 ⇒ ∃y(y² = x)] (Real numbers)
-(p) ∀x[x < 0 ⇒ ∃y(y² = x)] (Positive real numbers)
+- (a) ∀x(x + 1 ≥ x) (Real numbers)
+- (b) ∃x(2x + 3 = 5x + 1) (Natural numbers)
+- (c) ∃x(x² + 1 = 2x) (Real numbers)
+- (d) ∃x(x² = 2) (Rational numbers)
+- (e) ∃x(x² = 2) (Real numbers)
+- (f) ∀x(x³ + 17x² + 6x+ 100 ≥ 0) (Real numbers)
+- (g) ∃x(x³ + x² + x + 1 ≥ 0) (Real numbers)
+- (h) ∀x∃y(x + y = 0) (Real numbers)
+- (i) ∃x∀y(x + y = 0) (Real numbers)
+- (j) ∀x∃!y(y = x²) (Real numbers)
+- (k) ∀x∃!y(y = x²) (Natural numbers)
+- (l) ∀x∃y∀z(xy = xz) (Real numbers)
+- (m) ∀x∃y∀z(xy = xz) (Prime numbers)
+- (n) ∀x∃y(x ≥ 0 ⇒ y² = x) (Real numbers)
+- (o) ∀x[x < 0 ⇒ ∃y(y² = x)] (Real numbers)
+- (p) ∀x[x < 0 ⇒ ∃y(y² = x)] (Positive real numbers)
 
 Answer:
 c, e, g, h, j, k, n
@@ -1464,32 +1464,32 @@ Answer:
 
 (a) (∀x ∈ ℕ)(∃y ∈ ℕ)(x + y = 1)
 
-¬(∀x ∈ ℕ)(∃y ∈ ℕ)(x + y = 1)
-(∃x ∈ ℕ)¬(∃y ∈ ℕ)(x + y = 1)
-(∃x ∈ ℕ)(∀y ∈ ℕ)¬(x + y = 1)
-(∃x ∈ ℕ)(∀y ∈ ℕ)(x + y ≠ 1)
+- ¬(∀x ∈ ℕ)(∃y ∈ ℕ)(x + y = 1)
+- (∃x ∈ ℕ)¬(∃y ∈ ℕ)(x + y = 1)
+- (∃x ∈ ℕ)(∀y ∈ ℕ)¬(x + y = 1)
+- (∃x ∈ ℕ)(∀y ∈ ℕ)(x + y ≠ 1)
 
 (b) (∀x > 0)(∃y < 0)(x + y = 0) (where x, y are real number variables)
 
-¬(∀x > 0)(∃y < 0)(x + y = 0)
-(∃x > 0)¬(∃y < 0)(x + y = 0)
-(∃x > 0)(∀y < 0)¬(x + y = 0)
-(∃x > 0)(∀y < 0)(x + y ≠ 0)
+- ¬(∀x > 0)(∃y < 0)(x + y = 0)
+- (∃x > 0)¬(∃y < 0)(x + y = 0)
+- (∃x > 0)(∀y < 0)¬(x + y = 0)
+- (∃x > 0)(∀y < 0)(x + y ≠ 0)
 
 (c) ∃x(∀∊ > 0)(−∊ < x < ∊) (where x, y are real number variables)
 
-¬∃x(∀∊ > 0)(−∊ < x < ∊)
-∀x¬(∀∊ > 0)(−∊ < x < ∊)
-∀x(∃∊ > 0)¬(−∊ < x < ∊)
-∀x(∃∊ > 0)(−∊ ≥ x ≥ ∊)
+- ¬∃x(∀∊ > 0)(−∊ < x < ∊)
+- ∀x¬(∀∊ > 0)(−∊ < x < ∊)
+- ∀x(∃∊ > 0)¬(−∊ < x < ∊)
+- ∀x(∃∊ > 0)(−∊ ≥ x ≥ ∊)
 
 (d) (∀x ∈ ℕ)(∀y ∈ ℕ)(∃z ∈ ℕ)(x + y = z²)
 
-¬(∀x ∈ ℕ)(∀y ∈ ℕ)(∃z ∈ ℕ)(x + y = z²)
-(∃x ∈ ℕ)¬(∀y ∈ ℕ)(∃z ∈ ℕ)(x + y = z²)
-(∃x ∈ ℕ)(∃y ∈ ℕ)¬(∃z ∈ ℕ)(x + y = z²)
-(∃x ∈ ℕ)(∃y ∈ ℕ)(∀z ∈ ℕ)¬(x + y = z²)
-(∃x ∈ ℕ)(∃y ∈ ℕ)(∀z ∈ ℕ)(x + y ≠ z²)
+- ¬(∀x ∈ ℕ)(∀y ∈ ℕ)(∃z ∈ ℕ)(x + y = z²)
+- (∃x ∈ ℕ)¬(∀y ∈ ℕ)(∃z ∈ ℕ)(x + y = z²)
+- (∃x ∈ ℕ)(∃y ∈ ℕ)¬(∃z ∈ ℕ)(x + y = z²)
+- (∃x ∈ ℕ)(∃y ∈ ℕ)(∀z ∈ ℕ)¬(x + y = z²)
+- (∃x ∈ ℕ)(∃y ∈ ℕ)(∀z ∈ ℕ)(x + y ≠ z²)
 **** 6
 Give a negation (in positive form) of the quotation which you met in Exercise
 2.4.2(7): "You may fool all the people some of the time, you can even fool some
@@ -1498,9 +1498,9 @@ time."
 
 Answer:
 
-¬[(∀p)[fooled_some(p)] ∨ (∃p)[fooled_all(p)] ∨ ¬(∀p)[fooled_all(p)]]
-¬(∀p)[fooled_some(p)] ∧ ¬(∃p)[fooled_all(p)] ∧ (∀p)[fooled_all(p)]
-(∃p)[¬fooled_some(p)] ∧ (∀p)[¬fooled_all(p)] ∧ (∀p)[fooled_all(p)]
+- ¬[(∀p)[fooled_some(p)] ∨ (∃p)[fooled_all(p)] ∨ ¬(∀p)[fooled_all(p)]]
+- ¬(∀p)[fooled_some(p)] ∧ ¬(∃p)[fooled_all(p)] ∧ (∀p)[fooled_all(p)]
+- (∃p)[¬fooled_some(p)] ∧ (∀p)[¬fooled_all(p)] ∧ (∀p)[fooled_all(p)]
 **** 7
 The standard definition of a real function f being continuous at a point x = a
 is:
