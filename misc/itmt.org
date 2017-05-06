@@ -1512,11 +1512,122 @@ should be in positive form.
 
 Answer:
 
-TODO
+- ¬(∀∊ > 0)(∃δ > 0)(∀x)[|x − a| < δ ⇒ |f(x) − f(a)| < ∊]
+- (∃∊ > 0)¬(∃δ > 0)(∀x)[|x − a| < δ ⇒ |f(x) − f(a)| < ∊]
+- (∃∊ > 0)(∀δ > 0)¬(∀x)[|x − a| < δ ⇒ |f(x) − f(a)| < ∊]
+- (∃∊ > 0)(∀δ > 0)(∃x)¬[|x − a| < δ ⇒ |f(x) − f(a)| < ∊]
+- (∃∊ > 0)(∀δ > 0)(∃x)[¬(|x − a| < δ) ∧ ¬(|f(x) − f(a)| < ∊)]
+- (∃∊ > 0)(∀δ > 0)(∃x)[|x − a| ≥ δ ∧ |f(x) − f(a)| ≥ ∊]
 * Chapter 3: Proofs
-** § 3.1 What is a proof?
 ** § 3.2 Proof by contradiction
+Example:
+
+Theorem: The number √2 is irrational.
+
+Proof: Assume, on the contrary, that √2 were rational.  Then we could find
+natural numbers p and q such that:
+
+√2 = p/q
+
+where p and q have no common factors.
+
+Squaring gives:
+
+2 = p²/q²
+
+which rearranges to:
+
+p² = 2q²
+
+Thus, p² is even.  Hence p must be even, since odd² = odd.  Thus, there is a
+natural number r such that p = 2r.  Substituting for p:
+
+(2r)² = 2q²
+
+i.e.,
+
+4r² = 2q²
+
+and dividing both sides by two gives:
+
+2r² = q²
+
+Thus q² is even, meaning q is even.  But p is even and p and q have no common
+factors, so we have a contradiction.  Hence our original assumption that √2 was
+rational must be false.  In other words, √2 must be irrational, which is what
+we set out to prove. ∎
+
+Another way to think about it is proof by way of contrapositive.  Since ¬φ ⇒ Θ
+is equivalent to ¬Θ ⇒ φ, start with ¬φ and deduce F (i.e. ¬φ ⇒ F).  This is
+contrapositive of T ⇒ φ, proving that.  Using modus ponens, φ must be true.
+
+A better example of the above:
+
+To prove: If x² is even, then x is even.
+
+Contrapositive: If x is not even, then x² is not even.
+
+Proof: Suppose x is not even.  Then x is odd.  The product of two odd numbers
+is odd, hence x² = x·x is odd.  Thus x² is not even.  Having proved the
+contrapositive, we infer the original statement. ∎
+*** Exercises 3.2.1
+**** 1
+Prove that √3 is irrational.
+
+Answer:
+
+Theorem: √3 is irrational.
+
+Proof: Assume that √3 is rational.  If so, we could find numbers p and q where:
+
+√3 = p/q
+
+where p and q have no common factors.
+
+Squaring gives:
+
+3 = p²/q²
+
+which rearranges to:
+
+p² = 3q²
+
+Since p and q are natural numbers, p² is divisible by 3.  If p² is divisible by
+3, then p must also be divisible by 3.  This is because 3 is prime and there's
+no two numbers that can be multiplied to produce it.  This means that p can be
+expressed in terms of 3 and a natural number r, such that p = 3r.  Plugging
+this into our original equation gives us:
+
+(3r)² = 3q²
+
+Simplified, this is
+
+9r² = 3q²
+
+Now q² can be equated to:
+
+q² = 3r²
+
+This means that q² is also divisible by 3, and by the same logic above, that q
+is also divisible by 3.
+
+This means that p and q share a common factor, negating our argument that √3 =
+p/q and that √3 is rational.  Therefore √3 is irrational. ∎
+**** 2
+Is it true that √n is irrational for every natural number n?
+
+Answer:
+
+No.  n = 4 is an example where this is not true.
+**** 3
+If not, then for what n is √n irrational?  Formulate a prove a result of the
+form "√n is irrational if and only if n...".
+
+Answer:
+
+TODO
 ** § 3.3 Proving conditionals
+
 ** § 3.4 Proving quantified statements
 ** § 3.5 Induction proofs
 * Chapter 4: Proving results about numbers
