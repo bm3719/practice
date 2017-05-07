@@ -3,6 +3,13 @@
 Notes and (most of the) exercises from Introduction to Mathmatical Thinking
 (Devlin, 2012).
 
+Notes for anyone else reading this:
+- To save some typing, I skipped a few of the tedious or extremely obvious
+  exercises.
+- I left TODOs for exercises I didn't know the answers to.  No answer key
+  exists for this book, so I might come back to these later if I get better at
+  the topics in question.
+
 * Chapter 1: What is mathematics?
 The dichotomy between the computational and abstract is summarized as
 procedural vs. describing behavior.
@@ -20,9 +27,8 @@ How would you show that not every number of the form N = (p₁ ⋅ p₂ ⋅ p₃
 p_n) + 1 is prime, where p₁, p₂, p₃, ..., p_n, ... is the list of all prime
 numbers?
 
-Answer:
-
-Show that there must be at least one prime q, where q < N and q divides N.
+Answer: Show that there must be at least one prime q, where q < N and q divides
+N.
 **** 2
 Find two unambiguous (but natural sounding) sentences equivalent to the
 sentence "The man saw the woman with a telescope", the first where the man has
@@ -62,9 +68,7 @@ No head injury is too trivial to ignore.
 
 Reformulate to avoid the unintended second reading.
 
-Answer:
-
-For all head injuries, do not ignore.
+Answer: For all head injuries, do not ignore.
 **** 5
 You often see the following notice posted in elevators:
 
@@ -73,9 +77,7 @@ In case of fire, do not use elevator.
 Comment on the two meaning and reformulate to avoid the unintended second
 meaning.
 
-Answer:
-
-If fire, do not use elevator.
+Answer: If fire, do not use elevator.
 **** 6
 Official documents often contain one or more pages that are empty apart from
 one sentence at the bottom:
@@ -86,42 +88,32 @@ Does the sentence make a true statement?  What is the purpose of making such a
 statement.  What reformulation of the sentence would avoid any logical problems
 about truth?
 
-Answer:
-
-With the presence of the statement, since the page is not blank.  A better
-sentence would be: This page left intentionally blank, apart from this
+Answer: With the presence of the statement, since the page is not blank.  A
+better sentence would be: This page left intentionally blank, apart from this
 statement.
 **** 7
 Find (and provide citations for) three examples of published sentences whose
 literal meaning is (clearly) not what the writer intended.
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 8
 Comment on the sentence "The temperature is hot today".  You hear people say
 things like this all the time, and everyone understands what is meant.  But
 using language is this sloppy way in mathematics would be disastrous.
 
-Answer:
-
-Two points: hot is relative, ambiguity about what is hot.
+Answer: Two points: hot is relative, ambiguity about what is hot.
 **** 9
 Provide a context and a sentence within that context, where the word "and"
 occurs five times in succession, with no other word between those five
 occurrences (you are allowed to use punctuation).
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 10
 Provide a context and a sentence within that context, where the words "and, or,
 and, or, and" occur in that order, with no other word between them.  (Again,
 you can use punctuation).
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 ** § 2.2: The logical combinator and, or, and not
 The joint statement φ ∧ ψ is a /conjunction/.  φ and ψ are the /conjuncts/.
 
@@ -139,9 +131,7 @@ not badly made" or "At least one foreign car is well made".
 The mathematical concept of conjunction captures the meaning of "and" in
 everyday language.  True or false?  Explain your answer.
 
-Answer:
-
-False.  In natural language, it can imply order.
+Answer: False.  In natural language, it can imply order.
 **** 2
 Simplify the following symbolic statements as much as you can, leaving your
 answer in the standard symbolic form.  (In case you are not familiar with the
@@ -175,33 +165,25 @@ x = 0
 **** 3
 Express each of your simplified statements from question 1 in natural English.
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 4
 What strategy would you adopt to show that the conjunction φ₁ ∧ φ₂ ∧ ... ∧ φ_n
 is true?
 
-Answer:
-
-Prove all conjuncts.
+Answer: Prove all conjuncts.
 **** 5
 What strategy would you adopt to show that the conjunction φ₁ ∧ φ₂ ∧ ... ∧ φ_n
 is false?
 
-Answer:
-
-Attempt to prove all conjuncts until finding one false.
+Answer: Attempt to prove all conjuncts until finding one false.
 **** 6
 Is it possible for one of (φ ∧ ψ) ∧ θ and φ ∧ (ψ ∧ θ) to be true and the other
 false, or does the associative property hold for conjunction?  Prove your
 answer.
 
-Answer:
-
-The associative property holds for conjunction.  If one of {φ, ψ, θ} were
-false, which is required to make one of the statements false, that would also
-negate the other statement.
+Answer: The associative property holds for conjunction.  If one of {φ, ψ, θ}
+were false, which is required to make one of the statements false, that would
+also negate the other statement.
 **** 7
 Which of the following is more likely?
 
@@ -213,10 +195,8 @@ Which of the following is more likely?
 
 If you believe there is no definite answer, say so.
 
-Answer:
-
-Presuming the conditionals in a - d have non-zero likelihoods of being false,
-then e is more likely.
+Answer: Presuming the conditionals in a - d have non-zero likelihoods of being
+false, then e is more likely.
 **** 8
 In the following table, T denotes 'true' and F denotes 'false'.  The first two
 columns list all the possible combinations of values of T and F that the two
@@ -263,33 +243,25 @@ x > 3
 **** 2
 Express each of your simplified statements from Question 1 in natural English.
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 3
 What strategy would you adopt to show the disjunction φ₁ ∨ φ₂ ∨ ... ∨ φ_n
 is true?
 
-Answer:
-
-Prove any disjunct true.
+Answer: Prove any disjunct true.
 **** 4
 What strategy would you adopt to show the disjunction φ₁ ∨ φ₂ ∨ ... ∨ φ_n
 is false?
 
-Answer:
-
-Prove all disjuncts false.
+Answer: Prove all disjuncts false.
 **** 5
 Is it possible for one of (φ ∨ ψ) ∨ θ or φ ∨ (ψ ∨ θ) to be true and the other
 false, or does the associative property hold for disjunction?  Prove your
 answer.
 
-Answer:
-
-The associative property holds for disjunction.  If all of {φ, ψ, θ} where
-false, which is required to make one of the statements false, that would also
-negate the other statement.
+Answer: The associative property holds for disjunction.  If all of {φ, ψ, θ}
+where false, which is required to make one of the statements false, that would
+also negate the other statement.
 **** 6
 Which of the following is more likely?
 
@@ -301,9 +273,7 @@ Which of the following is more likely?
 
 If you believe there is no definite answer, say so.
 
-Answer:
-
-a is more likely.
+Answer: a is more likely.
 **** 7
 Fill in the entries in the final column of the following truth table:
 
@@ -345,16 +315,12 @@ x ≠ 1
 **** 2
 Express each of your simplified statements from Question 1 in natural English.
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 3
 Is showing that the negation ¬φ is true the same as showing that φ is false?
 Explain your answer.
 
-Answer:
-
-Yes.  The negation only applies to just φ.
+Answer: Yes.  The negation only applies to just φ.
 **** 4
 Fill in the entries in the final column of the following truth table:
 
@@ -436,9 +402,7 @@ pleased with the movie.  Indeed, it means something considerably less
 positive.  How would you capture this kind of use of language is the formal
 framework we have been looking at?
 
-Answer:
-
-"Not displeased" = ¬displeased.
+Answer: "Not displeased" = ¬displeased.
 ** § 2.3 Implication
 Intuitively: Implication = conditional + causation.
 
@@ -514,10 +478,8 @@ Answer:
 **** 2
 Provide justification for your entry.
 
-Answer:
-
-If φ is true, but ψ is false, then the implication is false because ψ's truth
-is conditional upon φ.
+Answer: If φ is true, but ψ is false, then the implication is false because ψ's
+truth is conditional upon φ.
 *** Exercises 2.3.2
 **** 1
 Fill in the third and fourth rows of the truth table.
@@ -533,9 +495,8 @@ Answer:
 **** 2
 Provide justification for your entries.
 
-Answer:
-
-The truth of ψ does not follow as φ is false, so the conditional still holds.
+Answer: The truth of ψ does not follow as φ is false, so the conditional still
+holds.
 *** Exercises 2.3.3
 **** 1
 Which of the following are true and which are false?
@@ -629,9 +590,7 @@ Answer:
 **** 4
 What conclusions can you draw from the above table?
 
-Answer:
-
-φ ⇒ ψ = ¬φ ∨ ψ
+Answer: φ ⇒ ψ = ¬φ ∨ ψ
 *** Exercises 2.3.4
 **** 1
 Build a truth table to prove the claim I made earlier that φ ⇔ ψ is true if φ
@@ -640,9 +599,7 @@ true and the other false. (To constitute a proof, your table should have
 columns that show how the entries for φ ⇔ ψ are derived, one operator at a
 time, as in the previous exercises.)
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 2
 Build a truth table to show that
 
@@ -736,9 +693,8 @@ No.
 Repeat the above exercise, but interpret 0 as T and 1 as F. What conclusions
 can you draw?
 
-Answer:
-
-Binary operations in binary arithmetic correspond to Boolean logic operations.
+Answer: Binary operations in binary arithmetic correspond to Boolean logic
+operations.
 **** 8
 The following puzzle was introduced by the psychologist Peter Wason in 1966,
 and is one of the most famous subject tests in the psychology of
@@ -755,9 +711,7 @@ rule "If there is a vowel on one side, then there is an odd number on the other
 side".  What is the least number of cards you have to turn over to verify this
 rule, and which cards do you in fact have to turn over?
 
-Answer:
-
-E and 4, I think.
+Answer: E and 4, I think.
 *** Exercises 2.3.5
 **** 1
 ¬(φ ∧ ψ) and (¬φ) ∨ (¬ψ) are equivalent.
@@ -821,22 +775,16 @@ divisible by 6?
 (e) n² is divisible by 3.
 (f) n is even and divisible by 3.
 
-Answer:
-
-a, f.
+Answer: a, f.
 **** 4
 In Exercise 3, which conditions are sufficient for n to be divisible by 6?
 
-Answer:
-
-c, d, f.
+Answer: c, d, f.
 **** 5
 In Exercise 3, which conditions are necessary and sufficient for n to be
 divisible by 6?
 
-Answer:
-
-f
+Answer: f
 **** 6
 Let /m/, /n/ denote any two natural numbers. Prove that /mn/ is odd iff /m/ and
 /n/ are odd.
@@ -856,16 +804,12 @@ Answer:
 With reference to the previous question, is it true that /mn/ is even iff /m/
 and /n/ are even?
 
-Answer:
-
-No.
+Answer: No.
 **** 8
 Show that φ ⇔ ψ is equivalent to (¬φ) ⇔ (¬ψ). How does this relate to your
 answers to Questions 6 and 7 above?
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 9
 Construct truth tables to illustrate the following:
 
@@ -899,18 +843,14 @@ Use truth tables to prove that the following are equivalent:
 (b) φ ⇒ (ψ ∧ θ) and (φ ⇒ ψ) ∧ (φ ⇒ θ)
 (c) (φ ∨ ψ) ⇒ θ and (ψ ⇒ θ) ∧ (ψ ⇒ θ)
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 11
 Verify the equivalences in (b) and (c) in the previous question by means of a
 logical argument. (So, in the case of (b), for example, you must show that
 assuming φ and deducing ψ ∧ θ is the same as both deducing ψ from φ and θ from
 φ.)
 
-Answer:
-
-TODO
+Answer: TODO
 **** 12
 Use truth tables to prove the equivalence of φ ⇒ ψ and (¬ψ) ⇒ (¬φ).  (¬ψ) ⇒
 (¬φ) is called the /contrapositive/ of φ ⇒ ψ. The logical equivalence of a
@@ -986,9 +926,7 @@ Show that for any two statements φ and ψ either φ ⇒ ψ or its converse is t
 (or both). This is another reminder that the conditional is not the same as
 implication.
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 17
 Express the combinator
 
@@ -996,9 +934,7 @@ Express the combinator
 
 in terms of the standard logical combinators.
 
-Answer:
-
-ψ ⇒ ¬φ
+Answer: ψ ⇒ ¬φ
 **** 18
 Identify the antecedent and the consequent in each of the following
 conditionals:
@@ -1048,9 +984,7 @@ Consequent: team wins
 Write the converse and contrapositive of each conditional in the previous
 question.
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 20
 Let ⊻ denote the /exclusive or/ that corresponds to the English expression
 "either one or the other but not both".  Construct a truth table for this
@@ -1067,9 +1001,7 @@ Answer:
 **** 21
 Express φ ⊻ ψ in terms of the basic combinators ∧, ∨, ¬.
 
-Answer:
-
-¬(φ ∧ ψ) ∧ ¬(φ ∧ ψ)
+Answer: ¬(φ ∧ ψ) ∧ ¬(φ ∧ ψ)
 **** 22
 Which of the following pairs of propositions are equivalent?
 
@@ -1079,9 +1011,7 @@ Which of the following pairs of propositions are equivalent?
 (d) ¬(P ⇒ (Q ∧ R)), ¬(P ⇒ Q) ∨ ¬(P ⇒ R)
 (e) P ⇒ (Q ⇒ R), (P ∧ Q) ⇒ R
 
-Answer:
-
-a, c, d
+Answer: a, c, d
 **** 23
 Give, if possible, an example of a true conditional sentence for which
 
@@ -1090,9 +1020,7 @@ Give, if possible, an example of a true conditional sentence for which
 (c) the contrapositive is true.
 (d) the contrapositive is false.
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 24
 You are in charge of a party where there are young people. Some are drinking
 alcohol, others soft drinks. Some are old enough to drink alcohol legally,
@@ -1105,18 +1033,14 @@ age, the other is above it. Unfortunately, you are not sure if they are
 drinking Seven-up or vodka and tonic. Which IDs and/or drinks do you need to
 check to make sure that no one is breaking the law?
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 25
 Compare the logical structure of the previous question with Wason’s problem
 (Exercise 2.3.4(8)). Comment on your answers to those two questions. In
 particular, identify any logical rules you used in solving each problem, say
 which one was easier, and why you felt it was easier.
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 ** § 2.4 Quantifiers
 Two (related) quantifiers:
 - /there exists/: ∃, the /existential quantifier/.
@@ -1178,9 +1102,7 @@ solution is simple, but it can take a lot of effort before you find it.  This
 would be an unfair question on a timed exam but is a great puzzle to keep
 thinking about until you hit upon the right idea.]
 
-Answer:
-
-TODO
+Answer: TODO
 *** Exercises 2.4.2
 **** 1
 Express the following as existence assertions. (Feel free to use a mix of
@@ -1300,27 +1222,21 @@ the meaning ‘x is rational’:
 
 There is a rational number between any two unequal real numbers.
 
-Answer:
-
-(∀n,m ∈ ℝ)(∃x ∈ ℚ)((n < x < m) ∨ (n > x > m))
+Answer: (∀n,m ∈ ℝ)(∃x ∈ ℚ)((n < x < m) ∨ (n > x > m))
 **** 7
 Express the following famous statement (by Abraham Lincoln) using quantifiers
 for people and times: "You may fool all the people some of the time, you can
 even fool some of the people all of the time, but you cannot fool all of the
 people all the time."
 
-Answer:
-
-(∀p)[fooled_some(p)] ∨ (∃p)[fooled_all(p)] ∨ ¬(∀p)[fooled_all(p)]
+Answer: (∀p)[fooled_some(p)] ∨ (∃p)[fooled_all(p)] ∨ ¬(∀p)[fooled_all(p)]
 **** 8
 A US newspaper headline read, "A driver is involved in an accident every six
 seconds."  Let x be a variable to denote a driver, t a variable for a
 six-second interval, and A(x, t) the property that x is in an accident during
 interval t.  Express the headline in logical notation.
 
-Answer:
-
-(∃x)(∀t)(A(x, t))
+Answer: (∃x)(∀t)(A(x, t))
 *** Exercises 2.4.3
 **** 1
 Show that ¬[∃xA(x)] is equivalent to ∀x[¬A(x)].
@@ -1331,7 +1247,6 @@ Answer:
 - It is not the case that there exists a x where A(x) holds.
 - This is the same as saying all x, A(x) always doesn't hold.
 - Symbolically, this is ∀x[¬A(x)].
-
 
 - Assume ∀x[¬A(x)].
 - For all x, A(x) always doesn't hold.
@@ -1441,22 +1356,17 @@ Which of the following are true?  The domain for each is given in parentheses.
 - (o) ∀x[x < 0 ⇒ ∃y(y² = x)] (Real numbers)
 - (p) ∀x[x < 0 ⇒ ∃y(y² = x)] (Positive real numbers)
 
-Answer:
-c, e, g, h, j, k, n
+Answer: c, e, g, h, j, k, n
 **** 3
 Negate each of the symbolic statements you wrote in Question 1, putting your
 answers in positive form. Express each negation in natural, idiomatic English.
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 4
 Negate each of the statements in Question 2, putting your answers in positive
 form.
 
-Answer:
-
-Skipping.
+Answer: Skipping.
 **** 5
 Negate the following statements and put each answer into positive form:
 
@@ -1616,18 +1526,237 @@ p/q and that √3 is rational.  Therefore √3 is irrational. ∎
 **** 2
 Is it true that √n is irrational for every natural number n?
 
-Answer:
-
-No.  n = 4 is an example where this is not true.
+Answer: No.  n = 4 is an example where this is not true.
 **** 3
 If not, then for what n is √n irrational?  Formulate a prove a result of the
 form "√n is irrational if and only if n...".
 
+Answer: TODO
+** § 3.3 Proving conditionals
+Example:
+
+Theorem: (x and y are rational number) ⇒ (x + y is a rational number)
+
+Proof:
+- Assume the antecedent.  x and y are rational numbers.
+- If they are, we can find integers p, q, m, n such that x = p/m and y = q/n.
+- Then: x + y = p/m + q/n  = (pn + qm)/mn
+- Since (pn + qm) an mn are integers, we can conclude that x + y is rational. ∎
+
+Conditionals involving quantifiers are sometimes best handled by proving the
+contrapositive.  Given the equivalence φ ⇒ ψ, use the contrapositive ¬ψ ⇒ ¬φ.
+
+Example:
+
+Suppose that for some given unknown angle θ we wish to prove the conditional:
+
+(sin θ ≠ 0) ⇒ (∀n ∈ ℕ)(θ ≠ nπ)
+
+This statement is equivalent to:
+
+¬(∀n ∈ ℕ)(θ ≠ nπ) ⇒ ¬(sin θ ≠ 0)
+
+which reduces to the positive form:
+
+(∃n ∈ ℕ)(θ ≠ nπ) ⇒ (sin θ = 0)
+
+This is an implication we know to be correct, thereby proving the original
+implication.
+
+For biconditional equivalences φ ⇔ ψ, you generally prove the two conditionals
+φ ⇒ ψ and ψ ⇒ φ.
+*** Exercises 3.3.1
+Let r, s be irrationals.  For each of the following, say whether the given
+number is necessarily irrational, and prove your answer.
+**** 1
+r + 3
+
 Answer:
 
-TODO
-** § 3.3 Proving conditionals
+Proof:
+- Assume r and s are irrational.
+- If r + 3 is rational, then there exists m and n such that r + 3 = m/n.
+- This means that r = (m/n) - 3.
+- This means that r must be rational.
+- This contradicts our antecedent assumption, therefore r + 3 is irrational. ∎
+**** 2
+5r
 
+Answer: Similar proof to above.  Answer is 5r is irrational.
+**** 3
+r + s
+
+Answer:
+
+Proof:
+- Assume r and s are irrational.
+- If r + s is rational, then there exists m and n such that r + s = m/n.
+- This means that r = m/n - s.
+- But if r = m/n - s, then r must be irrational, since s is irrational.
+- Therefore r + s must be irrational. ∎
+**** 4
+rs
+
+Answer: Similar proof to above.  Answer is rs is irrational.
+**** 5
+√r
+
+Answer: Similar proof to above.  Answer is √r is irrational.
+**** 6
+r^s
+
+Answer: TODO
+*** Exercises 3.3.2
+**** 1
+Explain why proving φ ⇒ ∀ and ψ ⇒ φ estabishes the truth of φ ⇔ ψ.
+
+Answer: I'm assuming this is a typo and the book means the first conditional to
+be φ ⇒ ψ.  If so, this is just the definition of biconditional or "if and only
+if".
+**** 2
+Explain why proving φ ⇒ ψ and (¬φ) ⇒ (¬ψ) estabishes the truth of φ ⇔ ψ.
+
+Answer: (¬φ) ⇒ (¬ψ) is the same as ψ ⇒ φ.
+**** 3
+Prove that if five investors split a payout of $2 million, at least one
+investor receives at least $400,000.
+
+Answer:
+
+Theorem: 2000000 split among 5_investors ⇒ (∃i ∈ 5_investors)(recieves(i,
+400000))
+Proof:
+- 2000000 is split 5 ways.
+- There exists investors {a, b, c, d, e}, each who receive 2000000 / 5.
+- 2000000 / 5 = 400000.
+- a ∈ 5_investors.
+- a receives 400000.
+- (∃i ∈ 5_investors)(recieves(i, 400000)). ∎
+**** 4
+Write down the converses of the following conditional statements:
+
+Answer:
+
+Note that the converse of p ⇒ q is q ⇒ p.
+
+(a) If the Dollar falls, the Yuan will rise.
+
+Y ⇒ ¬D
+
+(b) If x < y then −y < −x. (For x, y real numbers.)
+
+-y < -x ⇒ x < y
+
+(c) If two triangles are congruent they have the same area.
+
+If two triangles have the same area they are congruent.
+
+(d) The quadratic equation ax² + bx + c = 0 has a solution whenever b² ≥ 4a.
+(Where a, b, c, x denote real numbers and a ≠ 0.)
+
+ax² + bx + c = 0 ⇒ b² ≥ 4a
+
+(e) Let ABCD be a quadrilateral. If the opposite sides of ABCD are pairwise
+equal, then the opposite angles are pairwise equal.
+
+If the opposite angles of ABCD are pairwise equal, then the opposite sides are
+pairwise equal.
+
+(f) Let ABCD be a quadrilateral. If all four sides of ABCD are equal, then all
+four angles are equal.
+
+If all four angles in ABCD are equal, then all four sides are equal.
+
+(g) If n is not divisible by 3 then n² + 5 is divisible by 3. (For n a natural
+number.)
+
+If n² + 5 is divisible by 3, then n is not divisible by 3.
+**** 5
+Discounting the first example, which of the statements in the previous exercise
+are true, for which is the converse true, and which are equivalent?  Prove your
+answers.
+
+Answer:
+
+- b: Equivalent
+- c: Original true.
+- d: ?
+- e: Equivalent.
+- f: Equivalent.
+- g: Converse true.
+**** 6
+Let m and n be integers. Prove that:
+
+Answer:
+
+(a) If m and n are even, then m + n is even.
+
+Proof:
+- Assume m and n are even.
+- Only an even and an odd number added produce an odd.
+- m + n is even. ∎
+
+(b) If m and n are even, then mn is divisible by 4.
+
+Proof:
+- Assume m and n are even.
+- If m is even, then it is divisible by 2 and can be expressed as 2x for some
+  integer x.
+- If n is even, then it is divisible by 2 and can be expressed as 2y for some
+  integer y.
+- mn can then be expressed as 2x * 2y, or 4xy.
+- 4xy is divisible by 4.
+- Therefore, mn is divisible by 4. ∎
+
+(c) If m and n are odd, then m + n is even.
+
+Proof:
+- Assume m and n are odd.
+- Only an even and an odd number added produce an odd.
+- m + n is even. ∎
+
+(d) If one of m, n is even and the other is odd, then m + n is odd.
+
+Proof:
+- Assume one of m and n is even and the other odd.
+- Only an even and an odd number added produce an odd.
+- m + n is odd. ∎
+
+(e) If one of m, n is even and the other is odd, then mn is even.
+
+Proof:
+- Assume one of m and n is even and the other odd.
+- Only two odds multiplied produce an odd.
+- mn is odd. ∎
+**** 7
+Prove or disprove the statement “An integer n is divisible by 12 if and only if
+n³ is divisible by 12.”
+
+Answer:
+
+This is an equivalence and can be decomposed into the following, considering n
+∈ ℤ.
+
+- If n is divisible by 12, then n³ is divisible by 12.
+- If n³ is divisible by 12, then n is divisible by 12.
+
+Proof:
+- Assume n is divisible by 12.
+- If n is divisible by 12, then it can be expressed as 12x for some x ∈ ℤ.
+- n³ is then equal to 12x * 12x * 12x, or (12 * 3)x³.
+- (12 * 3)x³ is divisible by 12.
+- Therefore, n³ is divisible by 12.
+
+Proof:
+- Assume n³ is divisible by 12.
+- Since there is no cubed root of 12, each n in n³ must be divisible by 12.
+
+This equivalence is true, but I'm not sure about the second part of this answer..
+**** 8
+If you have not yet solved Exercise 3.3.1(6), have another attempt, using the hint
+to try s = √2.
+
+Answer: TODO
 ** § 3.4 Proving quantified statements
 ** § 3.5 Induction proofs
 * Chapter 4: Proving results about numbers
