@@ -1,0 +1,15 @@
+Code that writes code (that writes code)
+
+For this meetup, we'll take a break from our series of theory deep-dives and
+collectively level up the local Clojure community with a discussion about
+macros.  Though used everywhere by our heavily-bearded peers in the Common Lisp
+world, most Clojure programmers tend to not use them very much, or at all.
+Macros, however, are a critical feature of Clojure, and there are some key
+applications for them that everyone should know.
+
+We'll cover when you should use macros, when you shouldn't, compare Clojure
+macros to similar facilities in other languages, share a few macro-related
+tips, and maybe write some code to flex our macro-fu.
+
+Pizzas and drinks will be provided by Whiteboard Federal.  Call Bruce at the
+number provided if you have any issues entering the facility.

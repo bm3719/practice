@@ -1,0 +1,20 @@
+* logic-talk
+
+This project represents a talk about macro usage, specifically in Clojure.
+
+These concepts were presented at the National Capital Area Clojure Users Group
+on 2017-06-14.  See the [[https://www.meetup.com/Cap-Clug/events/239289076/][event page]] for details.
+
+* Usage
+
+The only code in this project is in =dev/user.clj=.
+
+There is also a [[doc/presentation.org][presentation]] in org-mode (to be used with org-present) in the
+=doc/= directory.  Open this file in Emacs and run ~M-x org-present~.  This
+requires the org-present package.
+
+* License
+
+Copyright © 2017
+
+Distributed under the GNU Public License version 3.0.
