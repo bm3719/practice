@@ -50,21 +50,21 @@
   ["explosions" "vampires" "zombies" "male nudity"])
 
 (def positive-reviews
-  ["Gratuitous quantities of $, just the way I like it."
+  ["Gratuitous quantities of $ just the way I like it."
    "Gives America what it wants: lots of $."
-   "Beautiful, non-stop $, often in slow motion."
+   "Beautiful non-stop $... often in slow motion."
    "Finally a movie that combines werewolves and $."
    "More than enough $ for the whole family."])
 
 (def neutral-reviews
   ["Has a reasonably satisfying quantities of $."
    "Only way to improve would be more $."
-   "Okay, but hopefully forthcoming the prequel has more $."
-   "+1 for having $, -1 for no close-ups of $."])
+   "Okay but hopefully forthcoming the prequel has more $."
+   "+1 for having $. -1 for no close-ups of $."])
 
 (def negative-reviews
   ["Not nearly enough $."
-   "When I pay good money for $, I expects lots of $."
+   "When I pay good money for $. I expects lots of $."
    "Guess I'll wait for the next reboot to see the $ I expect."
    "I don't think Hollywood understands my insatiable appetite for $."])
 
