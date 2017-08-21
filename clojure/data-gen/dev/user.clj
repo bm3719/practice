@@ -34,7 +34,6 @@
     {:name (str movie " "
                 (next-sequel-numeral) ": "
                 (next-sequel-suffix))
-     :stars (format "%.1f" (rand 5))
      :director (rand-nth directors)
      :release-date (str (+ 1980 (rand-int 38)) "-"
                         (rand-int 2) (inc (rand-int 2)) "-"
@@ -88,7 +87,7 @@
                 #"\$" (rand-nth features))})))
 
 (defn gen-files []
-  (let [movies-keys [:name :stars :director :release-date :box-office]
+  (let [movies-keys [:name :director :release-date :box-office]
         reviews-keys [:movie-name :name :rating :review]
         movies-data (gen-movies 2)
         reviews-data (gen-reviews 7 5 (map :name movies-data))]
