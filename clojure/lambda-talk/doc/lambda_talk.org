@@ -1,0 +1,113 @@
+* The λ-calculus
+
+"Lambda calculus is a model for the applicative component of programming
+languages.  It models all non-imperative constructs as applications of
+functions or rewrite rules."
+
+- from /The Lambda Papers/.  Gerald Sussman and Guy Steele. "Scheme: An
+  Interpreter for Extended Lambda Calculus".  1975
+
+Agenda:
+- High level overview
+- Brief tour of some selected topics
+- One deep-dive
+- Some motivation/guidance
+
+* An overview
+
+A formal model for computation, based on functions, their application, and
+abstraction.
+
+- history
+- vs. Turing machines
+- a language
+
+* The meta-language of λ
+
+The syntax (variations exist):
+- Variables: a
+- Abstraction: λx.a     λx.x
+- Application: (f x) f(x) 
+
+λx.x+1 a
+λa.a+1
+a+1
+
+Concepts:
+- Resolution: λy.(x(y(z))) (λq.q) = x(λq.q(z))
+- Functions can contain functions: λx.λy.x(y(z))
+- Simplification: The above can simplify to λxy.xyz
+- Currying
+
+a -> b -> c
+E1 
+* Rewrite Rules
+
+α-equivalence: λx.x = λy.y
+
+β-reduction: λx.x λy.y = λy.y
+
+λx.x λy.y
+β -> λ(λy.y).(λy.y)
+λy.y
+
+η-conversion: λx.λfx = f
+
+* Church Numerals
+
+A mapping of n ∈ ℕ as an n-fold composition of function f.
+
+0: λf.λx.x
+1: λf.λx.f x
+2: ?
+λf.λx.f f x
+
+* Combinatory logic and combinators
+
+Combinatory logic is a theory of higher-order functions that is equivalent to
+the λ-calculus.
+
+The main difference is that it removes abstraction.
+
+SKI
+
+Y (fixed-point combinator)
+
+#+BEGIN_SRC clojure
+(def y (fn [f]
+         ((fn [x]
+            (x x))
+          (fn [x]
+            (f (fn [y]
+                 ((x x) y)))))))
+#+END_SRC
+
+* Philosophy
+
+                         [[./lambda_man.jpg]]
+
+- As a desirable model, language minimalism
+- Computability
+- Whither Lisp, particularly Clojure?
+
+* Related Topics
+
+- Typed λ-calculus
+- Lambda Cube
+- System F
+- Cartesian closed categories
+- λ-calculus interpreters
+
+* Resources
+
+- Barendregt, H.P. /The Lambda Calculus/. 1984.
+
+- Steele, Guy, and Gerald Sussman. /The Lambda Papers/. 1975-1980.
+  - Notably: /Lambda the Ultimate Imperative/ and /Lambda the Ultimate
+    Declarative/.
+
+- Hindley, J. Roger, and Jonathan P. Seldin. /Lambda-Calculus and Combinators:
+  An Introduction/. 2008.
+
+- Michaelson, Greg. /An Introduction to Functional Programming Through Lambda
+  Calculus/. 2011.

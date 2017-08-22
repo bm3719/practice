@@ -1,0 +1,27 @@
+* lambda-talk
+
+This is a demonstration project used to illustrate a few basic concepts in the
+λ-calculus.
+
+These concepts will be presented at the National Capital Area Clojure Users
+Group on 2017-08-09.  See the [[https://www.meetup.com/Cap-Clug/events/240747487/][event page]] for details.
+
+* Usage
+
+The Clojure part of this application is only intended to be used from the REPL.
+
+There is also a presentation in org-mode (to be used with org-present) in the
+=doc/= directory.  Open this file in Emacs and run ~M-x org-present~.  You'll, of
+course, need to have installed the org-present package.
+
+Pro-tip: Bind a key to Unicode characters when using them regularly in Emacs.
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-M-l") (lambda () (interactive) (insert-char ?λ)))
+#+END_SRC
+
+* License
+
+Copyright © 2017
+
+Distributed under the GNU Public License version 3.0.
