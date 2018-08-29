@@ -1467,3 +1467,60 @@ f = do
 --   fmap f g = (\x -> f (g x))
 
 -- fmap could have been defined as (.) as well.
+
+-- NOTE: Not really a fan of how the rest of this book goes (and some of it up
+-- to this point), so I'm only jotting down the most minimal of notes from here
+-- on.
+
+-- Functor's <$> in an infix synonym for fmap.
+
+-- Applicative's <*> is sequential application, similar to Functor's <$>.  It's
+-- usually pronounced apply, app, or splat.
+-- > Just (+3) <*> Just 1
+-- Just 4
+-- > (+) <$> Just 3 <*> Just 1
+-- Just 4
+
+-- A Haskell version of thread-last, similar to >>=, but without Monads.
+x -: f = f x
+
+-- This:
+foo :: Maybe String
+foo = Just 3   >>= (\x ->
+      Just "!" >>= (\y ->
+      Just (show x ++ y)))
+
+-- is equivalent to this:
+foo' :: Maybe String
+foo' = do
+  x <- Just 3
+  y <- Just "!"
+  Just (show x ++ y)
+
+-- >> is sequential composition, where the first value is discarded.
+-- > Nothing >> Just 3
+-- Nothing
+-- > Just 1 >> Just 2
+-- Just 2
+
+-- >>=, monadic bind, works with lists as well, which are Monads, e.g.:
+-- > [1,2,3] >>= return
+-- [1,2,3]
+-- > [1,2] >>= \x -> [x,-x]
+-- [1,-1,2,-2]
+
+-- Monad is now defined as Applicative m => Monad m, with return = pure.
+
+-- > return 1 >>= \x -> Just (x,x)
+-- Just (1,1)
+
+-- Monad's ap function is a monadic version of <*>.
+
+-- The liftA and liftM functions are lift functions into applicative and monad
+-- contexts, respectively.
+-- > liftM2 (+) (Just 1) (Just 2)
+-- Just 3
+
+-- Data.Ratio has a Rational type which can express fractions.
+-- > 1%3 + 5%4
+-- 19%12
