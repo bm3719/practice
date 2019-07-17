@@ -1160,7 +1160,22 @@
     ["veer" "lake" "item" "kale" "mite" "ever"])
    #{#{"veer" "ever"} #{"lake" "kale"} #{"mite" "item"}})
 
-;; ;; #60: Sequence Reductions
-;; (= (take 5 (__ + (range))) [0 1 3 6 10])
-;; (= (__ conj [1] [2 3 4]) [[1] [1 2] [1 2 3] [1 2 3 4]])
-;; (= (last (__ * 2 [3 4 5])) (reduce * 2 [3 4 5]) 120)
+;; #60: Sequence Reductions
+(= (take 5 ((fn f [g & args]
+              (let [[i coll] args
+                    [i coll] (if (nil? coll) [(first i) (rest i)] [i coll])]
+                (if (empty? coll) [i]
+                    (lazy-seq (cons i (f g (g i (first coll)) (rest coll)))))))
+            + (range))) [0 1 3 6 10])
+(= ((fn f [g & args]
+      (let [[i coll] args
+            [i coll] (if (nil? coll) [(first i) (rest i)] [i coll])]
+        (if (empty? coll) [i]
+            (lazy-seq (cons i (f g (g i (first coll)) (rest coll)))))))
+    conj [1] [2 3 4]) [[1] [1 2] [1 2 3] [1 2 3 4]])
+(= (last ((fn f [g & args]
+            (let [[i coll] args
+                  [i coll] (if (nil? coll) [(first i) (rest i)] [i coll])]
+              (if (empty? coll) [i]
+                  (lazy-seq (cons i (f g (g i (first coll)) (rest coll)))))))
+          * 2 [3 4 5])) (reduce * 2 [3 4 5]) 120)
