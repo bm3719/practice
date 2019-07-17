@@ -1179,3 +1179,102 @@
               (if (empty? coll) [i]
                   (lazy-seq (cons i (f g (g i (first coll)) (rest coll)))))))
           * 2 [3 4 5])) (reduce * 2 [3 4 5]) 120)
+
+
+;; #69: Merge with a Function
+(= ((fn [f & maps]
+      (letfn [(m-w [m1 m2]
+                (reduce (fn [m [k v]] (assoc m k
+                                             (if (nil? (get m k)) v
+                                                 (f (get m k) v))))
+                        m1 m2))]
+        (reduce m-w maps)))
+    * {:a 2, :b 3, :c 4} {:a 2} {:b 2} {:c 5}))
+(= ((fn [f & maps]
+      (letfn [(m-w [m1 m2]
+                (reduce (fn [m [k v]] (assoc m k
+                                             (if (nil? (get m k)) v
+                                                 (f (get m k) v))))
+                        m1 m2))]
+        (reduce m-w maps)))
+    - {1 10, 2 20} {1 3, 2 10, 3 15})
+   {1 7, 2 10, 3 15})
+(= ((fn [f & maps]
+      (letfn [(m-w [m1 m2]
+                (reduce (fn [m [k v]] (assoc m k
+                                             (if (nil? (get m k)) v
+                                                 (f (get m k) v))))
+                        m1 m2))]
+        (reduce m-w maps)))
+    concat {:a [3], :b [6]} {:a [4 5], :c [8 9]}, {:b [7]})
+   {:a [3 4 5], :b [6 7], :c [8 9]})
+
+;; #102: intoCamelCase
+(= ((fn [s]
+      (let [[h & t] (clojure.string/split s #"-")]
+        (clojure.string/join
+         (conj (map clojure.string/capitalize t) h)))) "something") "something")
+(= ((fn [s]
+      (let [[h & t] (clojure.string/split s #"-")]
+        (clojure.string/join
+         (conj (map clojure.string/capitalize t) h)))) "multi-word-key") "multiWordKey")
+(= ((fn [s]
+      (let [[h & t] (clojure.string/split s #"-")]
+        (clojure.string/join
+         (conj (map clojure.string/capitalize t) h)))) "leaveMeAlone") "leaveMeAlone")
+
+;; #75: Euler's Totient Function
+(= ((fn [x]
+      (letfn [(gcd [x y] (if (= y 0) x (gcd y (mod x y))))]
+        (->> (rest (range (inc x)))
+             (filter #(= (gcd % x) 1))
+             (count))))
+    1) 1)
+(= ((fn [x]
+      (letfn [(gcd [x y] (if (= y 0) x (gcd y (mod x y))))]
+        (->> (rest (range (inc x)))
+             (filter #(= (gcd % x) 1))
+             (count))))
+    10) (count '(1 3 7 9)) 4)
+(= ((fn [x]
+      (letfn [(gcd [x y] (if (= y 0) x (gcd y (mod x y))))]
+        (->> (rest (range (inc x)))
+             (filter #(= (gcd % x) 1))
+             (count))))
+    40) 16)
+(= ((fn [x]
+      (letfn [(gcd [x y] (if (= y 0) x (gcd y (mod x y))))]
+        (->> (rest (range (inc x)))
+             (filter #(= (gcd % x) 1))
+             (count))))
+    99) 60)
+
+;; #86: Happy numbers
+(= ((fn f [n & [coll]]
+      (if (some #(= % n) (rest coll))
+        false
+        (let [x (->> (str n) (map str)
+                     (map read-string) (map #(* % %)) (apply +))]
+          (if (= x 1) true
+              (f x (cons x coll)))))) 7) true)
+(= ((fn f [n & [coll]]
+      (if (some #(= % n) (rest coll))
+        false
+        (let [x (->> (str n) (map str)
+                     (map read-string) (map #(* % %)) (apply +))]
+          (if (= x 1) true
+              (f x (cons x coll)))))) 986543210) true)
+(= ((fn f [n & [coll]]
+      (if (some #(= % n) (rest coll))
+        false
+        (let [x (->> (str n) (map str)
+                     (map read-string) (map #(* % %)) (apply +))]
+          (if (= x 1) true
+              (f x (cons x coll)))))) 2) false)
+(= ((fn f [n & [coll]]
+      (if (some #(= % n) (rest coll))
+        false
+        (let [x (->> (str n) (map str)
+                     (map read-string) (map #(* % %)) (apply +))]
+          (if (= x 1) true
+              (f x (cons x coll)))))) 3) false)
