@@ -1278,3 +1278,103 @@
                      (map read-string) (map #(* % %)) (apply +))]
           (if (= x 1) true
               (f x (cons x coll)))))) 3) false)
+
+;; #78: Reimplement Trampoline
+(= (letfn [(triple [x] #(sub-two (* 3 x)))
+           (sub-two [x] #(stop?(- x 2)))
+           (stop? [x] (if (> x 50) x #(triple x)))]
+     ((fn t [f & args] (if (fn? f) (t (apply f args)) f)) triple 2))
+   82)
+
+(= (letfn [(my-even? [x] (if (zero? x) true #(my-odd? (dec x))))
+           (my-odd? [x] (if (zero? x) false #(my-even? (dec x))))]
+     (map (partial (fn t [f & args] (if (fn? f) (t (apply f args)) f)) my-even?) (range 6)))
+   [true false true false true false])
+
+;; #115: The Balance of N
+(= true ((fn [n]
+           (let [n (str n)
+                 x (Math/floor (/ (count n) 2))
+                 ns [(take x n) (take x (reverse n))]]
+             (->> (for [cs ns] (map #(read-string (str %)) cs))
+                  (map #(apply + %))
+                  (apply =)))) 11))
+(= true ((fn [n]
+           (let [n (str n)
+                 x (Math/floor (/ (count n) 2))
+                 ns [(take x n) (take x (reverse n))]]
+             (->> (for [cs ns] (map #(read-string (str %)) cs))
+                  (map #(apply + %))
+                  (apply =)))) 121))
+(= false ((fn [n]
+            (let [n (str n)
+                  x (Math/floor (/ (count n) 2))
+                  ns [(take x n) (take x (reverse n))]]
+              (->> (for [cs ns] (map #(read-string (str %)) cs))
+                   (map #(apply + %))
+                   (apply =)))) 123))
+(= true ((fn [n]
+           (let [n (str n)
+                 x (Math/floor (/ (count n) 2))
+                 ns [(take x n) (take x (reverse n))]]
+             (->> (for [cs ns] (map #(read-string (str %)) cs))
+                  (map #(apply + %))
+                  (apply =)))) 0))
+(= false ((fn [n]
+            (let [n (str n)
+                  x (Math/floor (/ (count n) 2))
+                  ns [(take x n) (take x (reverse n))]]
+              (->> (for [cs ns] (map #(read-string (str %)) cs))
+                   (map #(apply + %))
+                   (apply =)))) 88099))
+(= true ((fn [n]
+           (let [n (str n)
+                 x (Math/floor (/ (count n) 2))
+                 ns [(take x n) (take x (reverse n))]]
+             (->> (for [cs ns] (map #(read-string (str %)) cs))
+                  (map #(apply + %))
+                  (apply =)))) 89098))
+(= true ((fn [n]
+           (let [n (str n)
+                 x (Math/floor (/ (count n) 2))
+                 ns [(take x n) (take x (reverse n))]]
+             (->> (for [cs ns] (map #(read-string (str %)) cs))
+                  (map #(apply + %))
+                  (apply =)))) 89089))
+(= (take 20 (filter (fn [n]
+                      (let [n (str n)
+                            x (Math/floor (/ (count n) 2))
+                            ns [(take x n) (take x (reverse n))]]
+                        (->> (for [cs ns] (map #(read-string (str %)) cs))
+                             (map #(apply + %))
+                             (apply =)))) (range)))
+   [0 1 2 3 4 5 6 7 8 9 11 22 33 44 55 66 77 88 99 101])
+
+;; #85: Power Set
+;; NOTE: Last test works on local REPL, but site says it times out.  Maybe come
+;; up with a non-recursive solution to this.
+(= ((fn ps [s]
+      (if (empty? s) #{s}
+          (reduce #(into %1 %2) #{s}
+                  (for [i s]
+                    (ps (disj s i))))))
+    #{1 :a}) #{#{1 :a} #{:a} #{} #{1}})
+(= ((fn ps [s]
+      (if (empty? s) #{s}
+          (reduce #(into %1 %2) #{s}
+                  (for [i s]
+                    (ps (disj s i))))))
+    #{}) #{#{}})
+(= ((fn ps [s]
+      (if (empty? s) #{s}
+          (reduce #(into %1 %2) #{s}
+                  (for [i s]
+                    (ps (disj s i))))))
+    #{1 2 3})
+   #{#{} #{1} #{2} #{3} #{1 2} #{1 3} #{2 3} #{1 2 3}})
+(= (count ((fn ps [s]
+             (if (empty? s) #{s}
+                 (reduce #(into %1 %2) #{s}
+                         (for [i s]
+                           (ps (disj s i))))))
+           (into #{} (range 10)))) 1024)
