@@ -1184,26 +1184,29 @@
 ;; #69: Merge with a Function
 (= ((fn [f & maps]
       (letfn [(m-w [m1 m2]
-                (reduce (fn [m [k v]] (assoc m k
-                                             (if (nil? (get m k)) v
-                                                 (f (get m k) v))))
+                (reduce (fn [m [k v]]
+                          (assoc m k
+                                 (if (nil? (get m k)) v
+                                     (f (get m k) v))))
                         m1 m2))]
         (reduce m-w maps)))
     * {:a 2, :b 3, :c 4} {:a 2} {:b 2} {:c 5}))
 (= ((fn [f & maps]
       (letfn [(m-w [m1 m2]
-                (reduce (fn [m [k v]] (assoc m k
-                                             (if (nil? (get m k)) v
-                                                 (f (get m k) v))))
+                (reduce (fn [m [k v]]
+                          (assoc m k
+                                 (if (nil? (get m k)) v
+                                     (f (get m k) v))))
                         m1 m2))]
         (reduce m-w maps)))
     - {1 10, 2 20} {1 3, 2 10, 3 15})
    {1 7, 2 10, 3 15})
 (= ((fn [f & maps]
       (letfn [(m-w [m1 m2]
-                (reduce (fn [m [k v]] (assoc m k
-                                             (if (nil? (get m k)) v
-                                                 (f (get m k) v))))
+                (reduce (fn [m [k v]]
+                          (assoc m k
+                                 (if (nil? (get m k)) v
+                                     (f (get m k) v))))
                         m1 m2))]
         (reduce m-w maps)))
     concat {:a [3], :b [6]} {:a [4 5], :c [8 9]}, {:b [7]})
@@ -1285,7 +1288,6 @@
            (stop? [x] (if (> x 50) x #(triple x)))]
      ((fn t [f & args] (if (fn? f) (t (apply f args)) f)) triple 2))
    82)
-
 (= (letfn [(my-even? [x] (if (zero? x) true #(my-odd? (dec x))))
            (my-odd? [x] (if (zero? x) false #(my-even? (dec x))))]
      (map (partial (fn t [f & args] (if (fn? f) (t (apply f args)) f)) my-even?) (range 6)))
@@ -1378,3 +1380,168 @@
                          (for [i s]
                            (ps (disj s i))))))
            (into #{} (range 10)))) 1024)
+
+;; #98: Equivalence classes
+(= ((fn [f coll]
+      (->> (group-by f coll)
+           (map second)
+           (map #(into #{} %))
+           (into #{}))) #(* % %) #{-2 -1 0 1 2})
+   #{#{0} #{1 -1} #{2 -2}})
+(= ((fn [f coll]
+      (->> (group-by f coll)
+           (map second)
+           (map #(into #{} %))
+           (into #{}))) #(rem % 3) #{0 1 2 3 4 5 })
+   #{#{0 3} #{1 4} #{2 5}})
+(= ((fn [f coll]
+      (->> (group-by f coll)
+           (map second)
+           (map #(into #{} %))
+           (into #{}))) identity #{0 1 2 3 4})
+   #{#{0} #{1} #{2} #{3} #{4}})
+(= ((fn [f coll]
+      (->> (group-by f coll)
+           (map second)
+           (map #(into #{} %))
+           (into #{}))) (constantly true) #{0 1 2 3 4})
+   #{#{0 1 2 3 4}})
+
+;; #105: Identify keys and values
+(= {}
+   ((fn f [coll]
+      (if (empty? coll) {}
+          (let [[is r] (split-with number? (rest coll))]
+            (into {(first coll) is} (f r)))))
+    []))
+(= {:a [1]}
+   ((fn f [coll]
+      (if (empty? coll) {}
+          (let [[is r] (split-with number? (rest coll))]
+            (into {(first coll) is} (f r)))))
+    [:a 1]))
+(= {:a [1], :b [2]}
+   ((fn f [coll]
+      (if (empty? coll) {}
+          (let [[is r] (split-with number? (rest coll))]
+            (into {(first coll) is} (f r)))))
+    [:a 1, :b 2]))
+(= {:a [1 2 3], :b [], :c [4]}
+   ((fn f [coll]
+      (if (empty? coll) {}
+          (let [[is r] (split-with number? (rest coll))]
+            (into {(first coll) is} (f r)))))
+    [:a 1 2 3 :b :c 4]))
+
+;; #137: Digits and bases
+(= [1 2 3 4 5 0 1]
+   ((fn f [n b]
+      (if (< n 2) [n]
+          (let [nr (int (/ n b))]
+            (conj (if (zero? nr) [] (f nr b))
+                  (mod n b))))) 1234501 10))
+(= [0] ((fn f [n b]
+          (if (< n 2) [n]
+              (let [nr (int (/ n b))]
+                (conj (if (zero? nr) [] (f nr b))
+                      (mod n b))))) 0 11))
+(= [1 0 0 1] ((fn f [n b]
+                (if (< n 2) [n]
+                    (let [nr (int (/ n b))]
+                      (conj (if (zero? nr) [] (f nr b))
+                            (mod n b))))) 9 2))
+(= [1 0] (let [n (rand-int 100000)]
+           ((fn f [n b]
+              (if (< n 2) [n]
+                  (let [nr (int (/ n b))]
+                    (conj (if (zero? nr) [] (f nr b))
+                          (mod n b))))) n n)))
+(= [16 18 5 24 15 1]
+   ((fn f [n b]
+      (if (< n 2) [n]
+          (let [nr (int (/ n b))]
+            (conj (if (zero? nr) [] (f nr b))
+                  (mod n b))))) Integer/MAX_VALUE 42))
+
+;; #144: Oscilrate
+(= (take 3 ((fn f [x & fs]
+              (let [y ((first fs) x)]
+                (lazy-seq (concat [x] (apply (partial f y)
+                                             (conj (vec (rest fs))
+                                                   (first fs))))))) 3.14 int double))
+   [3.14 3 3.0])
+(= (take 5 ((fn f [x & fs]
+              (let [y ((first fs) x)]
+                (lazy-seq (concat [x] (apply (partial f y)
+                                             (conj (vec (rest fs))
+                                                   (first fs))))))) 3 #(- % 3) #(+ 5 %)))
+   [3 0 5 2 7])
+(= (take 12 ((fn f [x & fs]
+               (let [y ((first fs) x)]
+                 (lazy-seq (concat [x] (apply (partial f y)
+                                              (conj (vec (rest fs))
+                                                    (first fs))))))) 0 inc dec inc dec inc))
+   [0 1 0 1 0 1 2 1 2 1 2 3])
+
+;; #110: Sequence of pronunciations
+(= [[1 1] [2 1] [1 2 1 1]]
+   (take 3 ((fn f [coll]
+              (letfn [(p [coll]
+                        (if (empty? coll) coll
+                            (let [x (first coll)
+                                  c (count (take-while #(= x %) coll))]
+                              (concat [c x] (p (drop c coll))))))]
+                (rest (iterate p coll)))) [1])))
+(= [3 1 2 4]
+   (first ((fn f [coll]
+             (letfn [(p [coll]
+                       (if (empty? coll) coll
+                           (let [x (first coll)
+                                 c (count (take-while #(= x %) coll))]
+                             (concat [c x] (p (drop c coll))))))]
+               (rest (iterate p coll)))) [1 1 1 4 4])))
+(= [1 1 1 3 2 1 3 2 1 1]
+   (nth ((fn f [coll]
+           (letfn [(p [coll]
+                     (if (empty? coll) coll
+                         (let [x (first coll)
+                               c (count (take-while #(= x %) coll))]
+                           (concat [c x] (p (drop c coll))))))]
+             (rest (iterate p coll)))) [1]) 6))
+(= 338 (count (nth ((fn f [coll]
+                      (letfn [(p [coll]
+                                (if (empty? coll) coll
+                                    (let [x (first coll)
+                                          c (count (take-while #(= x %) coll))]
+                                      (concat [c x] (p (drop c coll))))))]
+                        (rest (iterate p coll)))) [3 2]) 15)))
+
+;; #158: Decurry
+(= 10 (((fn g [f]
+          (fn h [& args]
+            (if (= (count args) 1) (f (first args))
+                ((apply h (drop-last args)) (last args)))))
+        (fn [a]
+          (fn [b]
+            (fn [c]
+              (fn [d]
+                (+ a b c d))))))
+       1 2 3 4))
+(= 24 (((fn g [f]
+          (fn h [& args]
+            (if (= (count args) 1) (f (first args))
+                ((apply h (drop-last args)) (last args)))))
+        (fn [a]
+          (fn [b]
+            (fn [c]
+              (fn [d]
+                (* a b c d))))))
+       1 2 3 4))
+(= 25 (((fn g [f]
+          (fn h [& args]
+            (if (= (count args) 1) (f (first args))
+                ((apply h (drop-last args)) (last args)))))
+        (fn [a]
+          (fn [b]
+            (* a b))))
+       5 5))
