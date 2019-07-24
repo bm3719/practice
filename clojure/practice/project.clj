@@ -3,7 +3,7 @@
   :url "https://github.com/bm3719/practice/tree/master/clojure/practice"
   :license {:name "BSD 2-Clause License"
             :url "https://opensource.org/licenses/BSD-2-Clause"}
-  :dependencies [[org.clojure/clojure "1.7.0"]]
+  :dependencies [[org.clojure/clojure "1.10.0"]]
   :main practice.core
   :repl-options {:init-ns user}
   :global-vars {*print-length* 100}
