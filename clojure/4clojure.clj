@@ -1164,3 +1164,32 @@
        (map #(* % % %) (range)) ;; perfect cubes
        (filter #(zero? (bit-and % (dec %))) (range)) ;; powers of 2
        (iterate inc 20))) ;; at least as large as 20
+
+;; #93: Partially Flatten a Sequence
+(def a93
+  (fn [colls]
+    (filter #(and (sequential? %) (not-any? sequential? %))
+            (rest (tree-seq sequential? seq colls)))))
+
+(= (a93 [["Do"] ["Nothing"]])
+   [["Do"] ["Nothing"]])
+(= (a93 [[[[:a :b]]] [[:c :d]] [:e :f]])
+   [[:a :b] [:c :d] [:e :f]])
+(= (a93 '((1 2)((3 4)((((5 6)))))))
+   '((1 2)(3 4)(5 6)))
+
+;; #114: Global take-while
+(def a114
+  (fn f [n p coll]
+    (if (or (empty? coll) (and (= n 1) (p (first coll)))) []
+        (cons (first coll) (f (if (p (first coll)) (dec n) n) p (rest coll))))))
+
+(= [2 3 5 7 11 13]
+   (a114 4 #(= 2 (mod % 3))
+         [2 3 5 7 11 13 17 19 23]))
+(= ["this" "is" "a" "sentence"]
+   (a114 3 #(some #{\i} %)
+         ["this" "is" "a" "sentence" "i" "wrote"]))
+(= ["this" "is"]
+   (a114 1 #{"a"}
+         ["this" "is" "a" "sentence" "i" "wrote"]))
