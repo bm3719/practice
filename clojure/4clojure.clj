@@ -1193,3 +1193,22 @@
 (= ["this" "is"]
    (a114 1 #{"a"}
          ["this" "is" "a" "sentence" "i" "wrote"]))
+
+;; #132: Insert between two items
+(def a132
+  (fn g [p v coll]
+    (if (< (count (take 3 coll)) 2) coll
+        (let [[f s r] ((juxt first second rest) coll)]
+          (lazy-cat (if (p f s) [f v] [f]) (g p v r))))))
+
+(= '(1 :less 6 :less 7 4 3) (a132 < :less [1 6 7 4 3]))
+(= '(2) (a132 > :more [2]))
+(= [0 1 :x 2 :x 3 :x 4]  (a132 #(and (pos? %) (< % %2)) :x (range 5)))
+(empty? (a132 > :more ()))
+(= [0 1 :same 1 2 3 :same 5 8 13 :same 21]
+   (take 12 (->> [0 1]
+                 (iterate (fn [[a b]] [b (+ a b)]))
+                 (map first) ; fibonacci numbers
+                 (a132 (fn [a b] ; both even or both odd
+                         (= (mod a 2) (mod b 2)))
+                       :same))))
