@@ -18,7 +18,7 @@
 ;; Reverses the elements of list lst. For example, the list (1 2 (3 4)) becomes
 ;; the sequence ((3 4) 2 1).
 (defn shallow-reverse [lst]
-  (if (empty? lst) ()
+  (if (empty? lst) []
       (cons (last lst) (shallow-reverse (butlast lst)))))
 
 ;; (remove-duplicates lst)
@@ -28,7 +28,7 @@
 (defn remove-duplicates [lst]
   (if (empty? lst) ()
       (cons (first lst)
-            (remove-duplicates (filter (fn [x] (not= x (first lst)))
+            (remove-duplicates (filter #(not= % (first lst))
                                        (rest lst))))))
 
 ;; (my-flatten lst)
@@ -81,8 +81,8 @@
 ;; are decimal 10 (linefeed), 13 (carriage return) and 32 through 126,
 ;; inclusive. Hint: filter.
 (defn zap-gremlins [text]
-  (apply str (filter (fn [c] (or (= 10 (int c)) (= 13 (int c))
-                                 (and (>= (int c) 32) (<= (int c) 126))))
+  (apply str (filter #(or (= 10 (int %)) (= 13 (int %))
+                          (and (>= (int %) 32) (<= (int %) 126)))
                      text)))
 
 ;; (rot-13 text)
@@ -91,15 +91,14 @@
 ;; uppercase and lowercase letters should be rotated; other characters should
 ;; be unaffected. You may need the coercions (int ch) and (char n). Hint: map.
 (defn rot-13 [text]
-  (defn rotate [n lower upper]
-    (let [x (mod (+ n 13) upper)]
-      (if (< x lower) (char (+ x lower)) (char x))))
-  (apply str (map (fn [c]
-                    (let [x (int c)]
-                      (cond (and (>= x 65) (<= x 90)) (rotate x 65 90)
-                            (and (>= x 97) (<= x 122)) (rotate x 97 122)
-                            :else (char x))))
-                  text)))
+  (letfn [(rotate [n lower upper]
+            (let [x (mod (+ n 13) upper)]
+              (if (< x lower) (char (+ x lower)) (char x))))]
+    (apply str (map #(let [x (int %)]
+                       (cond (and (>= x 65) (<= x 90)) (rotate x 65 90)
+                             (and (>= x 97) (<= x 122)) (rotate x 97 122)
+                             :else (char x)))
+                    text))))
 
 ;; (sqrt n)
 ;; Compute the square root of the positive number n, using Newton's
@@ -110,31 +109,25 @@
 ;; series of approximations, and taking approximations until they differ by
 ;; less than 0.00001. Hint: iterate.
 (defn sqrt [n]
-  (defn abs [n]
-    (if (< n 0) (- 0 n) n))
-  (defn dif [n1 n2]
-    (< (abs (- n1 n2)) 0.00001))
-  (defn newton [n r]
-    (let [guess (/ (+ r (/ n r)) 2)]
-      (if (dif r guess) guess
-          (newton n guess))))
-  (newton n 2))
+  (letfn [(abs [n] (if (< n 0) (- 0 n) n))
+          (dif [n1 n2] (< (abs (- n1 n2)) 0.00001))
+          (newton [n r]
+            (let [guess (/ (+ r (/ n r)) 2)]
+              (if (dif r guess) guess
+                  (newton n guess))))]
+    (newton n 2)))
 
 ;; (longest-collatz lo hi)
 ;; The Collatz sequence eventually converges to 1. Find which starting value,
 ;; in the range lo to hi (including both end points) takes the longest to
 ;; converge. If two values take equally long to converge, return either value.
 (defn longest-collatz [lo hi]
-  (defn collatz-count [n c]
-    (cond (<= n 1) c
-          (even? n) (collatz-count (/ n 2) (+ c 1))
-          :else (collatz-count (+ (* 3 n) 1) (+ c 1))))
-  (let [index (atom 0)]
-    (defn lst-index [lst n]
-      (if (= (first lst) n) @index
-          (do (swap! index inc)
-              (lst-index (rest lst) n)))))
-  (let [lst (range lo (inc hi))
-        col-lst (map (fn [x] (collatz-count x 0)) lst)
-        col-max (reduce max col-lst)]
-    (nth lst (lst-index col-lst col-max))))
+  (letfn [(collatz-count [n c]
+            (cond (= n 1) c
+                  (even? n) (collatz-count (/ n 2) (inc c))
+                  :else (collatz-count (+ (* 3 n) 1) (inc c))))]
+    (->> (range lo (inc hi))
+         (map (fn [x] ((juxt identity #(collatz-count % 0)) x)))
+         (sort-by second)
+         (last)
+         (first))))
