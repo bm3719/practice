@@ -1,4 +1,4 @@
-# Make LED fade in/out
+# Make LED cycle through random RGB colors.
 import RPi.GPIO as GPIO
 from time import sleep
 from random import randint
