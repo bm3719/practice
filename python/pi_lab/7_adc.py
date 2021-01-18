@@ -21,7 +21,7 @@ def loop():
     while True:
         value = adc.analogRead(0)  # Read channel 0.
         voltage = value / 255.0 * 3.3
-        print ("ADC value: %d, Voltage: %,2f" %(value, voltage))
+        print ("ADC value: " + str(value) + ", Voltage: " + str(voltage))
         time.sleep(0.1)
 
 def destroy():
