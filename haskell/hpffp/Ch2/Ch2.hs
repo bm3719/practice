@@ -1,4 +1,4 @@
--- Chapter 2
+-- Chapter 2: Intro
 
 sayHello :: String -> IO ()
 sayHello s = putStrLn ("Hello, " ++ s ++ "!")
