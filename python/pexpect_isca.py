@@ -18,10 +18,10 @@ child.send('sgsgsg')
 print("Escape character is '^]'.\n")
 child.interact()
 # At this point the script is running again.
-print 'Left interactve mode.'
+print('Left interactve mode.')
 if child.isalive():
     child.close()
 if child.isalive():
-    print 'Child did not exit gracefully.'
+    print('Child did not exit gracefully.')
 else:
-    print 'Child exited gracefully.'
+    print('Child exited gracefully.')
