@@ -107,7 +107,7 @@
 
 (= a35 (let [x 5] (+ 2 x)))
 (= a35 (let [x 3, y 10] (- y x)))
-(= a35 (let [x 21] (let [y 3] (/ x y))))
+(= a35 (let [x 21 y 3] (/ x y)))
 
 ;; #36: Let it Be
 (= 10 (let [x 7 y 3 z 1] (+ x y)))
@@ -893,11 +893,10 @@
 (def a76 [1 3 5 7 9 11])
 
 (= a76
-   (letfn
-       [(foo [x y] #(bar (conj x y) y))
-        (bar [x y] (if (> (last x) 10)
-                     x
-                     #(foo x (+ 2 y))))]
+   (letfn [(foo [x y] #(bar (conj x y) y))
+           (bar [x y] (if (> (last x) 10)
+                        x
+                        #(foo x (+ 2 y))))]
      (trampoline foo [] 1)))
 
 ;; #80: Perfect Numbers
@@ -945,7 +944,8 @@
                       m1 m2))]
       (reduce m-w maps))))
 
-(= (a69 * {:a 2, :b 3, :c 4} {:a 2} {:b 2} {:c 5}))
+(= (a69 * {:a 2, :b 3, :c 4} {:a 2} {:b 2} {:c 5})
+   {:a 4, :b 6, :c 20})
 (= (a69 - {1 10, 2 20} {1 3, 2 10, 3 15})
    {1 7, 2 10, 3 15})
 (= (a69 concat {:a [3], :b [6]} {:a [4 5], :c [8 9]}, {:b [7]})
@@ -1212,3 +1212,26 @@
                  (a132 (fn [a b] ; both even or both odd
                          (= (mod a 2) (mod b 2)))
                        :same))))
+
+;; NOTE: 4Clojure's main site is gone now, so the ordering here is no longer
+;; viable.  Will switch to sequential order, starting with the medium problems
+;; that aren't done yet, then doing the hard ones.
+
+;; #103: Generating k-combinations
+(def a103
+  (fn f [k es]
+    (cond
+      (zero? k) #{#{}}
+      (empty? es) #{}
+      :else (set (clojure.set/union
+                  (map #(conj % (first es)) (f (dec k) (rest es)))
+                  (f k (rest es)))))))
+
+(= (a103 1 #{4 5 6}) #{#{4} #{5} #{6}})
+(= (a103 10 #{4 5 6}) #{})
+(= (a103 2 #{0 1 2}) #{#{0 1} #{0 2} #{1 2}})
+(= (a103 3 #{0 1 2 3 4}) #{#{0 1 2} #{0 1 3} #{0 1 4} #{0 2 3} #{0 2 4}
+                           #{0 3 4} #{1 2 3} #{1 2 4} #{1 3 4} #{2 3 4}})
+(= (a103 4 #{[1 2 3] :a "abc" "efg"}) #{#{[1 2 3] :a "abc" "efg"}})
+(= (a103 2 #{[1 2 3] :a "abc" "efg"}) #{#{[1 2 3] :a} #{[1 2 3] "abc"} #{[1 2 3] "efg"}
+                                        #{:a "abc"} #{:a "efg"} #{"abc" "efg"}})
