@@ -1,0 +1,26 @@
+* basic-app
+
+A [[https://github.com/Day8/re-frame][re-frame]] application that does some basic client side stuff.  Created with
+[[https://github.com/day8/re-frame-template][re-frame-template]].
+
+** Development Mode
+
+*** Run application:
+
+#+BEGIN_SRC sh
+lein clean
+lein figwheel dev
+#+END_SRC
+
+Figwheel will automatically push cljs changes to the browser.
+
+Wait a bit, then browse to [[http://localhost:3449][http://localhost:3449]].
+
+** Production Build
+
+To compile clojurescript to javascript:
+
+#+BEGIN_SRC sh
+lein clean
+lein cljsbuild once min
+#+END_SRC
