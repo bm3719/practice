@@ -12,8 +12,8 @@
              ;; :builds-to-start [:dev]
              }
   :profiles {:dev {:dependencies [[binaryage/devtools "0.8.2"]
-                                  [figwheel-sidecar "0.5.14"] ; use here whatever the current version of figwheel is
-                                  [cider/piggieback "0.5.1"]
+                                  [figwheel-sidecar "0.5.14"] ; Match with current version of figwheel.
+                                  [cider/piggieback "0.5.1"]  ; Might not need.
                                   ]
                    :plugins      [[lein-figwheel "0.5.14"]]}}
   :cljsbuild {:builds
