@@ -1,5 +1,5 @@
-(defproject basic-lfw "0.1.0-SNAPSHOT"
-  :description "Sample lein-figwheel project."
+(defproject basic-rf "0.1.0-SNAPSHOT"
+  :description "Basic lein-figwheel project template with re-frame."
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
@@ -7,30 +7,39 @@
 
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [org.clojure/clojurescript "1.10.773"]
-                 [org.clojure/core.async  "0.4.500"]]
+                 [org.clojure/core.async  "0.4.500"]
+                 [reagent "0.6.0"]
+                 [re-frame "0.9.2"]]
 
-  :plugins [[lein-figwheel "0.5.20"]
-            [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
+  :source-paths ["src/clj" "src/cljs"]
 
-  :source-paths ["src"]
+  :profiles {:dev {:dependencies [[binaryage/devtools "1.0.0"]
+                                  [figwheel-sidecar "0.5.20"]]
+                   :plugins [[lein-figwheel "0.5.20"]
+                             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
+                   ;; need to add dev source path here to get user.clj loaded
+                   :source-paths ["src/clj" "src/cljs" "dev"]
+                   ;; need to add the compiled assets to the :clean-targets
+                   :clean-targets ^{:protect false} ["resources/public/js/compiled"
+                                                     :target-path]}}
 
   :cljsbuild {:builds
               [{:id "dev"
-                :source-paths ["src"]
+                :source-paths ["src/clj" "src/cljs" "dev"]
 
                 ;; The presence of a :figwheel configuration here
                 ;; will cause figwheel to inject the figwheel client
                 ;; into your build
-                :figwheel {:on-jsload "basic-lfw.core/on-js-reload"
+                :figwheel {:on-jsload "basic-app.core/mount-root"
                            ;; :open-urls will pop open your application
                            ;; in the default browser once Figwheel has
                            ;; started and compiled your application.
                            ;; Comment this out once it no longer serves you.
                            :open-urls ["http://localhost:3449/index.html"]}
 
-                :compiler {:main basic-lfw.core
+                :compiler {:main basic-rf.core
                            :asset-path "js/compiled/out"
-                           :output-to "resources/public/js/compiled/basic_lfw.js"
+                           :output-to "resources/public/js/compiled/app.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
@@ -40,9 +49,9 @@
                ;; production. You can build this with:
                ;; lein cljsbuild once min
                {:id "min"
-                :source-paths ["src"]
-                :compiler {:output-to "resources/public/js/compiled/basic_lfw.js"
-                           :main basic-lfw.core
+                :source-paths ["src/clj" "src/cljs"]
+                :compiler {:output-to "resources/public/js/compiled/basic_rf.js"
+                           :main basic-rf.core
                            :optimizations :advanced
                            :pretty-print false}}]}
 
@@ -61,7 +70,7 @@
 
              ;; doesn't work for you just run your own server :) (see lein-ring)
 
-             ;; :ring-handler basic_lfw.server/handler
+             ;; :ring-handler basic_rf.server/handler
 
              ;; To be able to open files in your editor from the heads up display
              ;; you will need to put a script on your path.
@@ -83,12 +92,4 @@
 
              ;; to pipe all the output to the repl
              ;; :server-logfile false
-             }
-
-  :profiles {:dev {:dependencies [[binaryage/devtools "1.0.0"]
-                                  [figwheel-sidecar "0.5.20"]]
-                   ;; need to add dev source path here to get user.clj loaded
-                   :source-paths ["src" "dev"]
-                   ;; need to add the compiled assets to the :clean-targets
-                   :clean-targets ^{:protect false} ["resources/public/js/compiled"
-                                                     :target-path]}})
+             })
