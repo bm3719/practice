@@ -8,3 +8,5 @@
 *.class
 /clojure/*/.lein-*
 /clojure/*/.nrepl-port
+/clojurescript/*/.nrepl-port
+/clojurescript/*/resources/public/js/compiled
