@@ -10,3 +10,4 @@
 /clojure/*/.nrepl-port
 /clojurescript/*/.nrepl-port
 /clojurescript/*/resources/public/js/compiled
+node_modules
