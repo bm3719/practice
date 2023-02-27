@@ -1,0 +1,7 @@
+Compilation example:
+
+#+begin_src sh
+  nasm -f elf64 -o hello.o hello.asm
+  ld hello.o -o hello
+  ./hello
+#+end_src
