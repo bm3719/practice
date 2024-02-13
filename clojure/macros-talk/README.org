@@ -1,4 +1,4 @@
-* logic-talk
+* macros-talk
 
 This project represents a talk about macro usage, specifically in Clojure.
 
