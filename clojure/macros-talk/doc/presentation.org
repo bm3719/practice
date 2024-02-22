@@ -6,29 +6,29 @@ A non-comprehensive look:
 - When not to use macros
 - Macro tips
 
----
-
-BTW, I suck at macros now, since I rarely use them.
 
 * What are macros?
 
-Macros are an expression of metaprogramming.
+Macros are an form of metaprogramming.
 
 Metaprogramming: Treating programs as data.  Generating programs, reading in
 programs, transformation of program or code that represents programs.
 
 3 main approaches:
+- Eval-ing generated strings that represent code (which you can also do in
+  Clojure), e.g.:
+  #+begin_src clojure
+  (eval (read-string "(+ 1 2)"))
+  #+end_src
 - Exposure of runtime.  Spring, Hibernate, and others do this with the JVM.
-- Eval-ing generated strings that represent code.
 - Metaprogramming systems, provided by the language.
 
 ---
 
 Approaches:
-- bytecode manipulation, APIs for this stuff, reflection.
 - JavaScript does this.  Functions emit text that happens to be valid code.
-- These include macro systems.  C/C++ and Lisp for example.  C++'s is Turing
-  complete.
+- bytecode manipulation, heavy-weight frameworks for this stuff, reflection.
+- These include macro systems.  C/C++ and Lisp for example.
   - There's also Template Haskell, which is a language extension. Template
     Haskell edits the AST, has ADTs representing it, and functions defined over
     those types.
@@ -47,39 +47,48 @@ Macroexpansion: A step in the evaluation workflow.
 
 - Contrast other language approaches, where very non-native interfaces are
   necessary.  Here, everything is an sexp.
-- Travel back in time and listen to Erik's talk about this.
+- The Clojure evaluation pipeline:
+  - Code read as data by reader, which also processes reader macros
+  - Macroexpansion
+  - Resulting code is then compiled and evaluated.
+
 
 * Macro basics
 
-- ~defmacro~
-- ~quote~ '
-- `
-- ~unquote~ ~
-- ~unquote-splice~ ~@
-- ~gensym~ var#
-- ~macroexpand~, ~macroexpand-1~
+- =defmacro=
+- ' =quote=
+- ` (syntax-quote)
+- ~ =unquote=
+- ~@ =unquote-splicing=
+- var# =gensym=
+- =macroexpand=, =macroexpand-1=
 
 --
 
-- syntax-quote namespace-qualifies. `(a b c)
-- (def c 1)
-  `(a b ~c)
-- (def lst '(1 2 3))
-  `(a b ~@lst)
-- Show definition of when then macroexpand a when statement.
-- macroexpand repeatedly calls macroexpand-1.
+- quote returns an un-evaled form.
+- syntax-quote namespace-qualifies. =`(a b c)=
+- =(def c 1)=
+  =`(a b ~c)=
+- =(def lst '(1 2 3))=
+  =`(a b ~@lst)=
+- =`(let [var# 1])=
+- Show definition of =when= then macroexpand a =when= statement.
+- =macroexpand= recursively calls =macroexpand-1=.
 
 * When to use macros
 
 - Modifying evaluation order.
-- Syntax abstraction.
+- Syntax abstraction (with caveats).
 - Presenting a clean abstraction.
 - DSLs or other extra-linguistic extension.
 
 ---
 
-- (defmacro infix [form]
+- Example:
+  #+begin_src clojure
+  (defmacro infix [form]
     `(~(second form) ~(first form) ~(last form)))
+  #+end_src
 - Common example is resource management, e.g., managing a stream.
 - Compojure, API design
 - DSL design
@@ -90,7 +99,7 @@ Macroexpansion: A step in the evaluation workflow.
 - "Data > Functions > Macros."  In other words, almost never use macros.
 - Most cases of syntax abstraction.
 - When the macros will infect code using it.
-- Anaphora.
+- Anaphora (with caveats).
 - When optimizing for simplicity.
 
 ---
@@ -99,31 +108,31 @@ Macroexpansion: A step in the evaluation workflow.
 - Macros require an extra layer of reasoning.  You have to think about your
   code at two levels.
 - vs. CL
-- praise-stuff example.
 - Anaphoric macros are called with symbols that are context-defined, hidden
   inside the macro definition.
   - These don't nest in Clojure.  Only the top-level binding is active.
-  - Nested awhen with `it'.
+  - Nested =awhen= with =it=.
 - Errors messages, line number references, debugging.
 
 * Some macro tips
 
 Combine your ` ' @ ~ symbols.
 
-Macro hygiene (gensyms)
+Macro hygiene: =gensyms=,
 
 ---
 
 - make-spinner example.
-- (def stuff "plastic")
+  #+begin_src clojure
+  (def stuff "plastic")
   ((defspinner (str stuff " tentacle")) "metal")
 
   (defmacro defspinner [arm]
     (let [stuff (gensym)]
       `(fn [~stuff] {:arms [~arm ~arm ~arm]
                      :center ~stuff})))
-
-  Finally, change the gensym to stuff#.  Remove ~.
+  #+end_src
+- Finally, change the =gensym= to =stuff#=.  Remove =~=.
 
 * Resources
 
