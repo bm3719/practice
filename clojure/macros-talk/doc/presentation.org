@@ -9,7 +9,7 @@ A non-comprehensive look:
 
 * What are macros?
 
-Macros are an form of metaprogramming.
+Macros are a form of metaprogramming.
 
 Metaprogramming: Treating programs as data.  Generating programs, reading in
 programs, transformation of program or code that represents programs.
@@ -63,7 +63,7 @@ Macroexpansion: A step in the evaluation workflow.
 - var# =gensym=
 - =macroexpand=, =macroexpand-1=
 
---
+---
 
 - quote returns an un-evaled form.
 - syntax-quote namespace-qualifies. =`(a b c)=
@@ -104,7 +104,6 @@ Macroexpansion: A step in the evaluation workflow.
 
 ---
 
--
 - Macros require an extra layer of reasoning.  You have to think about your
   code at two levels.
 - vs. CL
@@ -116,9 +115,9 @@ Macroexpansion: A step in the evaluation workflow.
 
 * Some macro tips
 
-Combine your ` ' @ ~ symbols.
+Combine your ` ' ~@ ~ symbols.
 
-Macro hygiene: =gensyms=,
+Macro hygiene: =gensyms=
 
 ---
 
