@@ -2,7 +2,7 @@
 import pexpect
 import sys
 
-child = pexpect.spawn ('telnet rainmaker.wunderground.com')
+child = pexpect.spawn('telnet rainmaker.wunderground.com')
 # Dump output to screen.
 child.logfile = sys.stdout
 # First prompt just expects a return.
@@ -18,7 +18,6 @@ child.send('X')
 if child.isalive():
     child.close()
 if child.isalive():
-    print '\nChild did not exit gracefully.'
+    print('\nChild did not exit gracefully.')
 else:
-    print '\nChild exited gracefully.'
-
+    print('\nChild exited gracefully.')
