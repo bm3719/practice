@@ -1,0 +1,6 @@
+* AWK
+
+A set of AWK programs from /The AWK Programming Language, 2nd Ed./.
+
+Attempts were made for some to solve them on my own before looking at the
+book's solution.
